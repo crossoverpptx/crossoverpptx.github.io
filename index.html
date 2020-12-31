@@ -323,143 +323,20 @@
         
           
             <h2 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h2><p>1、登陆EXSi，进入虚拟机所在的datastore目录,每个目录为一个虚拟机</p>
-<p><img src="/2020/12/31/EXSi%E4%B8%8A%E4%BF%AE%E6%94%B9%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%A3%81%E7%9B%98%E6%89%87%E5%8C%BA%E5%A4%A7%E5%B0%8F%E4%B8%BA32%E7%9A%84%E7%AE%80%E6%98%93%E6%96%B9%E6%B3%95/1.png" alt></p>
-<p><img src="/2020/12/31/EXSi%E4%B8%8A%E4%BF%AE%E6%94%B9%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%A3%81%E7%9B%98%E6%89%87%E5%8C%BA%E5%A4%A7%E5%B0%8F%E4%B8%BA32%E7%9A%84%E7%AE%80%E6%98%93%E6%96%B9%E6%B3%95/2.png" alt></p>
-<p>2、进入虚拟机目录</p>
 <p><img src="/2020/12/31/EXSi%E4%B8%8A%E4%BF%AE%E6%94%B9%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%A3%81%E7%9B%98%E6%89%87%E5%8C%BA%E5%A4%A7%E5%B0%8F%E4%B8%BA32%E7%9A%84%E7%AE%80%E6%98%93%E6%96%B9%E6%B3%95/3.png" alt></p>
 <p><img src="/2020/12/31/EXSi%E4%B8%8A%E4%BF%AE%E6%94%B9%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%A3%81%E7%9B%98%E6%89%87%E5%8C%BA%E5%A4%A7%E5%B0%8F%E4%B8%BA32%E7%9A%84%E7%AE%80%E6%98%93%E6%96%B9%E6%B3%95/4.png" alt></p>
-<p>3、找到对应的vmdk文件</p>
+<p>2、找到对应的vmdk文件</p>
 <p><img src="/2020/12/31/EXSi%E4%B8%8A%E4%BF%AE%E6%94%B9%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%A3%81%E7%9B%98%E6%89%87%E5%8C%BA%E5%A4%A7%E5%B0%8F%E4%B8%BA32%E7%9A%84%E7%AE%80%E6%98%93%E6%96%B9%E6%B3%95/5.png" alt></p>
-<p>4、进入修改</p>
+<p>3、进入修改</p>
 <p><img src="/2020/12/31/EXSi%E4%B8%8A%E4%BF%AE%E6%94%B9%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%A3%81%E7%9B%98%E6%89%87%E5%8C%BA%E5%A4%A7%E5%B0%8F%E4%B8%BA32%E7%9A%84%E7%AE%80%E6%98%93%E6%96%B9%E6%B3%95/6.png" alt></p>
 <p><img src="/2020/12/31/EXSi%E4%B8%8A%E4%BF%AE%E6%94%B9%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%A3%81%E7%9B%98%E6%89%87%E5%8C%BA%E5%A4%A7%E5%B0%8F%E4%B8%BA32%E7%9A%84%E7%AE%80%E6%98%93%E6%96%B9%E6%B3%95/7.png" alt></p>
-<p>5、保存退出即可</p>
+<p>4、保存退出即可</p>
 <hr>
 <h2 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h2><p>1、ESXI上创建所需安装版本的虚拟机，暂不安装系统</p>
 <p>2、将虚拟机的vmdk文件下载到本地进行以下修改</p>
 <p><img src="/2020/12/31/EXSi%E4%B8%8A%E4%BF%AE%E6%94%B9%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%A3%81%E7%9B%98%E6%89%87%E5%8C%BA%E5%A4%A7%E5%B0%8F%E4%B8%BA32%E7%9A%84%E7%AE%80%E6%98%93%E6%96%B9%E6%B3%95/8.png" alt></p>
-<p>3、将修改后的vmdk上传到esxi上开始系统安装</p>
+<p>3、将修改后的vmdk文件上传到ESXi后开始系统安装</p>
 <p>4、安装完成后使用winhex工具查看磁盘扇区数是否为32扇区</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/12/30/111111111111111111111111/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Nobody">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/me.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Nobody's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/12/30/111111111111111111111111/" itemprop="url">111111111111111111111111</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-12-30T10:37:05+08:00">
-                2020-12-30
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>这是一个网站[douyu](/111111111111111111111111/C 语言实例 _ 菜鸟教程.html)</p>
 
           
         
@@ -1367,7 +1244,7 @@
             
               <div class="site-state-item site-state-posts">
                 <a href="/archives">
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
