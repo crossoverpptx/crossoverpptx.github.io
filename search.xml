@@ -30,6 +30,9 @@
 <h3 id="Docker安装Tomcat实例"><a href="#Docker安装Tomcat实例" class="headerlink" title="Docker安装Tomcat实例"></a>Docker安装Tomcat实例</h3><p>1、获取tomcat镜像: docker  pull  tomcat<br>2、新建并运行tomcat容器:</p>
 <p>docker run  –name  tomcat  -p 127.0.0.1:8080:8080    -d  tomcat<br>docker run  –name  tomcat  -p 127.0.0.1:8080:8080    -d  tomcat –restart=always<br>    –name：容器名<br>    -p：后面接IP地址(可以不设)：接宿主机端口：容器端口<br>    -d：后台运行<br>3、进入容器：docker   exec/attach  -it  tomcat  bash<br>    exec进入容器后使用exit命令退出容器，只会退出容器，让容器在后台继续运行；attach进入后用exit退出，     会直接关闭容器.<br>    -it:交互模式进入容器<br>4、退出tomcat容器：exit<br>5、停止tomcat容器：docker   stop   tomcat<br>6、启动tomcat容器：docker   start   tomcat<br>7、删除tomcat容器：docker   container    rm  -f  tomcat</p>
 ]]></content>
+      <categories>
+        <category>容器</category>
+      </categories>
       <tags>
         <tag>Docker</tag>
       </tags>
@@ -53,6 +56,9 @@
 <p>3、将修改后的vmdk文件上传到ESXi后开始系统安装</p>
 <p>4、安装完成后使用winhex工具查看磁盘扇区数是否为32扇区</p>
 ]]></content>
+      <categories>
+        <category>虚拟化</category>
+      </categories>
       <tags>
         <tag>EXSi</tag>
       </tags>
@@ -135,8 +141,12 @@
 
 <p><strong>至此整个搭建过程完毕。</strong></p>
 ]]></content>
+      <categories>
+        <category>高可用</category>
+      </categories>
       <tags>
-        <tag>高可用</tag>
+        <tag>corosync</tag>
+        <tag>pacemaker</tag>
       </tags>
   </entry>
   <entry>
@@ -171,6 +181,9 @@
 <li>定义虚拟机，启动虚拟机</li>
 </ol>
 ]]></content>
+      <categories>
+        <category>虚拟化</category>
+      </categories>
       <tags>
         <tag>virsh</tag>
       </tags>
@@ -270,6 +283,9 @@
 </ol>
 <p><img src="/2021/01/02/KVM/7.png" alt></p>
 ]]></content>
+      <categories>
+        <category>虚拟化</category>
+      </categories>
       <tags>
         <tag>KVM</tag>
       </tags>
@@ -285,8 +301,11 @@
 <p>你有光明，中国便不再黑暗。</p>
 <p>——摘自原北京日报评论部主任卢新宁《2012年北京大学中文系毕业典礼上的讲话》</p>
 ]]></content>
+      <categories>
+        <category>读书</category>
+      </categories>
       <tags>
-        <tag>读书</tag>
+        <tag>信仰</tag>
       </tags>
   </entry>
   <entry>
@@ -294,8 +313,11 @@
     <url>/2020/06/21/%E5%AD%A4%E7%8B%AC/</url>
     <content><![CDATA[<p>我周围人声鼎沸，<br>他们讨论我不喜欢的话题，<br>我只好微笑，目光深远，<br>于是孤独从四面八方涌来，将我吞噬。</p>
 ]]></content>
+      <categories>
+        <category>随笔</category>
+      </categories>
       <tags>
-        <tag>随笔</tag>
+        <tag>孤独</tag>
       </tags>
   </entry>
   <entry>
@@ -303,8 +325,11 @@
     <url>/2020/07/14/%E3%80%8A%E5%81%87%E5%A6%82%E7%8C%AB%E4%BB%8E%E4%B8%96%E7%95%8C%E4%B8%8A%E6%B6%88%E5%A4%B1%E4%BA%86%E3%80%8B/</url>
     <content><![CDATA[<p>假如猫从世界上消失了<br>那这个世界会有如何的变化呢<br>假如我从世界上消失了<br>那究竟会有谁为我悲伤呢<br>假如我从世界上消失了<br>那些未实现的梦想和思绪<br>那些在我存活时未能完成的事情<br>对此我一定会抱有许多遗憾吧<br>然而，这个世界我在与不在<br>相信一定会有所不同<br>也许真的只是些小小的不同<br>然而正是它们<br>是我存在过的证明<br>是我挣扎着，烦恼着，生活过的证明</p>
 ]]></content>
+      <categories>
+        <category>读书</category>
+      </categories>
       <tags>
-        <tag>读书</tag>
+        <tag>感悟</tag>
       </tags>
   </entry>
   <entry>
@@ -312,8 +337,11 @@
     <url>/2020/09/11/%E5%B9%B8%E7%A6%8F/</url>
     <content><![CDATA[<p>”幸福“就是猫吃鱼，狗啃骨头，猪睡觉。</p>
 ]]></content>
+      <categories>
+        <category>随笔</category>
+      </categories>
       <tags>
-        <tag>随笔</tag>
+        <tag>幸福</tag>
       </tags>
   </entry>
   <entry>
@@ -332,6 +360,9 @@
 <p>时间很快，2020还有几小时就要成为过去式了，而我的人生才刚刚开始，过往虽有遗憾，但我不后悔。</p>
 <p>别了，2020。你好，2021！</p>
 ]]></content>
+      <categories>
+        <category>随笔</category>
+      </categories>
       <tags>
         <tag>2020</tag>
       </tags>
