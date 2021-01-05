@@ -294,6 +294,192 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/01/05/Linux%E4%B8%8B%E9%80%9A%E8%BF%87Python%E7%9A%84pymysql%E6%A8%A1%E5%9D%97%E5%90%91mysql%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8C%81%E7%BB%AD%E6%8F%92%E5%85%A5%E5%9B%BE%E7%89%87%E6%95%B0%E6%8D%AE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Nobody">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/me.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Nobody's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2021/01/05/Linux%E4%B8%8B%E9%80%9A%E8%BF%87Python%E7%9A%84pymysql%E6%A8%A1%E5%9D%97%E5%90%91mysql%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8C%81%E7%BB%AD%E6%8F%92%E5%85%A5%E5%9B%BE%E7%89%87%E6%95%B0%E6%8D%AE/" itemprop="url">Linux下通过Python的pymysql模块向mysql数据库持续插入图片数据</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-01-05T17:55:44+08:00">
+                2021-01-05
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2021-01-05T18:02:56+08:00">
+                2021-01-05
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/mysql/" itemprop="url" rel="index">
+                    <span itemprop="name">mysql</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  369
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  1
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><p>安装pymysql模块</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install pymysql</span><br></pre></td></tr></table></figure>
+<h2 id="源代码"><a href="#源代码" class="headerlink" title="源代码"></a>源代码</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#encoding=utf-8</span></span><br><span class="line"><span class="keyword">import</span> pymysql</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">import</span> string</span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"></span><br><span class="line"><span class="comment">#图片路径（根据实际情况修改）示例如下：</span></span><br><span class="line">picUrl = <span class="string">"/test/index.jpg"</span></span><br><span class="line"><span class="comment">#连接的数据库服务器主机名（根据实际情况修改）示例如下：</span></span><br><span class="line"><span class="comment">#conhost="127.0.0.1"</span></span><br><span class="line">conhost=<span class="string">"localhost"</span></span><br><span class="line"><span class="comment">#连接的数据库端口号（根据实际情况修改）示例如下：</span></span><br><span class="line">conport=<span class="number">3306</span></span><br><span class="line"><span class="comment">#连接的数据库的用户名（根据实际情况修改）示例如下：</span></span><br><span class="line">conuser=<span class="string">"root"</span></span><br><span class="line"><span class="comment">#连接的数据库密码（根据实际情况修改）示例如下：</span></span><br><span class="line">conpasswd=<span class="string">"111111"</span></span><br><span class="line"><span class="comment">#连接的数据库名（根据实际情况修改）示例如下：</span></span><br><span class="line">condb=<span class="string">"test"</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BlobDataTestor</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="comment">#连接数据库</span></span><br><span class="line">        self.conn = pymysql.connect(host=conhost,port=conport, user=conuser,passwd=conpasswd,db=condb)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__del__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            self.conn.close()</span><br><span class="line">        <span class="keyword">except</span>:</span><br><span class="line">            <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">closedb</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.conn.close()</span><br><span class="line"></span><br><span class="line">    <span class="comment">#创建表</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">setup</span><span class="params">(self)</span>:</span></span><br><span class="line">        cursor = self.conn.cursor()</span><br><span class="line">        cursor.execute(<span class="string">"""  </span></span><br><span class="line"><span class="string">            CREATE TABLE IF NOT EXISTS `Dem_Picture` (  </span></span><br><span class="line"><span class="string">            `ID` int(11) NOT NULL auto_increment,</span></span><br><span class="line"><span class="string">            `time` timestamp  ,</span></span><br><span class="line"><span class="string">            `PicData` mediumblob,</span></span><br><span class="line"><span class="string">            `RandomNum` varchar(20),</span></span><br><span class="line"><span class="string">            PRIMARY KEY (`ID`)  </span></span><br><span class="line"><span class="string">            ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;  </span></span><br><span class="line"><span class="string">            """</span>)</span><br><span class="line">	</span><br><span class="line">    <span class="comment">#删除表</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">teardown</span><span class="params">(self)</span>:</span></span><br><span class="line">        cursor = self.conn.cursor()</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            cursor.execute(<span class="string">"Drop Table Dem_Picture"</span>)</span><br><span class="line">        <span class="keyword">except</span>:</span><br><span class="line">            <span class="keyword">pass</span></span><br><span class="line">            <span class="comment"># self.conn.commit()</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">testRWBlobData</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="comment"># 读取源图片数据</span></span><br><span class="line">        f = open(picUrl, <span class="string">"rb"</span>)</span><br><span class="line">        b = f.read()</span><br><span class="line">        f.close()</span><br><span class="line"></span><br><span class="line">        <span class="comment">#生成随机数</span></span><br><span class="line">        s = <span class="string">''</span>.join(random.choice(string.ascii_uppercase + string.digits) <span class="keyword">for</span> _ <span class="keyword">in</span> range(<span class="number">10</span>))</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 将数据写入表</span></span><br><span class="line">        cursor = self.conn.cursor()</span><br><span class="line">        cursor.execute(<span class="string">"INSERT INTO Dem_Picture (time,PicData,RandomNum) VALUES (current_timestamp,%s,%s)"</span>,((pymysql.Binary(b)),s))</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line"></span><br><span class="line">    test = BlobDataTestor()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="comment">#创建表</span></span><br><span class="line">        test.setup()</span><br><span class="line">        <span class="keyword">while</span> <span class="number">1</span>:</span><br><span class="line">            test.testRWBlobData()</span><br><span class="line">            <span class="keyword">print</span> <span class="string">"insert success"</span></span><br><span class="line">            <span class="comment">#time.sleep(1)	#根据需要设置插入时间间隔</span></span><br><span class="line">        <span class="comment">#删除表</span></span><br><span class="line">        <span class="comment">#test.teardown()</span></span><br><span class="line">        </span><br><span class="line">    <span class="keyword">finally</span>:</span><br><span class="line">        test.closedb()</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/01/05/redhat7-6%E9%85%8D%E7%BD%AE163yum%E6%BA%90/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2146,264 +2332,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/12/28/Centos7-6%E4%B8%8Bcorosync-pacemaker-pcs%E9%AB%98%E5%8F%AF%E7%94%A8%E9%9B%86%E7%BE%A4%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Nobody">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/me.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Nobody's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/12/28/Centos7-6%E4%B8%8Bcorosync-pacemaker-pcs%E9%AB%98%E5%8F%AF%E7%94%A8%E9%9B%86%E7%BE%A4%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/" itemprop="url">Centos7.6下corosync+pacemaker+pcs高可用集群环境安装</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-12-28T14:59:55+08:00">
-                2020-12-28
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2021-01-05T17:05:17+08:00">
-                2021-01-05
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E9%AB%98%E5%8F%AF%E7%94%A8/" itemprop="url" rel="index">
-                    <span itemprop="name">高可用</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  927
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  3
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>在容灾备份领域，有多种高可用方案，corosync+pacemaker无疑是开源方案中的佼佼者。</p>
-<h2 id="什么是corosync、pacemaker、pcs？"><a href="#什么是corosync、pacemaker、pcs？" class="headerlink" title="什么是corosync、pacemaker、pcs？"></a>什么是corosync、pacemaker、pcs？</h2><blockquote>
-<ul>
-<li>Corosync是集群管理套件的一部分，通常会与其他资源管理器一起组合，使用它在传递信息的时候可以通过一个简单的配置文件来定义信息传递的方式和协议等。它是一个新兴的软件，2008年推出，但其实它并不是一个真正意义上的新软件，在2002年的时候有一个项目Openais，它由于过大，分裂为两个子项目，其中可以实现HA心跳信息传输的功能就是Corosync ，它的代码60%左右来源于Openais。Corosync可以提供一个完整的HA功能，但是要实现更多，更复杂的功能，那就需要使用Openais了。Corosync是未来的发展方向，在以后的新项目里，一般采用Corosync，而hb_gui可以提供很好的HA管理功能，可以实现图形化的管理。另外相关的图形化有RHCS的套件luci+ricci，当然还有基于java开发的LCMC集群管理工具。</li>
-</ul>
-</blockquote>
-<blockquote>
-<ul>
-<li>Pacemaker是一个集群资源管理器。它利用集群基础构件（OpenAIS、heartbeat或corosync）提供的消息和成员管理能力来探测并从节点或资源级别的故障中恢复，以实现群集服务（亦称资源）的最大可用性。</li>
-</ul>
-</blockquote>
-<blockquote>
-<ul>
-<li>Pcs是一种常用的集群配置及管理指令集，其他类似命令有crmsh。</li>
-</ul>
-</blockquote>
-<hr>
-<h2 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a><strong>环境准备</strong></h2><p>1、保证两个节点上的/etc/hosts文件均添加了下面的内容</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">10.10</span><span class="number">.4</span><span class="number">.176</span> g0001210030<span class="number">-00</span>-server01</span><br><span class="line"><span class="number">10.10</span><span class="number">.4</span><span class="number">.177</span> g0001210030<span class="number">-00</span>-server02</span><br></pre></td></tr></table></figure>
-
-<p>2、关闭防火墙（每个节点都需执行）</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">setenforce <span class="number">0</span></span><br><span class="line">sed -i.bak <span class="string">"s/SELINUX=enforcing/SELINUX=permissive/g"</span> /etc/selinux/config</span><br><span class="line">systemctl disable firewalld.service</span><br><span class="line">systemctl stop firewalld.service</span><br><span class="line">iptables --flush</span><br></pre></td></tr></table></figure>
-
-<p>3、查看主备机是否安装ntp服务</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl status ntpd.service</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2020/12/28/Centos7-6%E4%B8%8Bcorosync-pacemaker-pcs%E9%AB%98%E5%8F%AF%E7%94%A8%E9%9B%86%E7%BE%A4%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/pic1.png" alt></p>
-<p>若未安装ntp服务，先安装，确认安装ntp服务后，主机执行以下命令</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cp /etc/ntp.conf /etc/ntp.conf.bak</span><br><span class="line">rm -f /etc/ntp.conf</span><br><span class="line">vi /etc/ntp.conf</span><br></pre></td></tr></table></figure>
-
-<p>在/etc/ntp.conf文件输入一下内容</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">restrict default kod nomodify notrap nopeer noquery</span><br><span class="line">restrict <span class="number">-6</span> default kod nomodify notrap nopper noquery</span><br><span class="line">restrict <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span></span><br><span class="line">restrict <span class="number">-6</span>::<span class="number">1</span></span><br><span class="line">restrict <span class="number">10.10</span><span class="number">.1</span><span class="number">.0</span> mask <span class="number">255.255</span><span class="number">.0</span><span class="number">.0</span> nomodify notrap</span><br><span class="line">server <span class="number">10.10</span><span class="number">.4</span><span class="number">.176</span></span><br><span class="line">server <span class="number">127.127</span><span class="number">.1</span><span class="number">.0</span></span><br><span class="line">fudge <span class="number">127.127</span><span class="number">.1</span><span class="number">.0</span> stratum <span class="number">10</span></span><br></pre></td></tr></table></figure>
-
-<p>启动主机ntp服务</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#systemctl start ntpd.service</span></span><br></pre></td></tr></table></figure>
-
-<p>备机执行以下命令</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ntpdate <span class="number">10.10</span><span class="number">.4</span><span class="number">.176</span></span><br></pre></td></tr></table></figure>
-
-<p>如果出现下面提示</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">21</span> Sep <span class="number">18</span>:<span class="number">01</span>:<span class="number">41</span> ntpdate[<span class="number">2604</span>]: no server suitable <span class="keyword">for</span> synchronization found</span><br></pre></td></tr></table></figure>
-<p>稍等片刻再执行一次</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ntpdate <span class="number">10.10</span><span class="number">.4</span><span class="number">.176</span></span><br></pre></td></tr></table></figure>
-
-<hr>
-<h2 id="安装集群软件"><a href="#安装集群软件" class="headerlink" title="安装集群软件"></a><strong>安装集群软件</strong></h2><p><img src="/2020/12/28/Centos7-6%E4%B8%8Bcorosync-pacemaker-pcs%E9%AB%98%E5%8F%AF%E7%94%A8%E9%9B%86%E7%BE%A4%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/pic2.png" alt></p>
-<p><img src="/2020/12/28/Centos7-6%E4%B8%8Bcorosync-pacemaker-pcs%E9%AB%98%E5%8F%AF%E7%94%A8%E9%9B%86%E7%BE%A4%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/pic3.png" alt></p>
-<p>安装完毕，输入pcs status查询集群状态为下图所示，表示集群安装成功</p>
-<p><img src="/2020/12/28/Centos7-6%E4%B8%8Bcorosync-pacemaker-pcs%E9%AB%98%E5%8F%AF%E7%94%A8%E9%9B%86%E7%BE%A4%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/pic4.png" alt></p>
-<hr>
-<h2 id="集群资源配置"><a href="#集群资源配置" class="headerlink" title="集群资源配置"></a><strong>集群资源配置</strong></h2><p>1、注意：配置集群资源时，为防止资源启动的节点不一致，需要暂时将备节点的集群服务停止。在任意节点输入</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pcs cluster stop G0001210030<span class="number">-00</span>-SERVER02</span><br></pre></td></tr></table></figure>
-<p>即可关闭备节点集群服务。</p>
-<p>2、配置浮动IP和ha服务高可用（ip需根据实际情况修改、在任意节点配置即可）</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pcs resource create vip ocf:heartbeat:IPaddr2 ip=<span class="number">192.168</span><span class="number">.8</span><span class="number">.53</span> cidr_netmask=<span class="number">16</span> op monitor interval=<span class="number">30</span>s</span><br><span class="line">pcs resource create ha systemd:ha op monitor interval=<span class="number">60</span>s timeout=<span class="number">60</span>s on-fail=restart</span><br></pre></td></tr></table></figure>
-
-<p>配置资源关系</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pcs constraint colocation add vip ha INFINITY</span><br></pre></td></tr></table></figure>
-
-<p>设置启动顺序</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pcs constraint order vip  then ha</span><br></pre></td></tr></table></figure>
-
-<p>3、配置其他资源，如mariadb数据库服务（在任意节点配置即可，需要注意的是：配置mariadb服务高可用需要将mariadb服务设置为开机不自启）</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pcs resource create mysql-s systemd:mariadb op monitor interval=<span class="number">60</span>s timeout=<span class="number">60</span>s on-fail=restart</span><br></pre></td></tr></table></figure>
-
-<p>配置资源关系</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pcs constraint colocation add ha mysql-s INFINITY</span><br></pre></td></tr></table></figure>
-
-<p>设置启动顺序</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pcs constraint order ha then mysql-s</span><br></pre></td></tr></table></figure>
-
-
-
-<p><strong>至此整个搭建过程完毕。</strong></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2456,7 +2384,7 @@
             
               <div class="site-state-item site-state-posts">
                 <a href="/archives">
-                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-count">14</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2478,7 +2406,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-count">16</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -2529,7 +2457,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">5.2k</span>
+    <span title="Site words total count">5.6k</span>
   
 </div>
 
