@@ -446,4 +446,24 @@
         <tag>pymysql</tag>
       </tags>
   </entry>
+  <entry>
+    <title>排序算法（C）</title>
+    <url>/2021/01/06/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%EF%BC%88C%EF%BC%89/</url>
+    <content><![CDATA[<h2 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a>冒泡排序</h2><p>冒泡排序（Bubble Sort）：它重复地走访过要排序的数列，一次比较两个元素，如果他们的顺序（如从大到小、首字母从A到Z）错误就把他们交换过来。走访数列的工作是重复地进行直到没有再需要交换，也就是说该数列已经排序完成。这个算法的名字由来是因为越小的元素会经由交换慢慢“浮”到数列的顶端。 </p>
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#include &lt;stdio.h&gt;</span></span><br><span class="line">void bubble_sort(int [],int);</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	int i;</span><br><span class="line">	int arr[]=&#123;<span class="number">22</span>,<span class="number">34</span>,<span class="number">3</span>,<span class="number">32</span>,<span class="number">82</span>,<span class="number">55</span>,<span class="number">89</span>,<span class="number">50</span>,<span class="number">37</span>,<span class="number">5</span>,<span class="number">64</span>,<span class="number">35</span>,<span class="number">9</span>,<span class="number">70</span>&#125;;</span><br><span class="line">    int len=(int)sizeof(arr)/sizeof(*arr);</span><br><span class="line">    bubble_sort(arr,len);</span><br><span class="line">    <span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;len;i++)</span><br><span class="line">        printf(<span class="string">"%d "</span>,arr[i]);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void bubble_sort(int arr[],int len)</span><br><span class="line">&#123;</span><br><span class="line">    int i,j,temp;</span><br><span class="line">    <span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;len<span class="number">-1</span>;i++)</span><br><span class="line">        <span class="keyword">for</span>(j=<span class="number">0</span>;j&lt;len<span class="number">-1</span>-i;j++)</span><br><span class="line">            <span class="keyword">if</span>(arr[j]&gt;arr[j+<span class="number">1</span>])</span><br><span class="line">			&#123;</span><br><span class="line">                temp=arr[j];</span><br><span class="line">                arr[j]=arr[j+<span class="number">1</span>];</span><br><span class="line">                arr[j+<span class="number">1</span>]=temp;</span><br><span class="line">            &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="备注：常用排序算法的时间复杂度和空间复杂度"><a href="#备注：常用排序算法的时间复杂度和空间复杂度" class="headerlink" title="备注：常用排序算法的时间复杂度和空间复杂度"></a>备注：常用排序算法的时间复杂度和空间复杂度</h2><img src="/2021/01/06/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%EF%BC%88C%EF%BC%89/总.png" style="zoom:50%;">
+
+<p><img src="/2021/01/06/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%EF%BC%88C%EF%BC%89/E:%5CMyBlog%5Csource_posts%5C%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%EF%BC%88C%EF%BC%89%5C%E6%80%BB1.png" alt></p>
+]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>C</tag>
+        <tag>算法</tag>
+        <tag>排序</tag>
+      </tags>
+  </entry>
 </search>
