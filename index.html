@@ -294,6 +294,192 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/01/06/C-%E5%AE%9E%E4%BE%8B-%E4%B8%AA%E4%BA%BA%E9%93%B6%E8%A1%8C%E8%B4%A6%E6%88%B7%E7%AE%A1%E7%90%86%E7%A8%8B%E5%BA%8F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Nobody">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/me.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Nobody's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2021/01/06/C-%E5%AE%9E%E4%BE%8B-%E4%B8%AA%E4%BA%BA%E9%93%B6%E8%A1%8C%E8%B4%A6%E6%88%B7%E7%AE%A1%E7%90%86%E7%A8%8B%E5%BA%8F/" itemprop="url">C++实例-个人银行账户管理程序</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-01-06T11:00:09+08:00">
+                2021-01-06
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2021-01-06T11:05:46+08:00">
+                2021-01-06
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C/" itemprop="url" rel="index">
+                    <span itemprop="name">C++</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  512
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  2
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="源程序"><a href="#源程序" class="headerlink" title="源程序"></a>源程序</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#include &lt;iostream&gt;</span></span><br><span class="line"><span class="comment">#include &lt;cmath&gt;</span></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">//储蓄账户类</span><br><span class="line">class SavingAccount&#123;		</span><br><span class="line">private:</span><br><span class="line">	int id;					//账号</span><br><span class="line">	double balance;			//余额</span><br><span class="line">	double rate;			//存款的年利率</span><br><span class="line">	int lastDate;			//上次变更余额的时期</span><br><span class="line">	double accumulation;	//余额按日累加之和</span><br><span class="line"></span><br><span class="line">	//记录一笔账，date为日期，amount为金额，desc为说明</span><br><span class="line">	void record(int date,double amount);</span><br><span class="line"></span><br><span class="line">	//获得到指定日期为止的存款金额按日累积值</span><br><span class="line">	double accumulate(int date) const&#123;</span><br><span class="line">		<span class="keyword">return</span> accumulation+balance*(date-lastDate);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">public:</span><br><span class="line">	//构造函数</span><br><span class="line">	SavingAccount(int date,int id,double rate);</span><br><span class="line">	int getId()&#123;<span class="keyword">return</span> id;&#125;</span><br><span class="line">	double getBalance()&#123;<span class="keyword">return</span> balance;&#125;</span><br><span class="line">	double getRate()&#123;<span class="keyword">return</span> rate;&#125;</span><br><span class="line">	void deposit(int date,double amount);		//存入现金</span><br><span class="line">	void withdraw(int date,double amount);		//取出现金</span><br><span class="line">	//结算利息，每年<span class="number">1</span>月<span class="number">1</span>日调用一次该函数</span><br><span class="line">	void settle(int date);</span><br><span class="line">	//显示账户信息</span><br><span class="line">	void show();</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">//SavingAccount类相关成员函数的实现</span><br><span class="line">SavingAccount::SavingAccount(int date,int id,double rate)</span><br><span class="line">	:id(id),balance(<span class="number">0</span>),rate(rate),lastDate(date),accumulation(<span class="number">0</span>)&#123;</span><br><span class="line">	cout&lt;&lt;date&lt;&lt;<span class="string">"\t#"</span>&lt;&lt;id&lt;&lt;<span class="string">" is created"</span>&lt;&lt;endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void SavingAccount::record(int date,double amount)&#123;</span><br><span class="line">	accumulation=accumulate(date);</span><br><span class="line">	lastDate=date;</span><br><span class="line">	amount=floor(amount*<span class="number">100</span>+<span class="number">0.5</span>)/<span class="number">100</span>;			//保留小数点后两位</span><br><span class="line">	balance+=amount;</span><br><span class="line">	cout&lt;&lt;date&lt;&lt;<span class="string">"\t#"</span>&lt;&lt;id&lt;&lt;<span class="string">"\t"</span>&lt;&lt;amount&lt;&lt;<span class="string">"\t"</span>&lt;&lt;balance&lt;&lt;endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void SavingAccount::deposit(int date,double amount)&#123;</span><br><span class="line">	record(date,amount);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void SavingAccount::withdraw(int date,double amount)&#123;</span><br><span class="line">	<span class="keyword">if</span>(amount&gt;getBalance())</span><br><span class="line">		cout&lt;&lt;<span class="string">"Error:not enough money"</span>&lt;&lt;endl;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">		record(date,-amount);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void SavingAccount::settle(int date)&#123;</span><br><span class="line">	double interest=accumulate(date)*rate/<span class="number">365</span>;	//计算年息</span><br><span class="line">	<span class="keyword">if</span>(interest!=<span class="number">0</span>)</span><br><span class="line">		record(date,interest);</span><br><span class="line">	accumulation=<span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void SavingAccount::show()&#123;</span><br><span class="line">	cout&lt;&lt;<span class="string">"#"</span>&lt;&lt;id&lt;&lt;<span class="string">"\tBalance:"</span>&lt;&lt;balance;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	//建立几个账户</span><br><span class="line">	SavingAccount sa0(<span class="number">1</span>,<span class="number">21325302</span>,<span class="number">0.015</span>);</span><br><span class="line">	SavingAccount sa1(<span class="number">1</span>,<span class="number">58320212</span>,<span class="number">0.015</span>);</span><br><span class="line">	//几笔账目</span><br><span class="line">	sa0.deposit(<span class="number">5</span>,<span class="number">5000</span>);</span><br><span class="line">	sa1.deposit(<span class="number">25</span>,<span class="number">10000</span>);</span><br><span class="line">	sa0.deposit(<span class="number">45</span>,<span class="number">5500</span>);</span><br><span class="line">	sa1.withdraw(<span class="number">60</span>,<span class="number">4000</span>);</span><br><span class="line">	//开户后第<span class="number">90</span>天到了银行的计息日，结算所有账户的年息</span><br><span class="line">	sa0.settle(<span class="number">90</span>);</span><br><span class="line">	sa1.settle(<span class="number">90</span>);</span><br><span class="line">	//输出各个账户信息</span><br><span class="line">	sa0.show();</span><br><span class="line">	cout&lt;&lt;endl;</span><br><span class="line">	sa1.show();</span><br><span class="line">	cout&lt;&lt;endl;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="运行结果"><a href="#运行结果" class="headerlink" title="运行结果"></a>运行结果</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>       <span class="comment">#21325302 is created</span></span><br><span class="line"><span class="number">1</span>       <span class="comment">#58320212 is created</span></span><br><span class="line"><span class="number">5</span>       <span class="comment">#21325302       5000    5000</span></span><br><span class="line"><span class="number">25</span>      <span class="comment">#58320212       10000   10000</span></span><br><span class="line"><span class="number">45</span>      <span class="comment">#21325302       5500    10500</span></span><br><span class="line"><span class="number">60</span>      <span class="comment">#58320212       -4000   6000</span></span><br><span class="line"><span class="number">90</span>      <span class="comment">#21325302       27.64   10527.6</span></span><br><span class="line"><span class="number">90</span>      <span class="comment">#58320212       21.78   6021.78</span></span><br><span class="line"><span class="comment">#21325302       Balance:10527.6</span></span><br><span class="line"><span class="comment">#58320212       Balance:6021.78</span></span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/01/06/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%EF%BC%88C%EF%BC%89/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -341,7 +527,7 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2021-01-06T10:56:25+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2021-01-06T10:59:28+08:00">
                 2021-01-06
               </time>
             
@@ -444,7 +630,7 @@
 
 <h2 id="备注：常用排序算法的时间复杂度和空间复杂度"><a href="#备注：常用排序算法的时间复杂度和空间复杂度" class="headerlink" title="备注：常用排序算法的时间复杂度和空间复杂度"></a>备注：常用排序算法的时间复杂度和空间复杂度</h2><img src="/2021/01/06/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%EF%BC%88C%EF%BC%89/总.png" style="zoom:50%;">
 
-<p><img src="/2021/01/06/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%EF%BC%88C%EF%BC%89/E:%5CMyBlog%5Csource_posts%5C%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%EF%BC%88C%EF%BC%89%5C%E6%80%BB1.png" alt></p>
+<p><img src="/2021/01/06/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%EF%BC%88C%EF%BC%89/%E6%80%BB1.png" alt></p>
 
           
         
@@ -2130,216 +2316,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/12/30/Centos7-x%E7%B3%BB%E7%BB%9F%E4%B8%ADDocker%E5%AE%89%E8%A3%85%E5%8F%8A%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Nobody">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/me.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Nobody's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/12/30/Centos7-x%E7%B3%BB%E7%BB%9F%E4%B8%ADDocker%E5%AE%89%E8%A3%85%E5%8F%8A%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/" itemprop="url">Centos7.x系统中Docker安装及简单使用</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-12-30T10:33:44+08:00">
-                2020-12-30
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2021-01-03T18:18:00+08:00">
-                2021-01-03
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%AE%B9%E5%99%A8/" itemprop="url" rel="index">
-                    <span itemprop="name">容器</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  522
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  2
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="环境要求"><a href="#环境要求" class="headerlink" title="环境要求"></a>环境要求</h3><pre><code>1、只能是64位的系统;
-2、要求centos7以上系统的内核版本不低于3.10。</code></pre><hr>
-<h3 id="安装步骤"><a href="#安装步骤" class="headerlink" title="安装步骤"></a>安装步骤</h3><p>1、移除旧版本的docker</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum remove docker docker-client docker-client-latest docker-common docker-latest docker-latest-logrotate docker-logrotate docker-selinux docker-engine-selinux docker-engine</span><br></pre></td></tr></table></figure>
-
-<p>2、安装依赖包</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y yum-utils device-mapper-persistent-data lvm2</span><br></pre></td></tr></table></figure>
-
-<p>3、添加yum软件源<br>非官方源(比如阿里云)</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo</span><br></pre></td></tr></table></figure>
-
-<p>官方源</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum-config-manager  --add-repo https://download.docker.com/linux/centos/docker-ce.repo</span><br></pre></td></tr></table></figure>
-
-<p>4、更新yum软件源缓存：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum makecache fast</span><br></pre></td></tr></table></figure>
-
-<p>5、安装docker</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum  -y install  docker-ce</span><br></pre></td></tr></table></figure>
-
-<p>安装时，如果报错出现rpm包无法找到，先手动通过wget下载该rpm包，然后重新执行安装命令即可。 </p>
-<hr>
-<h3 id="Docker镜像和容器的简单使用命令"><a href="#Docker镜像和容器的简单使用命令" class="headerlink" title="Docker镜像和容器的简单使用命令"></a>Docker镜像和容器的简单使用命令</h3><p>1、查看docker版本： docker  version<br>2、查询镜像： docker  search  imageName[镜像名称：如  centos]<br>3、获取镜像：docker  pull  imageName[镜像名称：如  centos]<br>4、列出镜像:  docker  image  ls<br>5、查询镜像体积：docker system df<br>6、删除镜像:docker  image rm  imagesID<br>7、启动容器： docker  run –name ***  -p  port:port  -d  [镜像名]/ docker start                        [containerID/containerName]<br>8、退出容器：exit/docker  stop containerID<br>9、进入容器：docker  attach  containerID/docker   exec  -it   containerID<br>10、删除容器：<br>1）删除处于终止状态的：docker  container  rm  [ID]<br>2）删除处于运行状态的：docker  container  rm  -f  [ID]<br>3）删除所有处于终止状态的：docker container prune </p>
-<hr>
-<h3 id="Docker安装Tomcat实例"><a href="#Docker安装Tomcat实例" class="headerlink" title="Docker安装Tomcat实例"></a>Docker安装Tomcat实例</h3><p>1、获取tomcat镜像: docker  pull  tomcat<br>2、新建并运行tomcat容器:</p>
-<p>docker run  –name  tomcat  -p 127.0.0.1:8080:8080    -d  tomcat<br>docker run  –name  tomcat  -p 127.0.0.1:8080:8080    -d  tomcat –restart=always<br>    –name：容器名<br>    -p：后面接IP地址(可以不设)：接宿主机端口：容器端口<br>    -d：后台运行<br>3、进入容器：docker   exec/attach  -it  tomcat  bash<br>    exec进入容器后使用exit命令退出容器，只会退出容器，让容器在后台继续运行；attach进入后用exit退出，     会直接关闭容器.<br>    -it:交互模式进入容器<br>4、退出tomcat容器：exit<br>5、停止tomcat容器：docker   stop   tomcat<br>6、启动tomcat容器：docker   start   tomcat<br>7、删除tomcat容器：docker   container    rm  -f  tomcat</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2392,7 +2368,7 @@
             
               <div class="site-state-item site-state-posts">
                 <a href="/archives">
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">16</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2403,7 +2379,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -2414,7 +2390,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-count">21</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -2465,7 +2441,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">6.1k</span>
+    <span title="Site words total count">6.6k</span>
   
 </div>
 
