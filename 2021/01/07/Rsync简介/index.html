@@ -88,7 +88,7 @@
 <meta property="og:image" content="http://yoursite.com/2021/01/07/Rsync%E7%AE%80%E4%BB%8B/1.png">
 <meta property="og:image" content="http://yoursite.com/2021/01/07/Rsync%E7%AE%80%E4%BB%8B/2.png">
 <meta property="article:published_time" content="2021-01-07T03:23:20.000Z">
-<meta property="article:modified_time" content="2021-01-07T03:38:27.616Z">
+<meta property="article:modified_time" content="2021-01-07T10:03:28.770Z">
 <meta property="article:author" content="Nobody">
 <meta property="article:tag" content="高可用">
 <meta property="article:tag" content="Rsync">
@@ -345,7 +345,7 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2021-01-07T11:38:27+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2021-01-07T18:03:28+08:00">
                 2021-01-07
               </time>
             
@@ -395,7 +395,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  481
+                  482
                 </span>
               
 
@@ -444,7 +444,7 @@
 <li>解压服务端软件cwRsyncServer_4.0.5_Installe.zip安装，安装过程选择默认即可。</li>
 <li>打开cwRsyncServer安装路径C:\Program Files(x86)\ICW，其中rsyncd.conf是cwRsyncServer配置文件。修改文件内容如下：<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">use chroot = false</span><br><span class="line">strict modes = false</span><br><span class="line">hosts allow = <span class="number">10.10</span><span class="number">.4</span><span class="number">.75</span> <span class="comment">#限制了只允许10.10.4.75进行连接</span></span><br><span class="line">uid = <span class="number">0</span></span><br><span class="line">gid = <span class="number">0</span></span><br><span class="line">max connections = <span class="number">10</span></span><br><span class="line">strict modes = false</span><br><span class="line">log file = rsyncd.log</span><br><span class="line">lock file = rsyncd.lock</span><br><span class="line">[test] <span class="comment">#模块名称，可自定义</span></span><br><span class="line">path = /cygdrive/e/MySQL Server <span class="number">5.1</span>/data <span class="comment">#需要同步的文件目录</span></span><br><span class="line">read only = false</span><br><span class="line">transfer logging = yes</span><br><span class="line">auth users = test <span class="comment">#用户名</span></span><br><span class="line">secrets file = /cygdrive/c/Program Files (x86)/ICW/rsyncd.secrets <span class="comment">#用户和密码文件，内容为：test:111111</span></span><br><span class="line">comment = test</span><br></pre></td></tr></table></figure></li>
 </ol>
-<p><strong>注意：默认rsync使用873端口，自行开启windows 873端口，如果想使其他端口自行添加port参数。</strong><br>3. 在服务中找到RsyncServer，更改成自动启动，然后确认即可。</p>
+<p><strong>注意：默认rsync使用873端口，自行开启windows 873端口，如果想使用其他端口自行添加port参数。</strong><br>3. 在服务中找到RsyncServer，更改成自动启动，然后确认即可。</p>
 <p>  <img src="/2021/01/07/Rsync%E7%AE%80%E4%BB%8B/1.png" alt></p>
 <h3 id="客户端"><a href="#客户端" class="headerlink" title="客户端"></a>客户端</h3><ol>
 <li>将客户端软件cwRsyncClient.rar解压到E盘cwRsync目录下。</li>
