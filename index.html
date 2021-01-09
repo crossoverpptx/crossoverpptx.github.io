@@ -294,6 +294,203 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/01/09/C-%E5%AE%9E%E4%BE%8B-%E4%B8%AA%E4%BA%BA%E9%93%B6%E8%A1%8C%E8%B4%A6%E6%88%B7%E7%AE%A1%E7%90%86%E7%A8%8B%E5%BA%8F-%E6%94%B9%E8%BF%9B1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Nobody">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/me.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Nobody's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2021/01/09/C-%E5%AE%9E%E4%BE%8B-%E4%B8%AA%E4%BA%BA%E9%93%B6%E8%A1%8C%E8%B4%A6%E6%88%B7%E7%AE%A1%E7%90%86%E7%A8%8B%E5%BA%8F-%E6%94%B9%E8%BF%9B1/" itemprop="url">C++实例-个人银行账户管理程序-改进1</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-01-09T10:34:16+08:00">
+                2021-01-09
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2021-01-09T10:47:38+08:00">
+                2021-01-09
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C/" itemprop="url" rel="index">
+                    <span itemprop="name">C++</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  699
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  3
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>整个程序分为3个文件：account.h是类定义文件，account.cpp是类实现文件，5_11.cpp是主函数文件。具体改动如下：</p>
+<ul>
+<li><p>在SavingAccount类增加一个静态数据成员total，用来记录各个账户的总金额，并为其增加相应的静态成员函数getTotal()用来对其进行访问。</p>
+</li>
+<li><p>将SavingAccount类中诸如getBalance，accumulate这些不需要改变对象状态的成员函数声明为常成员函数。</p>
+</li>
+</ul>
+<h2 id="源程序"><a href="#源程序" class="headerlink" title="源程序"></a>源程序</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">//account.h</span><br><span class="line"><span class="comment">#ifndef _ACCOUNT_H_</span></span><br><span class="line"><span class="comment">#define _ACCOUNT_H_</span></span><br><span class="line"></span><br><span class="line">//储蓄账户类</span><br><span class="line">class SavingAccount&#123;		</span><br><span class="line">private:</span><br><span class="line">	int id;					//账号</span><br><span class="line">	double balance;			//余额</span><br><span class="line">	double rate;			//存款的年利率</span><br><span class="line">	int lastDate;			//上次变更余额的时期</span><br><span class="line">	double accumulation;	//余额按日累加之和</span><br><span class="line">	static double total;	//所有账户的总金额</span><br><span class="line"></span><br><span class="line">	//记录一笔账，date为日期，amount为金额，desc为说明</span><br><span class="line">	void record(int date,double amount);</span><br><span class="line"></span><br><span class="line">	//获得到指定日期为止的存款金额按日累积值</span><br><span class="line">	double accumulate(int date) const&#123;</span><br><span class="line">		<span class="keyword">return</span> accumulation+balance*(date-lastDate);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">public:</span><br><span class="line">	//构造函数</span><br><span class="line">	SavingAccount(int date,int id,double rate);</span><br><span class="line">	int getId() const&#123;<span class="keyword">return</span> id;&#125;</span><br><span class="line">	double getBalance() const&#123;<span class="keyword">return</span> balance;&#125;</span><br><span class="line">	double getRate() const&#123;<span class="keyword">return</span> rate;&#125;</span><br><span class="line">	static double getTotal()&#123;<span class="keyword">return</span> total;&#125;</span><br><span class="line">	void deposit(int date,double amount);		//存入现金</span><br><span class="line">	void withdraw(int date,double amount);		//取出现金</span><br><span class="line">	//结算利息，每年<span class="number">1</span>月<span class="number">1</span>日调用一次该函数</span><br><span class="line">	void settle(int date);</span><br><span class="line">	//显示账户信息</span><br><span class="line">	void show() const;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">#endif //_ACCOUNT_H_</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">//account.cpp</span><br><span class="line"><span class="comment">#include "account.h"</span></span><br><span class="line"><span class="comment">#include &lt;cmath&gt;</span></span><br><span class="line"><span class="comment">#include &lt;iostream&gt;</span></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">double SavingAccount::total=<span class="number">0</span>;</span><br><span class="line">//SavingAccount类相关成员函数的实现</span><br><span class="line">SavingAccount::SavingAccount(int date,int id,double rate)</span><br><span class="line">	:id(id),balance(<span class="number">0</span>),rate(rate),lastDate(date),accumulation(<span class="number">0</span>)&#123;</span><br><span class="line">	cout&lt;&lt;date&lt;&lt;<span class="string">"\t#"</span>&lt;&lt;id&lt;&lt;<span class="string">" is created"</span>&lt;&lt;endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void SavingAccount::record(int date,double amount)&#123;</span><br><span class="line">	accumulation=accumulate(date);</span><br><span class="line">	lastDate=date;</span><br><span class="line">	amount=floor(amount*<span class="number">100</span>+<span class="number">0.5</span>)/<span class="number">100</span>;			//保留小数点后两位</span><br><span class="line">	balance+=amount;</span><br><span class="line">	total+=amount;</span><br><span class="line">	cout&lt;&lt;date&lt;&lt;<span class="string">"\t#"</span>&lt;&lt;id&lt;&lt;<span class="string">"\t"</span>&lt;&lt;amount&lt;&lt;<span class="string">"\t"</span>&lt;&lt;balance&lt;&lt;endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void SavingAccount::deposit(int date,double amount)&#123;</span><br><span class="line">	record(date,amount);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void SavingAccount::withdraw(int date,double amount)&#123;</span><br><span class="line">	<span class="keyword">if</span>(amount&gt;getBalance())</span><br><span class="line">		cout&lt;&lt;<span class="string">"Error:not enough money"</span>&lt;&lt;endl;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">		record(date,-amount);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void SavingAccount::settle(int date)&#123;</span><br><span class="line">	double interest=accumulate(date)*rate/<span class="number">365</span>;	//计算年息</span><br><span class="line">	<span class="keyword">if</span>(interest!=<span class="number">0</span>)</span><br><span class="line">		record(date,interest);</span><br><span class="line">	accumulation=<span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void SavingAccount::show() const&#123;</span><br><span class="line">	cout&lt;&lt;<span class="string">"#"</span>&lt;&lt;id&lt;&lt;<span class="string">"\tBalance:"</span>&lt;&lt;balance;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">5</span>_11.cpp</span><br><span class="line"><span class="comment">#include "account.h"</span></span><br><span class="line"><span class="comment">#include &lt;iostream&gt;</span></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	//建立几个账户</span><br><span class="line">	SavingAccount sa0(<span class="number">1</span>,<span class="number">21325302</span>,<span class="number">0.015</span>);</span><br><span class="line">	SavingAccount sa1(<span class="number">1</span>,<span class="number">58320212</span>,<span class="number">0.015</span>);</span><br><span class="line">	//几笔账目</span><br><span class="line">	sa0.deposit(<span class="number">5</span>,<span class="number">5000</span>);</span><br><span class="line">	sa1.deposit(<span class="number">25</span>,<span class="number">10000</span>);</span><br><span class="line">	sa0.deposit(<span class="number">45</span>,<span class="number">5500</span>);</span><br><span class="line">	sa1.withdraw(<span class="number">60</span>,<span class="number">4000</span>);</span><br><span class="line">	//开户后第<span class="number">90</span>天到了银行的计息日，结算所有账户的年息</span><br><span class="line">	sa0.settle(<span class="number">90</span>);</span><br><span class="line">	sa1.settle(<span class="number">90</span>);</span><br><span class="line">	//输出各个账户信息</span><br><span class="line">	sa0.show();cout&lt;&lt;endl;</span><br><span class="line">	sa1.show();cout&lt;&lt;endl;</span><br><span class="line">	cout&lt;&lt;<span class="string">"Total:"</span>&lt;&lt;SavingAccount::getTotal()&lt;&lt;endl;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="运行结果"><a href="#运行结果" class="headerlink" title="运行结果"></a>运行结果</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>       <span class="comment">#21325302 is created</span></span><br><span class="line"><span class="number">1</span>       <span class="comment">#58320212 is created</span></span><br><span class="line"><span class="number">5</span>       <span class="comment">#21325302       5000    5000</span></span><br><span class="line"><span class="number">25</span>      <span class="comment">#58320212       10000   10000</span></span><br><span class="line"><span class="number">45</span>      <span class="comment">#21325302       5500    10500</span></span><br><span class="line"><span class="number">60</span>      <span class="comment">#58320212       -4000   6000</span></span><br><span class="line"><span class="number">90</span>      <span class="comment">#21325302       27.64   10527.6</span></span><br><span class="line"><span class="number">90</span>      <span class="comment">#58320212       21.78   6021.78</span></span><br><span class="line"><span class="comment">#21325302       Balance:10527.6</span></span><br><span class="line"><span class="comment">#58320212       Balance:6021.78</span></span><br><span class="line">Total:<span class="number">16549.4</span></span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/01/07/Rsync%E7%AE%80%E4%BB%8B/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -551,8 +748,8 @@ bat脚本命令说明：<figure class="highlight python"><table><tr><td class="g
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2021-01-06T11:05:46+08:00">
-                2021-01-06
+              <time title="更新于" itemprop="dateModified" datetime="2021-01-09T10:48:55+08:00">
+                2021-01-09
               </time>
             
           </span>
@@ -601,7 +798,7 @@ bat脚本命令说明：<figure class="highlight python"><table><tr><td class="g
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  512
+                  511
                 </span>
               
 
@@ -640,7 +837,7 @@ bat脚本命令说明：<figure class="highlight python"><table><tr><td class="g
       
         
           
-            <h2 id="源程序"><a href="#源程序" class="headerlink" title="源程序"></a>源程序</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#include &lt;iostream&gt;</span></span><br><span class="line"><span class="comment">#include &lt;cmath&gt;</span></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">//储蓄账户类</span><br><span class="line">class SavingAccount&#123;		</span><br><span class="line">private:</span><br><span class="line">	int id;					//账号</span><br><span class="line">	double balance;			//余额</span><br><span class="line">	double rate;			//存款的年利率</span><br><span class="line">	int lastDate;			//上次变更余额的时期</span><br><span class="line">	double accumulation;	//余额按日累加之和</span><br><span class="line"></span><br><span class="line">	//记录一笔账，date为日期，amount为金额，desc为说明</span><br><span class="line">	void record(int date,double amount);</span><br><span class="line"></span><br><span class="line">	//获得到指定日期为止的存款金额按日累积值</span><br><span class="line">	double accumulate(int date) const&#123;</span><br><span class="line">		<span class="keyword">return</span> accumulation+balance*(date-lastDate);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">public:</span><br><span class="line">	//构造函数</span><br><span class="line">	SavingAccount(int date,int id,double rate);</span><br><span class="line">	int getId()&#123;<span class="keyword">return</span> id;&#125;</span><br><span class="line">	double getBalance()&#123;<span class="keyword">return</span> balance;&#125;</span><br><span class="line">	double getRate()&#123;<span class="keyword">return</span> rate;&#125;</span><br><span class="line">	void deposit(int date,double amount);		//存入现金</span><br><span class="line">	void withdraw(int date,double amount);		//取出现金</span><br><span class="line">	//结算利息，每年<span class="number">1</span>月<span class="number">1</span>日调用一次该函数</span><br><span class="line">	void settle(int date);</span><br><span class="line">	//显示账户信息</span><br><span class="line">	void show();</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">//SavingAccount类相关成员函数的实现</span><br><span class="line">SavingAccount::SavingAccount(int date,int id,double rate)</span><br><span class="line">	:id(id),balance(<span class="number">0</span>),rate(rate),lastDate(date),accumulation(<span class="number">0</span>)&#123;</span><br><span class="line">	cout&lt;&lt;date&lt;&lt;<span class="string">"\t#"</span>&lt;&lt;id&lt;&lt;<span class="string">" is created"</span>&lt;&lt;endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void SavingAccount::record(int date,double amount)&#123;</span><br><span class="line">	accumulation=accumulate(date);</span><br><span class="line">	lastDate=date;</span><br><span class="line">	amount=floor(amount*<span class="number">100</span>+<span class="number">0.5</span>)/<span class="number">100</span>;			//保留小数点后两位</span><br><span class="line">	balance+=amount;</span><br><span class="line">	cout&lt;&lt;date&lt;&lt;<span class="string">"\t#"</span>&lt;&lt;id&lt;&lt;<span class="string">"\t"</span>&lt;&lt;amount&lt;&lt;<span class="string">"\t"</span>&lt;&lt;balance&lt;&lt;endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void SavingAccount::deposit(int date,double amount)&#123;</span><br><span class="line">	record(date,amount);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void SavingAccount::withdraw(int date,double amount)&#123;</span><br><span class="line">	<span class="keyword">if</span>(amount&gt;getBalance())</span><br><span class="line">		cout&lt;&lt;<span class="string">"Error:not enough money"</span>&lt;&lt;endl;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">		record(date,-amount);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void SavingAccount::settle(int date)&#123;</span><br><span class="line">	double interest=accumulate(date)*rate/<span class="number">365</span>;	//计算年息</span><br><span class="line">	<span class="keyword">if</span>(interest!=<span class="number">0</span>)</span><br><span class="line">		record(date,interest);</span><br><span class="line">	accumulation=<span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void SavingAccount::show()&#123;</span><br><span class="line">	cout&lt;&lt;<span class="string">"#"</span>&lt;&lt;id&lt;&lt;<span class="string">"\tBalance:"</span>&lt;&lt;balance;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	//建立几个账户</span><br><span class="line">	SavingAccount sa0(<span class="number">1</span>,<span class="number">21325302</span>,<span class="number">0.015</span>);</span><br><span class="line">	SavingAccount sa1(<span class="number">1</span>,<span class="number">58320212</span>,<span class="number">0.015</span>);</span><br><span class="line">	//几笔账目</span><br><span class="line">	sa0.deposit(<span class="number">5</span>,<span class="number">5000</span>);</span><br><span class="line">	sa1.deposit(<span class="number">25</span>,<span class="number">10000</span>);</span><br><span class="line">	sa0.deposit(<span class="number">45</span>,<span class="number">5500</span>);</span><br><span class="line">	sa1.withdraw(<span class="number">60</span>,<span class="number">4000</span>);</span><br><span class="line">	//开户后第<span class="number">90</span>天到了银行的计息日，结算所有账户的年息</span><br><span class="line">	sa0.settle(<span class="number">90</span>);</span><br><span class="line">	sa1.settle(<span class="number">90</span>);</span><br><span class="line">	//输出各个账户信息</span><br><span class="line">	sa0.show();</span><br><span class="line">	cout&lt;&lt;endl;</span><br><span class="line">	sa1.show();</span><br><span class="line">	cout&lt;&lt;endl;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+            <h2 id="源程序"><a href="#源程序" class="headerlink" title="源程序"></a>源程序</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#include &lt;iostream&gt;</span></span><br><span class="line"><span class="comment">#include &lt;cmath&gt;</span></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">//储蓄账户类</span><br><span class="line">class SavingAccount&#123;		</span><br><span class="line">private:</span><br><span class="line">	int id;					//账号</span><br><span class="line">	double balance;			//余额</span><br><span class="line">	double rate;			//存款的年利率</span><br><span class="line">	int lastDate;			//上次变更余额的时期</span><br><span class="line">	double accumulation;	//余额按日累加之和</span><br><span class="line"></span><br><span class="line">	//记录一笔账，date为日期，amount为金额，desc为说明</span><br><span class="line">	void record(int date,double amount);</span><br><span class="line"></span><br><span class="line">	//获得到指定日期为止的存款金额按日累积值</span><br><span class="line">	double accumulate(int date)&#123;</span><br><span class="line">		<span class="keyword">return</span> accumulation+balance*(date-lastDate);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">public:</span><br><span class="line">	//构造函数</span><br><span class="line">	SavingAccount(int date,int id,double rate);</span><br><span class="line">	int getId()&#123;<span class="keyword">return</span> id;&#125;</span><br><span class="line">	double getBalance()&#123;<span class="keyword">return</span> balance;&#125;</span><br><span class="line">	double getRate()&#123;<span class="keyword">return</span> rate;&#125;</span><br><span class="line">	void deposit(int date,double amount);		//存入现金</span><br><span class="line">	void withdraw(int date,double amount);		//取出现金</span><br><span class="line">	//结算利息，每年<span class="number">1</span>月<span class="number">1</span>日调用一次该函数</span><br><span class="line">	void settle(int date);</span><br><span class="line">	//显示账户信息</span><br><span class="line">	void show();</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">//SavingAccount类相关成员函数的实现</span><br><span class="line">SavingAccount::SavingAccount(int date,int id,double rate)</span><br><span class="line">	:id(id),balance(<span class="number">0</span>),rate(rate),lastDate(date),accumulation(<span class="number">0</span>)&#123;</span><br><span class="line">	cout&lt;&lt;date&lt;&lt;<span class="string">"\t#"</span>&lt;&lt;id&lt;&lt;<span class="string">" is created"</span>&lt;&lt;endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void SavingAccount::record(int date,double amount)&#123;</span><br><span class="line">	accumulation=accumulate(date);</span><br><span class="line">	lastDate=date;</span><br><span class="line">	amount=floor(amount*<span class="number">100</span>+<span class="number">0.5</span>)/<span class="number">100</span>;			//保留小数点后两位</span><br><span class="line">	balance+=amount;</span><br><span class="line">	cout&lt;&lt;date&lt;&lt;<span class="string">"\t#"</span>&lt;&lt;id&lt;&lt;<span class="string">"\t"</span>&lt;&lt;amount&lt;&lt;<span class="string">"\t"</span>&lt;&lt;balance&lt;&lt;endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void SavingAccount::deposit(int date,double amount)&#123;</span><br><span class="line">	record(date,amount);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void SavingAccount::withdraw(int date,double amount)&#123;</span><br><span class="line">	<span class="keyword">if</span>(amount&gt;getBalance())</span><br><span class="line">		cout&lt;&lt;<span class="string">"Error:not enough money"</span>&lt;&lt;endl;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">		record(date,-amount);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void SavingAccount::settle(int date)&#123;</span><br><span class="line">	double interest=accumulate(date)*rate/<span class="number">365</span>;	//计算年息</span><br><span class="line">	<span class="keyword">if</span>(interest!=<span class="number">0</span>)</span><br><span class="line">		record(date,interest);</span><br><span class="line">	accumulation=<span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void SavingAccount::show()&#123;</span><br><span class="line">	cout&lt;&lt;<span class="string">"#"</span>&lt;&lt;id&lt;&lt;<span class="string">"\tBalance:"</span>&lt;&lt;balance;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	//建立几个账户</span><br><span class="line">	SavingAccount sa0(<span class="number">1</span>,<span class="number">21325302</span>,<span class="number">0.015</span>);</span><br><span class="line">	SavingAccount sa1(<span class="number">1</span>,<span class="number">58320212</span>,<span class="number">0.015</span>);</span><br><span class="line">	//几笔账目</span><br><span class="line">	sa0.deposit(<span class="number">5</span>,<span class="number">5000</span>);</span><br><span class="line">	sa1.deposit(<span class="number">25</span>,<span class="number">10000</span>);</span><br><span class="line">	sa0.deposit(<span class="number">45</span>,<span class="number">5500</span>);</span><br><span class="line">	sa1.withdraw(<span class="number">60</span>,<span class="number">4000</span>);</span><br><span class="line">	//开户后第<span class="number">90</span>天到了银行的计息日，结算所有账户的年息</span><br><span class="line">	sa0.settle(<span class="number">90</span>);</span><br><span class="line">	sa1.settle(<span class="number">90</span>);</span><br><span class="line">	//输出各个账户信息</span><br><span class="line">	sa0.show();</span><br><span class="line">	cout&lt;&lt;endl;</span><br><span class="line">	sa1.show();</span><br><span class="line">	cout&lt;&lt;endl;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h2 id="运行结果"><a href="#运行结果" class="headerlink" title="运行结果"></a>运行结果</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>       <span class="comment">#21325302 is created</span></span><br><span class="line"><span class="number">1</span>       <span class="comment">#58320212 is created</span></span><br><span class="line"><span class="number">5</span>       <span class="comment">#21325302       5000    5000</span></span><br><span class="line"><span class="number">25</span>      <span class="comment">#58320212       10000   10000</span></span><br><span class="line"><span class="number">45</span>      <span class="comment">#21325302       5500    10500</span></span><br><span class="line"><span class="number">60</span>      <span class="comment">#58320212       -4000   6000</span></span><br><span class="line"><span class="number">90</span>      <span class="comment">#21325302       27.64   10527.6</span></span><br><span class="line"><span class="number">90</span>      <span class="comment">#58320212       21.78   6021.78</span></span><br><span class="line"><span class="comment">#21325302       Balance:10527.6</span></span><br><span class="line"><span class="comment">#58320212       Balance:6021.78</span></span><br></pre></td></tr></table></figure>
           
@@ -2153,202 +2350,6 @@ bat脚本命令说明：<figure class="highlight python"><table><tr><td class="g
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/12/31/%E6%88%91%E7%9A%842020/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Nobody">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/me.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Nobody's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/12/31/%E6%88%91%E7%9A%842020/" itemprop="url">我的2020</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-12-31T18:44:20+08:00">
-                2020-12-31
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2021-01-03T18:13:27+08:00">
-                2021-01-03
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E9%9A%8F%E7%AC%94/" itemprop="url" rel="index">
-                    <span itemprop="name">随笔</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  640
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  2
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>2020，一场突如其来的疫情，让它注定成为不平凡的一年。</p>
-<p>曾听闻，人这一生中有7次改变自己命运的机会，第一次是15岁，第二次是25岁，依此直到75岁。恰巧，今年我25岁。</p>
-<p>这一年，经历了许多。</p>
-<p>日复一日繁杂的工作让我不断思考我的人生路线。可是，陷入泥潭是难以自拔的。好在积蓄的能量终究会爆发，在无人预料，甚至我自己也毫无准备的情况下，我辞职了。</p>
-<p>毫无顾虑的睡上了几天，远在广东的两个大学同学邀我游玩。于是人生中第一次坐飞机，第一次踏上了祖国的南方大地。</p>
-<p>很快，3人租了辆车，开启了海岛之旅。于是我第一次走在真正的沙滩上，第一次见到真正的大海，吹着海风，吃着海鲜大餐，享受着无语伦比的惬意与快乐。</p>
-<p>也认识了很多朋友，他们是一群积极向上的年轻人，没有大城市的勾心斗角，只有淳朴的热情。可惜我是一个无比慢热的人，甚至没来得及跟他们交换微信，在一次晚餐后匆匆离别，或许就是永别了。</p>
-<p>返回南京，开始找工作，我自信最迟半个月肯定能找到心仪的工作。然而，事实狠狠打了我的脸，眼看一个月了，有几份工作，却都不是我想要的。慢慢地，我的耐心被消磨殆尽，也疲于奔波，在看清形势后，勉强找了一份稍满意的，准备一边做着一边找机会。</p>
-<p>可惜，命运总是会跟你开各种各样的玩笑。一次PM找我谈话，我以为是工作上的事，事实也确实是，不过内容是，我因为某种不可抗力被辞退了，而此时离我进入公司才3周。先是震惊，不过几分钟后我就冷静了下来，因为我已经决定了我接下来的方向。</p>
-<p>我好像突然醒悟了过来，我有了新的目标和方向。虽然可能有点晚，不过相比眼下一眼望到底的人生，似乎一切都还来得及，那就从头开始努力吧！</p>
-<p>时间很快，2020还有几小时就要成为过去式了，而我的人生才刚刚开始，过往虽有遗憾，但我不后悔。</p>
-<p>别了，2020。你好，2021！</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2401,7 +2402,7 @@ bat脚本命令说明：<figure class="highlight python"><table><tr><td class="g
             
               <div class="site-state-item site-state-posts">
                 <a href="/archives">
-                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-count">18</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2474,7 +2475,7 @@ bat脚本命令说明：<figure class="highlight python"><table><tr><td class="g
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">8.1k</span>
+    <span title="Site words total count">8.8k</span>
   
 </div>
 
