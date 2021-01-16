@@ -191,15 +191,6 @@
       </tags>
   </entry>
   <entry>
-    <title>《假如猫从世界上消失了》</title>
-    <url>/2020/07/14/%E3%80%8A%E5%81%87%E5%A6%82%E7%8C%AB%E4%BB%8E%E4%B8%96%E7%95%8C%E4%B8%8A%E6%B6%88%E5%A4%B1%E4%BA%86%E3%80%8B/</url>
-    <content><![CDATA[<p>假如猫从世界上消失了<br>那这个世界会有如何的变化呢<br>假如我从世界上消失了<br>那究竟会有谁为我悲伤呢<br>假如我从世界上消失了<br>那些未实现的梦想和思绪<br>那些在我存活时未能完成的事情<br>对此我一定会抱有许多遗憾吧<br>然而，这个世界我在与不在<br>相信一定会有所不同<br>也许真的只是些小小的不同<br>然而正是它们<br>是我存在过的证明<br>是我挣扎着，烦恼着，生活过的证明</p>
-]]></content>
-      <categories>
-        <category>读书</category>
-      </categories>
-  </entry>
-  <entry>
     <title>KVM</title>
     <url>/2021/01/02/KVM/</url>
     <content><![CDATA[<h2 id="安装前提"><a href="#安装前提" class="headerlink" title="安装前提"></a>安装前提</h2><ol>
@@ -566,5 +557,14 @@ bat脚本命令说明：<figure class="highlight python"><table><tr><td class="c
       <tags>
         <tag>毛泽东</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>假如猫从世界上消失了</title>
+    <url>/2020/07/14/%E5%81%87%E5%A6%82%E7%8C%AB%E4%BB%8E%E4%B8%96%E7%95%8C%E4%B8%8A%E6%B6%88%E5%A4%B1%E4%BA%86/</url>
+    <content><![CDATA[<p>假如猫从世界上消失了<br>那这个世界会有如何的变化呢<br>假如我从世界上消失了<br>那究竟会有谁为我悲伤呢<br>假如我从世界上消失了<br>那些未实现的梦想和思绪<br>那些在我存活时未能完成的事情<br>对此我一定会抱有许多遗憾吧<br>然而，这个世界我在与不在<br>相信一定会有所不同<br>也许真的只是些小小的不同<br>然而正是它们<br>是我存在过的证明<br>是我挣扎着，烦恼着，生活过的证明</p>
+]]></content>
+      <categories>
+        <category>读书</category>
+      </categories>
   </entry>
 </search>
