@@ -82,7 +82,7 @@
         <category>高可用</category>
       </categories>
       <tags>
-        <tag>pcs</tag>
+        <tag>高可用</tag>
       </tags>
   </entry>
   <entry>
@@ -187,7 +187,7 @@
         <category>虚拟化</category>
       </categories>
       <tags>
-        <tag>virsh</tag>
+        <tag>虚拟化</tag>
       </tags>
   </entry>
   <entry>
@@ -198,9 +198,6 @@
       <categories>
         <category>读书</category>
       </categories>
-      <tags>
-        <tag>感悟</tag>
-      </tags>
   </entry>
   <entry>
     <title>KVM</title>
@@ -318,9 +315,6 @@
       <categories>
         <category>读书</category>
       </categories>
-      <tags>
-        <tag>信仰</tag>
-      </tags>
   </entry>
   <entry>
     <title>幸福</title>
@@ -330,9 +324,6 @@
       <categories>
         <category>随笔</category>
       </categories>
-      <tags>
-        <tag>幸福</tag>
-      </tags>
   </entry>
   <entry>
     <title>我的2020</title>
@@ -365,9 +356,6 @@
       <categories>
         <category>随笔</category>
       </categories>
-      <tags>
-        <tag>孤独</tag>
-      </tags>
   </entry>
   <entry>
     <title>青年</title>
@@ -391,7 +379,6 @@
       </categories>
       <tags>
         <tag>鲁迅</tag>
-        <tag>青年</tag>
       </tags>
   </entry>
   <entry>
@@ -430,7 +417,6 @@
         <category>redhat</category>
       </categories>
       <tags>
-        <tag>redhat7.6</tag>
         <tag>redhat</tag>
       </tags>
   </entry>
@@ -446,7 +432,6 @@
       <tags>
         <tag>mysql</tag>
         <tag>python</tag>
-        <tag>pymysql</tag>
       </tags>
   </entry>
   <entry>
@@ -545,7 +530,6 @@ bat脚本命令说明：<figure class="highlight python"><table><tr><td class="c
       </categories>
       <tags>
         <tag>高可用</tag>
-        <tag>Rsync</tag>
       </tags>
   </entry>
   <entry>
