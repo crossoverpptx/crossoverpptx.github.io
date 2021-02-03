@@ -383,10 +383,10 @@
 <p>2、重新启动数据库，可以通过mysql直接登录数据库；<br>3、修改密码完成后，删除skip-grant-tables。</p>
 ]]></content>
       <categories>
-        <category>mysql</category>
+        <category>Mysql</category>
       </categories>
       <tags>
-        <tag>mysql</tag>
+        <tag>Mysql</tag>
       </tags>
   </entry>
   <entry>
