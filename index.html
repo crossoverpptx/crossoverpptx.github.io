@@ -294,6 +294,203 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/02/03/%E8%A1%A8%E7%99%BD%E5%B0%8F%E7%A8%8B%E5%BA%8F%EF%BC%88Python%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Nobody">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/me.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Nobody's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2021/02/03/%E8%A1%A8%E7%99%BD%E5%B0%8F%E7%A8%8B%E5%BA%8F%EF%BC%88Python%EF%BC%89/" itemprop="url">表白小程序（Python）</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-02-03T17:14:20+08:00">
+                2021-02-03
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2021-02-03T17:43:27+08:00">
+                2021-02-03
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/" itemprop="url" rel="index">
+                    <span itemprop="name">Python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  965
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  5
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h1><ul>
+<li>Windows环境下安装Python并添加到环境变量，</li>
+<li>pip安装需要的相关模块即可，主要是pygame模块。</li>
+</ul>
+<hr>
+<h1 id="目录结构"><a href="#目录结构" class="headerlink" title="目录结构"></a>目录结构</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">-resources       //资源文件目录</span><br><span class="line">    -font        //资源文件子目录(存放字体文件)</span><br><span class="line">        -STXINGKA.TTF</span><br><span class="line">    -images      //资源文件子目录(存放图片文件)</span><br><span class="line">        -bg.png</span><br><span class="line">        -icon.png</span><br><span class="line">    -music       //资源文件子目录(存放音频文件)</span><br><span class="line">        -bgm.mp3</span><br><span class="line">-cfg.py          //配置程序</span><br><span class="line">-love.py         //主程序</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="源程序"><a href="#源程序" class="headerlink" title="源程序"></a>源程序</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">//cfg.py</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line"><span class="comment"># 窗口大小(width, height)</span></span><br><span class="line">SCREENSIZE = (<span class="number">500</span>, <span class="number">260</span>)</span><br><span class="line"><span class="comment"># 定义一些颜色</span></span><br><span class="line">RED = (<span class="number">255</span>, <span class="number">0</span>, <span class="number">0</span>)</span><br><span class="line">BLACK = (<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>)</span><br><span class="line">AZURE = (<span class="number">240</span>, <span class="number">255</span>, <span class="number">255</span>)</span><br><span class="line">WHITE = (<span class="number">255</span>, <span class="number">255</span>, <span class="number">255</span>)</span><br><span class="line">MISTYROSE = (<span class="number">255</span>, <span class="number">228</span>, <span class="number">225</span>)</span><br><span class="line">PALETURQUOISE = (<span class="number">175</span>, <span class="number">238</span>, <span class="number">238</span>)</span><br><span class="line">PAPAYAWHIP = (<span class="number">255</span>, <span class="number">239</span>, <span class="number">213</span>)</span><br><span class="line">LIGHTGRAY = (<span class="number">211</span>, <span class="number">211</span>, <span class="number">211</span>)</span><br><span class="line">GAINSBORO = (<span class="number">230</span>, <span class="number">230</span>, <span class="number">230</span>)</span><br><span class="line">WHITESMOKE = (<span class="number">245</span>, <span class="number">245</span>, <span class="number">245</span>)</span><br><span class="line">DARKGRAY = (<span class="number">169</span>, <span class="number">169</span>, <span class="number">169</span>)</span><br><span class="line">BLUE = (<span class="number">0</span>, <span class="number">0</span>, <span class="number">255</span>)</span><br><span class="line">DEEPSKYBLUE = (<span class="number">0</span>, <span class="number">191</span>, <span class="number">255</span>)</span><br><span class="line">SKYBLUE = (<span class="number">135</span>, <span class="number">206</span>, <span class="number">235</span>)</span><br><span class="line">LIGHTSKYBLUE = (<span class="number">135</span>, <span class="number">206</span>, <span class="number">250</span>)</span><br><span class="line"><span class="comment"># 背景音乐路径</span></span><br><span class="line">BGM_PATH = os.path.join(os.getcwd(), <span class="string">'resources/music/bgm.mp3'</span>)</span><br><span class="line"><span class="comment"># 字体路径</span></span><br><span class="line">FONT_PATH = os.path.join(os.getcwd(), <span class="string">'resources/font/STXINGKA.TTF'</span>)</span><br><span class="line"><span class="comment"># 背景图片路径</span></span><br><span class="line">BG_IMAGE_PATH = os.path.join(os.getcwd(), <span class="string">'resources/images/bg.png'</span>)</span><br><span class="line"><span class="comment"># ICON路径</span></span><br><span class="line">ICON_IMAGE_PATH = os.path.join(os.getcwd(), <span class="string">'resources/images/icon.png'</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br></pre></td><td class="code"><pre><span class="line">//love.py</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> cfg</span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"><span class="keyword">import</span> pygame</span><br><span class="line"><span class="keyword">from</span> tkinter <span class="keyword">import</span> Tk, messagebox</span><br><span class="line"></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">Function:</span></span><br><span class="line"><span class="string">	按钮类</span></span><br><span class="line"><span class="string">Initial Args:</span></span><br><span class="line"><span class="string">	--x, y: 按钮左上角坐标</span></span><br><span class="line"><span class="string">	--width, height: 按钮宽高</span></span><br><span class="line"><span class="string">	--text: 按钮显示的文字</span></span><br><span class="line"><span class="string">	--fontpath: 字体路径</span></span><br><span class="line"><span class="string">	--fontsize: 字体大小</span></span><br><span class="line"><span class="string">	--fontcolor: 字体颜色</span></span><br><span class="line"><span class="string">	--bgcolors: 按钮背景颜色</span></span><br><span class="line"><span class="string">	--is_want_to_be_selected: 按钮是否想被玩家选中</span></span><br><span class="line"><span class="string">	--screensize: 软件屏幕大小</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Button</span><span class="params">(pygame.sprite.Sprite)</span>:</span></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, x, y, width, height, text, fontpath, fontsize, fontcolor, bgcolors, edgecolor, edgesize=<span class="number">1</span>, is_want_to_be_selected=True, screensize=None, **kwargs)</span>:</span></span><br><span class="line">		pygame.sprite.Sprite.__init__(self)</span><br><span class="line">		self.rect = pygame.Rect(x, y, width, height)</span><br><span class="line">		self.text = text</span><br><span class="line">		self.font = pygame.font.Font(fontpath, fontsize)</span><br><span class="line">		self.fontcolor = fontcolor</span><br><span class="line">		self.bgcolors = bgcolors</span><br><span class="line">		self.edgecolor = edgecolor</span><br><span class="line">		self.edgesize = edgesize</span><br><span class="line">		self.is_want_tobe_selected = is_want_to_be_selected</span><br><span class="line">		self.screensize = screensize</span><br><span class="line">	<span class="string">'''自动根据各种情况将按钮绑定到屏幕'''</span></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">draw</span><span class="params">(self, screen, mouse_pos)</span>:</span></span><br><span class="line">		<span class="comment"># 鼠标在按钮范围内</span></span><br><span class="line">		<span class="keyword">if</span> self.rect.collidepoint(mouse_pos):</span><br><span class="line">			<span class="comment"># --不想被选中</span></span><br><span class="line">			<span class="keyword">if</span> <span class="keyword">not</span> self.is_want_tobe_selected:</span><br><span class="line">				<span class="keyword">while</span> self.rect.collidepoint(mouse_pos):</span><br><span class="line">					self.rect.left, self.rect.top = random.randint(<span class="number">0</span>, self.screensize[<span class="number">0</span>]-self.rect.width), random.randint(<span class="number">0</span>, self.screensize[<span class="number">1</span>]-self.rect.height)</span><br><span class="line">			pygame.draw.rect(screen, self.bgcolors[<span class="number">0</span>], self.rect, <span class="number">0</span>)</span><br><span class="line">			pygame.draw.rect(screen, self.edgecolor, self.rect, self.edgesize)</span><br><span class="line">		<span class="comment"># 鼠标不在按钮范围内</span></span><br><span class="line">		<span class="keyword">else</span>:</span><br><span class="line">			pygame.draw.rect(screen, self.bgcolors[<span class="number">1</span>], self.rect, <span class="number">0</span>)</span><br><span class="line">			pygame.draw.rect(screen, self.edgecolor, self.rect, self.edgesize)</span><br><span class="line">		text_render = self.font.render(self.text, <span class="literal">True</span>, self.fontcolor)</span><br><span class="line">		fontsize = self.font.size(self.text)</span><br><span class="line">		screen.blit(text_render, (self.rect.x+(self.rect.width-fontsize[<span class="number">0</span>])/<span class="number">2</span>, self.rect.y+(self.rect.height-fontsize[<span class="number">1</span>])/<span class="number">2</span>))</span><br><span class="line"></span><br><span class="line"><span class="string">'''在指定位置显示文字'''</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">showText</span><span class="params">(screen, text, position, fontpath, fontsize, fontcolor, is_bold=False)</span>:</span></span><br><span class="line">	font = pygame.font.Font(fontpath, fontsize)</span><br><span class="line">	font.set_bold(is_bold)</span><br><span class="line">	text_render = font.render(text, <span class="literal">True</span>, fontcolor)</span><br><span class="line">	screen.blit(text_render, position)</span><br><span class="line"></span><br><span class="line"><span class="string">'''主函数'''</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">	<span class="comment"># 初始化</span></span><br><span class="line">	pygame.init()</span><br><span class="line">	screen = pygame.display.set_mode(cfg.SCREENSIZE, <span class="number">0</span>, <span class="number">32</span>)</span><br><span class="line">	pygame.display.set_icon(pygame.image.load(cfg.ICON_IMAGE_PATH))</span><br><span class="line">	pygame.display.set_caption(<span class="string">'来自一位喜欢你的小哥哥'</span>)</span><br><span class="line">	<span class="comment"># 背景音乐</span></span><br><span class="line">	pygame.mixer.music.load(cfg.BGM_PATH)</span><br><span class="line">	pygame.mixer.music.play(<span class="number">-1</span>, <span class="number">30.0</span>)</span><br><span class="line">	<span class="comment"># biu爱心那个背景图片</span></span><br><span class="line">	bg_image = pygame.image.load(cfg.BG_IMAGE_PATH)</span><br><span class="line">	bg_image = pygame.transform.smoothscale(bg_image, (<span class="number">150</span>, <span class="number">150</span>))</span><br><span class="line">	<span class="comment"># 实例化两个按钮</span></span><br><span class="line">	button_yes = Button(x=<span class="number">20</span>, y=cfg.SCREENSIZE[<span class="number">1</span>]<span class="number">-70</span>, width=<span class="number">120</span>, height=<span class="number">35</span>, </span><br><span class="line">						text=<span class="string">'好呀'</span>, fontpath=cfg.FONT_PATH, fontsize=<span class="number">15</span>, fontcolor=cfg.BLACK, edgecolor=cfg.SKYBLUE, </span><br><span class="line">						edgesize=<span class="number">2</span>, bgcolors=[cfg.DARKGRAY, cfg.GAINSBORO], is_want_to_be_selected=<span class="literal">True</span>, screensize=cfg.SCREENSIZE)</span><br><span class="line">	button_no = Button(x=cfg.SCREENSIZE[<span class="number">0</span>]<span class="number">-140</span>, y=cfg.SCREENSIZE[<span class="number">1</span>]<span class="number">-70</span>, width=<span class="number">120</span>, height=<span class="number">35</span>, </span><br><span class="line">					   text=<span class="string">'算了吧'</span>, fontpath=cfg.FONT_PATH, fontsize=<span class="number">15</span>, fontcolor=cfg.BLACK, edgecolor=cfg.DARKGRAY, </span><br><span class="line">					   edgesize=<span class="number">1</span>, bgcolors=[cfg.DARKGRAY, cfg.GAINSBORO], is_want_to_be_selected=<span class="literal">False</span>, screensize=cfg.SCREENSIZE)</span><br><span class="line">	<span class="comment"># 是否点击了好呀按钮</span></span><br><span class="line">	is_agree = <span class="literal">False</span></span><br><span class="line">	<span class="comment"># 主循环</span></span><br><span class="line">	clock = pygame.time.Clock()</span><br><span class="line">	<span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">		<span class="comment"># --背景图片</span></span><br><span class="line">		screen.fill(cfg.WHITE)</span><br><span class="line">		screen.blit(bg_image, (cfg.SCREENSIZE[<span class="number">0</span>]-bg_image.get_height(), <span class="number">0</span>))</span><br><span class="line">		<span class="comment"># --鼠标事件捕获</span></span><br><span class="line">		<span class="keyword">for</span> event <span class="keyword">in</span> pygame.event.get():</span><br><span class="line">			<span class="keyword">if</span> event.type == pygame.QUIT:</span><br><span class="line">				<span class="comment"># ----没有点击好呀按钮之前不许退出程序</span></span><br><span class="line">				<span class="keyword">if</span> is_agree:</span><br><span class="line">					pygame.quit()</span><br><span class="line">					sys.exit()</span><br><span class="line">			<span class="keyword">elif</span> event.type == pygame.MOUSEBUTTONDOWN <span class="keyword">and</span> event.button:</span><br><span class="line">				<span class="keyword">if</span> button_yes.rect.collidepoint(pygame.mouse.get_pos()):</span><br><span class="line">					button_yes.is_selected = <span class="literal">True</span></span><br><span class="line">					root = Tk()</span><br><span class="line">					root.withdraw()</span><br><span class="line">					messagebox.showinfo(<span class="string">''</span>, <span class="string">'❤❤❤么么哒❤❤❤'</span>)</span><br><span class="line">					root.destroy()</span><br><span class="line">					is_agree = <span class="literal">True</span></span><br><span class="line">		<span class="comment"># --显示文字</span></span><br><span class="line">		showText(screen=screen, text=<span class="string">'小姐姐, 我观察你很久了'</span>, position=(<span class="number">40</span>, <span class="number">50</span>), </span><br><span class="line">				 fontpath=cfg.FONT_PATH, fontsize=<span class="number">25</span>, fontcolor=cfg.BLACK, is_bold=<span class="literal">False</span>)</span><br><span class="line">		showText(screen=screen, text=<span class="string">'做我女朋友好不好?'</span>, position=(<span class="number">40</span>, <span class="number">100</span>), </span><br><span class="line">				 fontpath=cfg.FONT_PATH, fontsize=<span class="number">25</span>, fontcolor=cfg.BLACK, is_bold=<span class="literal">True</span>)</span><br><span class="line">		<span class="comment"># --显示按钮</span></span><br><span class="line">		button_yes.draw(screen, pygame.mouse.get_pos())</span><br><span class="line">		button_no.draw(screen, pygame.mouse.get_pos())</span><br><span class="line">		<span class="comment"># --刷新</span></span><br><span class="line">		pygame.display.update()</span><br><span class="line">		clock.tick(<span class="number">60</span>)</span><br><span class="line"></span><br><span class="line"><span class="string">'''run'''</span></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">	main()</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>在cmd窗口执行python love.py即可运行。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/01/16/%E8%AE%BA%E6%8C%81%E4%B9%85%E6%88%98/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1337,8 +1534,8 @@ bat脚本命令说明：<figure class="highlight python"><table><tr><td class="g
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2021-01-16T12:51:15+08:00">
-                2021-01-16
+              <time title="更新于" itemprop="dateModified" datetime="2021-02-03T17:16:50+08:00">
+                2021-02-03
               </time>
             
           </span>
@@ -1356,8 +1553,8 @@ bat脚本命令说明：<figure class="highlight python"><table><tr><td class="g
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/mysql/" itemprop="url" rel="index">
-                    <span itemprop="name">mysql</span>
+                  <a href="/categories/Mysql/" itemprop="url" rel="index">
+                    <span itemprop="name">Mysql</span>
                   </a>
                 </span>
 
@@ -2045,218 +2242,6 @@ bat脚本命令说明：<figure class="highlight python"><table><tr><td class="g
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/01/03/KVM%E4%B9%8Bvirsh%E7%AE%A1%E7%90%86%E5%91%BD%E4%BB%A4/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Nobody">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/me.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Nobody's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2021/01/03/KVM%E4%B9%8Bvirsh%E7%AE%A1%E7%90%86%E5%91%BD%E4%BB%A4/" itemprop="url">KVM之virsh管理命令</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-01-03T15:28:21+08:00">
-                2021-01-03
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2021-01-16T12:51:37+08:00">
-                2021-01-16
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%99%9A%E6%8B%9F%E5%8C%96/" itemprop="url" rel="index">
-                    <span itemprop="name">虚拟化</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  435
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  1
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="使用前提"><a href="#使用前提" class="headerlink" title="使用前提"></a>使用前提</h2><ol>
-<li>安装虚拟化相关组件<br>安装qemu-kvm（用户态管理工具）<br>安装libvirt（命令行管理工具）<br>安装virt-install（安装kvm工具）<br>安装bridge-utils（桥接设备管理工具）<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y qemu-kvm libvirt virt-install bridge-utils</span><br></pre></td></tr></table></figure></li>
-<li>启动libvirtd服务<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">systemctl enable libvirtd</span><br><span class="line">systemctl start  libvirtd</span><br><span class="line">systemctl status  libvirtd</span><br></pre></td></tr></table></figure></li>
-<li>安装virt-manager<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y install virt-manager</span><br></pre></td></tr></table></figure>
-
-</li>
-</ol>
-<p>使用可视化创建的虚拟机xml文件位置：/etc/libvirt/qemu/</p>
-<hr>
-<h2 id="常用的虚拟机管理命令"><a href="#常用的虚拟机管理命令" class="headerlink" title="常用的虚拟机管理命令"></a>常用的虚拟机管理命令</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 列出所有的虚拟机</span></span><br><span class="line">virsh list --all</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示虚拟机信息</span></span><br><span class="line">virsh dominfo *	( *为虚拟机名称 )</span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义虚拟机</span></span><br><span class="line">virsh define *.xml</span><br><span class="line"></span><br><span class="line"><span class="comment"># 启动虚拟机</span></span><br><span class="line">virsh start *</span><br><span class="line"></span><br><span class="line"><span class="comment"># 强制关闭虚拟机/关闭虚拟机</span></span><br><span class="line">virsh destroy */virsh shutdown *</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除虚拟机</span></span><br><span class="line">virsh undefine *</span><br><span class="line"></span><br><span class="line"><span class="comment"># 挂起虚拟机</span></span><br><span class="line">virsh suspend *</span><br><span class="line"></span><br><span class="line"><span class="comment"># 恢复被挂起的虚拟机</span></span><br><span class="line">virsh resume *</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看虚拟机网卡信息</span></span><br><span class="line">virsh domiflist *</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加网卡</span></span><br><span class="line">virsh attach-interface * --type * --source * --model * --live --config</span><br><span class="line">（第一个*为虚拟机名称，后三个*依次为Type Source Model）</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除网卡</span></span><br><span class="line">virsh detach-interface * --type  * --mac  *  --live --config</span><br><span class="line">（第一个*为虚拟机名称，后两个*依次为Type MAC）</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h2 id="通过xml文件创建虚拟机"><a href="#通过xml文件创建虚拟机" class="headerlink" title="通过xml文件创建虚拟机"></a>通过xml文件创建虚拟机</h2><ol>
-<li>配置xml，创建空镜像<br>xml文件配置可通过可视化创建虚拟机作为模板。<br>创建空镜像<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">qemu-img create -f qcow2  *.qcow2  <span class="number">100</span>G	（*为虚拟机名称，大小自定义）</span><br></pre></td></tr></table></figure></li>
-<li>定义虚拟机，启动虚拟机<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">virsh define *.xml</span><br><span class="line">virsh start  *</span><br></pre></td></tr></table></figure>
-
-</li>
-</ol>
-<hr>
-<h2 id="通过存储池iSCSI创建虚拟机"><a href="#通过存储池iSCSI创建虚拟机" class="headerlink" title="通过存储池iSCSI创建虚拟机"></a>通过存储池iSCSI创建虚拟机</h2><ol>
-<li>定义存储池<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">virsh pool-define-<span class="keyword">as</span> --name unary --type iscsi --source-host <span class="number">10.10</span><span class="number">.4</span><span class="number">.75</span> --source-dev iqn<span class="number">.2020</span><span class="number">-01.</span>com.unary:<span class="number">208450552</span>df3636922c9fbb0b0c71f45.d41d8cd98f00b204e9800998ecf8427e.v<span class="number">.4</span>a2a26d3.st<span class="number">.20200102193701</span> --target /dev/disk/by-path</span><br></pre></td></tr></table></figure></li>
-<li>创建存储池<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">virsh pool-build unary</span><br></pre></td></tr></table></figure></li>
-<li>激活存储池<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">virsh pool-start unary</span><br></pre></td></tr></table></figure></li>
-<li>查看存储池<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">virsh pool-list –all</span><br></pre></td></tr></table></figure></li>
-<li>配置xml文件</li>
-<li>创建空镜像</li>
-<li>定义虚拟机，启动虚拟机</li>
-</ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2309,7 +2294,7 @@ bat脚本命令说明：<figure class="highlight python"><table><tr><td class="g
             
               <div class="site-state-item site-state-posts">
                 <a href="/archives">
-                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-count">20</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2320,7 +2305,7 @@ bat脚本命令说明：<figure class="highlight python"><table><tr><td class="g
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -2331,7 +2316,7 @@ bat脚本命令说明：<figure class="highlight python"><table><tr><td class="g
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">16</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -2382,7 +2367,7 @@ bat脚本命令说明：<figure class="highlight python"><table><tr><td class="g
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">8.8k</span>
+    <span title="Site words total count">9.8k</span>
   
 </div>
 
