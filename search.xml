@@ -583,8 +583,6 @@ bat脚本命令说明：<figure class="highlight python"><table><tr><td class="c
 
 <hr>
 <h2 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h2><p>在cmd窗口执行python love.py即可运行。</p>
-<hr>
-<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><p><a href="https://github.com/nobody-blog/Code/tree/main/NaughtyConfession" target="_blank" rel="noopener">源码GitHub地址</a></p>
 ]]></content>
       <categories>
         <category>python</category>
