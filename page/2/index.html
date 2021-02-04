@@ -294,6 +294,493 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/01/03/KVM%E4%B9%8Bvirsh%E7%AE%A1%E7%90%86%E5%91%BD%E4%BB%A4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Nobody">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/me.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Nobody's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2021/01/03/KVM%E4%B9%8Bvirsh%E7%AE%A1%E7%90%86%E5%91%BD%E4%BB%A4/" itemprop="url">KVM之virsh管理命令</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-01-03T15:28:21+08:00">
+                2021-01-03
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2021-01-16T12:51:37+08:00">
+                2021-01-16
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%99%9A%E6%8B%9F%E5%8C%96/" itemprop="url" rel="index">
+                    <span itemprop="name">虚拟化</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  435
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  1
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="使用前提"><a href="#使用前提" class="headerlink" title="使用前提"></a>使用前提</h2><ol>
+<li>安装虚拟化相关组件<br>安装qemu-kvm（用户态管理工具）<br>安装libvirt（命令行管理工具）<br>安装virt-install（安装kvm工具）<br>安装bridge-utils（桥接设备管理工具）<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y qemu-kvm libvirt virt-install bridge-utils</span><br></pre></td></tr></table></figure></li>
+<li>启动libvirtd服务<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">systemctl enable libvirtd</span><br><span class="line">systemctl start  libvirtd</span><br><span class="line">systemctl status  libvirtd</span><br></pre></td></tr></table></figure></li>
+<li>安装virt-manager<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y install virt-manager</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<p>使用可视化创建的虚拟机xml文件位置：/etc/libvirt/qemu/</p>
+<hr>
+<h2 id="常用的虚拟机管理命令"><a href="#常用的虚拟机管理命令" class="headerlink" title="常用的虚拟机管理命令"></a>常用的虚拟机管理命令</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 列出所有的虚拟机</span></span><br><span class="line">virsh list --all</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示虚拟机信息</span></span><br><span class="line">virsh dominfo *	( *为虚拟机名称 )</span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义虚拟机</span></span><br><span class="line">virsh define *.xml</span><br><span class="line"></span><br><span class="line"><span class="comment"># 启动虚拟机</span></span><br><span class="line">virsh start *</span><br><span class="line"></span><br><span class="line"><span class="comment"># 强制关闭虚拟机/关闭虚拟机</span></span><br><span class="line">virsh destroy */virsh shutdown *</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除虚拟机</span></span><br><span class="line">virsh undefine *</span><br><span class="line"></span><br><span class="line"><span class="comment"># 挂起虚拟机</span></span><br><span class="line">virsh suspend *</span><br><span class="line"></span><br><span class="line"><span class="comment"># 恢复被挂起的虚拟机</span></span><br><span class="line">virsh resume *</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看虚拟机网卡信息</span></span><br><span class="line">virsh domiflist *</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加网卡</span></span><br><span class="line">virsh attach-interface * --type * --source * --model * --live --config</span><br><span class="line">（第一个*为虚拟机名称，后三个*依次为Type Source Model）</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除网卡</span></span><br><span class="line">virsh detach-interface * --type  * --mac  *  --live --config</span><br><span class="line">（第一个*为虚拟机名称，后两个*依次为Type MAC）</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="通过xml文件创建虚拟机"><a href="#通过xml文件创建虚拟机" class="headerlink" title="通过xml文件创建虚拟机"></a>通过xml文件创建虚拟机</h2><ol>
+<li>配置xml，创建空镜像<br>xml文件配置可通过可视化创建虚拟机作为模板。<br>创建空镜像<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">qemu-img create -f qcow2  *.qcow2  <span class="number">100</span>G	（*为虚拟机名称，大小自定义）</span><br></pre></td></tr></table></figure></li>
+<li>定义虚拟机，启动虚拟机<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">virsh define *.xml</span><br><span class="line">virsh start  *</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<hr>
+<h2 id="通过存储池iSCSI创建虚拟机"><a href="#通过存储池iSCSI创建虚拟机" class="headerlink" title="通过存储池iSCSI创建虚拟机"></a>通过存储池iSCSI创建虚拟机</h2><ol>
+<li>定义存储池<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">virsh pool-define-<span class="keyword">as</span> --name unary --type iscsi --source-host <span class="number">10.10</span><span class="number">.4</span><span class="number">.75</span> --source-dev iqn<span class="number">.2020</span><span class="number">-01.</span>com.unary:<span class="number">208450552</span>df3636922c9fbb0b0c71f45.d41d8cd98f00b204e9800998ecf8427e.v<span class="number">.4</span>a2a26d3.st<span class="number">.20200102193701</span> --target /dev/disk/by-path</span><br></pre></td></tr></table></figure></li>
+<li>创建存储池<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">virsh pool-build unary</span><br></pre></td></tr></table></figure></li>
+<li>激活存储池<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">virsh pool-start unary</span><br></pre></td></tr></table></figure></li>
+<li>查看存储池<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">virsh pool-list –all</span><br></pre></td></tr></table></figure></li>
+<li>配置xml文件</li>
+<li>创建空镜像</li>
+<li>定义虚拟机，启动虚拟机</li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/01/02/KVM/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Nobody">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/me.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Nobody's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2021/01/02/KVM/" itemprop="url">KVM</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-01-02T17:12:23+08:00">
+                2021-01-02
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2021-01-03T18:16:01+08:00">
+                2021-01-03
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%99%9A%E6%8B%9F%E5%8C%96/" itemprop="url" rel="index">
+                    <span itemprop="name">虚拟化</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  844
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  3
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="安装前提"><a href="#安装前提" class="headerlink" title="安装前提"></a>安装前提</h2><ol>
+<li><p>Kernel-based Virtual Machine的简称，是一个开源的系统虚拟化模块，自Linux2.6.20之后集成在Linux的各个主要发行版本中。它使用Linux自身的调度器进行管理，所以相对于Xen，其核心源码很少。KVM目前已成为学术界的主流VMM之一。</p>
+</li>
+<li><p>Kvm的安装，需要一定的硬件和软件支持：<br>1.需要宿主机CPU支持完全虚拟化（如Intel VT技术或者AMD V技术）。<br>2.宿主机系统为64位的Linux系统且内核版本高于2.6.20，内核版本过低，需要进行升级。 </p>
+</li>
+<li><p>查看CPU是否支持完全虚拟化，在宿主机输入：</p>
+</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">egrep <span class="string">'vmx|svm'</span> /proc/cpuinfo</span><br><span class="line">...</span><br><span class="line">flags  : fpu vme de pse tsc msr pae mce cx8 apic mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 cx16 xtpr pdcm dca sse4_1 sse4_2 popcnt aes lahf_lm ida arat dts tpr_shadow vnmi flexpriority ept vpid</span><br></pre></td></tr></table></figure>
+<p>​       回车后，出现以上结果，说明CPU支持虚拟化且已经开启。Vmx是intel cpu，svm为AMD cpu。另外在选择宿主机系统的时候，尽量不要使用Centos6.3和6.4版本，经验证，这两个版本安装kvm后，会出现图像界面闪烁情况，推荐使用Centos6.564bit。对于宿主机的配置，官方建议为64位x86架构且支持虚拟化指令集的CPU，4G内存，以便发挥kvm最大性能。</p>
+<hr>
+<h2 id="KVM安装"><a href="#KVM安装" class="headerlink" title="KVM安装"></a>KVM安装</h2><ol>
+<li>关闭selinux<br>设置selinux=disable。</li>
+<li>使用yum安装命令进行安装相关软件包</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install kvm qemu-kvm virt-viewer virt-manager libvirt libvirt-python python-virtinst bridge-utils tunctl</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<ul>
+<li>kvm是属于内核模块；</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>qemu-kvm是kvm的一个管理工具的引擎；</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>libvirt和libvirt-client提供访问和控制虚拟客户端的接口；</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>python-virtinst中有很多用于安装虚拟机的程序，如virt-install，virt-clone等；</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>bridge-utils是一个和网桥有关的程序。</li>
+</ul>
+</blockquote>
+<ol start="3">
+<li>安装完毕后，Reboot机器。</li>
+</ol>
+<hr>
+<h2 id="KVM启用"><a href="#KVM启用" class="headerlink" title="KVM启用"></a>KVM启用</h2><ol>
+<li><p>查看虚拟机安装情况，安装正常会出现如下情况</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">lsmod | grep kvm  </span><br><span class="line">kvm_intel    <span class="number">69416</span>  <span class="number">0</span></span><br><span class="line">kvm           <span class="number">226208</span>  <span class="number">1</span> kvm_amd</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>启动 libvirtd </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service libvirtd start</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>查看虚拟机状态命令</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">virsh  list   --all</span><br><span class="line">Id    Name                    status</span><br><span class="line">----------------------------------------------------</span><br></pre></td></tr></table></figure>
+<p>这样就表明kvm安装成功且已经能正常工作了。</p>
+</li>
+</ol>
+<hr>
+<h2 id="虚拟机安装和设置"><a href="#虚拟机安装和设置" class="headerlink" title="虚拟机安装和设置"></a>虚拟机安装和设置</h2><ol>
+<li>virt-manager图形工具<br>安装kvm成功后，会在system tools中有一个virtual machine manager。</li>
+</ol>
+<p><img src="/2021/01/02/KVM/1.png" alt></p>
+<p>​        Kvm虚拟机的安装维护，主要通过此工具。</p>
+<ol start="2">
+<li>新建kvm虚拟机<br>virtual machine manager 在首次登陆后，会自动创建一个本地的kvm连接。</li>
+</ol>
+<p><img src="/2021/01/02/KVM/2.png" alt></p>
+<p>右击选择“new”即可新建虚拟机。</p>
+<ol start="3">
+<li>源文件选择<br>Kvm的源文件安装方式有四种，我们主要熟知第一种和第四种。</li>
+</ol>
+<p><img src="/2021/01/02/KVM/3.png" alt></p>
+<p>​        第一种为选择本地的镜像文件安装，第四种为选择从其他虚拟机（vmware）迁移过来的虚拟机文件，选择后点击“Forward”。</p>
+<ol start="4">
+<li><p>选择源文件路径OS type 和Version可以默认，选择路径后点击“Forward”。</p>
+<p><img src="/2021/01/02/KVM/4.png" alt></p>
+</li>
+<li><p>Cpu和内存设置</p>
+<p>设置虚拟机内存大小和cpu个数，选择后点击“Forword”。</p>
+</li>
+</ol>
+<p><img src="/2021/01/02/KVM/5.png" alt></p>
+<ol start="6">
+<li><p>设置和网络<br>勾选“customize……install”，这样在点击Finish后，我们可以再具体配置虚拟机的其他选项。<br>Advancde options 下可以设置虚拟机的网络连接类型和MAC地址。</p>
+<p><img src="/2021/01/02/KVM/6.png" alt></p>
+</li>
+<li><p>具体设置<br>在安装前可以具体设置kvm的各个参数。</p>
+</li>
+</ol>
+<p><img src="/2021/01/02/KVM/7.png" alt></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/12/31/%E6%88%91%E7%9A%842020/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1945,7 +2432,7 @@
             
               <div class="site-state-item site-state-posts">
                 <a href="/archives">
-                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-count">20</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1956,7 +2443,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -1967,7 +2454,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-count">15</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -2018,7 +2505,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">8.4k</span>
+    <span title="Site words total count">9.8k</span>
   
 </div>
 

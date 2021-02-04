@@ -1,6 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>C++实例-个人银行账户管理程序-改进1</title>
+    <url>/2021/01/09/C-%E5%AE%9E%E4%BE%8B-%E4%B8%AA%E4%BA%BA%E9%93%B6%E8%A1%8C%E8%B4%A6%E6%88%B7%E7%AE%A1%E7%90%86%E7%A8%8B%E5%BA%8F-%E6%94%B9%E8%BF%9B1/</url>
+    <content><![CDATA[<p>具体改动如下：</p>
+<ul>
+<li>在SavingAccount类增加一个静态数据成员total，用来记录各个账户的总金额，并为其增加相应的静态成员函数getTotal()用来对其进行访问。</li>
+<li>将SavingAccount类中诸如getBalance，accumulate这些不需要改变对象状态的成员函数声明为常成员函数。</li>
+<li>将整个程序分为3个文件：account.h是类定义文件，account.cpp是类实现文件，5_11.cpp是主函数文件。</li>
+</ul>
+<h2 id="源程序"><a href="#源程序" class="headerlink" title="源程序"></a>源程序</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">//account.h</span><br><span class="line"><span class="comment">#ifndef _ACCOUNT_H_</span></span><br><span class="line"><span class="comment">#define _ACCOUNT_H_</span></span><br><span class="line"></span><br><span class="line">//储蓄账户类</span><br><span class="line">class SavingAccount&#123;		</span><br><span class="line">private:</span><br><span class="line">	int id;					//账号</span><br><span class="line">	double balance;			//余额</span><br><span class="line">	double rate;			//存款的年利率</span><br><span class="line">	int lastDate;			//上次变更余额的时期</span><br><span class="line">	double accumulation;	//余额按日累加之和</span><br><span class="line">	static double total;	//所有账户的总金额</span><br><span class="line"></span><br><span class="line">	//记录一笔账，date为日期，amount为金额</span><br><span class="line">	void record(int date,double amount);</span><br><span class="line"></span><br><span class="line">	//获得到指定日期为止的存款金额按日累积值</span><br><span class="line">	double accumulate(int date) const&#123;</span><br><span class="line">		<span class="keyword">return</span> accumulation+balance*(date-lastDate);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">public:</span><br><span class="line">	//构造函数</span><br><span class="line">	SavingAccount(int date,int id,double rate);</span><br><span class="line">	int getId() const&#123;<span class="keyword">return</span> id;&#125;</span><br><span class="line">	double getBalance() const&#123;<span class="keyword">return</span> balance;&#125;</span><br><span class="line">	double getRate() const&#123;<span class="keyword">return</span> rate;&#125;</span><br><span class="line">	static double getTotal()&#123;<span class="keyword">return</span> total;&#125;</span><br><span class="line">	void deposit(int date,double amount);		//存入现金</span><br><span class="line">	void withdraw(int date,double amount);		//取出现金</span><br><span class="line">	//结算利息，每年<span class="number">1</span>月<span class="number">1</span>日调用一次该函数</span><br><span class="line">	void settle(int date);</span><br><span class="line">	//显示账户信息</span><br><span class="line">	void show() const;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">#endif //_ACCOUNT_H_</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">//account.cpp</span><br><span class="line"><span class="comment">#include "account.h"</span></span><br><span class="line"><span class="comment">#include &lt;cmath&gt;</span></span><br><span class="line"><span class="comment">#include &lt;iostream&gt;</span></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">double SavingAccount::total=<span class="number">0</span>;</span><br><span class="line">//SavingAccount类相关成员函数的实现</span><br><span class="line">SavingAccount::SavingAccount(int date,int id,double rate)</span><br><span class="line">	:id(id),balance(<span class="number">0</span>),rate(rate),lastDate(date),accumulation(<span class="number">0</span>)&#123;</span><br><span class="line">	cout&lt;&lt;date&lt;&lt;<span class="string">"\t#"</span>&lt;&lt;id&lt;&lt;<span class="string">" is created"</span>&lt;&lt;endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void SavingAccount::record(int date,double amount)&#123;</span><br><span class="line">	accumulation=accumulate(date);</span><br><span class="line">	lastDate=date;</span><br><span class="line">	amount=floor(amount*<span class="number">100</span>+<span class="number">0.5</span>)/<span class="number">100</span>;			//保留小数点后两位</span><br><span class="line">	balance+=amount;</span><br><span class="line">	total+=amount;</span><br><span class="line">	cout&lt;&lt;date&lt;&lt;<span class="string">"\t#"</span>&lt;&lt;id&lt;&lt;<span class="string">"\t"</span>&lt;&lt;amount&lt;&lt;<span class="string">"\t"</span>&lt;&lt;balance&lt;&lt;endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void SavingAccount::deposit(int date,double amount)&#123;</span><br><span class="line">	record(date,amount);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void SavingAccount::withdraw(int date,double amount)&#123;</span><br><span class="line">	<span class="keyword">if</span>(amount&gt;getBalance())</span><br><span class="line">		cout&lt;&lt;<span class="string">"Error:not enough money"</span>&lt;&lt;endl;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">		record(date,-amount);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void SavingAccount::settle(int date)&#123;</span><br><span class="line">	double interest=accumulate(date)*rate/<span class="number">365</span>;	//计算年息</span><br><span class="line">	<span class="keyword">if</span>(interest!=<span class="number">0</span>)</span><br><span class="line">		record(date,interest);</span><br><span class="line">	accumulation=<span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void SavingAccount::show() const&#123;</span><br><span class="line">	cout&lt;&lt;<span class="string">"#"</span>&lt;&lt;id&lt;&lt;<span class="string">"\tBalance:"</span>&lt;&lt;balance;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="number">5</span>_11.cpp</span><br><span class="line"><span class="comment">#include "account.h"</span></span><br><span class="line"><span class="comment">#include &lt;iostream&gt;</span></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	//建立几个账户</span><br><span class="line">	SavingAccount sa0(<span class="number">1</span>,<span class="number">21325302</span>,<span class="number">0.015</span>);</span><br><span class="line">	SavingAccount sa1(<span class="number">1</span>,<span class="number">58320212</span>,<span class="number">0.015</span>);</span><br><span class="line">	//几笔账目</span><br><span class="line">	sa0.deposit(<span class="number">5</span>,<span class="number">5000</span>);</span><br><span class="line">	sa1.deposit(<span class="number">25</span>,<span class="number">10000</span>);</span><br><span class="line">	sa0.deposit(<span class="number">45</span>,<span class="number">5500</span>);</span><br><span class="line">	sa1.withdraw(<span class="number">60</span>,<span class="number">4000</span>);</span><br><span class="line">	//开户后第<span class="number">90</span>天到了银行的计息日，结算所有账户的年息</span><br><span class="line">	sa0.settle(<span class="number">90</span>);</span><br><span class="line">	sa1.settle(<span class="number">90</span>);</span><br><span class="line">	//输出各个账户信息</span><br><span class="line">	sa0.show();cout&lt;&lt;endl;</span><br><span class="line">	sa1.show();cout&lt;&lt;endl;</span><br><span class="line">	cout&lt;&lt;<span class="string">"Total:"</span>&lt;&lt;SavingAccount::getTotal()&lt;&lt;endl;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="运行结果"><a href="#运行结果" class="headerlink" title="运行结果"></a>运行结果</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="number">1</span>       <span class="comment">#21325302 is created</span></span><br><span class="line"><span class="number">1</span>       <span class="comment">#58320212 is created</span></span><br><span class="line"><span class="number">5</span>       <span class="comment">#21325302       5000    5000</span></span><br><span class="line"><span class="number">25</span>      <span class="comment">#58320212       10000   10000</span></span><br><span class="line"><span class="number">45</span>      <span class="comment">#21325302       5500    10500</span></span><br><span class="line"><span class="number">60</span>      <span class="comment">#58320212       -4000   6000</span></span><br><span class="line"><span class="number">90</span>      <span class="comment">#21325302       27.64   10527.6</span></span><br><span class="line"><span class="number">90</span>      <span class="comment">#58320212       21.78   6021.78</span></span><br><span class="line"><span class="comment">#21325302       Balance:10527.6</span></span><br><span class="line"><span class="comment">#58320212       Balance:6021.78</span></span><br><span class="line">Total:<span class="number">16549.4</span></span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>C++</category>
+      </categories>
+      <tags>
+        <tag>C++</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>C++实例-个人银行账户管理程序</title>
+    <url>/2021/01/06/C-%E5%AE%9E%E4%BE%8B-%E4%B8%AA%E4%BA%BA%E9%93%B6%E8%A1%8C%E8%B4%A6%E6%88%B7%E7%AE%A1%E7%90%86%E7%A8%8B%E5%BA%8F/</url>
+    <content><![CDATA[<h2 id="源程序"><a href="#源程序" class="headerlink" title="源程序"></a>源程序</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#include &lt;iostream&gt;</span></span><br><span class="line"><span class="comment">#include &lt;cmath&gt;</span></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">//储蓄账户类</span><br><span class="line">class SavingAccount&#123;		</span><br><span class="line">private:</span><br><span class="line">	int id;					//账号</span><br><span class="line">	double balance;			//余额</span><br><span class="line">	double rate;			//存款的年利率</span><br><span class="line">	int lastDate;			//上次变更余额的时期</span><br><span class="line">	double accumulation;	//余额按日累加之和</span><br><span class="line"></span><br><span class="line">	//记录一笔账，date为日期，amount为金额</span><br><span class="line">	void record(int date,double amount);</span><br><span class="line"></span><br><span class="line">	//获得到指定日期为止的存款金额按日累积值</span><br><span class="line">	double accumulate(int date)&#123;</span><br><span class="line">		<span class="keyword">return</span> accumulation+balance*(date-lastDate);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">public:</span><br><span class="line">	//构造函数</span><br><span class="line">	SavingAccount(int date,int id,double rate);</span><br><span class="line">	int getId()&#123;<span class="keyword">return</span> id;&#125;</span><br><span class="line">	double getBalance()&#123;<span class="keyword">return</span> balance;&#125;</span><br><span class="line">	double getRate()&#123;<span class="keyword">return</span> rate;&#125;</span><br><span class="line">	void deposit(int date,double amount);		//存入现金</span><br><span class="line">	void withdraw(int date,double amount);		//取出现金</span><br><span class="line">	//结算利息，每年<span class="number">1</span>月<span class="number">1</span>日调用一次该函数</span><br><span class="line">	void settle(int date);</span><br><span class="line">	//显示账户信息</span><br><span class="line">	void show();</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">//SavingAccount类相关成员函数的实现</span><br><span class="line">SavingAccount::SavingAccount(int date,int id,double rate)</span><br><span class="line">	:id(id),balance(<span class="number">0</span>),rate(rate),lastDate(date),accumulation(<span class="number">0</span>)&#123;</span><br><span class="line">	cout&lt;&lt;date&lt;&lt;<span class="string">"\t#"</span>&lt;&lt;id&lt;&lt;<span class="string">" is created"</span>&lt;&lt;endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void SavingAccount::record(int date,double amount)&#123;</span><br><span class="line">	accumulation=accumulate(date);</span><br><span class="line">	lastDate=date;</span><br><span class="line">	amount=floor(amount*<span class="number">100</span>+<span class="number">0.5</span>)/<span class="number">100</span>;			//保留小数点后两位</span><br><span class="line">	balance+=amount;</span><br><span class="line">	cout&lt;&lt;date&lt;&lt;<span class="string">"\t#"</span>&lt;&lt;id&lt;&lt;<span class="string">"\t"</span>&lt;&lt;amount&lt;&lt;<span class="string">"\t"</span>&lt;&lt;balance&lt;&lt;endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void SavingAccount::deposit(int date,double amount)&#123;</span><br><span class="line">	record(date,amount);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void SavingAccount::withdraw(int date,double amount)&#123;</span><br><span class="line">	<span class="keyword">if</span>(amount&gt;getBalance())</span><br><span class="line">		cout&lt;&lt;<span class="string">"Error:not enough money"</span>&lt;&lt;endl;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">		record(date,-amount);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void SavingAccount::settle(int date)&#123;</span><br><span class="line">	double interest=accumulate(date)*rate/<span class="number">365</span>;	//计算年息</span><br><span class="line">	<span class="keyword">if</span>(interest!=<span class="number">0</span>)</span><br><span class="line">		record(date,interest);</span><br><span class="line">	accumulation=<span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void SavingAccount::show()&#123;</span><br><span class="line">	cout&lt;&lt;<span class="string">"#"</span>&lt;&lt;id&lt;&lt;<span class="string">"\tBalance:"</span>&lt;&lt;balance;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	//建立几个账户</span><br><span class="line">	SavingAccount sa0(<span class="number">1</span>,<span class="number">21325302</span>,<span class="number">0.015</span>);</span><br><span class="line">	SavingAccount sa1(<span class="number">1</span>,<span class="number">58320212</span>,<span class="number">0.015</span>);</span><br><span class="line">	//几笔账目</span><br><span class="line">	sa0.deposit(<span class="number">5</span>,<span class="number">5000</span>);</span><br><span class="line">	sa1.deposit(<span class="number">25</span>,<span class="number">10000</span>);</span><br><span class="line">	sa0.deposit(<span class="number">45</span>,<span class="number">5500</span>);</span><br><span class="line">	sa1.withdraw(<span class="number">60</span>,<span class="number">4000</span>);</span><br><span class="line">	//开户后第<span class="number">90</span>天到了银行的计息日，结算所有账户的年息</span><br><span class="line">	sa0.settle(<span class="number">90</span>);</span><br><span class="line">	sa1.settle(<span class="number">90</span>);</span><br><span class="line">	//输出各个账户信息</span><br><span class="line">	sa0.show();</span><br><span class="line">	cout&lt;&lt;endl;</span><br><span class="line">	sa1.show();</span><br><span class="line">	cout&lt;&lt;endl;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="运行结果"><a href="#运行结果" class="headerlink" title="运行结果"></a>运行结果</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="number">1</span>       <span class="comment">#21325302 is created</span></span><br><span class="line"><span class="number">1</span>       <span class="comment">#58320212 is created</span></span><br><span class="line"><span class="number">5</span>       <span class="comment">#21325302       5000    5000</span></span><br><span class="line"><span class="number">25</span>      <span class="comment">#58320212       10000   10000</span></span><br><span class="line"><span class="number">45</span>      <span class="comment">#21325302       5500    10500</span></span><br><span class="line"><span class="number">60</span>      <span class="comment">#58320212       -4000   6000</span></span><br><span class="line"><span class="number">90</span>      <span class="comment">#21325302       27.64   10527.6</span></span><br><span class="line"><span class="number">90</span>      <span class="comment">#58320212       21.78   6021.78</span></span><br><span class="line"><span class="comment">#21325302       Balance:10527.6</span></span><br><span class="line"><span class="comment">#58320212       Balance:6021.78</span></span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>C++</category>
+      </categories>
+      <tags>
+        <tag>C++</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Centos7.6下corosync+pacemaker+pcs高可用集群环境安装</title>
     <url>/2020/12/28/Centos7-6%E4%B8%8Bcorosync-pacemaker-pcs%E9%AB%98%E5%8F%AF%E7%94%A8%E9%9B%86%E7%BE%A4%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/</url>
     <content><![CDATA[<p>在容灾备份领域，有多种高可用方案，corosync+pacemaker无疑是开源方案中的佼佼者。</p>
@@ -83,6 +119,72 @@
       </categories>
       <tags>
         <tag>高可用</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Centos7.x系统中Docker安装及简单使用</title>
+    <url>/2020/12/30/Centos7-x%E7%B3%BB%E7%BB%9F%E4%B8%ADDocker%E5%AE%89%E8%A3%85%E5%8F%8A%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/</url>
+    <content><![CDATA[<h3 id="环境要求"><a href="#环境要求" class="headerlink" title="环境要求"></a>环境要求</h3><pre><code>1、只能是64位的系统;
+2、要求centos7以上系统的内核版本不低于3.10。</code></pre><hr>
+<h3 id="安装步骤"><a href="#安装步骤" class="headerlink" title="安装步骤"></a>安装步骤</h3><p>1、移除旧版本的docker</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">yum remove docker docker-client docker-client-latest docker-common docker-latest docker-latest-logrotate docker-logrotate docker-selinux docker-engine-selinux docker-engine</span><br></pre></td></tr></table></figure>
+
+<p>2、安装依赖包</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">yum install -y yum-utils device-mapper-persistent-data lvm2</span><br></pre></td></tr></table></figure>
+
+<p>3、添加yum软件源<br>非官方源(比如阿里云)</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo</span><br></pre></td></tr></table></figure>
+
+<p>官方源</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">yum-config-manager  --add-repo https://download.docker.com/linux/centos/docker-ce.repo</span><br></pre></td></tr></table></figure>
+
+<p>4、更新yum软件源缓存：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">yum makecache fast</span><br></pre></td></tr></table></figure>
+
+<p>5、安装docker</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">yum  -y install  docker-ce</span><br></pre></td></tr></table></figure>
+
+<p>安装时，如果报错出现rpm包无法找到，先手动通过wget下载该rpm包，然后重新执行安装命令即可。 </p>
+<hr>
+<h3 id="Docker镜像和容器的简单使用命令"><a href="#Docker镜像和容器的简单使用命令" class="headerlink" title="Docker镜像和容器的简单使用命令"></a>Docker镜像和容器的简单使用命令</h3><p>1、查看docker版本： docker  version<br>2、查询镜像： docker  search  imageName[镜像名称：如  centos]<br>3、获取镜像：docker  pull  imageName[镜像名称：如  centos]<br>4、列出镜像:  docker  image  ls<br>5、查询镜像体积：docker system df<br>6、删除镜像:docker  image rm  imagesID<br>7、启动容器： docker  run –name ***  -p  port:port  -d  [镜像名]/ docker start                        [containerID/containerName]<br>8、退出容器：exit/docker  stop containerID<br>9、进入容器：docker  attach  containerID/docker   exec  -it   containerID<br>10、删除容器：<br>1）删除处于终止状态的：docker  container  rm  [ID]<br>2）删除处于运行状态的：docker  container  rm  -f  [ID]<br>3）删除所有处于终止状态的：docker container prune </p>
+<hr>
+<h3 id="Docker安装Tomcat实例"><a href="#Docker安装Tomcat实例" class="headerlink" title="Docker安装Tomcat实例"></a>Docker安装Tomcat实例</h3><p>1、获取tomcat镜像: docker  pull  tomcat<br>2、新建并运行tomcat容器:</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">docker run  --name  tomcat  -p <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">8080</span>:<span class="number">8080</span>    -d  tomcat</span><br><span class="line">docker run  --name  tomcat  -p <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">8080</span>:<span class="number">8080</span>    -d  tomcat --restart=always</span><br></pre></td></tr></table></figure>
+<pre><code>--name：容器名 
+-p：后面接IP地址(可以不设)：接宿主机端口：容器端口  
+-d：后台运行</code></pre><p>3、进入容器：docker   exec/attach  -it  tomcat  bash<br>    exec进入容器后使用exit命令退出容器，只会退出容器，让容器在后台继续运行；attach进入后用exit退出，     会直接关闭容器.<br>    -it:交互模式进入容器<br>4、退出tomcat容器：exit<br>5、停止tomcat容器：docker   stop   tomcat<br>6、启动tomcat容器：docker   start   tomcat<br>7、删除tomcat容器：docker   container    rm  -f  tomcat</p>
+]]></content>
+      <categories>
+        <category>容器</category>
+      </categories>
+      <tags>
+        <tag>Docker</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>EXSi上修改虚拟机磁盘扇区大小为32的简易方法</title>
+    <url>/2020/12/31/EXSi%E4%B8%8A%E4%BF%AE%E6%94%B9%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%A3%81%E7%9B%98%E6%89%87%E5%8C%BA%E5%A4%A7%E5%B0%8F%E4%B8%BA32%E7%9A%84%E7%AE%80%E6%98%93%E6%96%B9%E6%B3%95/</url>
+    <content><![CDATA[<h2 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h2><p>1、登陆EXSi，进入虚拟机所在的datastore目录,每个目录为一个虚拟机</p>
+<p><img src="/2020/12/31/EXSi%E4%B8%8A%E4%BF%AE%E6%94%B9%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%A3%81%E7%9B%98%E6%89%87%E5%8C%BA%E5%A4%A7%E5%B0%8F%E4%B8%BA32%E7%9A%84%E7%AE%80%E6%98%93%E6%96%B9%E6%B3%95/3.png" alt></p>
+<p><img src="/2020/12/31/EXSi%E4%B8%8A%E4%BF%AE%E6%94%B9%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%A3%81%E7%9B%98%E6%89%87%E5%8C%BA%E5%A4%A7%E5%B0%8F%E4%B8%BA32%E7%9A%84%E7%AE%80%E6%98%93%E6%96%B9%E6%B3%95/4.png" alt></p>
+<p>2、找到对应的vmdk文件</p>
+<p><img src="/2020/12/31/EXSi%E4%B8%8A%E4%BF%AE%E6%94%B9%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%A3%81%E7%9B%98%E6%89%87%E5%8C%BA%E5%A4%A7%E5%B0%8F%E4%B8%BA32%E7%9A%84%E7%AE%80%E6%98%93%E6%96%B9%E6%B3%95/5.png" alt></p>
+<p>3、进入修改</p>
+<p><img src="/2020/12/31/EXSi%E4%B8%8A%E4%BF%AE%E6%94%B9%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%A3%81%E7%9B%98%E6%89%87%E5%8C%BA%E5%A4%A7%E5%B0%8F%E4%B8%BA32%E7%9A%84%E7%AE%80%E6%98%93%E6%96%B9%E6%B3%95/6.png" alt></p>
+<p><img src="/2020/12/31/EXSi%E4%B8%8A%E4%BF%AE%E6%94%B9%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%A3%81%E7%9B%98%E6%89%87%E5%8C%BA%E5%A4%A7%E5%B0%8F%E4%B8%BA32%E7%9A%84%E7%AE%80%E6%98%93%E6%96%B9%E6%B3%95/7.png" alt></p>
+<p>4、保存退出即可</p>
+<hr>
+<h2 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h2><p>1、ESXI上创建所需安装版本的虚拟机，暂不安装系统</p>
+<p>2、将虚拟机的vmdk文件下载到本地进行以下修改</p>
+<p><img src="/2020/12/31/EXSi%E4%B8%8A%E4%BF%AE%E6%94%B9%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%A3%81%E7%9B%98%E6%89%87%E5%8C%BA%E5%A4%A7%E5%B0%8F%E4%B8%BA32%E7%9A%84%E7%AE%80%E6%98%93%E6%96%B9%E6%B3%95/8.png" alt></p>
+<p>3、将修改后的vmdk文件上传到ESXi后开始系统安装</p>
+<p>4、安装完成后使用winhex工具查看磁盘扇区数是否为32扇区</p>
+]]></content>
+      <categories>
+        <category>虚拟化</category>
+      </categories>
+      <tags>
+        <tag>EXSi</tag>
       </tags>
   </entry>
   <entry>
@@ -227,29 +329,6 @@
       </tags>
   </entry>
   <entry>
-    <title>C++实例-个人银行账户管理程序-改进1</title>
-    <url>/2021/01/09/C-%E5%AE%9E%E4%BE%8B-%E4%B8%AA%E4%BA%BA%E9%93%B6%E8%A1%8C%E8%B4%A6%E6%88%B7%E7%AE%A1%E7%90%86%E7%A8%8B%E5%BA%8F-%E6%94%B9%E8%BF%9B1/</url>
-    <content><![CDATA[<p>具体改动如下：</p>
-<ul>
-<li>在SavingAccount类增加一个静态数据成员total，用来记录各个账户的总金额，并为其增加相应的静态成员函数getTotal()用来对其进行访问。</li>
-<li>将SavingAccount类中诸如getBalance，accumulate这些不需要改变对象状态的成员函数声明为常成员函数。</li>
-<li>将整个程序分为3个文件：account.h是类定义文件，account.cpp是类实现文件，5_11.cpp是主函数文件。</li>
-</ul>
-<h2 id="源程序"><a href="#源程序" class="headerlink" title="源程序"></a>源程序</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">//account.h</span><br><span class="line"><span class="comment">#ifndef _ACCOUNT_H_</span></span><br><span class="line"><span class="comment">#define _ACCOUNT_H_</span></span><br><span class="line"></span><br><span class="line">//储蓄账户类</span><br><span class="line">class SavingAccount&#123;		</span><br><span class="line">private:</span><br><span class="line">	int id;					//账号</span><br><span class="line">	double balance;			//余额</span><br><span class="line">	double rate;			//存款的年利率</span><br><span class="line">	int lastDate;			//上次变更余额的时期</span><br><span class="line">	double accumulation;	//余额按日累加之和</span><br><span class="line">	static double total;	//所有账户的总金额</span><br><span class="line"></span><br><span class="line">	//记录一笔账，date为日期，amount为金额</span><br><span class="line">	void record(int date,double amount);</span><br><span class="line"></span><br><span class="line">	//获得到指定日期为止的存款金额按日累积值</span><br><span class="line">	double accumulate(int date) const&#123;</span><br><span class="line">		<span class="keyword">return</span> accumulation+balance*(date-lastDate);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">public:</span><br><span class="line">	//构造函数</span><br><span class="line">	SavingAccount(int date,int id,double rate);</span><br><span class="line">	int getId() const&#123;<span class="keyword">return</span> id;&#125;</span><br><span class="line">	double getBalance() const&#123;<span class="keyword">return</span> balance;&#125;</span><br><span class="line">	double getRate() const&#123;<span class="keyword">return</span> rate;&#125;</span><br><span class="line">	static double getTotal()&#123;<span class="keyword">return</span> total;&#125;</span><br><span class="line">	void deposit(int date,double amount);		//存入现金</span><br><span class="line">	void withdraw(int date,double amount);		//取出现金</span><br><span class="line">	//结算利息，每年<span class="number">1</span>月<span class="number">1</span>日调用一次该函数</span><br><span class="line">	void settle(int date);</span><br><span class="line">	//显示账户信息</span><br><span class="line">	void show() const;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">#endif //_ACCOUNT_H_</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">//account.cpp</span><br><span class="line"><span class="comment">#include "account.h"</span></span><br><span class="line"><span class="comment">#include &lt;cmath&gt;</span></span><br><span class="line"><span class="comment">#include &lt;iostream&gt;</span></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">double SavingAccount::total=<span class="number">0</span>;</span><br><span class="line">//SavingAccount类相关成员函数的实现</span><br><span class="line">SavingAccount::SavingAccount(int date,int id,double rate)</span><br><span class="line">	:id(id),balance(<span class="number">0</span>),rate(rate),lastDate(date),accumulation(<span class="number">0</span>)&#123;</span><br><span class="line">	cout&lt;&lt;date&lt;&lt;<span class="string">"\t#"</span>&lt;&lt;id&lt;&lt;<span class="string">" is created"</span>&lt;&lt;endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void SavingAccount::record(int date,double amount)&#123;</span><br><span class="line">	accumulation=accumulate(date);</span><br><span class="line">	lastDate=date;</span><br><span class="line">	amount=floor(amount*<span class="number">100</span>+<span class="number">0.5</span>)/<span class="number">100</span>;			//保留小数点后两位</span><br><span class="line">	balance+=amount;</span><br><span class="line">	total+=amount;</span><br><span class="line">	cout&lt;&lt;date&lt;&lt;<span class="string">"\t#"</span>&lt;&lt;id&lt;&lt;<span class="string">"\t"</span>&lt;&lt;amount&lt;&lt;<span class="string">"\t"</span>&lt;&lt;balance&lt;&lt;endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void SavingAccount::deposit(int date,double amount)&#123;</span><br><span class="line">	record(date,amount);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void SavingAccount::withdraw(int date,double amount)&#123;</span><br><span class="line">	<span class="keyword">if</span>(amount&gt;getBalance())</span><br><span class="line">		cout&lt;&lt;<span class="string">"Error:not enough money"</span>&lt;&lt;endl;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">		record(date,-amount);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void SavingAccount::settle(int date)&#123;</span><br><span class="line">	double interest=accumulate(date)*rate/<span class="number">365</span>;	//计算年息</span><br><span class="line">	<span class="keyword">if</span>(interest!=<span class="number">0</span>)</span><br><span class="line">		record(date,interest);</span><br><span class="line">	accumulation=<span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void SavingAccount::show() const&#123;</span><br><span class="line">	cout&lt;&lt;<span class="string">"#"</span>&lt;&lt;id&lt;&lt;<span class="string">"\tBalance:"</span>&lt;&lt;balance;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="number">5</span>_11.cpp</span><br><span class="line"><span class="comment">#include "account.h"</span></span><br><span class="line"><span class="comment">#include &lt;iostream&gt;</span></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	//建立几个账户</span><br><span class="line">	SavingAccount sa0(<span class="number">1</span>,<span class="number">21325302</span>,<span class="number">0.015</span>);</span><br><span class="line">	SavingAccount sa1(<span class="number">1</span>,<span class="number">58320212</span>,<span class="number">0.015</span>);</span><br><span class="line">	//几笔账目</span><br><span class="line">	sa0.deposit(<span class="number">5</span>,<span class="number">5000</span>);</span><br><span class="line">	sa1.deposit(<span class="number">25</span>,<span class="number">10000</span>);</span><br><span class="line">	sa0.deposit(<span class="number">45</span>,<span class="number">5500</span>);</span><br><span class="line">	sa1.withdraw(<span class="number">60</span>,<span class="number">4000</span>);</span><br><span class="line">	//开户后第<span class="number">90</span>天到了银行的计息日，结算所有账户的年息</span><br><span class="line">	sa0.settle(<span class="number">90</span>);</span><br><span class="line">	sa1.settle(<span class="number">90</span>);</span><br><span class="line">	//输出各个账户信息</span><br><span class="line">	sa0.show();cout&lt;&lt;endl;</span><br><span class="line">	sa1.show();cout&lt;&lt;endl;</span><br><span class="line">	cout&lt;&lt;<span class="string">"Total:"</span>&lt;&lt;SavingAccount::getTotal()&lt;&lt;endl;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="运行结果"><a href="#运行结果" class="headerlink" title="运行结果"></a>运行结果</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="number">1</span>       <span class="comment">#21325302 is created</span></span><br><span class="line"><span class="number">1</span>       <span class="comment">#58320212 is created</span></span><br><span class="line"><span class="number">5</span>       <span class="comment">#21325302       5000    5000</span></span><br><span class="line"><span class="number">25</span>      <span class="comment">#58320212       10000   10000</span></span><br><span class="line"><span class="number">45</span>      <span class="comment">#21325302       5500    10500</span></span><br><span class="line"><span class="number">60</span>      <span class="comment">#58320212       -4000   6000</span></span><br><span class="line"><span class="number">90</span>      <span class="comment">#21325302       27.64   10527.6</span></span><br><span class="line"><span class="number">90</span>      <span class="comment">#58320212       21.78   6021.78</span></span><br><span class="line"><span class="comment">#21325302       Balance:10527.6</span></span><br><span class="line"><span class="comment">#58320212       Balance:6021.78</span></span><br><span class="line">Total:<span class="number">16549.4</span></span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>C++</category>
-      </categories>
-      <tags>
-        <tag>C++</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Linux下修改mysql数据库密码的几种方法</title>
     <url>/2021/01/05/Linux%E4%B8%8B%E4%BF%AE%E6%94%B9mysql%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AF%86%E7%A0%81%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E6%B3%95/</url>
     <content><![CDATA[<h2 id="未设置密码，可以通过mysql直接登录数据库"><a href="#未设置密码，可以通过mysql直接登录数据库" class="headerlink" title="未设置密码，可以通过mysql直接登录数据库"></a>未设置密码，可以通过mysql直接登录数据库</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">mysql&gt; use mysql;</span><br><span class="line">mysql&gt; update user set password=password(<span class="string">"111111"</span>) where user=<span class="string">'root'</span>;</span><br><span class="line">mysql&gt; flush privileges;</span><br><span class="line">mysql&gt; exit;</span><br></pre></td></tr></table></figure>
@@ -264,19 +343,6 @@
       </categories>
       <tags>
         <tag>mysql</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>C++实例-个人银行账户管理程序</title>
-    <url>/2021/01/06/C-%E5%AE%9E%E4%BE%8B-%E4%B8%AA%E4%BA%BA%E9%93%B6%E8%A1%8C%E8%B4%A6%E6%88%B7%E7%AE%A1%E7%90%86%E7%A8%8B%E5%BA%8F/</url>
-    <content><![CDATA[<h2 id="源程序"><a href="#源程序" class="headerlink" title="源程序"></a>源程序</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#include &lt;iostream&gt;</span></span><br><span class="line"><span class="comment">#include &lt;cmath&gt;</span></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">//储蓄账户类</span><br><span class="line">class SavingAccount&#123;		</span><br><span class="line">private:</span><br><span class="line">	int id;					//账号</span><br><span class="line">	double balance;			//余额</span><br><span class="line">	double rate;			//存款的年利率</span><br><span class="line">	int lastDate;			//上次变更余额的时期</span><br><span class="line">	double accumulation;	//余额按日累加之和</span><br><span class="line"></span><br><span class="line">	//记录一笔账，date为日期，amount为金额</span><br><span class="line">	void record(int date,double amount);</span><br><span class="line"></span><br><span class="line">	//获得到指定日期为止的存款金额按日累积值</span><br><span class="line">	double accumulate(int date)&#123;</span><br><span class="line">		<span class="keyword">return</span> accumulation+balance*(date-lastDate);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">public:</span><br><span class="line">	//构造函数</span><br><span class="line">	SavingAccount(int date,int id,double rate);</span><br><span class="line">	int getId()&#123;<span class="keyword">return</span> id;&#125;</span><br><span class="line">	double getBalance()&#123;<span class="keyword">return</span> balance;&#125;</span><br><span class="line">	double getRate()&#123;<span class="keyword">return</span> rate;&#125;</span><br><span class="line">	void deposit(int date,double amount);		//存入现金</span><br><span class="line">	void withdraw(int date,double amount);		//取出现金</span><br><span class="line">	//结算利息，每年<span class="number">1</span>月<span class="number">1</span>日调用一次该函数</span><br><span class="line">	void settle(int date);</span><br><span class="line">	//显示账户信息</span><br><span class="line">	void show();</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">//SavingAccount类相关成员函数的实现</span><br><span class="line">SavingAccount::SavingAccount(int date,int id,double rate)</span><br><span class="line">	:id(id),balance(<span class="number">0</span>),rate(rate),lastDate(date),accumulation(<span class="number">0</span>)&#123;</span><br><span class="line">	cout&lt;&lt;date&lt;&lt;<span class="string">"\t#"</span>&lt;&lt;id&lt;&lt;<span class="string">" is created"</span>&lt;&lt;endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void SavingAccount::record(int date,double amount)&#123;</span><br><span class="line">	accumulation=accumulate(date);</span><br><span class="line">	lastDate=date;</span><br><span class="line">	amount=floor(amount*<span class="number">100</span>+<span class="number">0.5</span>)/<span class="number">100</span>;			//保留小数点后两位</span><br><span class="line">	balance+=amount;</span><br><span class="line">	cout&lt;&lt;date&lt;&lt;<span class="string">"\t#"</span>&lt;&lt;id&lt;&lt;<span class="string">"\t"</span>&lt;&lt;amount&lt;&lt;<span class="string">"\t"</span>&lt;&lt;balance&lt;&lt;endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void SavingAccount::deposit(int date,double amount)&#123;</span><br><span class="line">	record(date,amount);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void SavingAccount::withdraw(int date,double amount)&#123;</span><br><span class="line">	<span class="keyword">if</span>(amount&gt;getBalance())</span><br><span class="line">		cout&lt;&lt;<span class="string">"Error:not enough money"</span>&lt;&lt;endl;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">		record(date,-amount);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void SavingAccount::settle(int date)&#123;</span><br><span class="line">	double interest=accumulate(date)*rate/<span class="number">365</span>;	//计算年息</span><br><span class="line">	<span class="keyword">if</span>(interest!=<span class="number">0</span>)</span><br><span class="line">		record(date,interest);</span><br><span class="line">	accumulation=<span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void SavingAccount::show()&#123;</span><br><span class="line">	cout&lt;&lt;<span class="string">"#"</span>&lt;&lt;id&lt;&lt;<span class="string">"\tBalance:"</span>&lt;&lt;balance;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	//建立几个账户</span><br><span class="line">	SavingAccount sa0(<span class="number">1</span>,<span class="number">21325302</span>,<span class="number">0.015</span>);</span><br><span class="line">	SavingAccount sa1(<span class="number">1</span>,<span class="number">58320212</span>,<span class="number">0.015</span>);</span><br><span class="line">	//几笔账目</span><br><span class="line">	sa0.deposit(<span class="number">5</span>,<span class="number">5000</span>);</span><br><span class="line">	sa1.deposit(<span class="number">25</span>,<span class="number">10000</span>);</span><br><span class="line">	sa0.deposit(<span class="number">45</span>,<span class="number">5500</span>);</span><br><span class="line">	sa1.withdraw(<span class="number">60</span>,<span class="number">4000</span>);</span><br><span class="line">	//开户后第<span class="number">90</span>天到了银行的计息日，结算所有账户的年息</span><br><span class="line">	sa0.settle(<span class="number">90</span>);</span><br><span class="line">	sa1.settle(<span class="number">90</span>);</span><br><span class="line">	//输出各个账户信息</span><br><span class="line">	sa0.show();</span><br><span class="line">	cout&lt;&lt;endl;</span><br><span class="line">	sa1.show();</span><br><span class="line">	cout&lt;&lt;endl;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="运行结果"><a href="#运行结果" class="headerlink" title="运行结果"></a>运行结果</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="number">1</span>       <span class="comment">#21325302 is created</span></span><br><span class="line"><span class="number">1</span>       <span class="comment">#58320212 is created</span></span><br><span class="line"><span class="number">5</span>       <span class="comment">#21325302       5000    5000</span></span><br><span class="line"><span class="number">25</span>      <span class="comment">#58320212       10000   10000</span></span><br><span class="line"><span class="number">45</span>      <span class="comment">#21325302       5500    10500</span></span><br><span class="line"><span class="number">60</span>      <span class="comment">#58320212       -4000   6000</span></span><br><span class="line"><span class="number">90</span>      <span class="comment">#21325302       27.64   10527.6</span></span><br><span class="line"><span class="number">90</span>      <span class="comment">#58320212       21.78   6021.78</span></span><br><span class="line"><span class="comment">#21325302       Balance:10527.6</span></span><br><span class="line"><span class="comment">#58320212       Balance:6021.78</span></span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>C++</category>
-      </categories>
-      <tags>
-        <tag>C++</tag>
       </tags>
   </entry>
   <entry>
@@ -317,46 +383,18 @@ bat脚本命令说明：<figure class="highlight python"><table><tr><td class="c
       </tags>
   </entry>
   <entry>
-    <title>信仰</title>
-    <url>/2020/12/29/%E4%BF%A1%E4%BB%B0/</url>
-    <content><![CDATA[<p>在这个怀疑的时代，我们依然需要信仰。</p>
-<p>无论中国怎样，请记得：</p>
-<p>你所站立的地方，就是你的中国；</p>
-<p>你怎么样，中国便怎么样；</p>
-<p>你是什么，中国便是什么；</p>
-<p>你有光明，中国便不再黑暗。</p>
-<p>——摘自原北京日报评论部主任卢新宁《2012年北京大学中文系毕业典礼上的讲话》</p>
-]]></content>
+    <title>Linux下通过python的pymysql模块向mysql数据库持续插入图片数据</title>
+    <url>/2021/01/05/Linux%E4%B8%8B%E9%80%9A%E8%BF%87python%E7%9A%84pymysql%E6%A8%A1%E5%9D%97%E5%90%91mysql%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8C%81%E7%BB%AD%E6%8F%92%E5%85%A5%E5%9B%BE%E7%89%87%E6%95%B0%E6%8D%AE/</url>
+    <content><![CDATA[<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><p>安装pymysql模块</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">pip install pymysql</span><br></pre></td></tr></table></figure>
+<h2 id="源代码"><a href="#源代码" class="headerlink" title="源代码"></a>源代码</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#encoding=utf-8</span></span><br><span class="line"><span class="keyword">import</span> pymysql</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">import</span> string</span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"></span><br><span class="line"><span class="comment">#图片路径（根据实际情况修改）示例如下：</span></span><br><span class="line">picUrl = <span class="string">"/test/index.jpg"</span></span><br><span class="line"><span class="comment">#连接的数据库服务器主机名（根据实际情况修改）示例如下：</span></span><br><span class="line"><span class="comment">#conhost="127.0.0.1"</span></span><br><span class="line">conhost=<span class="string">"localhost"</span></span><br><span class="line"><span class="comment">#连接的数据库端口号（根据实际情况修改）示例如下：</span></span><br><span class="line">conport=<span class="number">3306</span></span><br><span class="line"><span class="comment">#连接的数据库的用户名（根据实际情况修改）示例如下：</span></span><br><span class="line">conuser=<span class="string">"root"</span></span><br><span class="line"><span class="comment">#连接的数据库密码（根据实际情况修改）示例如下：</span></span><br><span class="line">conpasswd=<span class="string">"111111"</span></span><br><span class="line"><span class="comment">#连接的数据库名（根据实际情况修改）示例如下：</span></span><br><span class="line">condb=<span class="string">"test"</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BlobDataTestor</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="comment">#连接数据库</span></span><br><span class="line">        self.conn = pymysql.connect(host=conhost,port=conport, user=conuser,passwd=conpasswd,db=condb)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__del__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            self.conn.close()</span><br><span class="line">        <span class="keyword">except</span>:</span><br><span class="line">            <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">closedb</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.conn.close()</span><br><span class="line"></span><br><span class="line">    <span class="comment">#创建表</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">setup</span><span class="params">(self)</span>:</span></span><br><span class="line">        cursor = self.conn.cursor()</span><br><span class="line">        cursor.execute(<span class="string">"""  </span></span><br><span class="line"><span class="string">            CREATE TABLE IF NOT EXISTS `Dem_Picture` (  </span></span><br><span class="line"><span class="string">            `ID` int(11) NOT NULL auto_increment,</span></span><br><span class="line"><span class="string">            `time` timestamp  ,</span></span><br><span class="line"><span class="string">            `PicData` mediumblob,</span></span><br><span class="line"><span class="string">            `RandomNum` varchar(20),</span></span><br><span class="line"><span class="string">            PRIMARY KEY (`ID`)  </span></span><br><span class="line"><span class="string">            ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;  </span></span><br><span class="line"><span class="string">            """</span>)</span><br><span class="line">	</span><br><span class="line">    <span class="comment">#删除表</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">teardown</span><span class="params">(self)</span>:</span></span><br><span class="line">        cursor = self.conn.cursor()</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            cursor.execute(<span class="string">"Drop Table Dem_Picture"</span>)</span><br><span class="line">        <span class="keyword">except</span>:</span><br><span class="line">            <span class="keyword">pass</span></span><br><span class="line">            <span class="comment"># self.conn.commit()</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">testRWBlobData</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="comment"># 读取源图片数据</span></span><br><span class="line">        f = open(picUrl, <span class="string">"rb"</span>)</span><br><span class="line">        b = f.read()</span><br><span class="line">        f.close()</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 生成随机数</span></span><br><span class="line">        s = <span class="string">''</span>.join(random.choice(string.ascii_uppercase + string.digits) <span class="keyword">for</span> _ <span class="keyword">in</span> range(<span class="number">10</span>))</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 将数据写入表</span></span><br><span class="line">        cursor = self.conn.cursor()</span><br><span class="line">        cursor.execute(<span class="string">"INSERT INTO Dem_Picture (time,PicData,RandomNum) VALUES (current_timestamp,%s,%s)"</span>,((pymysql.Binary(b)),s))</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line"></span><br><span class="line">    test = BlobDataTestor()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="comment">#创建表</span></span><br><span class="line">        test.setup()</span><br><span class="line">        <span class="keyword">while</span> <span class="number">1</span>:</span><br><span class="line">            test.testRWBlobData()</span><br><span class="line">            <span class="keyword">print</span> <span class="string">"insert success"</span></span><br><span class="line">            <span class="comment">#time.sleep(1)	#根据需要设置插入时间间隔</span></span><br><span class="line">        <span class="comment">#删除表</span></span><br><span class="line">        <span class="comment">#test.teardown()</span></span><br><span class="line">        </span><br><span class="line">    <span class="keyword">finally</span>:</span><br><span class="line">        test.closedb()</span><br></pre></td></tr></table></figure>]]></content>
       <categories>
-        <category>读书</category>
+        <category>mysql</category>
       </categories>
-  </entry>
-  <entry>
-    <title>假如猫从世界上消失了</title>
-    <url>/2020/07/14/%E5%81%87%E5%A6%82%E7%8C%AB%E4%BB%8E%E4%B8%96%E7%95%8C%E4%B8%8A%E6%B6%88%E5%A4%B1%E4%BA%86/</url>
-    <content><![CDATA[<p>假如猫从世界上消失了<br>那这个世界会有如何的变化呢<br>假如我从世界上消失了<br>那究竟会有谁为我悲伤呢<br>假如我从世界上消失了<br>那些未实现的梦想和思绪<br>那些在我存活时未能完成的事情<br>对此我一定会抱有许多遗憾吧<br>然而，这个世界我在与不在<br>相信一定会有所不同<br>也许真的只是些小小的不同<br>然而正是它们<br>是我存在过的证明<br>是我挣扎着，烦恼着，生活过的证明</p>
-]]></content>
-      <categories>
-        <category>读书</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>幸福</title>
-    <url>/2020/09/11/%E5%B9%B8%E7%A6%8F/</url>
-    <content><![CDATA[<p>”幸福“就是猫吃鱼，狗啃骨头，猪睡觉。</p>
-]]></content>
-      <categories>
-        <category>随笔</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>孤独</title>
-    <url>/2020/06/21/%E5%AD%A4%E7%8B%AC/</url>
-    <content><![CDATA[<p>我周围人声鼎沸，<br>他们讨论我不喜欢的话题，<br>我只好微笑，目光深远，<br>于是孤独从四面八方涌来，将我吞噬。</p>
-]]></content>
-      <categories>
-        <category>随笔</category>
-      </categories>
+      <tags>
+        <tag>mysql</tag>
+        <tag>python</tag>
+      </tags>
   </entry>
   <entry>
     <title>redhat7.6配置163yum源</title>
@@ -381,16 +419,46 @@ bat脚本命令说明：<figure class="highlight python"><table><tr><td class="c
       </tags>
   </entry>
   <entry>
-    <title>论持久战</title>
-    <url>/2021/01/16/%E8%AE%BA%E6%8C%81%E4%B9%85%E6%88%98/</url>
-    <content><![CDATA[<p><a href="https://www.marxists.org/chinese/maozedong/marxist.org-chinese-mao-193805b.htm" target="_blank" rel="noopener">在线阅读网址一</a><br><a href="http://chinatide.net/xiachao/3-2.html" target="_blank" rel="noopener">在线阅读网址二</a></p>
+    <title>信仰</title>
+    <url>/2020/12/29/%E4%BF%A1%E4%BB%B0/</url>
+    <content><![CDATA[<p>在这个怀疑的时代，我们依然需要信仰。</p>
+<p>无论中国怎样，请记得：</p>
+<p>你所站立的地方，就是你的中国；</p>
+<p>你怎么样，中国便怎么样；</p>
+<p>你是什么，中国便是什么；</p>
+<p>你有光明，中国便不再黑暗。</p>
+<p>——摘自原北京日报评论部主任卢新宁《2012年北京大学中文系毕业典礼上的讲话》</p>
 ]]></content>
       <categories>
         <category>读书</category>
       </categories>
-      <tags>
-        <tag>毛泽东</tag>
-      </tags>
+  </entry>
+  <entry>
+    <title>假如猫从世界上消失了</title>
+    <url>/2020/07/14/%E5%81%87%E5%A6%82%E7%8C%AB%E4%BB%8E%E4%B8%96%E7%95%8C%E4%B8%8A%E6%B6%88%E5%A4%B1%E4%BA%86/</url>
+    <content><![CDATA[<p>假如猫从世界上消失了<br>那这个世界会有如何的变化呢<br>假如我从世界上消失了<br>那究竟会有谁为我悲伤呢<br>假如我从世界上消失了<br>那些未实现的梦想和思绪<br>那些在我存活时未能完成的事情<br>对此我一定会抱有许多遗憾吧<br>然而，这个世界我在与不在<br>相信一定会有所不同<br>也许真的只是些小小的不同<br>然而正是它们<br>是我存在过的证明<br>是我挣扎着，烦恼着，生活过的证明</p>
+]]></content>
+      <categories>
+        <category>读书</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>孤独</title>
+    <url>/2020/06/21/%E5%AD%A4%E7%8B%AC/</url>
+    <content><![CDATA[<p>我周围人声鼎沸，<br>他们讨论我不喜欢的话题，<br>我只好微笑，目光深远，<br>于是孤独从四面八方涌来，将我吞噬。</p>
+]]></content>
+      <categories>
+        <category>随笔</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>幸福</title>
+    <url>/2020/09/11/%E5%B9%B8%E7%A6%8F/</url>
+    <content><![CDATA[<p>”幸福“就是猫吃鱼，狗啃骨头，猪睡觉。</p>
+]]></content>
+      <categories>
+        <category>随笔</category>
+      </categories>
   </entry>
   <entry>
     <title>我的2020</title>
@@ -464,6 +532,44 @@ bat脚本命令说明：<figure class="highlight python"><table><tr><td class="c
       </tags>
   </entry>
   <entry>
+    <title>表白小程序（python）</title>
+    <url>/2021/02/03/%E8%A1%A8%E7%99%BD%E5%B0%8F%E7%A8%8B%E5%BA%8F%EF%BC%88python%EF%BC%89/</url>
+    <content><![CDATA[<h2 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h2><ul>
+<li>Windows环境下安装python并添加到环境变量，</li>
+<li>pip安装需要的相关模块即可，主要是pygame模块。</li>
+</ul>
+<hr>
+<h2 id="目录结构"><a href="#目录结构" class="headerlink" title="目录结构"></a>目录结构</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">-resources       //资源文件目录</span><br><span class="line">    -font        //资源文件子目录(存放字体文件)</span><br><span class="line">        -STXINGKA.TTF</span><br><span class="line">    -images      //资源文件子目录(存放图片文件)</span><br><span class="line">        -bg.png</span><br><span class="line">        -icon.png</span><br><span class="line">    -music       //资源文件子目录(存放音频文件)</span><br><span class="line">        -bgm.mp3</span><br><span class="line">-cfg.py          //配置程序</span><br><span class="line">-love.py         //主程序</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="源程序"><a href="#源程序" class="headerlink" title="源程序"></a>源程序</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">//cfg.py</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line"><span class="comment"># 窗口大小(width, height)</span></span><br><span class="line">SCREENSIZE = (<span class="number">500</span>, <span class="number">260</span>)</span><br><span class="line"><span class="comment"># 定义一些颜色</span></span><br><span class="line">RED = (<span class="number">255</span>, <span class="number">0</span>, <span class="number">0</span>)</span><br><span class="line">BLACK = (<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>)</span><br><span class="line">AZURE = (<span class="number">240</span>, <span class="number">255</span>, <span class="number">255</span>)</span><br><span class="line">WHITE = (<span class="number">255</span>, <span class="number">255</span>, <span class="number">255</span>)</span><br><span class="line">MISTYROSE = (<span class="number">255</span>, <span class="number">228</span>, <span class="number">225</span>)</span><br><span class="line">PALETURQUOISE = (<span class="number">175</span>, <span class="number">238</span>, <span class="number">238</span>)</span><br><span class="line">PAPAYAWHIP = (<span class="number">255</span>, <span class="number">239</span>, <span class="number">213</span>)</span><br><span class="line">LIGHTGRAY = (<span class="number">211</span>, <span class="number">211</span>, <span class="number">211</span>)</span><br><span class="line">GAINSBORO = (<span class="number">230</span>, <span class="number">230</span>, <span class="number">230</span>)</span><br><span class="line">WHITESMOKE = (<span class="number">245</span>, <span class="number">245</span>, <span class="number">245</span>)</span><br><span class="line">DARKGRAY = (<span class="number">169</span>, <span class="number">169</span>, <span class="number">169</span>)</span><br><span class="line">BLUE = (<span class="number">0</span>, <span class="number">0</span>, <span class="number">255</span>)</span><br><span class="line">DEEPSKYBLUE = (<span class="number">0</span>, <span class="number">191</span>, <span class="number">255</span>)</span><br><span class="line">SKYBLUE = (<span class="number">135</span>, <span class="number">206</span>, <span class="number">235</span>)</span><br><span class="line">LIGHTSKYBLUE = (<span class="number">135</span>, <span class="number">206</span>, <span class="number">250</span>)</span><br><span class="line"><span class="comment"># 背景音乐路径</span></span><br><span class="line">BGM_PATH = os.path.join(os.getcwd(), <span class="string">'resources/music/bgm.mp3'</span>)</span><br><span class="line"><span class="comment"># 字体路径</span></span><br><span class="line">FONT_PATH = os.path.join(os.getcwd(), <span class="string">'resources/font/STXINGKA.TTF'</span>)</span><br><span class="line"><span class="comment"># 背景图片路径</span></span><br><span class="line">BG_IMAGE_PATH = os.path.join(os.getcwd(), <span class="string">'resources/images/bg.png'</span>)</span><br><span class="line"><span class="comment"># ICON路径</span></span><br><span class="line">ICON_IMAGE_PATH = os.path.join(os.getcwd(), <span class="string">'resources/images/icon.png'</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">//love.py</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> cfg</span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"><span class="keyword">import</span> pygame</span><br><span class="line"><span class="keyword">from</span> tkinter <span class="keyword">import</span> Tk, messagebox</span><br><span class="line"></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">Function:</span></span><br><span class="line"><span class="string">	按钮类</span></span><br><span class="line"><span class="string">Initial Args:</span></span><br><span class="line"><span class="string">	--x, y: 按钮左上角坐标</span></span><br><span class="line"><span class="string">	--width, height: 按钮宽高</span></span><br><span class="line"><span class="string">	--text: 按钮显示的文字</span></span><br><span class="line"><span class="string">	--fontpath: 字体路径</span></span><br><span class="line"><span class="string">	--fontsize: 字体大小</span></span><br><span class="line"><span class="string">	--fontcolor: 字体颜色</span></span><br><span class="line"><span class="string">	--bgcolors: 按钮背景颜色</span></span><br><span class="line"><span class="string">	--is_want_to_be_selected: 按钮是否想被玩家选中</span></span><br><span class="line"><span class="string">	--screensize: 软件屏幕大小</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Button</span><span class="params">(pygame.sprite.Sprite)</span>:</span></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, x, y, width, height, text, fontpath, fontsize, fontcolor, bgcolors, edgecolor, edgesize=<span class="number">1</span>, is_want_to_be_selected=True, screensize=None, **kwargs)</span>:</span></span><br><span class="line">		pygame.sprite.Sprite.__init__(self)</span><br><span class="line">		self.rect = pygame.Rect(x, y, width, height)</span><br><span class="line">		self.text = text</span><br><span class="line">		self.font = pygame.font.Font(fontpath, fontsize)</span><br><span class="line">		self.fontcolor = fontcolor</span><br><span class="line">		self.bgcolors = bgcolors</span><br><span class="line">		self.edgecolor = edgecolor</span><br><span class="line">		self.edgesize = edgesize</span><br><span class="line">		self.is_want_tobe_selected = is_want_to_be_selected</span><br><span class="line">		self.screensize = screensize</span><br><span class="line">	<span class="string">'''自动根据各种情况将按钮绑定到屏幕'''</span></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">draw</span><span class="params">(self, screen, mouse_pos)</span>:</span></span><br><span class="line">		<span class="comment"># 鼠标在按钮范围内</span></span><br><span class="line">		<span class="keyword">if</span> self.rect.collidepoint(mouse_pos):</span><br><span class="line">			<span class="comment"># --不想被选中</span></span><br><span class="line">			<span class="keyword">if</span> <span class="keyword">not</span> self.is_want_tobe_selected:</span><br><span class="line">				<span class="keyword">while</span> self.rect.collidepoint(mouse_pos):</span><br><span class="line">					self.rect.left, self.rect.top = random.randint(<span class="number">0</span>, self.screensize[<span class="number">0</span>]-self.rect.width), random.randint(<span class="number">0</span>, self.screensize[<span class="number">1</span>]-self.rect.height)</span><br><span class="line">			pygame.draw.rect(screen, self.bgcolors[<span class="number">0</span>], self.rect, <span class="number">0</span>)</span><br><span class="line">			pygame.draw.rect(screen, self.edgecolor, self.rect, self.edgesize)</span><br><span class="line">		<span class="comment"># 鼠标不在按钮范围内</span></span><br><span class="line">		<span class="keyword">else</span>:</span><br><span class="line">			pygame.draw.rect(screen, self.bgcolors[<span class="number">1</span>], self.rect, <span class="number">0</span>)</span><br><span class="line">			pygame.draw.rect(screen, self.edgecolor, self.rect, self.edgesize)</span><br><span class="line">		text_render = self.font.render(self.text, <span class="literal">True</span>, self.fontcolor)</span><br><span class="line">		fontsize = self.font.size(self.text)</span><br><span class="line">		screen.blit(text_render, (self.rect.x+(self.rect.width-fontsize[<span class="number">0</span>])/<span class="number">2</span>, self.rect.y+(self.rect.height-fontsize[<span class="number">1</span>])/<span class="number">2</span>))</span><br><span class="line"></span><br><span class="line"><span class="string">'''在指定位置显示文字'''</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">showText</span><span class="params">(screen, text, position, fontpath, fontsize, fontcolor, is_bold=False)</span>:</span></span><br><span class="line">	font = pygame.font.Font(fontpath, fontsize)</span><br><span class="line">	font.set_bold(is_bold)</span><br><span class="line">	text_render = font.render(text, <span class="literal">True</span>, fontcolor)</span><br><span class="line">	screen.blit(text_render, position)</span><br><span class="line"></span><br><span class="line"><span class="string">'''主函数'''</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">	<span class="comment"># 初始化</span></span><br><span class="line">	pygame.init()</span><br><span class="line">	screen = pygame.display.set_mode(cfg.SCREENSIZE, <span class="number">0</span>, <span class="number">32</span>)</span><br><span class="line">	pygame.display.set_icon(pygame.image.load(cfg.ICON_IMAGE_PATH))</span><br><span class="line">	pygame.display.set_caption(<span class="string">'来自一位喜欢你的小哥哥'</span>)</span><br><span class="line">	<span class="comment"># 背景音乐</span></span><br><span class="line">	pygame.mixer.music.load(cfg.BGM_PATH)</span><br><span class="line">	pygame.mixer.music.play(<span class="number">-1</span>, <span class="number">30.0</span>)</span><br><span class="line">	<span class="comment"># biu爱心那个背景图片</span></span><br><span class="line">	bg_image = pygame.image.load(cfg.BG_IMAGE_PATH)</span><br><span class="line">	bg_image = pygame.transform.smoothscale(bg_image, (<span class="number">150</span>, <span class="number">150</span>))</span><br><span class="line">	<span class="comment"># 实例化两个按钮</span></span><br><span class="line">	button_yes = Button(x=<span class="number">20</span>, y=cfg.SCREENSIZE[<span class="number">1</span>]<span class="number">-70</span>, width=<span class="number">120</span>, height=<span class="number">35</span>, </span><br><span class="line">						text=<span class="string">'好呀'</span>, fontpath=cfg.FONT_PATH, fontsize=<span class="number">15</span>, fontcolor=cfg.BLACK, edgecolor=cfg.SKYBLUE, </span><br><span class="line">						edgesize=<span class="number">2</span>, bgcolors=[cfg.DARKGRAY, cfg.GAINSBORO], is_want_to_be_selected=<span class="literal">True</span>, screensize=cfg.SCREENSIZE)</span><br><span class="line">	button_no = Button(x=cfg.SCREENSIZE[<span class="number">0</span>]<span class="number">-140</span>, y=cfg.SCREENSIZE[<span class="number">1</span>]<span class="number">-70</span>, width=<span class="number">120</span>, height=<span class="number">35</span>, </span><br><span class="line">					   text=<span class="string">'算了吧'</span>, fontpath=cfg.FONT_PATH, fontsize=<span class="number">15</span>, fontcolor=cfg.BLACK, edgecolor=cfg.DARKGRAY, </span><br><span class="line">					   edgesize=<span class="number">1</span>, bgcolors=[cfg.DARKGRAY, cfg.GAINSBORO], is_want_to_be_selected=<span class="literal">False</span>, screensize=cfg.SCREENSIZE)</span><br><span class="line">	<span class="comment"># 是否点击了好呀按钮</span></span><br><span class="line">	is_agree = <span class="literal">False</span></span><br><span class="line">	<span class="comment"># 主循环</span></span><br><span class="line">	clock = pygame.time.Clock()</span><br><span class="line">	<span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">		<span class="comment"># --背景图片</span></span><br><span class="line">		screen.fill(cfg.WHITE)</span><br><span class="line">		screen.blit(bg_image, (cfg.SCREENSIZE[<span class="number">0</span>]-bg_image.get_height(), <span class="number">0</span>))</span><br><span class="line">		<span class="comment"># --鼠标事件捕获</span></span><br><span class="line">		<span class="keyword">for</span> event <span class="keyword">in</span> pygame.event.get():</span><br><span class="line">			<span class="keyword">if</span> event.type == pygame.QUIT:</span><br><span class="line">				<span class="comment"># ----没有点击好呀按钮之前不许退出程序</span></span><br><span class="line">				<span class="keyword">if</span> is_agree:</span><br><span class="line">					pygame.quit()</span><br><span class="line">					sys.exit()</span><br><span class="line">			<span class="keyword">elif</span> event.type == pygame.MOUSEBUTTONDOWN <span class="keyword">and</span> event.button:</span><br><span class="line">				<span class="keyword">if</span> button_yes.rect.collidepoint(pygame.mouse.get_pos()):</span><br><span class="line">					button_yes.is_selected = <span class="literal">True</span></span><br><span class="line">					root = Tk()</span><br><span class="line">					root.withdraw()</span><br><span class="line">					messagebox.showinfo(<span class="string">''</span>, <span class="string">'❤❤❤么么哒❤❤❤'</span>)</span><br><span class="line">					root.destroy()</span><br><span class="line">					is_agree = <span class="literal">True</span></span><br><span class="line">		<span class="comment"># --显示文字</span></span><br><span class="line">		showText(screen=screen, text=<span class="string">'小姐姐, 我观察你很久了'</span>, position=(<span class="number">40</span>, <span class="number">50</span>), </span><br><span class="line">				 fontpath=cfg.FONT_PATH, fontsize=<span class="number">25</span>, fontcolor=cfg.BLACK, is_bold=<span class="literal">False</span>)</span><br><span class="line">		showText(screen=screen, text=<span class="string">'做我女朋友好不好?'</span>, position=(<span class="number">40</span>, <span class="number">100</span>), </span><br><span class="line">				 fontpath=cfg.FONT_PATH, fontsize=<span class="number">25</span>, fontcolor=cfg.BLACK, is_bold=<span class="literal">True</span>)</span><br><span class="line">		<span class="comment"># --显示按钮</span></span><br><span class="line">		button_yes.draw(screen, pygame.mouse.get_pos())</span><br><span class="line">		button_no.draw(screen, pygame.mouse.get_pos())</span><br><span class="line">		<span class="comment"># --刷新</span></span><br><span class="line">		pygame.display.update()</span><br><span class="line">		clock.tick(<span class="number">60</span>)</span><br><span class="line"></span><br><span class="line"><span class="string">'''run'''</span></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">	main()</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h2><p>在cmd窗口执行python love.py即可运行。</p>
+<hr>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><p><a href="https://github.com/nobody-blog/Code/tree/main/NaughtyConfession" target="_blank" rel="noopener">源码GitHub地址</a></p>
+]]></content>
+      <categories>
+        <category>python</category>
+      </categories>
+      <tags>
+        <tag>python</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>论持久战</title>
+    <url>/2021/01/16/%E8%AE%BA%E6%8C%81%E4%B9%85%E6%88%98/</url>
+    <content><![CDATA[<p><a href="https://www.marxists.org/chinese/maozedong/marxist.org-chinese-mao-193805b.htm" target="_blank" rel="noopener">在线阅读网址一</a><br><a href="http://chinatide.net/xiachao/3-2.html" target="_blank" rel="noopener">在线阅读网址二</a></p>
+]]></content>
+      <categories>
+        <category>读书</category>
+      </categories>
+      <tags>
+        <tag>毛泽东</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>青年</title>
     <url>/2021/01/04/%E9%9D%92%E5%B9%B4/</url>
     <content><![CDATA[<p>从一封匿名信里看见一句话，是“数麻石片”(原注江苏方言)，大约是没有本领便不必提倡改革，不如去数石片的好的意思。因此又记起了本志通信栏内所载四川方言的“洗煤炭”。想来别省方言中，相类的话还多；守着这专劝人自暴自弃的格言的人，也怕并不少。 </p>
@@ -485,72 +591,6 @@ bat脚本命令说明：<figure class="highlight python"><table><tr><td class="c
       </categories>
       <tags>
         <tag>鲁迅</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Centos7.x系统中Docker安装及简单使用</title>
-    <url>/2020/12/30/Centos7-x%E7%B3%BB%E7%BB%9F%E4%B8%ADDocker%E5%AE%89%E8%A3%85%E5%8F%8A%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/</url>
-    <content><![CDATA[<h3 id="环境要求"><a href="#环境要求" class="headerlink" title="环境要求"></a>环境要求</h3><pre><code>1、只能是64位的系统;
-2、要求centos7以上系统的内核版本不低于3.10。</code></pre><hr>
-<h3 id="安装步骤"><a href="#安装步骤" class="headerlink" title="安装步骤"></a>安装步骤</h3><p>1、移除旧版本的docker</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">yum remove docker docker-client docker-client-latest docker-common docker-latest docker-latest-logrotate docker-logrotate docker-selinux docker-engine-selinux docker-engine</span><br></pre></td></tr></table></figure>
-
-<p>2、安装依赖包</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">yum install -y yum-utils device-mapper-persistent-data lvm2</span><br></pre></td></tr></table></figure>
-
-<p>3、添加yum软件源<br>非官方源(比如阿里云)</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo</span><br></pre></td></tr></table></figure>
-
-<p>官方源</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">yum-config-manager  --add-repo https://download.docker.com/linux/centos/docker-ce.repo</span><br></pre></td></tr></table></figure>
-
-<p>4、更新yum软件源缓存：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">yum makecache fast</span><br></pre></td></tr></table></figure>
-
-<p>5、安装docker</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">yum  -y install  docker-ce</span><br></pre></td></tr></table></figure>
-
-<p>安装时，如果报错出现rpm包无法找到，先手动通过wget下载该rpm包，然后重新执行安装命令即可。 </p>
-<hr>
-<h3 id="Docker镜像和容器的简单使用命令"><a href="#Docker镜像和容器的简单使用命令" class="headerlink" title="Docker镜像和容器的简单使用命令"></a>Docker镜像和容器的简单使用命令</h3><p>1、查看docker版本： docker  version<br>2、查询镜像： docker  search  imageName[镜像名称：如  centos]<br>3、获取镜像：docker  pull  imageName[镜像名称：如  centos]<br>4、列出镜像:  docker  image  ls<br>5、查询镜像体积：docker system df<br>6、删除镜像:docker  image rm  imagesID<br>7、启动容器： docker  run –name ***  -p  port:port  -d  [镜像名]/ docker start                        [containerID/containerName]<br>8、退出容器：exit/docker  stop containerID<br>9、进入容器：docker  attach  containerID/docker   exec  -it   containerID<br>10、删除容器：<br>1）删除处于终止状态的：docker  container  rm  [ID]<br>2）删除处于运行状态的：docker  container  rm  -f  [ID]<br>3）删除所有处于终止状态的：docker container prune </p>
-<hr>
-<h3 id="Docker安装Tomcat实例"><a href="#Docker安装Tomcat实例" class="headerlink" title="Docker安装Tomcat实例"></a>Docker安装Tomcat实例</h3><p>1、获取tomcat镜像: docker  pull  tomcat<br>2、新建并运行tomcat容器:</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">docker run  --name  tomcat  -p <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">8080</span>:<span class="number">8080</span>    -d  tomcat</span><br><span class="line">docker run  --name  tomcat  -p <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">8080</span>:<span class="number">8080</span>    -d  tomcat --restart=always</span><br></pre></td></tr></table></figure>
-<pre><code>--name：容器名 
--p：后面接IP地址(可以不设)：接宿主机端口：容器端口  
--d：后台运行</code></pre><p>3、进入容器：docker   exec/attach  -it  tomcat  bash<br>    exec进入容器后使用exit命令退出容器，只会退出容器，让容器在后台继续运行；attach进入后用exit退出，     会直接关闭容器.<br>    -it:交互模式进入容器<br>4、退出tomcat容器：exit<br>5、停止tomcat容器：docker   stop   tomcat<br>6、启动tomcat容器：docker   start   tomcat<br>7、删除tomcat容器：docker   container    rm  -f  tomcat</p>
-]]></content>
-      <categories>
-        <category>容器</category>
-      </categories>
-      <tags>
-        <tag>Docker</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>EXSi上修改虚拟机磁盘扇区大小为32的简易方法</title>
-    <url>/2020/12/31/EXSi%E4%B8%8A%E4%BF%AE%E6%94%B9%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%A3%81%E7%9B%98%E6%89%87%E5%8C%BA%E5%A4%A7%E5%B0%8F%E4%B8%BA32%E7%9A%84%E7%AE%80%E6%98%93%E6%96%B9%E6%B3%95/</url>
-    <content><![CDATA[<h2 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h2><p>1、登陆EXSi，进入虚拟机所在的datastore目录,每个目录为一个虚拟机</p>
-<p><img src="/2020/12/31/EXSi%E4%B8%8A%E4%BF%AE%E6%94%B9%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%A3%81%E7%9B%98%E6%89%87%E5%8C%BA%E5%A4%A7%E5%B0%8F%E4%B8%BA32%E7%9A%84%E7%AE%80%E6%98%93%E6%96%B9%E6%B3%95/3.png" alt></p>
-<p><img src="/2020/12/31/EXSi%E4%B8%8A%E4%BF%AE%E6%94%B9%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%A3%81%E7%9B%98%E6%89%87%E5%8C%BA%E5%A4%A7%E5%B0%8F%E4%B8%BA32%E7%9A%84%E7%AE%80%E6%98%93%E6%96%B9%E6%B3%95/4.png" alt></p>
-<p>2、找到对应的vmdk文件</p>
-<p><img src="/2020/12/31/EXSi%E4%B8%8A%E4%BF%AE%E6%94%B9%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%A3%81%E7%9B%98%E6%89%87%E5%8C%BA%E5%A4%A7%E5%B0%8F%E4%B8%BA32%E7%9A%84%E7%AE%80%E6%98%93%E6%96%B9%E6%B3%95/5.png" alt></p>
-<p>3、进入修改</p>
-<p><img src="/2020/12/31/EXSi%E4%B8%8A%E4%BF%AE%E6%94%B9%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%A3%81%E7%9B%98%E6%89%87%E5%8C%BA%E5%A4%A7%E5%B0%8F%E4%B8%BA32%E7%9A%84%E7%AE%80%E6%98%93%E6%96%B9%E6%B3%95/6.png" alt></p>
-<p><img src="/2020/12/31/EXSi%E4%B8%8A%E4%BF%AE%E6%94%B9%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%A3%81%E7%9B%98%E6%89%87%E5%8C%BA%E5%A4%A7%E5%B0%8F%E4%B8%BA32%E7%9A%84%E7%AE%80%E6%98%93%E6%96%B9%E6%B3%95/7.png" alt></p>
-<p>4、保存退出即可</p>
-<hr>
-<h2 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h2><p>1、ESXI上创建所需安装版本的虚拟机，暂不安装系统</p>
-<p>2、将虚拟机的vmdk文件下载到本地进行以下修改</p>
-<p><img src="/2020/12/31/EXSi%E4%B8%8A%E4%BF%AE%E6%94%B9%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%A3%81%E7%9B%98%E6%89%87%E5%8C%BA%E5%A4%A7%E5%B0%8F%E4%B8%BA32%E7%9A%84%E7%AE%80%E6%98%93%E6%96%B9%E6%B3%95/8.png" alt></p>
-<p>3、将修改后的vmdk文件上传到ESXi后开始系统安装</p>
-<p>4、安装完成后使用winhex工具查看磁盘扇区数是否为32扇区</p>
-]]></content>
-      <categories>
-        <category>虚拟化</category>
-      </categories>
-      <tags>
-        <tag>EXSi</tag>
       </tags>
   </entry>
 </search>
