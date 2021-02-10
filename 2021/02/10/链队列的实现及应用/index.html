@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="虚拟化," />
+  <meta name="keywords" content="C++,算法," />
 
 
 
@@ -79,16 +79,17 @@
 
 
 
-<meta name="description" content="使用前提 安装虚拟化相关组件安装qemu-kvm（用户态管理工具）安装libvirt（命令行管理工具）安装virt-install（安装kvm工具）安装bridge-utils（桥接设备管理工具）1yum install -y qemu-kvm libvirt virt-install bridge-utils 启动libvirtd服务123systemctl enable libvirtdsys">
+<meta name="description" content="本文记录单链队列（队列的链式存储结构）的数据结构定义及基本操作的算法描述，并对算法进行简单应用。 采用C语言实现，其中应用了少数C++特性，比如引用等。    源程序&#x2F;&#x2F;LinkQueue.cpp 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354">
 <meta property="og:type" content="article">
-<meta property="og:title" content="KVM之virsh管理命令">
-<meta property="og:url" content="http://yoursite.com/2021/01/03/KVM%E4%B9%8Bvirsh%E7%AE%A1%E7%90%86%E5%91%BD%E4%BB%A4/index.html">
+<meta property="og:title" content="链队列的实现及应用">
+<meta property="og:url" content="http://yoursite.com/2021/02/10/%E9%93%BE%E9%98%9F%E5%88%97%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%8F%8A%E5%BA%94%E7%94%A8/index.html">
 <meta property="og:site_name" content="Nobody&#39;s Blog">
-<meta property="og:description" content="使用前提 安装虚拟化相关组件安装qemu-kvm（用户态管理工具）安装libvirt（命令行管理工具）安装virt-install（安装kvm工具）安装bridge-utils（桥接设备管理工具）1yum install -y qemu-kvm libvirt virt-install bridge-utils 启动libvirtd服务123systemctl enable libvirtdsys">
-<meta property="article:published_time" content="2021-01-03T07:28:21.000Z">
-<meta property="article:modified_time" content="2021-01-16T04:51:37.530Z">
+<meta property="og:description" content="本文记录单链队列（队列的链式存储结构）的数据结构定义及基本操作的算法描述，并对算法进行简单应用。 采用C语言实现，其中应用了少数C++特性，比如引用等。    源程序&#x2F;&#x2F;LinkQueue.cpp 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354">
+<meta property="article:published_time" content="2021-02-10T03:59:41.000Z">
+<meta property="article:modified_time" content="2021-02-10T10:18:55.416Z">
 <meta property="article:author" content="Nobody">
-<meta property="article:tag" content="虚拟化">
+<meta property="article:tag" content="C++">
+<meta property="article:tag" content="算法">
 <meta name="twitter:card" content="summary">
 
 
@@ -119,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2021/01/03/KVM之virsh管理命令/"/>
+  <link rel="canonical" href="http://yoursite.com/2021/02/10/链队列的实现及应用/"/>
 
 
 
 
 
-  <title>KVM之virsh管理命令 | Nobody's Blog</title>
+  <title>链队列的实现及应用 | Nobody's Blog</title>
   
 
 
@@ -296,7 +297,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/01/03/KVM%E4%B9%8Bvirsh%E7%AE%A1%E7%90%86%E5%91%BD%E4%BB%A4/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/02/10/%E9%93%BE%E9%98%9F%E5%88%97%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%8F%8A%E5%BA%94%E7%94%A8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Nobody">
@@ -313,7 +314,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">KVM之virsh管理命令</h1>
+          <h1 class="post-title" itemprop="name headline">链队列的实现及应用</h1>
         
 
         <div class="post-meta">
@@ -325,8 +326,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-01-03T15:28:21+08:00">
-                2021-01-03
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-02-10T11:59:41+08:00">
+                2021-02-10
               </time>
             
 
@@ -341,8 +342,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2021-01-16T12:51:37+08:00">
-                2021-01-16
+              <time title="更新于" itemprop="dateModified" datetime="2021-02-10T18:18:55+08:00">
+                2021-02-10
               </time>
             
           </span>
@@ -360,8 +361,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%99%9A%E6%8B%9F%E5%8C%96/" itemprop="url" rel="index">
-                    <span itemprop="name">虚拟化</span>
+                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
                   </a>
                 </span>
 
@@ -391,7 +392,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  435
+                  890
                 </span>
               
 
@@ -407,7 +408,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  1
+                  4
                 </span>
               
             </div>
@@ -428,35 +429,18 @@
       
 
       
-        <h2 id="使用前提"><a href="#使用前提" class="headerlink" title="使用前提"></a>使用前提</h2><ol>
-<li>安装虚拟化相关组件<br>安装qemu-kvm（用户态管理工具）<br>安装libvirt（命令行管理工具）<br>安装virt-install（安装kvm工具）<br>安装bridge-utils（桥接设备管理工具）<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y qemu-kvm libvirt virt-install bridge-utils</span><br></pre></td></tr></table></figure></li>
-<li>启动libvirtd服务<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">systemctl enable libvirtd</span><br><span class="line">systemctl start  libvirtd</span><br><span class="line">systemctl status  libvirtd</span><br></pre></td></tr></table></figure></li>
-<li>安装virt-manager<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y install virt-manager</span><br></pre></td></tr></table></figure>
-
-</li>
-</ol>
-<p>使用可视化创建的虚拟机xml文件位置：/etc/libvirt/qemu/</p>
+        <blockquote>
+<ul>
+<li>本文记录单链队列（队列的链式存储结构）的数据结构定义及基本操作的算法描述，并对算法进行简单应用。</li>
+<li>采用C语言实现，其中应用了少数C++特性，比如引用等。</li>
+</ul>
+</blockquote>
 <hr>
-<h2 id="常用的虚拟机管理命令"><a href="#常用的虚拟机管理命令" class="headerlink" title="常用的虚拟机管理命令"></a>常用的虚拟机管理命令</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 列出所有的虚拟机</span></span><br><span class="line">virsh list --all</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示虚拟机信息</span></span><br><span class="line">virsh dominfo *	( *为虚拟机名称 )</span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义虚拟机</span></span><br><span class="line">virsh define *.xml</span><br><span class="line"></span><br><span class="line"><span class="comment"># 启动虚拟机</span></span><br><span class="line">virsh start *</span><br><span class="line"></span><br><span class="line"><span class="comment"># 强制关闭虚拟机/关闭虚拟机</span></span><br><span class="line">virsh destroy */virsh shutdown *</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除虚拟机</span></span><br><span class="line">virsh undefine *</span><br><span class="line"></span><br><span class="line"><span class="comment"># 挂起虚拟机</span></span><br><span class="line">virsh suspend *</span><br><span class="line"></span><br><span class="line"><span class="comment"># 恢复被挂起的虚拟机</span></span><br><span class="line">virsh resume *</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看虚拟机网卡信息</span></span><br><span class="line">virsh domiflist *</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加网卡</span></span><br><span class="line">virsh attach-interface * --type * --source * --model * --live --config</span><br><span class="line">（第一个*为虚拟机名称，后三个*依次为Type Source Model）</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除网卡</span></span><br><span class="line">virsh detach-interface * --type  * --mac  *  --live --config</span><br><span class="line">（第一个*为虚拟机名称，后两个*依次为Type MAC）</span><br></pre></td></tr></table></figure>
+<h1 id="源程序"><a href="#源程序" class="headerlink" title="源程序"></a>源程序</h1><p>//LinkQueue.cpp</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#include &lt;stdio.h&gt;</span></span><br><span class="line"><span class="comment">#include &lt;stdlib.h&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#define MAXQSIZE 5</span></span><br><span class="line"><span class="comment">#define OK 1</span></span><br><span class="line"><span class="comment">#define ERROR 0</span></span><br><span class="line"><span class="comment">#define TRUE 1</span></span><br><span class="line"><span class="comment">#define FALSE 0</span></span><br><span class="line"><span class="comment">#define OVERFLOW -2</span></span><br><span class="line"></span><br><span class="line">typedef int Status;</span><br><span class="line">typedef int QElemType;</span><br><span class="line"></span><br><span class="line">typedef struct QNode</span><br><span class="line">&#123;</span><br><span class="line">	QElemType data;</span><br><span class="line">	struct QNode *next;</span><br><span class="line">&#125;QNode,*QueuePtr;</span><br><span class="line"></span><br><span class="line">typedef struct</span><br><span class="line">&#123;</span><br><span class="line">	QueuePtr front;</span><br><span class="line">	QueuePtr rear;</span><br><span class="line">&#125;LinkQueue;</span><br><span class="line"></span><br><span class="line">//构造一个空队列Q</span><br><span class="line">Status InitQueue(LinkQueue &amp;Q)</span><br><span class="line">&#123;</span><br><span class="line">	Q.front=Q.rear=(QueuePtr)malloc(sizeof(QNode));</span><br><span class="line">	<span class="keyword">if</span>(!Q.front)</span><br><span class="line">		exit(OVERFLOW);</span><br><span class="line">	Q.front-&gt;next=NULL;</span><br><span class="line">	<span class="keyword">return</span> OK;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//销毁队列Q</span><br><span class="line">Status DestroyQueue(LinkQueue &amp;Q)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">while</span>(Q.front)</span><br><span class="line">	&#123;</span><br><span class="line">		Q.rear=Q.front-&gt;next;</span><br><span class="line">		free(Q.front);</span><br><span class="line">		Q.front=Q.rear;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> OK;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//把Q清为空队列</span><br><span class="line">Status ClearQueue(LinkQueue &amp;Q)</span><br><span class="line">&#123;</span><br><span class="line">	QueuePtr p,q;</span><br><span class="line">	Q.rear=Q.front;</span><br><span class="line">	p=Q.front-&gt;next;</span><br><span class="line">	Q.front-&gt;next=NULL;</span><br><span class="line">	<span class="keyword">while</span>(p)</span><br><span class="line">	&#123;</span><br><span class="line">		q=p;</span><br><span class="line">		p=p-&gt;next;</span><br><span class="line">		free(q);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> OK;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//若队列Q为空队列，则返回TRUE,否则返回FALSE</span><br><span class="line">Status QueueEmpty(LinkQueue Q)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">if</span>(Q.front==Q.rear)</span><br><span class="line">		<span class="keyword">return</span> TRUE;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">		<span class="keyword">return</span> ERROR;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//返回Q的元素个数，即队列的长度</span><br><span class="line">int QueueLength(LinkQueue Q)</span><br><span class="line">&#123;</span><br><span class="line">	int i=<span class="number">0</span>;</span><br><span class="line">	QueuePtr p;</span><br><span class="line">	p=Q.front;</span><br><span class="line">	<span class="keyword">while</span>(Q.rear!=p)</span><br><span class="line">	&#123;</span><br><span class="line">		i++;</span><br><span class="line">		p=p-&gt;next;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> i;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//若队列不空，则用e返回Q的队头元素，并返回OK;否则返回ERROR</span><br><span class="line">Status GetHead(LinkQueue Q,QElemType &amp;e)</span><br><span class="line">&#123;</span><br><span class="line">	QueuePtr p;</span><br><span class="line">	<span class="keyword">if</span>(Q.front==Q.rear)</span><br><span class="line">		<span class="keyword">return</span> ERROR;</span><br><span class="line">	p=Q.front-&gt;next;</span><br><span class="line">	e=p-&gt;data;</span><br><span class="line">	<span class="keyword">return</span> OK;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//插入元素e作为新的队尾元素</span><br><span class="line">Status EnQueue(LinkQueue &amp;Q,QElemType e)</span><br><span class="line">&#123;</span><br><span class="line">	QueuePtr p=(QueuePtr)malloc(sizeof(QNode));</span><br><span class="line">	<span class="keyword">if</span>(!p)</span><br><span class="line">		exit(OVERFLOW);</span><br><span class="line">	p-&gt;data=e;</span><br><span class="line">	p-&gt;next=NULL;</span><br><span class="line">	Q.rear-&gt;next=p;</span><br><span class="line">	Q.rear=p;</span><br><span class="line">	<span class="keyword">return</span> OK;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//若队列不空，则删除Q的队头元素，用e返回其值，并返回OK；否则返回ERROR</span><br><span class="line">Status DeQueue(LinkQueue &amp;Q,QElemType &amp;e)</span><br><span class="line">&#123;</span><br><span class="line">	QueuePtr p;</span><br><span class="line">	<span class="keyword">if</span>(Q.front==Q.rear)</span><br><span class="line">		<span class="keyword">return</span> ERROR;</span><br><span class="line">	p=Q.front-&gt;next;</span><br><span class="line">	e=p-&gt;data;</span><br><span class="line">	Q.front-&gt;next=p-&gt;next;</span><br><span class="line">	<span class="keyword">if</span>(Q.rear==p)</span><br><span class="line">		Q.rear=Q.front;</span><br><span class="line">	free(p);</span><br><span class="line">	<span class="keyword">return</span> OK;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//从队头到队尾依次对队列Q中每个元素调用函数visit()。一旦visit失败，则操作失败</span><br><span class="line">Status QueueTraverse(LinkQueue Q,void (*visit)(QElemType))</span><br><span class="line">&#123;</span><br><span class="line">	QueuePtr p;</span><br><span class="line">	p=Q.front-&gt;next;</span><br><span class="line">	<span class="keyword">while</span>(p)</span><br><span class="line">	&#123;</span><br><span class="line">		visit(p-&gt;data);</span><br><span class="line">		p=p-&gt;next;</span><br><span class="line">	&#125;</span><br><span class="line">	printf(<span class="string">"\n"</span>);</span><br><span class="line">	<span class="keyword">return</span> OK;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void visit(QElemType i)</span><br><span class="line">&#123;</span><br><span class="line">	printf(<span class="string">"%d "</span>,i);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	int i;</span><br><span class="line">	QElemType d;</span><br><span class="line">	LinkQueue q;</span><br><span class="line">	i=InitQueue(q);</span><br><span class="line">	<span class="keyword">if</span>(i)</span><br><span class="line">		printf(<span class="string">"成功地构造了一个空队列！\n"</span>);</span><br><span class="line">	printf(<span class="string">"初始化队列后，队列空否？%d(1：空 0：否)，"</span>,QueueEmpty(q));</span><br><span class="line">	printf(<span class="string">"队列长度为：%d\n"</span>,QueueLength(q));</span><br><span class="line">	EnQueue(q,<span class="number">-5</span>);</span><br><span class="line">	EnQueue(q,<span class="number">5</span>);</span><br><span class="line">	EnQueue(q,<span class="number">10</span>);</span><br><span class="line">	printf(<span class="string">"插入3个元素（-5,5,10）后，队列长度为：%d\n"</span>,QueueLength(q));</span><br><span class="line">	printf(<span class="string">"现在队列空否？%d(1：空 0：否)\n"</span>,QueueEmpty(q));</span><br><span class="line">	printf(<span class="string">"现在队列中的元素为："</span>);</span><br><span class="line">	QueueTraverse(q,visit);</span><br><span class="line">	i=GetHead(q,d);</span><br><span class="line">	<span class="keyword">if</span>(i==OK)</span><br><span class="line">		printf(<span class="string">"队头元素为：%d\n"</span>,d);</span><br><span class="line">	DeQueue(q,d);</span><br><span class="line">	printf(<span class="string">"删除了队头元素：%d\n"</span>,d);</span><br><span class="line">	i=GetHead(q,d);</span><br><span class="line">	<span class="keyword">if</span>(i==OK)</span><br><span class="line">		printf(<span class="string">"新的队头元素为：%d\n"</span>,d);</span><br><span class="line">	ClearQueue(q);</span><br><span class="line">	printf("清空队列后，q.front=%u q.rear=%u q.front-&gt;next=%u\n",q.front,q.rear,q.front-&gt;next);</span><br><span class="line">	DestroyQueue(q);</span><br><span class="line">	printf(<span class="string">"销毁队列后，q.front=%u q.rear=%u\n"</span>,q.front,q.rear);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <hr>
-<h2 id="通过xml文件创建虚拟机"><a href="#通过xml文件创建虚拟机" class="headerlink" title="通过xml文件创建虚拟机"></a>通过xml文件创建虚拟机</h2><ol>
-<li>配置xml，创建空镜像<br>xml文件配置可通过可视化创建虚拟机作为模板。<br>创建空镜像<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">qemu-img create -f qcow2  *.qcow2  <span class="number">100</span>G	（*为虚拟机名称，大小自定义）</span><br></pre></td></tr></table></figure></li>
-<li>定义虚拟机，启动虚拟机<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">virsh define *.xml</span><br><span class="line">virsh start  *</span><br></pre></td></tr></table></figure>
-
-</li>
-</ol>
-<hr>
-<h2 id="通过存储池iSCSI创建虚拟机"><a href="#通过存储池iSCSI创建虚拟机" class="headerlink" title="通过存储池iSCSI创建虚拟机"></a>通过存储池iSCSI创建虚拟机</h2><ol>
-<li>定义存储池<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">virsh pool-define-<span class="keyword">as</span> --name unary --type iscsi --source-host <span class="number">10.10</span><span class="number">.4</span><span class="number">.75</span> --source-dev iqn<span class="number">.2020</span><span class="number">-01.</span>com.unary:<span class="number">208450552</span>df3636922c9fbb0b0c71f45.d41d8cd98f00b204e9800998ecf8427e.v<span class="number">.4</span>a2a26d3.st<span class="number">.20200102193701</span> --target /dev/disk/by-path</span><br></pre></td></tr></table></figure></li>
-<li>创建存储池<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">virsh pool-build unary</span><br></pre></td></tr></table></figure></li>
-<li>激活存储池<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">virsh pool-start unary</span><br></pre></td></tr></table></figure></li>
-<li>查看存储池<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">virsh pool-list –all</span><br></pre></td></tr></table></figure></li>
-<li>配置xml文件</li>
-<li>创建空镜像</li>
-<li>定义虚拟机，启动虚拟机</li>
-</ol>
-
+<h1 id="运行结果"><a href="#运行结果" class="headerlink" title="运行结果"></a>运行结果</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">成功地构造了一个空队列！</span><br><span class="line">初始化队列后，队列空否？<span class="number">1</span>(<span class="number">1</span>：空 <span class="number">0</span>：否)，队列长度为：<span class="number">0</span></span><br><span class="line">插入<span class="number">3</span>个元素（<span class="number">-5</span>,<span class="number">5</span>,<span class="number">10</span>）后，队列长度为：<span class="number">3</span></span><br><span class="line">现在队列空否？<span class="number">0</span>(<span class="number">1</span>：空 <span class="number">0</span>：否)</span><br><span class="line">现在队列中的元素为：<span class="number">-5</span> <span class="number">5</span> <span class="number">10</span></span><br><span class="line">队头元素为：<span class="number">-5</span></span><br><span class="line">删除了队头元素：<span class="number">-5</span></span><br><span class="line">新的队头元素为：<span class="number">5</span></span><br><span class="line">清空队列后，q.front=10555928 q.rear=10555928 q.front-&gt;next=0</span><br><span class="line">销毁队列后，q.front=<span class="number">0</span> q.rear=<span class="number">0</span></span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -473,7 +457,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/%E8%99%9A%E6%8B%9F%E5%8C%96/" rel="tag"># 虚拟化</a>
+            <a href="/tags/C/" rel="tag"># C++</a>
+          
+            <a href="/tags/%E7%AE%97%E6%B3%95/" rel="tag"># 算法</a>
           
         </div>
       
@@ -486,8 +472,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2021/01/02/KVM/" rel="next" title="KVM">
-                <i class="fa fa-chevron-left"></i> KVM
+              <a href="/2021/02/03/%E8%A1%A8%E7%99%BD%E5%B0%8F%E7%A8%8B%E5%BA%8F%EF%BC%88python%EF%BC%89/" rel="next" title="表白小程序（python）">
+                <i class="fa fa-chevron-left"></i> 表白小程序（python）
               </a>
             
           </div>
@@ -496,8 +482,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2021/01/04/%E9%9D%92%E5%B9%B4/" rel="prev" title="青年">
-                青年 <i class="fa fa-chevron-right"></i>
+              <a href="/2021/02/10/%E9%A1%BA%E5%BA%8F%E6%A0%88%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%8F%8A%E5%BA%94%E7%94%A8/" rel="prev" title="顺序栈的实现及应用">
+                顺序栈的实现及应用 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -632,7 +618,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#使用前提"><span class="nav-number">1.</span> <span class="nav-text">使用前提</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常用的虚拟机管理命令"><span class="nav-number">2.</span> <span class="nav-text">常用的虚拟机管理命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#通过xml文件创建虚拟机"><span class="nav-number">3.</span> <span class="nav-text">通过xml文件创建虚拟机</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#通过存储池iSCSI创建虚拟机"><span class="nav-number">4.</span> <span class="nav-text">通过存储池iSCSI创建虚拟机</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#源程序"><span class="nav-number">1.</span> <span class="nav-text">源程序</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#运行结果"><span class="nav-number">2.</span> <span class="nav-text">运行结果</span></a></li></ol></div>
             
 
           </div>
