@@ -83,14 +83,14 @@
 
 
 
-<meta name="description" content="环境要求1、只能是64位的系统; 2、要求centos7以上系统的内核版本不低于3.10。 安装步骤1、移除旧版本的docker 1yum remove docker docker-client docker-client-latest docker-common docker-latest docker-latest-logrotate docker-logrotate docker-selin">
+<meta name="description" content="Docker简介 Docker 是一个开源的应用容器引擎，让开发者可以打包他们的应用以及依赖包到一个可移植的容器中，然后发布到任何流行的Linux机器或Windows 机器上，也可以实现虚拟化，容器是完全使用沙箱机制，相互之间不会有任何接口。 一个完整的Docker由四个部分组成：Docker Client（客户端）、Docker Daemon（守护进程）、Docker Image（镜像）和Doc">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Centos7.x系统中Docker安装及简单使用">
 <meta property="og:url" content="http://yoursite.com/2020/12/30/Centos7-x%E7%B3%BB%E7%BB%9F%E4%B8%ADDocker%E5%AE%89%E8%A3%85%E5%8F%8A%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/index.html">
 <meta property="og:site_name" content="Nobody&#39;s Blog">
-<meta property="og:description" content="环境要求1、只能是64位的系统; 2、要求centos7以上系统的内核版本不低于3.10。 安装步骤1、移除旧版本的docker 1yum remove docker docker-client docker-client-latest docker-common docker-latest docker-latest-logrotate docker-logrotate docker-selin">
+<meta property="og:description" content="Docker简介 Docker 是一个开源的应用容器引擎，让开发者可以打包他们的应用以及依赖包到一个可移植的容器中，然后发布到任何流行的Linux机器或Windows 机器上，也可以实现虚拟化，容器是完全使用沙箱机制，相互之间不会有任何接口。 一个完整的Docker由四个部分组成：Docker Client（客户端）、Docker Daemon（守护进程）、Docker Image（镜像）和Doc">
 <meta property="article:published_time" content="2020-12-30T02:33:44.000Z">
-<meta property="article:modified_time" content="2021-01-13T10:16:12.233Z">
+<meta property="article:modified_time" content="2021-02-24T02:43:14.550Z">
 <meta property="article:author" content="Nobody">
 <meta property="article:tag" content="Docker">
 <meta name="twitter:card" content="summary">
@@ -345,8 +345,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2021-01-13T18:16:12+08:00">
-                2021-01-13
+              <time title="更新于" itemprop="dateModified" datetime="2021-02-24T10:43:14+08:00">
+                2021-02-24
               </time>
             
           </span>
@@ -400,7 +400,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  522
+                  708
                 </span>
               
 
@@ -416,7 +416,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  2
+                  3
                 </span>
               
             </div>
@@ -437,9 +437,17 @@
       
 
       
-        <h3 id="环境要求"><a href="#环境要求" class="headerlink" title="环境要求"></a>环境要求</h3><pre><code>1、只能是64位的系统;
+        <h2 id="Docker简介"><a href="#Docker简介" class="headerlink" title="Docker简介"></a>Docker简介</h2><ul>
+<li>Docker 是一个开源的应用容器引擎，让开发者可以打包他们的应用以及依赖包到一个可移植的容器中，然后发布到任何流行的Linux机器或Windows 机器上，也可以实现虚拟化，容器是完全使用沙箱机制，相互之间不会有任何接口。</li>
+<li>一个完整的Docker由四个部分组成：Docker Client（客户端）、Docker Daemon（守护进程）、Docker Image（镜像）和Docker Container（容器）。</li>
+<li>Docker 使用客户端-服务器 (C/S) 架构模式，使用远程API来管理和创建Docker容器。Docker 容器通过 Docker 镜像来创建。容器与镜像的关系类似于面向对象编程中的对象与类。</li>
+</ul>
+<a id="more"></a>
+
+<hr>
+<h2 id="环境要求"><a href="#环境要求" class="headerlink" title="环境要求"></a>环境要求</h2><pre><code>1、只能是64位的系统;
 2、要求centos7以上系统的内核版本不低于3.10。</code></pre><hr>
-<h3 id="安装步骤"><a href="#安装步骤" class="headerlink" title="安装步骤"></a>安装步骤</h3><p>1、移除旧版本的docker</p>
+<h2 id="安装步骤"><a href="#安装步骤" class="headerlink" title="安装步骤"></a>安装步骤</h2><p>1、移除旧版本的docker</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum remove docker docker-client docker-client-latest docker-common docker-latest docker-latest-logrotate docker-logrotate docker-selinux docker-engine-selinux docker-engine</span><br></pre></td></tr></table></figure>
 
 <p>2、安装依赖包</p>
@@ -459,9 +467,9 @@
 
 <p>安装时，如果报错出现rpm包无法找到，先手动通过wget下载该rpm包，然后重新执行安装命令即可。 </p>
 <hr>
-<h3 id="Docker镜像和容器的简单使用命令"><a href="#Docker镜像和容器的简单使用命令" class="headerlink" title="Docker镜像和容器的简单使用命令"></a>Docker镜像和容器的简单使用命令</h3><p>1、查看docker版本： docker  version<br>2、查询镜像： docker  search  imageName[镜像名称：如  centos]<br>3、获取镜像：docker  pull  imageName[镜像名称：如  centos]<br>4、列出镜像:  docker  image  ls<br>5、查询镜像体积：docker system df<br>6、删除镜像:docker  image rm  imagesID<br>7、启动容器： docker  run –name ***  -p  port:port  -d  [镜像名]/ docker start                        [containerID/containerName]<br>8、退出容器：exit/docker  stop containerID<br>9、进入容器：docker  attach  containerID/docker   exec  -it   containerID<br>10、删除容器：<br>1）删除处于终止状态的：docker  container  rm  [ID]<br>2）删除处于运行状态的：docker  container  rm  -f  [ID]<br>3）删除所有处于终止状态的：docker container prune </p>
+<h2 id="Docker镜像和容器的简单使用命令"><a href="#Docker镜像和容器的简单使用命令" class="headerlink" title="Docker镜像和容器的简单使用命令"></a>Docker镜像和容器的简单使用命令</h2><p>1、查看docker版本： docker  version<br>2、查询镜像： docker  search  imageName[镜像名称：如  centos]<br>3、获取镜像：docker  pull  imageName[镜像名称：如  centos]<br>4、列出镜像:  docker  image  ls<br>5、查询镜像体积：docker system df<br>6、删除镜像:docker  image rm  imagesID<br>7、启动容器： docker  run –name ***  -p  port:port  -d  [镜像名]/ docker start                        [containerID/containerName]<br>8、退出容器：exit/docker  stop containerID<br>9、进入容器：docker  attach  containerID/docker   exec  -it   containerID<br>10、删除容器：<br>1）删除处于终止状态的：docker  container  rm  [ID]<br>2）删除处于运行状态的：docker  container  rm  -f  [ID]<br>3）删除所有处于终止状态的：docker container prune </p>
 <hr>
-<h3 id="Docker安装Tomcat实例"><a href="#Docker安装Tomcat实例" class="headerlink" title="Docker安装Tomcat实例"></a>Docker安装Tomcat实例</h3><p>1、获取tomcat镜像: docker  pull  tomcat<br>2、新建并运行tomcat容器:</p>
+<h2 id="Docker安装Tomcat实例"><a href="#Docker安装Tomcat实例" class="headerlink" title="Docker安装Tomcat实例"></a>Docker安装Tomcat实例</h2><p>1、获取tomcat镜像: docker  pull  tomcat<br>2、新建并运行tomcat容器:</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker run  --name  tomcat  -p <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">8080</span>:<span class="number">8080</span>    -d  tomcat</span><br><span class="line">docker run  --name  tomcat  -p <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">8080</span>:<span class="number">8080</span>    -d  tomcat --restart=always</span><br></pre></td></tr></table></figure>
 <pre><code>--name：容器名 
 -p：后面接IP地址(可以不设)：接宿主机端口：容器端口  
@@ -587,7 +595,7 @@
             
               <div class="site-state-item site-state-posts">
                 <a href="/archives">
-                  <span class="site-state-item-count">26</span>
+                  <span class="site-state-item-count">25</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -598,7 +606,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">12</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -665,7 +673,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#环境要求"><span class="nav-number">1.</span> <span class="nav-text">环境要求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装步骤"><span class="nav-number">2.</span> <span class="nav-text">安装步骤</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Docker镜像和容器的简单使用命令"><span class="nav-number">3.</span> <span class="nav-text">Docker镜像和容器的简单使用命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Docker安装Tomcat实例"><span class="nav-number">4.</span> <span class="nav-text">Docker安装Tomcat实例</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Docker简介"><span class="nav-number">1.</span> <span class="nav-text">Docker简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#环境要求"><span class="nav-number">2.</span> <span class="nav-text">环境要求</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装步骤"><span class="nav-number">3.</span> <span class="nav-text">安装步骤</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Docker镜像和容器的简单使用命令"><span class="nav-number">4.</span> <span class="nav-text">Docker镜像和容器的简单使用命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Docker安装Tomcat实例"><span class="nav-number">5.</span> <span class="nav-text">Docker安装Tomcat实例</span></a></li></ol></div>
             
 
           </div>
@@ -699,7 +707,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">13.4k</span>
+    <span title="Site words total count">14.1k</span>
   
 </div>
 

@@ -94,7 +94,7 @@
 <meta property="og:image" content="http://yoursite.com/2020/12/28/Centos7-6%E4%B8%8Bcorosync-pacemaker-pcs%E9%AB%98%E5%8F%AF%E7%94%A8%E9%9B%86%E7%BE%A4%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/pic3.png">
 <meta property="og:image" content="http://yoursite.com/2020/12/28/Centos7-6%E4%B8%8Bcorosync-pacemaker-pcs%E9%AB%98%E5%8F%AF%E7%94%A8%E9%9B%86%E7%BE%A4%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/pic4.png">
 <meta property="article:published_time" content="2020-12-28T06:59:55.000Z">
-<meta property="article:modified_time" content="2021-01-16T04:52:27.810Z">
+<meta property="article:modified_time" content="2021-02-24T03:25:11.875Z">
 <meta property="article:author" content="Nobody">
 <meta property="article:tag" content="高可用">
 <meta name="twitter:card" content="summary">
@@ -350,8 +350,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2021-01-16T12:52:27+08:00">
-                2021-01-16
+              <time title="更新于" itemprop="dateModified" datetime="2021-02-24T11:25:11+08:00">
+                2021-02-24
               </time>
             
           </span>
@@ -442,7 +442,7 @@
       
 
       
-        <p>在容灾备份领域，有多种高可用方案，corosync+pacemaker无疑是开源方案中的佼佼者。</p>
+        <p><strong>在容灾备份领域，有多种高可用方案，corosync+pacemaker无疑是开源方案中的佼佼者。</strong></p>
 <h2 id="什么是corosync、pacemaker、pcs？"><a href="#什么是corosync、pacemaker、pcs？" class="headerlink" title="什么是corosync、pacemaker、pcs？"></a>什么是corosync、pacemaker、pcs？</h2><blockquote>
 <ul>
 <li>Corosync是集群管理套件的一部分，通常会与其他资源管理器一起组合，使用它在传递信息的时候可以通过一个简单的配置文件来定义信息传递的方式和协议等。它是一个新兴的软件，2008年推出，但其实它并不是一个真正意义上的新软件，在2002年的时候有一个项目Openais，它由于过大，分裂为两个子项目，其中可以实现HA心跳信息传输的功能就是Corosync ，它的代码60%左右来源于Openais。Corosync可以提供一个完整的HA功能，但是要实现更多，更复杂的功能，那就需要使用Openais了。Corosync是未来的发展方向，在以后的新项目里，一般采用Corosync，而hb_gui可以提供很好的HA管理功能，可以实现图形化的管理。另外相关的图形化有RHCS的套件luci+ricci，当然还有基于java开发的LCMC集群管理工具。</li>
@@ -458,6 +458,8 @@
 <li>Pcs是一种常用的集群配置及管理指令集，其他类似命令有crmsh。</li>
 </ul>
 </blockquote>
+<a id="more"></a>
+
 <hr>
 <h2 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a><strong>环境准备</strong></h2><p>1、保证两个节点上的/etc/hosts文件均添加了下面的内容</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">10.10</span><span class="number">.4</span><span class="number">.176</span> g0001210030<span class="number">-00</span>-server01</span><br><span class="line"><span class="number">10.10</span><span class="number">.4</span><span class="number">.177</span> g0001210030<span class="number">-00</span>-server02</span><br></pre></td></tr></table></figure>
@@ -637,7 +639,7 @@
             
               <div class="site-state-item site-state-posts">
                 <a href="/archives">
-                  <span class="site-state-item-count">26</span>
+                  <span class="site-state-item-count">25</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -648,7 +650,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">12</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -749,7 +751,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">13.4k</span>
+    <span title="Site words total count">14.1k</span>
   
 </div>
 

@@ -83,14 +83,14 @@
 
 
 
-<meta name="description" content="使用前提 安装虚拟化相关组件安装qemu-kvm（用户态管理工具）安装libvirt（命令行管理工具）安装virt-install（安装kvm工具）安装bridge-utils（桥接设备管理工具）1yum install -y qemu-kvm libvirt virt-install bridge-utils 启动libvirtd服务123systemctl enable libvirtdsys">
+<meta name="description" content="Virsh简介 virsh 是用来管理客户端及其管理程序的命令行界面工具。 virsh 工具是构建在 libvirt 管理 API 上，可作为 xm 命令和图形客户端管理程序（virt-manager）的替代工具。非特权用户只能以只读模式使用 virsh。您可使用 virsh 为客户端机器执行脚本。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="KVM之virsh管理命令">
 <meta property="og:url" content="http://yoursite.com/2021/01/03/KVM%E4%B9%8Bvirsh%E7%AE%A1%E7%90%86%E5%91%BD%E4%BB%A4/index.html">
 <meta property="og:site_name" content="Nobody&#39;s Blog">
-<meta property="og:description" content="使用前提 安装虚拟化相关组件安装qemu-kvm（用户态管理工具）安装libvirt（命令行管理工具）安装virt-install（安装kvm工具）安装bridge-utils（桥接设备管理工具）1yum install -y qemu-kvm libvirt virt-install bridge-utils 启动libvirtd服务123systemctl enable libvirtdsys">
+<meta property="og:description" content="Virsh简介 virsh 是用来管理客户端及其管理程序的命令行界面工具。 virsh 工具是构建在 libvirt 管理 API 上，可作为 xm 命令和图形客户端管理程序（virt-manager）的替代工具。非特权用户只能以只读模式使用 virsh。您可使用 virsh 为客户端机器执行脚本。">
 <meta property="article:published_time" content="2021-01-03T07:28:21.000Z">
-<meta property="article:modified_time" content="2021-01-16T04:51:37.530Z">
+<meta property="article:modified_time" content="2021-02-24T03:11:56.721Z">
 <meta property="article:author" content="Nobody">
 <meta property="article:tag" content="虚拟化">
 <meta name="twitter:card" content="summary">
@@ -345,8 +345,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2021-01-16T12:51:37+08:00">
-                2021-01-16
+              <time title="更新于" itemprop="dateModified" datetime="2021-02-24T11:11:56+08:00">
+                2021-02-24
               </time>
             
           </span>
@@ -400,7 +400,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  435
+                  526
                 </span>
               
 
@@ -416,7 +416,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  1
+                  2
                 </span>
               
             </div>
@@ -437,7 +437,14 @@
       
 
       
-        <h2 id="使用前提"><a href="#使用前提" class="headerlink" title="使用前提"></a>使用前提</h2><ol>
+        <h2 id="Virsh简介"><a href="#Virsh简介" class="headerlink" title="Virsh简介"></a>Virsh简介</h2><ul>
+<li>virsh 是用来管理客户端及其管理程序的命令行界面工具。</li>
+<li>virsh 工具是构建在 libvirt 管理 API 上，可作为 xm 命令和图形客户端管理程序（virt-manager）的替代工具。非特权用户只能以只读模式使用 virsh。您可使用 virsh 为客户端机器执行脚本。</li>
+</ul>
+<a id="more"></a>
+
+<hr>
+<h2 id="使用前提"><a href="#使用前提" class="headerlink" title="使用前提"></a>使用前提</h2><ol>
 <li>安装虚拟化相关组件<br>安装qemu-kvm（用户态管理工具）<br>安装libvirt（命令行管理工具）<br>安装virt-install（安装kvm工具）<br>安装bridge-utils（桥接设备管理工具）<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y qemu-kvm libvirt virt-install bridge-utils</span><br></pre></td></tr></table></figure></li>
 <li>启动libvirtd服务<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">systemctl enable libvirtd</span><br><span class="line">systemctl start  libvirtd</span><br><span class="line">systemctl status  libvirtd</span><br></pre></td></tr></table></figure></li>
 <li>安装virt-manager<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y install virt-manager</span><br></pre></td></tr></table></figure>
@@ -505,8 +512,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2021/01/04/%E9%9D%92%E5%B9%B4/" rel="prev" title="青年">
-                青年 <i class="fa fa-chevron-right"></i>
+              <a href="/2021/01/04/%E3%80%8A%E7%83%AD%E9%A3%8E%C2%B7%E9%9A%8F%E6%84%9F%E5%BD%95%E5%9B%9B%E5%8D%81%E4%B8%80%E3%80%8B/" rel="prev" title="《热风·随感录四十一》">
+                《热风·随感录四十一》 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -586,7 +593,7 @@
             
               <div class="site-state-item site-state-posts">
                 <a href="/archives">
-                  <span class="site-state-item-count">26</span>
+                  <span class="site-state-item-count">25</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -597,7 +604,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">12</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -664,7 +671,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#使用前提"><span class="nav-number">1.</span> <span class="nav-text">使用前提</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常用的虚拟机管理命令"><span class="nav-number">2.</span> <span class="nav-text">常用的虚拟机管理命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#通过xml文件创建虚拟机"><span class="nav-number">3.</span> <span class="nav-text">通过xml文件创建虚拟机</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#通过存储池iSCSI创建虚拟机"><span class="nav-number">4.</span> <span class="nav-text">通过存储池iSCSI创建虚拟机</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Virsh简介"><span class="nav-number">1.</span> <span class="nav-text">Virsh简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用前提"><span class="nav-number">2.</span> <span class="nav-text">使用前提</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常用的虚拟机管理命令"><span class="nav-number">3.</span> <span class="nav-text">常用的虚拟机管理命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#通过xml文件创建虚拟机"><span class="nav-number">4.</span> <span class="nav-text">通过xml文件创建虚拟机</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#通过存储池iSCSI创建虚拟机"><span class="nav-number">5.</span> <span class="nav-text">通过存储池iSCSI创建虚拟机</span></a></li></ol></div>
             
 
           </div>
@@ -698,7 +705,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">13.4k</span>
+    <span title="Site words total count">14.1k</span>
   
 </div>
 

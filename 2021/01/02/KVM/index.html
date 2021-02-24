@@ -83,12 +83,12 @@
 
 
 
-<meta name="description" content="安装前提 Kernel-based Virtual Machine的简称，是一个开源的系统虚拟化模块，自Linux2.6.20之后集成在Linux的各个主要发行版本中。它使用Linux自身的调度器进行管理，所以相对于Xen，其核心源码很少。KVM目前已成为学术界的主流VMM之一。  Kvm的安装，需要一定的硬件和软件支持：1.需要宿主机CPU支持完全虚拟化（如Intel VT技术或者AMD V技术">
+<meta name="description" content="KVM简介Kernel-based Virtual Machine的简称，是一个开源的系统虚拟化模块，自Linux2.6.20之后集成在Linux的各个主要发行版本中。它使用Linux自身的调度器进行管理，所以相对于Xen，其核心源码很少。KVM目前已成为学术界的主流VMM之一。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="KVM">
 <meta property="og:url" content="http://yoursite.com/2021/01/02/KVM/index.html">
 <meta property="og:site_name" content="Nobody&#39;s Blog">
-<meta property="og:description" content="安装前提 Kernel-based Virtual Machine的简称，是一个开源的系统虚拟化模块，自Linux2.6.20之后集成在Linux的各个主要发行版本中。它使用Linux自身的调度器进行管理，所以相对于Xen，其核心源码很少。KVM目前已成为学术界的主流VMM之一。  Kvm的安装，需要一定的硬件和软件支持：1.需要宿主机CPU支持完全虚拟化（如Intel VT技术或者AMD V技术">
+<meta property="og:description" content="KVM简介Kernel-based Virtual Machine的简称，是一个开源的系统虚拟化模块，自Linux2.6.20之后集成在Linux的各个主要发行版本中。它使用Linux自身的调度器进行管理，所以相对于Xen，其核心源码很少。KVM目前已成为学术界的主流VMM之一。">
 <meta property="og:image" content="http://yoursite.com/2021/01/02/KVM/1.png">
 <meta property="og:image" content="http://yoursite.com/2021/01/02/KVM/2.png">
 <meta property="og:image" content="http://yoursite.com/2021/01/02/KVM/3.png">
@@ -97,7 +97,7 @@
 <meta property="og:image" content="http://yoursite.com/2021/01/02/KVM/6.png">
 <meta property="og:image" content="http://yoursite.com/2021/01/02/KVM/7.png">
 <meta property="article:published_time" content="2021-01-02T09:12:23.000Z">
-<meta property="article:modified_time" content="2021-01-03T10:16:01.140Z">
+<meta property="article:modified_time" content="2021-02-24T03:00:25.755Z">
 <meta property="article:author" content="Nobody">
 <meta property="article:tag" content="KVM">
 <meta name="twitter:card" content="summary">
@@ -353,8 +353,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2021-01-03T18:16:01+08:00">
-                2021-01-03
+              <time title="更新于" itemprop="dateModified" datetime="2021-02-24T11:00:25+08:00">
+                2021-02-24
               </time>
             
           </span>
@@ -408,7 +408,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  844
+                  846
                 </span>
               
 
@@ -445,9 +445,11 @@
       
 
       
-        <h2 id="安装前提"><a href="#安装前提" class="headerlink" title="安装前提"></a>安装前提</h2><ol>
-<li><p>Kernel-based Virtual Machine的简称，是一个开源的系统虚拟化模块，自Linux2.6.20之后集成在Linux的各个主要发行版本中。它使用Linux自身的调度器进行管理，所以相对于Xen，其核心源码很少。KVM目前已成为学术界的主流VMM之一。</p>
-</li>
+        <h2 id="KVM简介"><a href="#KVM简介" class="headerlink" title="KVM简介"></a>KVM简介</h2><p>Kernel-based Virtual Machine的简称，是一个开源的系统虚拟化模块，自Linux2.6.20之后集成在Linux的各个主要发行版本中。它使用Linux自身的调度器进行管理，所以相对于Xen，其核心源码很少。KVM目前已成为学术界的主流VMM之一。</p>
+<a id="more"></a>
+
+<hr>
+<h2 id="安装前提"><a href="#安装前提" class="headerlink" title="安装前提"></a>安装前提</h2><ol start="2">
 <li><p>Kvm的安装，需要一定的硬件和软件支持：<br>1.需要宿主机CPU支持完全虚拟化（如Intel VT技术或者AMD V技术）。<br>2.宿主机系统为64位的Linux系统且内核版本高于2.6.20，内核版本过低，需要进行升级。 </p>
 </li>
 <li><p>查看CPU是否支持完全虚拟化，在宿主机输入：</p>
@@ -657,7 +659,7 @@
             
               <div class="site-state-item site-state-posts">
                 <a href="/archives">
-                  <span class="site-state-item-count">26</span>
+                  <span class="site-state-item-count">25</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -668,7 +670,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">12</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -735,7 +737,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装前提"><span class="nav-number">1.</span> <span class="nav-text">安装前提</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#KVM安装"><span class="nav-number">2.</span> <span class="nav-text">KVM安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#KVM启用"><span class="nav-number">3.</span> <span class="nav-text">KVM启用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#虚拟机安装和设置"><span class="nav-number">4.</span> <span class="nav-text">虚拟机安装和设置</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#KVM简介"><span class="nav-number">1.</span> <span class="nav-text">KVM简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装前提"><span class="nav-number">2.</span> <span class="nav-text">安装前提</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#KVM安装"><span class="nav-number">3.</span> <span class="nav-text">KVM安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#KVM启用"><span class="nav-number">4.</span> <span class="nav-text">KVM启用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#虚拟机安装和设置"><span class="nav-number">5.</span> <span class="nav-text">虚拟机安装和设置</span></a></li></ol></div>
             
 
           </div>
@@ -769,7 +771,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">13.4k</span>
+    <span title="Site words total count">14.1k</span>
   
 </div>
 

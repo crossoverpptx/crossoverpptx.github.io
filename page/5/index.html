@@ -345,8 +345,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2021-01-13T18:16:12+08:00">
-                2021-01-13
+              <time title="更新于" itemprop="dateModified" datetime="2021-02-24T10:43:14+08:00">
+                2021-02-24
               </time>
             
           </span>
@@ -395,7 +395,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  522
+                  708
                 </span>
               
 
@@ -411,7 +411,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  2
+                  3
                 </span>
               
             </div>
@@ -433,38 +433,18 @@
 
       
         
-          
-            <h3 id="环境要求"><a href="#环境要求" class="headerlink" title="环境要求"></a>环境要求</h3><pre><code>1、只能是64位的系统;
-2、要求centos7以上系统的内核版本不低于3.10。</code></pre><hr>
-<h3 id="安装步骤"><a href="#安装步骤" class="headerlink" title="安装步骤"></a>安装步骤</h3><p>1、移除旧版本的docker</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum remove docker docker-client docker-client-latest docker-common docker-latest docker-latest-logrotate docker-logrotate docker-selinux docker-engine-selinux docker-engine</span><br></pre></td></tr></table></figure>
-
-<p>2、安装依赖包</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y yum-utils device-mapper-persistent-data lvm2</span><br></pre></td></tr></table></figure>
-
-<p>3、添加yum软件源<br>非官方源(比如阿里云)</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo</span><br></pre></td></tr></table></figure>
-
-<p>官方源</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum-config-manager  --add-repo https://download.docker.com/linux/centos/docker-ce.repo</span><br></pre></td></tr></table></figure>
-
-<p>4、更新yum软件源缓存：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum makecache fast</span><br></pre></td></tr></table></figure>
-
-<p>5、安装docker</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum  -y install  docker-ce</span><br></pre></td></tr></table></figure>
-
-<p>安装时，如果报错出现rpm包无法找到，先手动通过wget下载该rpm包，然后重新执行安装命令即可。 </p>
-<hr>
-<h3 id="Docker镜像和容器的简单使用命令"><a href="#Docker镜像和容器的简单使用命令" class="headerlink" title="Docker镜像和容器的简单使用命令"></a>Docker镜像和容器的简单使用命令</h3><p>1、查看docker版本： docker  version<br>2、查询镜像： docker  search  imageName[镜像名称：如  centos]<br>3、获取镜像：docker  pull  imageName[镜像名称：如  centos]<br>4、列出镜像:  docker  image  ls<br>5、查询镜像体积：docker system df<br>6、删除镜像:docker  image rm  imagesID<br>7、启动容器： docker  run –name ***  -p  port:port  -d  [镜像名]/ docker start                        [containerID/containerName]<br>8、退出容器：exit/docker  stop containerID<br>9、进入容器：docker  attach  containerID/docker   exec  -it   containerID<br>10、删除容器：<br>1）删除处于终止状态的：docker  container  rm  [ID]<br>2）删除处于运行状态的：docker  container  rm  -f  [ID]<br>3）删除所有处于终止状态的：docker container prune </p>
-<hr>
-<h3 id="Docker安装Tomcat实例"><a href="#Docker安装Tomcat实例" class="headerlink" title="Docker安装Tomcat实例"></a>Docker安装Tomcat实例</h3><p>1、获取tomcat镜像: docker  pull  tomcat<br>2、新建并运行tomcat容器:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker run  --name  tomcat  -p <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">8080</span>:<span class="number">8080</span>    -d  tomcat</span><br><span class="line">docker run  --name  tomcat  -p <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">8080</span>:<span class="number">8080</span>    -d  tomcat --restart=always</span><br></pre></td></tr></table></figure>
-<pre><code>--name：容器名 
--p：后面接IP地址(可以不设)：接宿主机端口：容器端口  
--d：后台运行</code></pre><p>3、进入容器：docker   exec/attach  -it  tomcat  bash<br>    exec进入容器后使用exit命令退出容器，只会退出容器，让容器在后台继续运行；attach进入后用exit退出，     会直接关闭容器.<br>    -it:交互模式进入容器<br>4、退出tomcat容器：exit<br>5、停止tomcat容器：docker   stop   tomcat<br>6、启动tomcat容器：docker   start   tomcat<br>7、删除tomcat容器：docker   container    rm  -f  tomcat</p>
-
-          
+          <h2 id="Docker简介"><a href="#Docker简介" class="headerlink" title="Docker简介"></a>Docker简介</h2><ul>
+<li>Docker 是一个开源的应用容器引擎，让开发者可以打包他们的应用以及依赖包到一个可移植的容器中，然后发布到任何流行的Linux机器或Windows 机器上，也可以实现虚拟化，容器是完全使用沙箱机制，相互之间不会有任何接口。</li>
+<li>一个完整的Docker由四个部分组成：Docker Client（客户端）、Docker Daemon（守护进程）、Docker Image（镜像）和Docker Container（容器）。</li>
+<li>Docker 使用客户端-服务器 (C/S) 架构模式，使用远程API来管理和创建Docker容器。Docker 容器通过 Docker 镜像来创建。容器与镜像的关系类似于面向对象编程中的对象与类。</li>
+</ul>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2020/12/30/Centos7-x%E7%B3%BB%E7%BB%9F%E4%B8%ADDocker%E5%AE%89%E8%A3%85%E5%8F%8A%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -558,8 +538,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2021-01-16T12:49:42+08:00">
-                2021-01-16
+              <time title="更新于" itemprop="dateModified" datetime="2021-02-24T12:19:55+08:00">
+                2021-02-24
               </time>
             
           </span>
@@ -749,8 +729,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2021-01-16T12:52:27+08:00">
-                2021-01-16
+              <time title="更新于" itemprop="dateModified" datetime="2021-02-24T11:25:11+08:00">
+                2021-02-24
               </time>
             
           </span>
@@ -837,8 +817,7 @@
 
       
         
-          
-            <p>在容灾备份领域，有多种高可用方案，corosync+pacemaker无疑是开源方案中的佼佼者。</p>
+          <p><strong>在容灾备份领域，有多种高可用方案，corosync+pacemaker无疑是开源方案中的佼佼者。</strong></p>
 <h2 id="什么是corosync、pacemaker、pcs？"><a href="#什么是corosync、pacemaker、pcs？" class="headerlink" title="什么是corosync、pacemaker、pcs？"></a>什么是corosync、pacemaker、pcs？</h2><blockquote>
 <ul>
 <li>Corosync是集群管理套件的一部分，通常会与其他资源管理器一起组合，使用它在传递信息的时候可以通过一个简单的配置文件来定义信息传递的方式和协议等。它是一个新兴的软件，2008年推出，但其实它并不是一个真正意义上的新软件，在2002年的时候有一个项目Openais，它由于过大，分裂为两个子项目，其中可以实现HA心跳信息传输的功能就是Corosync ，它的代码60%左右来源于Openais。Corosync可以提供一个完整的HA功能，但是要实现更多，更复杂的功能，那就需要使用Openais了。Corosync是未来的发展方向，在以后的新项目里，一般采用Corosync，而hb_gui可以提供很好的HA管理功能，可以实现图形化的管理。另外相关的图形化有RHCS的套件luci+ricci，当然还有基于java开发的LCMC集群管理工具。</li>
@@ -854,66 +833,13 @@
 <li>Pcs是一种常用的集群配置及管理指令集，其他类似命令有crmsh。</li>
 </ul>
 </blockquote>
-<hr>
-<h2 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a><strong>环境准备</strong></h2><p>1、保证两个节点上的/etc/hosts文件均添加了下面的内容</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">10.10</span><span class="number">.4</span><span class="number">.176</span> g0001210030<span class="number">-00</span>-server01</span><br><span class="line"><span class="number">10.10</span><span class="number">.4</span><span class="number">.177</span> g0001210030<span class="number">-00</span>-server02</span><br></pre></td></tr></table></figure>
-
-<p>2、关闭防火墙（每个节点都需执行）</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">setenforce <span class="number">0</span></span><br><span class="line">sed -i.bak <span class="string">"s/SELINUX=enforcing/SELINUX=permissive/g"</span> /etc/selinux/config</span><br><span class="line">systemctl disable firewalld.service</span><br><span class="line">systemctl stop firewalld.service</span><br><span class="line">iptables --flush</span><br></pre></td></tr></table></figure>
-
-<p>3、查看主备机是否安装ntp服务</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl status ntpd.service</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2020/12/28/Centos7-6%E4%B8%8Bcorosync-pacemaker-pcs%E9%AB%98%E5%8F%AF%E7%94%A8%E9%9B%86%E7%BE%A4%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/pic1.png" alt></p>
-<p>若未安装ntp服务，先安装，确认安装ntp服务后，主机执行以下命令</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cp /etc/ntp.conf /etc/ntp.conf.bak</span><br><span class="line">rm -f /etc/ntp.conf</span><br><span class="line">vi /etc/ntp.conf</span><br></pre></td></tr></table></figure>
-
-<p>在/etc/ntp.conf文件输入一下内容</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">restrict default kod nomodify notrap nopeer noquery</span><br><span class="line">restrict <span class="number">-6</span> default kod nomodify notrap nopper noquery</span><br><span class="line">restrict <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span></span><br><span class="line">restrict <span class="number">-6</span>::<span class="number">1</span></span><br><span class="line">restrict <span class="number">10.10</span><span class="number">.1</span><span class="number">.0</span> mask <span class="number">255.255</span><span class="number">.0</span><span class="number">.0</span> nomodify notrap</span><br><span class="line">server <span class="number">10.10</span><span class="number">.4</span><span class="number">.176</span></span><br><span class="line">server <span class="number">127.127</span><span class="number">.1</span><span class="number">.0</span></span><br><span class="line">fudge <span class="number">127.127</span><span class="number">.1</span><span class="number">.0</span> stratum <span class="number">10</span></span><br></pre></td></tr></table></figure>
-
-<p>启动主机ntp服务</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#systemctl start ntpd.service</span></span><br></pre></td></tr></table></figure>
-
-<p>备机执行以下命令</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ntpdate <span class="number">10.10</span><span class="number">.4</span><span class="number">.176</span></span><br></pre></td></tr></table></figure>
-
-<p>如果出现下面提示</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">21</span> Sep <span class="number">18</span>:<span class="number">01</span>:<span class="number">41</span> ntpdate[<span class="number">2604</span>]: no server suitable <span class="keyword">for</span> synchronization found</span><br></pre></td></tr></table></figure>
-<p>稍等片刻再执行一次</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ntpdate <span class="number">10.10</span><span class="number">.4</span><span class="number">.176</span></span><br></pre></td></tr></table></figure>
-
-<hr>
-<h2 id="安装集群软件"><a href="#安装集群软件" class="headerlink" title="安装集群软件"></a><strong>安装集群软件</strong></h2><p><img src="/2020/12/28/Centos7-6%E4%B8%8Bcorosync-pacemaker-pcs%E9%AB%98%E5%8F%AF%E7%94%A8%E9%9B%86%E7%BE%A4%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/pic2.png" alt></p>
-<p><img src="/2020/12/28/Centos7-6%E4%B8%8Bcorosync-pacemaker-pcs%E9%AB%98%E5%8F%AF%E7%94%A8%E9%9B%86%E7%BE%A4%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/pic3.png" alt></p>
-<p>安装完毕，输入pcs status查询集群状态为下图所示，表示集群安装成功</p>
-<p><img src="/2020/12/28/Centos7-6%E4%B8%8Bcorosync-pacemaker-pcs%E9%AB%98%E5%8F%AF%E7%94%A8%E9%9B%86%E7%BE%A4%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/pic4.png" alt></p>
-<hr>
-<h2 id="集群资源配置"><a href="#集群资源配置" class="headerlink" title="集群资源配置"></a><strong>集群资源配置</strong></h2><p>1、注意：配置集群资源时，为防止资源启动的节点不一致，需要暂时将备节点的集群服务停止。在任意节点输入</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pcs cluster stop G0001210030<span class="number">-00</span>-SERVER02</span><br></pre></td></tr></table></figure>
-<p>即可关闭备节点集群服务。</p>
-<p>2、配置浮动IP和ha服务高可用（ip需根据实际情况修改、在任意节点配置即可）</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pcs resource create vip ocf:heartbeat:IPaddr2 ip=<span class="number">192.168</span><span class="number">.8</span><span class="number">.53</span> cidr_netmask=<span class="number">16</span> op monitor interval=<span class="number">30</span>s</span><br><span class="line">pcs resource create ha systemd:ha op monitor interval=<span class="number">60</span>s timeout=<span class="number">60</span>s on-fail=restart</span><br></pre></td></tr></table></figure>
-
-<p>配置资源关系</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pcs constraint colocation add vip ha INFINITY</span><br></pre></td></tr></table></figure>
-
-<p>设置启动顺序</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pcs constraint order vip  then ha</span><br></pre></td></tr></table></figure>
-
-<p>3、配置其他资源，如mariadb数据库服务（在任意节点配置即可，需要注意的是：配置mariadb服务高可用需要将mariadb服务设置为开机不自启）</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pcs resource create mysql-s systemd:mariadb op monitor interval=<span class="number">60</span>s timeout=<span class="number">60</span>s on-fail=restart</span><br></pre></td></tr></table></figure>
-
-<p>配置资源关系</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pcs constraint colocation add ha mysql-s INFINITY</span><br></pre></td></tr></table></figure>
-
-<p>设置启动顺序</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pcs constraint order ha then mysql-s</span><br></pre></td></tr></table></figure>
-
-
-
-<p><strong>至此整个搭建过程完毕。</strong></p>
-
-          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2020/12/28/Centos7-6%E4%B8%8Bcorosync-pacemaker-pcs%E9%AB%98%E5%8F%AF%E7%94%A8%E9%9B%86%E7%BE%A4%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1007,8 +933,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2021-01-16T12:49:35+08:00">
-                2021-01-16
+              <time title="更新于" itemprop="dateModified" datetime="2021-02-24T12:20:40+08:00">
+                2021-02-24
               </time>
             
           </span>
@@ -1192,8 +1118,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2021-01-16T12:57:17+08:00">
-                2021-01-16
+              <time title="更新于" itemprop="dateModified" datetime="2021-02-24T12:08:11+08:00">
+                2021-02-24
               </time>
             
           </span>
@@ -1211,8 +1137,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AF%BB%E4%B9%A6/" itemprop="url" rel="index">
-                    <span itemprop="name">读书</span>
+                  <a href="/categories/%E7%94%B5%E5%BD%B1/" itemprop="url" rel="index">
+                    <span itemprop="name">电影</span>
                   </a>
                 </span>
 
@@ -1280,10 +1206,14 @@
 
       
         
-          
-            <p>假如猫从世界上消失了<br>那这个世界会有如何的变化呢<br>假如我从世界上消失了<br>那究竟会有谁为我悲伤呢<br>假如我从世界上消失了<br>那些未实现的梦想和思绪<br>那些在我存活时未能完成的事情<br>对此我一定会抱有许多遗憾吧<br>然而，这个世界我在与不在<br>相信一定会有所不同<br>也许真的只是些小小的不同<br>然而正是它们<br>是我存在过的证明<br>是我挣扎着，烦恼着，生活过的证明</p>
-
-          
+          <p>假如猫从世界上消失了<br>那这个世界会有如何的变化呢</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2020/07/14/%E5%81%87%E5%A6%82%E7%8C%AB%E4%BB%8E%E4%B8%96%E7%95%8C%E4%B8%8A%E6%B6%88%E5%A4%B1%E4%BA%86/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1321,7 +1251,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/4/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/6/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/4/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span>
   </nav>
 
 
@@ -1369,7 +1299,7 @@
             
               <div class="site-state-item site-state-posts">
                 <a href="/archives">
-                  <span class="site-state-item-count">26</span>
+                  <span class="site-state-item-count">25</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1380,7 +1310,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">12</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -1465,7 +1395,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">13.4k</span>
+    <span title="Site words total count">14.1k</span>
   
 </div>
 

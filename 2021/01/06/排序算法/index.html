@@ -83,16 +83,16 @@
 
 
 
-<meta name="description" content="冒泡排序冒泡排序（Bubble Sort）：它重复地走访过要排序的数列，一次比较两个元素，如果他们的顺序（如从大到小、首字母从A到Z）错误就把他们交换过来。走访数列的工作是重复地进行直到没有再需要交换，也就是说该数列已经排序完成。这个算法的名字由来是因为越小的元素会经由交换慢慢“浮”到数列的顶端。  实例：123456789101112131415161718192021222324252627#">
+<meta name="description" content="本文介绍几种常用的排序算法：冒泡排序、选择排序、插入排序、希尔排序、归并排序。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="排序算法">
 <meta property="og:url" content="http://yoursite.com/2021/01/06/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/index.html">
 <meta property="og:site_name" content="Nobody&#39;s Blog">
-<meta property="og:description" content="冒泡排序冒泡排序（Bubble Sort）：它重复地走访过要排序的数列，一次比较两个元素，如果他们的顺序（如从大到小、首字母从A到Z）错误就把他们交换过来。走访数列的工作是重复地进行直到没有再需要交换，也就是说该数列已经排序完成。这个算法的名字由来是因为越小的元素会经由交换慢慢“浮”到数列的顶端。  实例：123456789101112131415161718192021222324252627#">
+<meta property="og:description" content="本文介绍几种常用的排序算法：冒泡排序、选择排序、插入排序、希尔排序、归并排序。">
 <meta property="og:image" content="http://yoursite.com/2021/01/06/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/%E6%80%BB.png">
 <meta property="og:image" content="http://yoursite.com/2021/01/06/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/%E6%80%BB1.png">
 <meta property="article:published_time" content="2021-01-06T02:15:35.000Z">
-<meta property="article:modified_time" content="2021-02-23T07:21:06.282Z">
+<meta property="article:modified_time" content="2021-02-24T04:14:08.520Z">
 <meta property="article:author" content="Nobody">
 <meta property="article:tag" content="C&#x2F;C++">
 <meta property="article:tag" content="算法">
@@ -349,8 +349,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2021-02-23T15:21:06+08:00">
-                2021-02-23
+              <time title="更新于" itemprop="dateModified" datetime="2021-02-24T12:14:08+08:00">
+                2021-02-24
               </time>
             
           </span>
@@ -404,7 +404,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1.5k
+                  1.6k
                 </span>
               
 
@@ -441,7 +441,11 @@
       
 
       
-        <h2 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a>冒泡排序</h2><p>冒泡排序（Bubble Sort）：它重复地走访过要排序的数列，一次比较两个元素，如果他们的顺序（如从大到小、首字母从A到Z）错误就把他们交换过来。走访数列的工作是重复地进行直到没有再需要交换，也就是说该数列已经排序完成。这个算法的名字由来是因为越小的元素会经由交换慢慢“浮”到数列的顶端。 </p>
+        <p><strong>本文介绍几种常用的排序算法：冒泡排序、选择排序、插入排序、希尔排序、归并排序。</strong></p>
+<a id="more"></a>
+
+<hr>
+<h2 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a>冒泡排序</h2><p>冒泡排序（Bubble Sort）：它重复地走访过要排序的数列，一次比较两个元素，如果他们的顺序（如从大到小、首字母从A到Z）错误就把他们交换过来。走访数列的工作是重复地进行直到没有再需要交换，也就是说该数列已经排序完成。这个算法的名字由来是因为越小的元素会经由交换慢慢“浮”到数列的顶端。 </p>
 <h3 id="实例："><a href="#实例：" class="headerlink" title="实例："></a>实例：</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">bubble_sort</span><span class="params">(<span class="keyword">int</span> [],<span class="keyword">int</span>)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i;</span><br><span class="line">	<span class="keyword">int</span> arr[]=&#123;<span class="number">22</span>,<span class="number">34</span>,<span class="number">3</span>,<span class="number">32</span>,<span class="number">82</span>,<span class="number">55</span>,<span class="number">89</span>,<span class="number">50</span>,<span class="number">37</span>,<span class="number">5</span>,<span class="number">64</span>,<span class="number">35</span>,<span class="number">9</span>,<span class="number">70</span>&#125;;</span><br><span class="line">    <span class="keyword">int</span> len=(<span class="keyword">int</span>)<span class="keyword">sizeof</span>(arr)/<span class="keyword">sizeof</span>(*arr);</span><br><span class="line">    bubble_sort(arr,len);</span><br><span class="line">    <span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;len;i++)</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d "</span>,arr[i]);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">bubble_sort</span><span class="params">(<span class="keyword">int</span> arr[],<span class="keyword">int</span> len)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i,j,temp;</span><br><span class="line">    <span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;len<span class="number">-1</span>;i++)</span><br><span class="line">        <span class="keyword">for</span>(j=<span class="number">0</span>;j&lt;len<span class="number">-1</span>-i;j++)</span><br><span class="line">            <span class="keyword">if</span>(arr[j]&gt;arr[j+<span class="number">1</span>])</span><br><span class="line">			&#123;</span><br><span class="line">                temp=arr[j];</span><br><span class="line">                arr[j]=arr[j+<span class="number">1</span>];</span><br><span class="line">                arr[j+<span class="number">1</span>]=temp;</span><br><span class="line">            &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h3 id="运行结果："><a href="#运行结果：" class="headerlink" title="运行结果："></a>运行结果：</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">3</span> <span class="number">5</span> <span class="number">9</span> <span class="number">22</span> <span class="number">32</span> <span class="number">34</span> <span class="number">35</span> <span class="number">37</span> <span class="number">50</span> <span class="number">55</span> <span class="number">64</span> <span class="number">70</span> <span class="number">82</span> <span class="number">89</span></span><br></pre></td></tr></table></figure>
@@ -599,7 +603,7 @@
             
               <div class="site-state-item site-state-posts">
                 <a href="/archives">
-                  <span class="site-state-item-count">26</span>
+                  <span class="site-state-item-count">25</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -610,7 +614,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">12</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -711,7 +715,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">13.4k</span>
+    <span title="Site words total count">14.1k</span>
   
 </div>
 
