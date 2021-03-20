@@ -6,7 +6,7 @@
   <link href="http://yoursite.com/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2021-02-24T03:50:49.125Z</updated>
+  <updated>2021-03-20T05:09:53.785Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>海街日记</title>
+    <link href="http://yoursite.com/2021/03/20/%E6%B5%B7%E8%A1%97%E6%97%A5%E8%AE%B0/"/>
+    <id>http://yoursite.com/2021/03/20/%E6%B5%B7%E8%A1%97%E6%97%A5%E8%AE%B0/</id>
+    <published>2021-03-20T04:17:47.000Z</published>
+    <updated>2021-03-20T05:09:53.785Z</updated>
+    
+    <content type="html"><![CDATA[<p>“虽然知道自己马上就要死了，但是依然能感受到美丽的东西是美的，很开心。”追求凋零之美一直是日本艺术的永恒话题。</p><p>电影开头铃的父亲和电影结尾二宫女士的去世，无尽温柔的人的也无法抵挡死亡；海上的烟花会和盛开的樱花，在绽放后转瞬消逝，这些无一不蕴含凋零的色彩。</p><p>但这部电影的主题却不是宣扬悲伤，而是在告诉人们，死亡和失去并不可怕，珍惜身边的人， 好好活着。</p><p><img src="/2021/03/20/%E6%B5%B7%E8%A1%97%E6%97%A5%E8%AE%B0/%E6%B5%B7%E8%A1%97%E6%97%A5%E8%AE%B0.jpg" alt></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;“虽然知道自己马上就要死了，但是依然能感受到美丽的东西是美的，很开心。”追求凋零之美一直是日本艺术的永恒话题。&lt;/p&gt;
+&lt;p&gt;电影开头铃的父亲和电影结尾二宫女士的去世，无尽温柔的人的也无法抵挡死亡；海上的烟花会和盛开的樱花，在绽放后转瞬消逝，这些无一不蕴含凋零的色彩。&lt;/p</summary>
+      
+    
+    
+    
+    <category term="电影" scheme="http://yoursite.com/categories/%E7%94%B5%E5%BD%B1/"/>
+    
+    
+    <category term="电影" scheme="http://yoursite.com/tags/%E7%94%B5%E5%BD%B1/"/>
+    
+  </entry>
   
   <entry>
     <title>二叉树的实现及应用-改进1</title>
@@ -462,27 +487,6 @@
     
     
     <category term="随笔" scheme="http://yoursite.com/tags/%E9%9A%8F%E7%AC%94/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>EXSi上修改虚拟机磁盘扇区大小为32的简易方法</title>
-    <link href="http://yoursite.com/2020/12/31/EXSi%E4%B8%8A%E4%BF%AE%E6%94%B9%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%A3%81%E7%9B%98%E6%89%87%E5%8C%BA%E5%A4%A7%E5%B0%8F%E4%B8%BA32%E7%9A%84%E7%AE%80%E6%98%93%E6%96%B9%E6%B3%95/"/>
-    <id>http://yoursite.com/2020/12/31/EXSi%E4%B8%8A%E4%BF%AE%E6%94%B9%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%A3%81%E7%9B%98%E6%89%87%E5%8C%BA%E5%A4%A7%E5%B0%8F%E4%B8%BA32%E7%9A%84%E7%AE%80%E6%98%93%E6%96%B9%E6%B3%95/</id>
-    <published>2020-12-31T08:50:26.000Z</published>
-    <updated>2021-02-24T03:24:27.700Z</updated>
-    
-    <content type="html"><![CDATA[<p><strong>本文介绍EXSi服务器上修改虚拟机磁盘扇区大小为32的两种方法。</strong></p><a id="more"></a><hr><h2 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h2><p>1、登陆EXSi，进入虚拟机所在的datastore目录,每个目录为一个虚拟机</p><p><img src="/2020/12/31/EXSi%E4%B8%8A%E4%BF%AE%E6%94%B9%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%A3%81%E7%9B%98%E6%89%87%E5%8C%BA%E5%A4%A7%E5%B0%8F%E4%B8%BA32%E7%9A%84%E7%AE%80%E6%98%93%E6%96%B9%E6%B3%95/3.png" alt></p><p><img src="/2020/12/31/EXSi%E4%B8%8A%E4%BF%AE%E6%94%B9%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%A3%81%E7%9B%98%E6%89%87%E5%8C%BA%E5%A4%A7%E5%B0%8F%E4%B8%BA32%E7%9A%84%E7%AE%80%E6%98%93%E6%96%B9%E6%B3%95/4.png" alt></p><p>2、找到对应的vmdk文件</p><p><img src="/2020/12/31/EXSi%E4%B8%8A%E4%BF%AE%E6%94%B9%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%A3%81%E7%9B%98%E6%89%87%E5%8C%BA%E5%A4%A7%E5%B0%8F%E4%B8%BA32%E7%9A%84%E7%AE%80%E6%98%93%E6%96%B9%E6%B3%95/5.png" alt></p><p>3、进入修改</p><p><img src="/2020/12/31/EXSi%E4%B8%8A%E4%BF%AE%E6%94%B9%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%A3%81%E7%9B%98%E6%89%87%E5%8C%BA%E5%A4%A7%E5%B0%8F%E4%B8%BA32%E7%9A%84%E7%AE%80%E6%98%93%E6%96%B9%E6%B3%95/6.png" alt></p><p><img src="/2020/12/31/EXSi%E4%B8%8A%E4%BF%AE%E6%94%B9%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%A3%81%E7%9B%98%E6%89%87%E5%8C%BA%E5%A4%A7%E5%B0%8F%E4%B8%BA32%E7%9A%84%E7%AE%80%E6%98%93%E6%96%B9%E6%B3%95/7.png" alt></p><p>4、保存退出即可</p><hr><h2 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h2><p>1、ESXI上创建所需安装版本的虚拟机，暂不安装系统</p><p>2、将虚拟机的vmdk文件下载到本地进行以下修改</p><p><img src="/2020/12/31/EXSi%E4%B8%8A%E4%BF%AE%E6%94%B9%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%A3%81%E7%9B%98%E6%89%87%E5%8C%BA%E5%A4%A7%E5%B0%8F%E4%B8%BA32%E7%9A%84%E7%AE%80%E6%98%93%E6%96%B9%E6%B3%95/8.png" alt></p><p>3、将修改后的vmdk文件上传到ESXi后开始系统安装</p><p>4、安装完成后使用winhex工具查看磁盘扇区数是否为32扇区</p>]]></content>
-    
-    
-    <summary type="html">&lt;p&gt;&lt;strong&gt;本文介绍EXSi服务器上修改虚拟机磁盘扇区大小为32的两种方法。&lt;/strong&gt;&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="虚拟化" scheme="http://yoursite.com/categories/%E8%99%9A%E6%8B%9F%E5%8C%96/"/>
-    
-    
-    <category term="EXSi" scheme="http://yoursite.com/tags/EXSi/"/>
     
   </entry>
   
