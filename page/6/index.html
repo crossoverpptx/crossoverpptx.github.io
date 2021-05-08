@@ -298,6 +298,210 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/12/28/Centos7-6%E4%B8%8Bcorosync-pacemaker-pcs%E9%AB%98%E5%8F%AF%E7%94%A8%E9%9B%86%E7%BE%A4%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Nobody">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/me.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Nobody's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/12/28/Centos7-6%E4%B8%8Bcorosync-pacemaker-pcs%E9%AB%98%E5%8F%AF%E7%94%A8%E9%9B%86%E7%BE%A4%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/" itemprop="url">Centos7.6下corosync+pacemaker+pcs高可用集群环境安装</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-12-28T14:59:55+08:00">
+                2020-12-28
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2021-02-24T11:25:11+08:00">
+                2021-02-24
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%AB%98%E5%8F%AF%E7%94%A8/" itemprop="url" rel="index">
+                    <span itemprop="name">高可用</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  927
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  3
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p><strong>在容灾备份领域，有多种高可用方案，corosync+pacemaker无疑是开源方案中的佼佼者。</strong></p>
+<h2 id="什么是corosync、pacemaker、pcs？"><a href="#什么是corosync、pacemaker、pcs？" class="headerlink" title="什么是corosync、pacemaker、pcs？"></a>什么是corosync、pacemaker、pcs？</h2><blockquote>
+<ul>
+<li>Corosync是集群管理套件的一部分，通常会与其他资源管理器一起组合，使用它在传递信息的时候可以通过一个简单的配置文件来定义信息传递的方式和协议等。它是一个新兴的软件，2008年推出，但其实它并不是一个真正意义上的新软件，在2002年的时候有一个项目Openais，它由于过大，分裂为两个子项目，其中可以实现HA心跳信息传输的功能就是Corosync ，它的代码60%左右来源于Openais。Corosync可以提供一个完整的HA功能，但是要实现更多，更复杂的功能，那就需要使用Openais了。Corosync是未来的发展方向，在以后的新项目里，一般采用Corosync，而hb_gui可以提供很好的HA管理功能，可以实现图形化的管理。另外相关的图形化有RHCS的套件luci+ricci，当然还有基于java开发的LCMC集群管理工具。</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>Pacemaker是一个集群资源管理器。它利用集群基础构件（OpenAIS、heartbeat或corosync）提供的消息和成员管理能力来探测并从节点或资源级别的故障中恢复，以实现群集服务（亦称资源）的最大可用性。</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>Pcs是一种常用的集群配置及管理指令集，其他类似命令有crmsh。</li>
+</ul>
+</blockquote>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2020/12/28/Centos7-6%E4%B8%8Bcorosync-pacemaker-pcs%E9%AB%98%E5%8F%AF%E7%94%A8%E9%9B%86%E7%BE%A4%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/11/%E5%B9%B8%E7%A6%8F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -708,7 +912,7 @@
             
               <div class="site-state-item site-state-posts">
                 <a href="/archives">
-                  <span class="site-state-item-count">27</span>
+                  <span class="site-state-item-count">28</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -804,7 +1008,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">14.9k</span>
+    <span title="Site words total count">15.1k</span>
   
 </div>
 
