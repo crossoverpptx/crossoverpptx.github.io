@@ -6,7 +6,7 @@
   <link href="http://yoursite.com/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2021-05-19T03:45:20.932Z</updated>
+  <updated>2021-05-20T01:47:13.205Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>C++实例-初试vector</title>
+    <link href="http://yoursite.com/2021/05/20/C-%E5%AE%9E%E4%BE%8B-%E5%88%9D%E8%AF%95vector/"/>
+    <id>http://yoursite.com/2021/05/20/C-%E5%AE%9E%E4%BE%8B-%E5%88%9D%E8%AF%95vector/</id>
+    <published>2021-05-20T01:34:09.000Z</published>
+    <updated>2021-05-20T01:47:13.205Z</updated>
+    
+    <content type="html"><![CDATA[<p>假设有一组成绩的集合，其中成绩的取值是从0到100。以10分为一个分数段，要求统计各个分数段各有多少个成绩。采用如下方式实现：使用一个含有11个元素的vector对象，每个元素分别用于统计各个分数段上出现的成绩个数。</p><a id="more"></a><hr><h2 id="源程序"><a href="#源程序" class="headerlink" title="源程序"></a>源程序</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">unsigned</span>&gt; <span class="title">scores</span><span class="params">(<span class="number">11</span>, <span class="number">0</span>)</span></span>;</span><br><span class="line"><span class="keyword">unsigned</span> grade;</span><br><span class="line"><span class="keyword">while</span>(<span class="built_in">cin</span> &gt;&gt; grade)</span><br><span class="line"><span class="keyword">if</span>(grade &lt;= <span class="number">100</span>)</span><br><span class="line">++scores[grade/<span class="number">10</span>];</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i != <span class="number">11</span>; i++)</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; scores[i] &lt;&lt; <span class="string">" "</span>;</span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><hr><h2 id="运行结果"><a href="#运行结果" class="headerlink" title="运行结果"></a>运行结果</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">42</span> <span class="number">65</span> <span class="number">95</span> <span class="number">100</span> <span class="number">39</span> <span class="number">67</span> <span class="number">95</span> <span class="number">76</span> <span class="number">88</span> <span class="number">76</span> <span class="number">83</span> <span class="number">92</span> <span class="number">76</span> <span class="number">93</span></span><br><span class="line"><span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">1</span> <span class="number">1</span> <span class="number">0</span> <span class="number">2</span> <span class="number">3</span> <span class="number">2</span> <span class="number">4</span> <span class="number">1</span></span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;假设有一组成绩的集合，其中成绩的取值是从0到100。以10分为一个分数段，要求统计各个分数段各有多少个成绩。采用如下方式实现：使用一个含有11个元素的vector对象，每个元素分别用于统计各个分数段上出现的成绩个数。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="C/C++" scheme="http://yoursite.com/categories/C-C/"/>
+    
+    
+    <category term="C/C++" scheme="http://yoursite.com/tags/C-C/"/>
+    
+  </entry>
   
   <entry>
     <title>C++实例-将0到15之间的10进制转换成16进制</title>
@@ -464,27 +485,6 @@
     
     
     <category term="redhat" scheme="http://yoursite.com/tags/redhat/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Linux下修改mysql数据库密码的几种方法</title>
-    <link href="http://yoursite.com/2021/01/05/Linux%E4%B8%8B%E4%BF%AE%E6%94%B9mysql%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AF%86%E7%A0%81%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E6%B3%95/"/>
-    <id>http://yoursite.com/2021/01/05/Linux%E4%B8%8B%E4%BF%AE%E6%94%B9mysql%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AF%86%E7%A0%81%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E6%B3%95/</id>
-    <published>2021-01-05T08:18:41.000Z</published>
-    <updated>2021-02-24T03:26:41.228Z</updated>
-    
-    <content type="html"><![CDATA[<p><strong>本文介绍几种常见情况下mysql数据库的密码修改方法。</strong></p><a id="more"></a><hr><h2 id="未设置密码，可以通过mysql直接登录数据库"><a href="#未设置密码，可以通过mysql直接登录数据库" class="headerlink" title="未设置密码，可以通过mysql直接登录数据库"></a>未设置密码，可以通过mysql直接登录数据库</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; use mysql;</span><br><span class="line">mysql&gt; update user set password=password(<span class="string">"111111"</span>) where user=<span class="string">'root'</span>;</span><br><span class="line">mysql&gt; flush privileges;</span><br><span class="line">mysql&gt; exit;</span><br></pre></td></tr></table></figure><hr><h2 id="若已知密码，需要修改密码"><a href="#若已知密码，需要修改密码" class="headerlink" title="若已知密码，需要修改密码"></a>若已知密码，需要修改密码</h2><p>除了上述方法，也可以在mysql系统外，使用mysqladmin。</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysqladmin -u root -p password <span class="string">"111111"</span></span><br><span class="line">Enter password: 【输入原来的密码】</span><br></pre></td></tr></table></figure><hr><h2 id="若忘记数据库密码，需要修改密码"><a href="#若忘记数据库密码，需要修改密码" class="headerlink" title="若忘记数据库密码，需要修改密码"></a>若忘记数据库密码，需要修改密码</h2><p>1、先停止数据库服务，修改/etc/my.cnf文件，在[mysqld]末尾添加skip-grant-tables；</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[mysqld]</span><br><span class="line">skip-grant-tables</span><br></pre></td></tr></table></figure><p>2、重新启动数据库，可以通过mysql直接登录数据库；<br>3、修改密码完成后，删除skip-grant-tables。</p>]]></content>
-    
-    
-    <summary type="html">&lt;p&gt;&lt;strong&gt;本文介绍几种常见情况下mysql数据库的密码修改方法。&lt;/strong&gt;&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="mysql" scheme="http://yoursite.com/categories/mysql/"/>
-    
-    
-    <category term="mysql" scheme="http://yoursite.com/tags/mysql/"/>
     
   </entry>
   
