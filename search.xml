@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>void*的用法</title>
+      <link href="2021/08/22/void-%E7%9A%84%E7%94%A8%E6%B3%95/"/>
+      <url>2021/08/22/void-%E7%9A%84%E7%94%A8%E6%B3%95/</url>
+      
+        <content type="html"><![CDATA[<h2 id="void-是一种特殊的指针类型，可用于存放任意对象的地址。"><a href="#void-是一种特殊的指针类型，可用于存放任意对象的地址。" class="headerlink" title="void*是一种特殊的指针类型，可用于存放任意对象的地址。"></a>void*是一种特殊的指针类型，可用于存放任意对象的地址。</h2><a id="more"></a><hr><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="keyword">double</span> obj = <span class="number">3.14</span>, * pd = &amp;obj;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span>* pv = &amp;obj;</span><br><span class="line">pv = pd;</span><br><span class="line"></span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">"*pd 的值为："</span> &lt;&lt; *pd &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"><span class="comment">//cout &lt;&lt; "*pv 的值为：" &lt;&lt; *pv &lt;&lt; endl; // 错误，不能直接操作 void* 所指的对象，因为我们并不知道这个对象到底是什么类型</span></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; pv &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    </span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> C/C++ </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> C/C++ </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>C++实例-定义及使用Sales_data类-改进1</title>
       <link href="2021/05/26/C-%E5%AE%9E%E4%BE%8B-%E5%AE%9A%E4%B9%89%E5%8F%8A%E4%BD%BF%E7%94%A8Sales-data%E7%B1%BB-%E6%94%B9%E8%BF%9B1/"/>
       <url>2021/05/26/C-%E5%AE%9E%E4%BE%8B-%E5%AE%9A%E4%B9%89%E5%8F%8A%E4%BD%BF%E7%94%A8Sales-data%E7%B1%BB-%E6%94%B9%E8%BF%9B1/</url>
