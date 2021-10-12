@@ -1020,4 +1020,26 @@ bat脚本命令说明：<figure class="highlight python"><table><tr><td class="c
         <tag>数值分析</tag>
       </tags>
   </entry>
+  <entry>
+    <title>追赶法求解线性方程组（C语言）</title>
+    <url>/2021/10/12/%E8%BF%BD%E8%B5%B6%E6%B3%95%E6%B1%82%E8%A7%A3%E7%BA%BF%E6%80%A7%E6%96%B9%E7%A8%8B%E7%BB%84%EF%BC%88C%E8%AF%AD%E8%A8%80%EF%BC%89/</url>
+    <content><![CDATA[<p><strong>利用追赶法求解线性方程组，基于C语言实现。</strong></p>
+<p><strong>追赶法是LU分解法的一种特例，其系数矩阵是一种稀疏矩阵，除主对角线及相邻的两条对角线为非零元素，其余元素值均为0，称为三对角矩阵。</strong></p>
+<a id="more"></a>
+
+<hr>
+<h2 id="源程序"><a href="#源程序" class="headerlink" title="源程序"></a>源程序</h2><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">double</span> a[]=&#123;<span class="number">0</span>,<span class="number">-1</span>,<span class="number">-1</span>,<span class="number">-1</span>&#125;;</span><br><span class="line">    <span class="keyword">double</span> b[]=&#123;<span class="number">2</span>,<span class="number">2</span>,<span class="number">2</span>,<span class="number">2</span>&#125;;</span><br><span class="line">    <span class="keyword">double</span> c[]=&#123;<span class="number">-1</span>,<span class="number">-1</span>,<span class="number">-1</span>&#125;;</span><br><span class="line">    <span class="keyword">double</span> d[]=&#123;<span class="number">0</span>,<span class="number">1</span>,<span class="number">0</span>,<span class="number">2.5</span>&#125;;</span><br><span class="line">    <span class="keyword">int</span> n=<span class="number">3</span>, i;</span><br><span class="line">    <span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        a[i]=a[i]/b[i<span class="number">-1</span>];</span><br><span class="line">        b[i]=b[i]-c[i<span class="number">-1</span>]*a[i];</span><br><span class="line">        d[i]=d[i]-a[i]*d[i<span class="number">-1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    d[n]=d[n]/b[n];</span><br><span class="line">    <span class="keyword">for</span>(i=n<span class="number">-1</span>;i&gt;=<span class="number">0</span>;i--)</span><br><span class="line">    &#123;</span><br><span class="line">        d[i]=(d[i]-c[i]*d[i+<span class="number">1</span>])/b[i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;=n;i++)</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%lf\n"</span>,d[i]);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="运行结果"><a href="#运行结果" class="headerlink" title="运行结果"></a>运行结果</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="number">1.100000</span></span><br><span class="line"><span class="number">2.200000</span></span><br><span class="line"><span class="number">2.300000</span></span><br><span class="line"><span class="number">2.400000</span></span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>数值分析</category>
+      </categories>
+      <tags>
+        <tag>C/C++</tag>
+        <tag>数值分析</tag>
+      </tags>
+  </entry>
 </search>
