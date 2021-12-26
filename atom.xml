@@ -6,7 +6,7 @@
   <link href="http://yoursite.com/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2021-12-26T10:19:21.501Z</updated>
+  <updated>2021-12-26T10:23:24.338Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -21,9 +21,9 @@
     <link href="http://yoursite.com/2021/12/26/%E6%96%87%E4%BB%B6%E9%87%8D%E5%AE%9A%E5%90%91/"/>
     <id>http://yoursite.com/2021/12/26/%E6%96%87%E4%BB%B6%E9%87%8D%E5%AE%9A%E5%90%91/</id>
     <published>2021-12-26T10:09:20.000Z</published>
-    <updated>2021-12-26T10:19:21.501Z</updated>
+    <updated>2021-12-26T10:23:24.338Z</updated>
     
-    <content type="html"><![CDATA[<p>当测试程序时，反复从键盘敲入测试数据作为程序的输入，是非常乏味且低效的。<a id="more"></a>大多数操作系统支持文件重定向，这种机制允许我们将标准输入和标准输出与文件命名关联起来：</p><p>$ addItems <infile>outfile</infile></p><p>假定$是操作系统提示符，程序已经编译为名为addItems.exe的可执行文件（在UNIX操作系统中是addItems），则上述命令会从一个名为infile的文件读取数据，并将结果写入到一个名为outfile的文件中，两个文件都处于当前目录中。</p><p>已在Windows下为例：</p><p>G:\C++Primer\Debug&gt;”C++Primer.exe” &lt;infile.txt&gt;outfile.txt</p>]]></content>
+    <content type="html"><![CDATA[<p>当测试程序时，反复从键盘敲入测试数据作为程序的输入，是非常乏味且低效的。<a id="more"></a>大多数操作系统支持文件重定向，这种机制允许我们将标准输入和标准输出与文件命名关联起来：</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ addItems &lt;infile &gt;outfile</span><br></pre></td></tr></table></figure><p>假定$是操作系统提示符，程序已经编译为名为addItems.exe的可执行文件（在UNIX操作系统中是addItems），则上述命令会从一个名为infile的文件读取数据，并将结果写入到一个名为outfile的文件中，两个文件都处于当前目录中。</p><p>已在Windows下为例：</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">G:\C++Primer\Debug&gt;<span class="string">"C++Primer.exe"</span> &lt;infile.txt&gt;outfile.txt</span><br></pre></td></tr></table></figure>]]></content>
     
     
     <summary type="html">&lt;p&gt;当测试程序时，反复从键盘敲入测试数据作为程序的输入，是非常乏味且低效的。&lt;/p&gt;</summary>
