@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>Nobody&#39;s Blog</title>
+  <title>crossoverpptx&#39;s Blog</title>
   
   <subtitle>世界上有两件东西能震撼人们的心灵：一件是我们心中崇高的道德标准；另一件是我们头顶上灿烂的星空。</subtitle>
   <link href="http://yoursite.com/atom.xml" rel="self"/>
@@ -10,7 +10,7 @@
   <id>http://yoursite.com/</id>
   
   <author>
-    <name>Nobody</name>
+    <name>crossoverpptx</name>
     
   </author>
   
