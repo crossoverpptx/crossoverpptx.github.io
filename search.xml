@@ -551,7 +551,7 @@ bat脚本命令说明：<figure class="highlight python"><table><tr><td class="c
   <entry>
     <title>二叉树的实现及应用-改进1</title>
     <url>/2021/02/23/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%8F%8A%E5%BA%94%E7%94%A8-%E6%94%B9%E8%BF%9B1/</url>
-    <content><![CDATA[<p>本文是对 <a href="https://nobody-blog.github.io/2021/02/23/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%8F%8A%E5%BA%94%E7%94%A8/" target="_blank" rel="noopener"><strong>二叉树的实现及应用</strong></a> 的改进，源程序被拆分为四个子程序：Status.h（状态码头文件）、BiTree.h（二叉树数据结构及函数声明头文件）、BiTree.c（函数定义）、BiTree-main.c（主程序）。</p>
+    <content><![CDATA[<p>本文是对 <a href="https://crossoverpptx.github.io/2021/02/23/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%8F%8A%E5%BA%94%E7%94%A8/" target="_blank" rel="noopener"><strong>二叉树的实现及应用</strong></a> 的改进，源程序被拆分为四个子程序：Status.h（状态码头文件）、BiTree.h（二叉树数据结构及函数声明头文件）、BiTree.c（函数定义）、BiTree-main.c（主程序）。</p>
 <a id="more"></a>
 
 <hr>
