@@ -83,17 +83,19 @@
 
 
 
-<meta name="description" content="将0到15之间的十进制数转换成对应的十六进制形式。">
+<meta name="description" content="什么是引用计数引用计数（reference count）的核心思想是使用一个计数器来标识当前指针指向的对象被多少类的对象所使用（即记录指针指向对象被引用的次数）。它允许有多个相同值的对象共享这个值的实现。引用计数的使用常有两个目的：  简化跟踪堆中（也即C++中new出来的）的对象的过程。一旦一个对象通过调用new被分配出来，记录谁拥有这个对象是很重要的，因为其所有者要负责对它进行delete。但">
 <meta property="og:type" content="article">
-<meta property="og:title" content="C++实例-将0到15之间的10进制转换成16进制">
-<meta property="og:url" content="http://yoursite.com/2021/05/19/C-%E5%AE%9E%E4%BE%8B-%E5%B0%860%E5%88%B015%E4%B9%8B%E9%97%B4%E7%9A%8410%E8%BF%9B%E5%88%B6%E8%BD%AC%E6%8D%A2%E6%88%9016%E8%BF%9B%E5%88%B6/index.html">
+<meta property="og:title" content="C++:引用计数">
+<meta property="og:url" content="http://yoursite.com/2022/01/11/C-%E5%BC%95%E7%94%A8%E8%AE%A1%E6%95%B0/index.html">
 <meta property="og:site_name" content="crossoverpptx&#39;s Blog">
-<meta property="og:description" content="将0到15之间的十进制数转换成对应的十六进制形式。">
-<meta property="article:published_time" content="2021-05-19T03:41:55.000Z">
-<meta property="article:modified_time" content="2021-05-26T08:32:50.900Z">
+<meta property="og:description" content="什么是引用计数引用计数（reference count）的核心思想是使用一个计数器来标识当前指针指向的对象被多少类的对象所使用（即记录指针指向对象被引用的次数）。它允许有多个相同值的对象共享这个值的实现。引用计数的使用常有两个目的：  简化跟踪堆中（也即C++中new出来的）的对象的过程。一旦一个对象通过调用new被分配出来，记录谁拥有这个对象是很重要的，因为其所有者要负责对它进行delete。但">
+<meta property="og:image" content="http://yoursite.com/2022/01/11/C-%E5%BC%95%E7%94%A8%E8%AE%A1%E6%95%B0/1.png">
+<meta property="article:published_time" content="2022-01-11T09:43:43.000Z">
+<meta property="article:modified_time" content="2022-01-11T11:44:23.249Z">
 <meta property="article:author" content="crossoverpptx">
 <meta property="article:tag" content="C&#x2F;C++">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/2022/01/11/C-%E5%BC%95%E7%94%A8%E8%AE%A1%E6%95%B0/1.png">
 
 
 
@@ -123,13 +125,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2021/05/19/C-实例-将0到15之间的10进制转换成16进制/"/>
+  <link rel="canonical" href="http://yoursite.com/2022/01/11/C-引用计数/"/>
 
 
 
 
 
-  <title>C++实例-将0到15之间的10进制转换成16进制 | crossoverpptx's Blog</title>
+  <title>C++:引用计数 | crossoverpptx's Blog</title>
   
 
 
@@ -300,7 +302,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/05/19/C-%E5%AE%9E%E4%BE%8B-%E5%B0%860%E5%88%B015%E4%B9%8B%E9%97%B4%E7%9A%8410%E8%BF%9B%E5%88%B6%E8%BD%AC%E6%8D%A2%E6%88%9016%E8%BF%9B%E5%88%B6/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/01/11/C-%E5%BC%95%E7%94%A8%E8%AE%A1%E6%95%B0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="crossoverpptx">
@@ -317,7 +319,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">C++实例-将0到15之间的10进制转换成16进制</h1>
+          <h1 class="post-title" itemprop="name headline">C++:引用计数</h1>
         
 
         <div class="post-meta">
@@ -329,8 +331,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-05-19T11:41:55+08:00">
-                2021-05-19
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-01-11T17:43:43+08:00">
+                2022-01-11
               </time>
             
 
@@ -345,8 +347,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2021-05-26T16:32:50+08:00">
-                2021-05-26
+              <time title="更新于" itemprop="dateModified" datetime="2022-01-11T19:44:23+08:00">
+                2022-01-11
               </time>
             
           </span>
@@ -400,7 +402,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  143
+                  1.1k
                 </span>
               
 
@@ -416,7 +418,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  1
+                  4
                 </span>
               
             </div>
@@ -437,14 +439,26 @@
       
 
       
-        <p><strong>将0到15之间的十进制数转换成对应的十六进制形式。</strong></p>
-<a id="more"></a>
+        <h3 id="什么是引用计数"><a href="#什么是引用计数" class="headerlink" title="什么是引用计数"></a>什么是引用计数</h3><p>引用计数（reference count）的核心思想是使用一个计数器来标识当前指针指向的对象被多少类的对象所使用（即记录指针指向对象被引用的次数）。它允许有多个相同值的对象共享这个值的实现。引用计数的使用常有两个目的：</p>
+<ul>
+<li><p>简化跟踪堆中（也即C++中new出来的）的对象的过程。一旦一个对象通过调用new被分配出来，记录谁拥有这个对象是很重要的，因为其所有者要负责对它进行delete。但是对象所有者可以有多个，且所有权能够被传递，这就使得内存跟踪变得困难。引用计数可以跟踪对象所有权，并能够自动销毁对象。可以说引用计数是个简单的垃圾回收体系。</p>
+</li>
+<li><p>节省内存，提高程序运行效率。如果很多对象有相同的值，为这多个相同的值存储多个副本是很浪费空间的，所以最好做法是让左右对象都共享同一个值的实现。C++标准库中<strong>string</strong>类采取一种称为”写时复制“的技术，使得只有当字符串被修改的时候才创建各自的拷贝，否则可能（标准库允许使用但没强制要求）采用引用计数技术来管理共享对象的多个对象。<a id="more"></a></p>
+</li>
+</ul>
+<h3 id="引用计数的实现"><a href="#引用计数的实现" class="headerlink" title="引用计数的实现"></a>引用计数的实现</h3><p>使用引用计数实现智能指针的关键是，引用计数应该存在哪里。引用计数应该是某个类对象和其复制对象共享的， 而指针成员恰好有这样的特性， 故可以在类中多声明一个size_t* 的成员，用来表示引用计数。</p>
+<ul>
+<li>构造函数中创建类的新对象时，初始化引用计数为1；</li>
+<li>拷贝构造函数复制指针，并使相应的引用计数增加1；</li>
+<li>赋值操作减少左操作数所指对象的引用计数，增加右操作数所指对象的引用计数；</li>
+<li>析构函数使引用计数减少1，并且当引用计数为1时，释放指针所指向的对象；</li>
+</ul>
+<p><img src="/2022/01/11/C-%E5%BC%95%E7%94%A8%E8%AE%A1%E6%95%B0/1.png" alt></p>
+<h3 id="示例代码"><a href="#示例代码" class="headerlink" title="示例代码"></a>示例代码</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="built_in">std</span>::<span class="built_in">string</span>; <span class="keyword">using</span> <span class="built_in">std</span>::ostream; <span class="keyword">using</span> <span class="built_in">std</span>::<span class="built_in">cout</span>; <span class="keyword">using</span> <span class="built_in">std</span>::<span class="keyword">size_t</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">HasPtr</span> &#123;</span></span><br><span class="line">	<span class="function"><span class="keyword">friend</span> ostream&amp; <span class="title">print</span><span class="params">(ostream&amp;, <span class="keyword">const</span> HasPtr&amp;)</span></span>;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="comment">// string()：构造空的string类对象，既空字符串</span></span><br><span class="line">	HasPtr(<span class="keyword">const</span> <span class="built_in">string</span>&amp; s = <span class="built_in">string</span>()) : ps(<span class="keyword">new</span> <span class="built_in">string</span>(s)), i(<span class="number">0</span>), use(<span class="keyword">new</span> <span class="keyword">size_t</span>(<span class="number">1</span>)) &#123; &#125; <span class="comment">// constructor</span></span><br><span class="line">	~HasPtr(); <span class="comment">// 析构函数</span></span><br><span class="line">	HasPtr(<span class="keyword">const</span> HasPtr&amp; rhs) : ps(rhs.ps), i(rhs.i), use(rhs.use) &#123; ++* use; &#125; <span class="comment">// 拷贝构造函数</span></span><br><span class="line">	HasPtr&amp; <span class="keyword">operator</span>=(<span class="keyword">const</span> HasPtr&amp;); <span class="comment">// 运算符重载</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	<span class="built_in">string</span>* ps; <span class="comment">// ps是一个指针，指向string类型</span></span><br><span class="line">	<span class="keyword">int</span> i;</span><br><span class="line">	<span class="keyword">size_t</span>* use; <span class="comment">// use是一个指针，指向size_t类型</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 析构函数的定义</span></span><br><span class="line">HasPtr::~HasPtr()</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">if</span> (-- * use == <span class="number">0</span>) &#123;	<span class="comment">// 如果引用计数为变0</span></span><br><span class="line">		<span class="keyword">delete</span> ps;			<span class="comment">// 释放string内存</span></span><br><span class="line">		<span class="keyword">delete</span> use;			<span class="comment">// 释放计数器内存</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 运算符重载的定义</span></span><br><span class="line">HasPtr&amp;</span><br><span class="line">HasPtr::<span class="keyword">operator</span>=(<span class="keyword">const</span> HasPtr&amp; rhs)</span><br><span class="line">&#123;</span><br><span class="line">	++* rhs.use;			<span class="comment">// 递增右侧运算对象的引用计数</span></span><br><span class="line">	<span class="keyword">if</span> (-- * use == <span class="number">0</span>) &#123;	<span class="comment">// 然后递减本对象的引用计数</span></span><br><span class="line">		<span class="keyword">delete</span> ps;			<span class="comment">// 如果没有其他用户</span></span><br><span class="line">		<span class="keyword">delete</span> use;			<span class="comment">// 释放本对象分配的成员</span></span><br><span class="line">	&#125;</span><br><span class="line">	ps = rhs.ps;			<span class="comment">// 将数据从rhs拷贝到本对象</span></span><br><span class="line">	i = rhs.i;</span><br><span class="line">	use = rhs.use;</span><br><span class="line">	<span class="keyword">return</span> *<span class="keyword">this</span>;			<span class="comment">// 返回本对象</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 友元函数的定义</span></span><br><span class="line"><span class="function">ostream&amp; <span class="title">print</span><span class="params">(ostream&amp; os, <span class="keyword">const</span> HasPtr&amp; p)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	os &lt;&lt; p.ps &lt;&lt; <span class="string">' '</span> &lt;&lt; *p.ps &lt;&lt; <span class="string">' '</span> &lt;&lt; *p.use;</span><br><span class="line">	<span class="keyword">return</span> os;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">func</span><span class="params">(<span class="keyword">const</span> HasPtr&amp; p)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	HasPtr temp;</span><br><span class="line">	temp = p;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"p: "</span>;</span><br><span class="line">	<span class="built_in">print</span>(<span class="built_in">cout</span>, p) &lt;&lt; <span class="string">'\n'</span>;;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"temp: "</span>;</span><br><span class="line">	<span class="built_in">print</span>(<span class="built_in">cout</span>, temp) &lt;&lt; <span class="string">'\n'</span>;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"HasPtr str1(\"copy me\"), str2;\n"</span>;</span><br><span class="line">	HasPtr str1("copy me"), str2;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"str1: "</span>;</span><br><span class="line">	<span class="built_in">print</span>(<span class="built_in">cout</span>, str1) &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"str2: "</span>;</span><br><span class="line">	<span class="built_in">print</span>(<span class="built_in">cout</span>, str2) &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"\nstr2 = str1;\n"</span>;</span><br><span class="line">	str2 = str1;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"str1: "</span>;</span><br><span class="line">	<span class="built_in">print</span>(<span class="built_in">cout</span>, str1) &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"str2: "</span>;</span><br><span class="line">	<span class="built_in">print</span>(<span class="built_in">cout</span>, str2) &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">	</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"\nfunc(str1);\n"</span>;</span><br><span class="line">	func(str1);</span><br><span class="line">	</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"\nstr1: "</span>;</span><br><span class="line">	<span class="built_in">print</span>(<span class="built_in">cout</span>, str1) &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"str2: "</span>;</span><br><span class="line">	<span class="built_in">print</span>(<span class="built_in">cout</span>, str2) &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<hr>
-<h2 id="源程序"><a href="#源程序" class="headerlink" title="源程序"></a>源程序</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="comment">//using std::string; using std::cin; using std::cout; using std::endl;</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">const</span> <span class="built_in">string</span> hexdigits = <span class="string">"0123456789ABCDEF"</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"Enter a series of numbers between 0 and 15"</span></span><br><span class="line">		 &lt;&lt; <span class="string">"separated by spaces. Hit ENTER when finished:"</span></span><br><span class="line">		 &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="built_in">string</span> result;</span><br><span class="line">	<span class="built_in">string</span>::size_type n;</span><br><span class="line">	<span class="keyword">while</span> (<span class="built_in">cin</span> &gt;&gt; n)</span><br><span class="line">		<span class="keyword">if</span> (n &lt; hexdigits.<span class="built_in">size</span>())</span><br><span class="line">			result += hexdigits[n];</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"Your hex number is:"</span> &lt;&lt; result &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="执行结果"><a href="#执行结果" class="headerlink" title="执行结果"></a>执行结果</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">HasPtr str1(<span class="string">"copy me"</span>), str2;</span><br><span class="line">str1: <span class="number">0116</span>D990 copy me <span class="number">1</span></span><br><span class="line">str2: <span class="number">011654E8</span>  <span class="number">1</span></span><br><span class="line"></span><br><span class="line">str2 = str1;</span><br><span class="line">str1: <span class="number">0116</span>D990 copy me <span class="number">2</span></span><br><span class="line">str2: <span class="number">0116</span>D990 copy me <span class="number">2</span></span><br><span class="line"></span><br><span class="line">func(str1);</span><br><span class="line">p: <span class="number">0116</span>D990 copy me <span class="number">3</span></span><br><span class="line">temp: <span class="number">0116</span>D990 copy me <span class="number">3</span></span><br><span class="line"></span><br><span class="line">str1: <span class="number">0116</span>D990 copy me <span class="number">2</span></span><br><span class="line">str2: <span class="number">0116</span>D990 copy me <span class="number">2</span></span><br></pre></td></tr></table></figure>
 
-<hr>
-<h2 id="运行结果"><a href="#运行结果" class="headerlink" title="运行结果"></a>运行结果</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Enter a series of numbers between <span class="number">0</span> <span class="keyword">and</span> <span class="number">15</span>separated by spaces. Hit ENTER when finished:</span><br><span class="line"><span class="number">12</span> <span class="number">0</span> <span class="number">5</span> <span class="number">15</span> <span class="number">8</span> <span class="number">15</span></span><br><span class="line">Your hex number <span class="keyword">is</span>:C05F8F</span><br></pre></td></tr></table></figure>
+
       
     </div>
     
@@ -474,8 +488,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2021/05/17/C-%E5%AE%9E%E4%BE%8B-%E5%AE%9A%E4%B9%89%E5%8F%8A%E4%BD%BF%E7%94%A8Sales-data%E7%B1%BB/" rel="next" title="C++实例-定义及使用Sales_data类">
-                <i class="fa fa-chevron-left"></i> C++实例-定义及使用Sales_data类
+              <a href="/2022/01/06/python-selenium%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%8A%A8%E5%88%B7%E6%96%B0%E7%BD%91%E9%A1%B5/" rel="next" title="python+selenium实现自动刷新网页">
+                <i class="fa fa-chevron-left"></i> python+selenium实现自动刷新网页
               </a>
             
           </div>
@@ -483,10 +497,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2021/05/20/C-%E5%AE%9E%E4%BE%8B-%E5%88%9D%E8%AF%95vector/" rel="prev" title="C++实例-初试vector">
-                C++实例-初试vector <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -643,7 +653,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#源程序"><span class="nav-number">1.</span> <span class="nav-text">源程序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#运行结果"><span class="nav-number">2.</span> <span class="nav-text">运行结果</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是引用计数"><span class="nav-number">1.</span> <span class="nav-text">什么是引用计数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#引用计数的实现"><span class="nav-number">2.</span> <span class="nav-text">引用计数的实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#示例代码"><span class="nav-number">3.</span> <span class="nav-text">示例代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#执行结果"><span class="nav-number">4.</span> <span class="nav-text">执行结果</span></a></li></ol></div>
             
 
           </div>
