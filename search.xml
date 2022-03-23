@@ -80,7 +80,7 @@
 <p>若未安装ntp服务，先安装，确认安装ntp服务后，主机执行以下命令</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">cp /etc/ntp.conf /etc/ntp.conf.bak</span><br><span class="line">rm -f /etc/ntp.conf</span><br><span class="line">vi /etc/ntp.conf</span><br></pre></td></tr></table></figure>
 
-<p>在/etc/ntp.conf文件输入一下内容</p>
+<p>在/etc/ntp.conf文件输入以下内容</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">restrict default kod nomodify notrap nopeer noquery</span><br><span class="line">restrict <span class="number">-6</span> default kod nomodify notrap nopper noquery</span><br><span class="line">restrict <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span></span><br><span class="line">restrict <span class="number">-6</span>::<span class="number">1</span></span><br><span class="line">restrict <span class="number">10.10</span><span class="number">.1</span><span class="number">.0</span> mask <span class="number">255.255</span><span class="number">.0</span><span class="number">.0</span> nomodify notrap</span><br><span class="line">server <span class="number">10.10</span><span class="number">.4</span><span class="number">.176</span></span><br><span class="line">server <span class="number">127.127</span><span class="number">.1</span><span class="number">.0</span></span><br><span class="line">fudge <span class="number">127.127</span><span class="number">.1</span><span class="number">.0</span> stratum <span class="number">10</span></span><br></pre></td></tr></table></figure>
 
 <p>启动主机ntp服务</p>
