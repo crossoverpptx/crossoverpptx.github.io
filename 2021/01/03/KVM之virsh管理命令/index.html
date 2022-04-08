@@ -90,7 +90,7 @@
 <meta property="og:site_name" content="crossoverpptx&#39;s Blog">
 <meta property="og:description" content="Virsh简介 virsh 是用来管理客户端及其管理程序的命令行界面工具。 virsh 工具是构建在 libvirt 管理 API 上，可作为 xm 命令和图形客户端管理程序（virt-manager）的替代工具。非特权用户只能以只读模式使用 virsh。您可使用 virsh 为客户端机器执行脚本。">
 <meta property="article:published_time" content="2021-01-03T07:28:21.000Z">
-<meta property="article:modified_time" content="2021-02-24T03:11:56.721Z">
+<meta property="article:modified_time" content="2022-04-08T02:10:15.162Z">
 <meta property="article:author" content="crossoverpptx">
 <meta property="article:tag" content="虚拟化">
 <meta name="twitter:card" content="summary">
@@ -345,8 +345,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2021-02-24T11:11:56+08:00">
-                2021-02-24
+              <time title="更新于" itemprop="dateModified" datetime="2022-04-08T10:10:15+08:00">
+                2022-04-08
               </time>
             
           </span>
@@ -400,7 +400,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  526
+                  516
                 </span>
               
 
@@ -457,8 +457,8 @@
 
 <hr>
 <h2 id="通过xml文件创建虚拟机"><a href="#通过xml文件创建虚拟机" class="headerlink" title="通过xml文件创建虚拟机"></a>通过xml文件创建虚拟机</h2><ol>
-<li>配置xml，创建空镜像<br>xml文件配置可通过可视化创建虚拟机作为模板。<br>创建空镜像<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">qemu-img create -f qcow2  *.qcow2  <span class="number">100</span>G	（*为虚拟机名称，大小自定义）</span><br></pre></td></tr></table></figure></li>
-<li>定义虚拟机，启动虚拟机<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">virsh define *.xml</span><br><span class="line">virsh start  *</span><br></pre></td></tr></table></figure>
+<li>创建空镜像<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">qemu-img create -f qcow2  *.qcow2  <span class="number">100</span>G	（*为虚拟机名称，大小自定义）</span><br></pre></td></tr></table></figure></li>
+<li>配置xml并启动虚拟机，xml文件配置可通过可视化创建虚拟机生成的xml文件作为模板。<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">virsh define *.xml</span><br><span class="line">virsh start  *</span><br></pre></td></tr></table></figure>
 
 </li>
 </ol>
@@ -468,9 +468,8 @@
 <li>创建存储池<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">virsh pool-build unary</span><br></pre></td></tr></table></figure></li>
 <li>激活存储池<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">virsh pool-start unary</span><br></pre></td></tr></table></figure></li>
 <li>查看存储池<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">virsh pool-list –all</span><br></pre></td></tr></table></figure></li>
-<li>配置xml文件</li>
 <li>创建空镜像</li>
-<li>定义虚拟机，启动虚拟机</li>
+<li>配置xml并启动虚拟机</li>
 </ol>
 
       
@@ -593,7 +592,7 @@
             
               <div class="site-state-item site-state-posts">
                 <a href="/archives">
-                  <span class="site-state-item-count">40</span>
+                  <span class="site-state-item-count">30</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -604,7 +603,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-count">13</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -615,7 +614,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-count">16</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -705,7 +704,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">20k</span>
+    <span title="Site words total count">16k</span>
   
 </div>
 
