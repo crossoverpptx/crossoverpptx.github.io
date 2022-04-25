@@ -927,7 +927,7 @@ bat脚本命令说明：<figure class="highlight python"><table><tr><td class="c
 </tr>
 <tr>
 <td align="left">算法</td>
-<td align="center">STL 提供了非常多（大约 100 个）的数据结构算法，它们都被设计成一个个的模板函数，这些算法在 std 命名空间中定义，其中大部分算法都包含在头文件 <algorithm> 中，少部分位于头文件 <numeric> 中。</numeric></algorithm></td>
+<td align="center">STL 提供了非常多（大约 100 个）的数据结构算法，它们都被设计成一个个的模板函数，这些算法在 std 命名空间中定义，其中大部分算法都包含在头文件 algorithm 中，少部分位于头文件 numeric 中。</td>
 </tr>
 <tr>
 <td align="left">迭代器</td>
@@ -946,7 +946,7 @@ bat脚本命令说明：<figure class="highlight python"><table><tr><td class="c
 <td align="center">为容器类模板提供自定义的内存申请和释放功能，由于往往只有高级用户才有改变内存分配策略的需求，因此内存分配器对于一般用户来说，并不常用。</td>
 </tr>
 </tbody></table>
-<p>另外，在惠普实验室最初发行的版本中，STL 被组织成 48 个头文件；但在 C++ 标准中，它们被重新组织为 13 个头文件，分别是：<iterator>、  <functional>、  <vector>、  <deque>、<list>、<queue>、<stack>、<set>、<map>、<algorithm>、<numeric>、<memory>和<utility>。</utility></memory></numeric></algorithm></map></set></stack></queue></list></deque></vector></functional></iterator></p>
+<p>另外，在惠普实验室最初发行的版本中，STL 被组织成 48 个头文件；但在 C++ 标准中，它们被重新组织为 13 个头文件，分别是：iterator、functional、vector、deque、list、queue、stack、set、map、algorithm、numeric、memory和utility。</p>
 ]]></content>
       <categories>
         <category>C++STL</category>
