@@ -1110,7 +1110,7 @@ bat脚本命令说明：<figure class="highlight python"><table><tr><td class="c
   <entry>
     <title>C++STL：顺序容器</title>
     <url>/2022/04/26/C-STL%EF%BC%9A%E9%A1%BA%E5%BA%8F%E5%AE%B9%E5%99%A8/</url>
-    <content><![CDATA[<h3 id="顺序容器概述"><a href="#顺序容器概述" class="headerlink" title="顺序容器概述"></a>顺序容器概述</h3><p>所谓顺序容器，即以线性排列（类似普通数组的存储方式）来存储某一指定类型（例如 int、double 等）的数据，需要特殊说明的是，该类容器并不会自动对存储的元素按照值的大小进行排序。</p>
+    <content><![CDATA[<h3 id="顺序容器概述"><a href="#顺序容器概述" class="headerlink" title="顺序容器概述"></a>顺序容器概述</h3><p>所谓顺序容器，即以线性排列（类似普通数组的存储方式）来存储某一指定类型（例如 int、double 等）的数据，需要特殊说明的是，该类容器并不会自动对存储的元素按照值的大小进行排序。<a id="more"></a></p>
 <p>需要注意的是，序列容器只是一类容器的统称，并不指具体的某个容器，序列容器大致包含以下几类容器：</p>
 <ul>
 <li>array&lt;T,N&gt;（数组容器）：表示可以存储 N 个 T 类型的元素，是 C++ 本身提供的一种容器。此类容器一旦建立，其长度就是固定不变的，这意味着不能增加或删除元素，只能改变某个元素的值；</li>
