@@ -90,7 +90,7 @@
 <meta property="og:site_name" content="crossoverpptx&#39;s Blog">
 <meta property="og:description" content="无序关联容器概述继 map、multimap、set、multiset 关联容器之后，本节介绍一类“特殊”的关联容器，它们常被称为“无序容器”、“哈希容器”或者“无序关联容器”。">
 <meta property="article:published_time" content="2022-05-09T09:46:20.000Z">
-<meta property="article:modified_time" content="2022-05-09T13:46:28.843Z">
+<meta property="article:modified_time" content="2022-05-09T13:54:57.540Z">
 <meta property="article:author" content="crossoverpptx">
 <meta property="article:tag" content="C&#x2F;C++">
 <meta property="article:tag" content="STL">
@@ -346,7 +346,7 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2022-05-09T21:46:28+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2022-05-09T21:54:57+08:00">
                 2022-05-09
               </time>
             
@@ -1269,6 +1269,7 @@
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 传入 2 个迭代器</span></span><br><span class="line"><span class="function"><span class="built_in">std</span>::<span class="built_in">unordered_set</span>&lt;<span class="built_in">std</span>::<span class="built_in">string</span>&gt; <span class="title">uset2</span><span class="params">(++uset.<span class="built_in">begin</span>(),uset.<span class="built_in">end</span>())</span></span>;</span><br></pre></td></tr></table></figure>
 
 <p>通过此方式创建的 uset2 容器，其内部就包含 uset 容器中除第 1 个元素外的所有其它元素。</p>
+<hr>
 <h2 id="unordered-multiset"><a href="#unordered-multiset" class="headerlink" title="unordered_multiset"></a>unordered_multiset</h2><h3 id="概述-4"><a href="#概述-4" class="headerlink" title="概述"></a>概述</h3><p>前面章节介绍了 unordered_set 容器的特定和用法，在此基础上，本节再介绍一个类似的 C++ STL 无序容器，即 unordered_multiset 容器。</p>
 <p>所谓“类似”，指的是 unordered_multiset 容器大部分的特性都和 unordered_set 容器相同，包括：</p>
 <ol>
