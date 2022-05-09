@@ -1,0 +1,2204 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="C/C++,STL," />
+
+
+
+
+  
+
+
+  <link rel="alternate" href="/atom.xml" title="crossoverpptx's Blog" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="无序关联容器概述继 map、multimap、set、multiset 关联容器之后，本节介绍一类“特殊”的关联容器，它们常被称为“无序容器”、“哈希容器”或者“无序关联容器”。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C++STL：无序关联容器">
+<meta property="og:url" content="http://yoursite.com/2022/05/09/C-STL%EF%BC%9A%E6%97%A0%E5%BA%8F%E5%85%B3%E8%81%94%E5%AE%B9%E5%99%A8/index.html">
+<meta property="og:site_name" content="crossoverpptx&#39;s Blog">
+<meta property="og:description" content="无序关联容器概述继 map、multimap、set、multiset 关联容器之后，本节介绍一类“特殊”的关联容器，它们常被称为“无序容器”、“哈希容器”或者“无序关联容器”。">
+<meta property="article:published_time" content="2022-05-09T09:46:20.000Z">
+<meta property="article:modified_time" content="2022-05-09T13:46:28.843Z">
+<meta property="article:author" content="crossoverpptx">
+<meta property="article:tag" content="C&#x2F;C++">
+<meta property="article:tag" content="STL">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2022/05/09/C-STL：无序关联容器/"/>
+
+
+
+
+
+  <title>C++STL：无序关联容器 | crossoverpptx's Blog</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">crossoverpptx's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">黑夜给了我黑色的眼睛，我却用它寻找光明</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/05/09/C-STL%EF%BC%9A%E6%97%A0%E5%BA%8F%E5%85%B3%E8%81%94%E5%AE%B9%E5%99%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="crossoverpptx">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/me.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="crossoverpptx's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">C++STL：无序关联容器</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-05-09T17:46:20+08:00">
+                2022-05-09
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2022-05-09T21:46:28+08:00">
+                2022-05-09
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C-STL/" itemprop="url" rel="index">
+                    <span itemprop="name">C++STL</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i> 浏览
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  16.7k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  66
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="无序关联容器"><a href="#无序关联容器" class="headerlink" title="无序关联容器"></a>无序关联容器</h2><h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>继 map、multimap、set、multiset 关联容器之后，本节介绍一类“特殊”的关联容器，它们常被称为“无序容器”、“哈希容器”或者“无序关联容器”。<a id="more"></a></p>
+<blockquote>
+<p>注意，无序容器是 C++ 11 标准才正式引入到 STL 标准库中的，这意味着如果要使用该类容器，则必须选择支持 C++ 11 标准的编译器。</p>
+</blockquote>
+<p>和关联容器一样，无序容器也使用键值对（pair 类型）的方式存储数据。不过，它们有本质上的不同：</p>
+<ul>
+<li>关联式容器的底层实现采用的树存储结构，更确切的说是红黑树结构；</li>
+<li>无序容器的底层实现采用的是哈希表的存储结构。</li>
+</ul>
+<blockquote>
+<p>C++ STL 底层采用哈希表实现无序容器时，会将所有数据存储到一整块连续的内存空间中，并且当数据存储位置发生冲突时，解决方法选用的是“链地址法”（又称“开链法”）。</p>
+</blockquote>
+<p>基于底层实现采用了不同的数据结构，因此和关联容器相比，无序容器具有以下 2 个特点：</p>
+<ol>
+<li>无序容器内部存储的键值对是无序的，各键值对的存储位置取决于该键值对中的键，</li>
+<li>和关联容器相比，无序容器擅长通过指定键查找对应的值（平均时间复杂度为 O(1)）；但对于使用迭代器遍历容器中存储的元素，无序容器的执行效率则不如关联容器。</li>
+</ol>
+<h3 id="无序容器种类"><a href="#无序容器种类" class="headerlink" title="无序容器种类"></a>无序容器种类</h3><p>和关联容器一样，无序容器只是一类容器的统称，其包含有 4 个具体容器，分别为 unordered_map、unordered_multimap、unordered_set 以及 unordered_multiset。</p>
+<p>下表这 4 种无序容器的功能做了详细的介绍：</p>
+<table>
+<thead>
+<tr>
+<th>无序容器</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>unordered_map</td>
+<td>存储键值对 &lt;key, value&gt; 类型的元素，其中各个键值对键的值不允许重复，且该容器中存储的键值对是无序的。</td>
+</tr>
+<tr>
+<td>unordered_multimap</td>
+<td>和 unordered_map 唯一的区别在于，该容器允许存储多个键相同的键值对。</td>
+</tr>
+<tr>
+<td>unordered_set</td>
+<td>不再以键值对的形式存储数据，而是直接存储数据元素本身（当然也可以理解为，该容器存储的全部都是键 key 和值 value 相等的键值对，正因为它们相等，因此只存储 value 即可）。另外，该容器存储的元素不能重复，且容器内部存储的元素也是无序的。</td>
+</tr>
+<tr>
+<td>unordered_multiset</td>
+<td>和 unordered_set 唯一的区别在于，该容器允许存储值相同的元素。</td>
+</tr>
+</tbody></table>
+<p>以上 4 种无序容器的名称，仅是在前面所学的 4 种关联容器名称的基础上，添加了 “unordered_”，其实它们仅有一个区别，即 map 容器内存会对存储的键值对进行排序，而 unordered_map 不会。</p>
+<blockquote>
+<p>也就是说，C++ 11 标准的 STL 中，在已提供有 4 种关联式容器的基础上，又新增了各自的“unordered”版本（无序版本、哈希版本），提高了查找指定元素的效率。</p>
+</blockquote>
+<p>既然无序容器和之前所学的关联容器类似，那么在实际使用中应该选哪种容器呢？总的来说，实际场景中如果涉及大量遍历容器的操作，建议首选关联容器；反之，如果更多的操作是通过键获取对应的值，则应首选无序容器。</p>
+<p>这里以 unordered_map 容器为例，举个例子（不必深究该容器的具体用法）：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unordered_map&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 创建并初始化一个 unordered_map 容器，其存储的 &lt;string,string&gt; 类型的键值对</span></span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">unordered_map</span>&lt;<span class="built_in">std</span>::<span class="built_in">string</span>, <span class="built_in">std</span>::<span class="built_in">string</span>&gt; my_uMap&#123;</span><br><span class="line">        &#123;<span class="string">"C语言教程"</span>,<span class="string">"http://c.biancheng.net/c/"</span>&#125;,</span><br><span class="line">        &#123;<span class="string">"Python教程"</span>,<span class="string">"http://c.biancheng.net/python/"</span>&#125;,</span><br><span class="line">        &#123;<span class="string">"Java教程"</span>,<span class="string">"http://c.biancheng.net/java/"</span>&#125; &#125;;</span><br><span class="line">    <span class="comment">// 查找指定键对应的值，效率比关联式容器高</span></span><br><span class="line">    <span class="built_in">string</span> str = my_uMap.at(<span class="string">"C语言教程"</span>);</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"str = "</span> &lt;&lt; str &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="comment">// 使用迭代器遍历哈希容器，效率不如关联式容器</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span> iter = my_uMap.<span class="built_in">begin</span>(); iter != my_uMap.<span class="built_in">end</span>(); ++iter)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">// pair 类型键值对分为 2 部分</span></span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; iter-&gt;first &lt;&lt; <span class="string">" "</span> &lt;&lt; iter-&gt;second &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>程序执行结果为：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">str = http://c.biancheng.net/c/</span><br><span class="line">C语言教程 http://c.biancheng.net/c/</span><br><span class="line">Python教程 http://c.biancheng.net/python/</span><br><span class="line">Java教程 http://c.biancheng.net/java/</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="unordered-map"><a href="#unordered-map" class="headerlink" title="unordered_map"></a>unordered_map</h2><h4 id="概述-1"><a href="#概述-1" class="headerlink" title="概述"></a>概述</h4><p>unordered_map 容器，直译过来就是”无序 map 容器”的意思。所谓“无序”，指的是 unordered_map 容器不会像 map 容器那样对存储的数据进行排序。换句话说，unordered_map 容器和 map 容器仅有一点不同，即 map 容器中存储的数据是有序的，而 unordered_map 容器中是无序的。</p>
+<blockquote>
+<p>可以将 unordered_map 容器等价为无序的 map 容器。</p>
+</blockquote>
+<p>具体来讲，unordered_map 容器和 map 容器一样，以键值对（pair类型）的形式存储数据，存储的各个键值对的键互不相同且不允许被修改。但由于 unordered_map 容器底层采用的是哈希表存储结构，该结构本身不具有对数据的排序功能，所以此容器内部不会自行对存储的键值对进行排序。</p>
+<p>unordered_map 容器在<code>&lt;unordered_map&gt;</code>头文件中，并位于 std 命名空间中。因此，如果想使用该容器，代码中应包含如下语句：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unordered_map&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>注意，第二行代码不是必需的，但如果不用，则后续程序中在使用此容器时，需手动注明 std 命名空间（建议初学者使用）。</p>
+</blockquote>
+<p>unordered_map 容器模板的定义如下所示：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt; <span class="class"><span class="keyword">class</span> <span class="title">Key</span>,                        // 键值对中键的类型</span></span><br><span class="line"><span class="class">           <span class="title">class</span> <span class="title">T</span>,                          // 键值对中值的类型</span></span><br><span class="line"><span class="class">           <span class="title">class</span> <span class="title">Hash</span> = <span class="title">hash</span>&lt;Key&gt;,           // 容器内部存储键值对所用的哈希函数</span></span><br><span class="line"><span class="class">           <span class="title">class</span> <span class="title">Pred</span> = <span class="title">equal_to</span>&lt;Key&gt;,       // 判断各个键值对键相同的规则</span></span><br><span class="line"><span class="class">           <span class="title">class</span> <span class="title">Alloc</span> = <span class="title">allocator</span>&lt; pair&lt;const Key,T&gt; &gt;  // 指定分配器对象的类型</span></span><br><span class="line"><span class="class">           &gt; <span class="title">class</span> <span class="title">unordered_map</span>;</span></span><br></pre></td></tr></table></figure>
+
+<p>以上 5 个参数中，必须显式给前 2 个参数传值，并且除特殊情况外，最多只需要使用前 4 个参数，各自的含义和功能如下表所示：</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>&lt;key,T&gt;</td>
+<td>前 2 个参数分别用于确定键值对中键和值的类型，也就是存储键值对的类型。</td>
+</tr>
+<tr>
+<td>Hash = hash&lt;Key&gt;</td>
+<td>用于指明容器在存储各个键值对时要使用的哈希函数，默认使用 STL 标准库提供的 hash&lt;key&gt; 哈希函数。注意，默认哈希函数只适用于基本数据类型（包括 string 类型），而不适用于自定义的结构体或者类。</td>
+</tr>
+<tr>
+<td>Pred = equal_to&lt;Key&gt;</td>
+<td>要知道，unordered_map 容器中存储的各个键值对的键是不能相等的，而判断是否相等的规则，就由此参数指定。默认情况下，使用 STL 标准库中提供的 equal_to&lt;key&gt; 规则，该规则仅支持可直接用 == 运算符做比较的数据类型。</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>总的来说，当无序容器中存储键值对的键为自定义类型时，默认的哈希函数 hash 以及比较函数 equal_to 将不再适用，只能自己设计适用该类型的哈希函数和比较函数，并显式传递给 Hash 参数和 Pred 参数。</p>
+</blockquote>
+<h4 id="成员方法"><a href="#成员方法" class="headerlink" title="成员方法"></a>成员方法</h4><p>unordered_map 既可以看做是关联容器，更属于自成一脉的无序容器。因此在该容器模板类中，既包含一些在学习关联容器时常见的成员方法，还有一些属于无序容器特有的成员方法。下表列出了 unordered_map 类模板提供的所有常用的成员方法以及各自的功能：</p>
+<table>
+<thead>
+<tr>
+<th>成员方法</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>begin()</td>
+<td>返回指向容器中第一个键值对的正向迭代器。</td>
+</tr>
+<tr>
+<td>end()</td>
+<td>返回指向容器中最后一个键值对之后位置的正向迭代器。</td>
+</tr>
+<tr>
+<td>cbegin()</td>
+<td>和 begin() 功能相同，只不过在其基础上增加了 const 属性，即该方法返回的迭代器不能用于修改容器内存储的键值对。</td>
+</tr>
+<tr>
+<td>cend()</td>
+<td>和 end() 功能相同，只不过在其基础上，增加了 const 属性，即该方法返回的迭代器不能用于修改容器内存储的键值对。</td>
+</tr>
+<tr>
+<td>empty()</td>
+<td>若容器为空，则返回 true；否则 false。</td>
+</tr>
+<tr>
+<td>size()</td>
+<td>返回当前容器中存有键值对的个数。</td>
+</tr>
+<tr>
+<td>max_size()</td>
+<td>返回容器所能容纳键值对的最大个数，不同的操作系统，其返回值亦不相同。</td>
+</tr>
+<tr>
+<td>operator[key]</td>
+<td>该模板类中重载了 [] 运算符，其功能是可以向访问数组中元素那样，只要给定某个键值对的键 key，就可以获取该键对应的值。注意，如果当前容器中没有以 key 为键的键值对，则其会使用该键向当前容器中插入一个新键值对。</td>
+</tr>
+<tr>
+<td>at(key)</td>
+<td>返回容器中存储的键 key 对应的值，如果 key 不存在，则会抛出 out_of_range 异常。</td>
+</tr>
+<tr>
+<td>find(key)</td>
+<td>查找以 key 为键的键值对，如果找到，则返回一个指向该键值对的正向迭代器；反之，则返回一个指向容器中最后一个键值对之后位置的迭代器（如果 end() 方法返回的迭代器）。</td>
+</tr>
+<tr>
+<td>count(key)</td>
+<td>在容器中查找以 key 键的键值对的个数。</td>
+</tr>
+<tr>
+<td>equal_range(key)</td>
+<td>返回一个 pair 对象，其包含 2 个迭代器，用于表明当前容器中键为 key 的键值对所在的范围。</td>
+</tr>
+<tr>
+<td>emplace()</td>
+<td>向容器中添加新键值对，效率比 insert() 方法高。</td>
+</tr>
+<tr>
+<td>emplace_hint()</td>
+<td>向容器中添加新键值对，效率比 insert() 方法高。</td>
+</tr>
+<tr>
+<td>insert()</td>
+<td>向容器中添加新键值对。</td>
+</tr>
+<tr>
+<td>erase()</td>
+<td>删除指定键值对。</td>
+</tr>
+<tr>
+<td>clear()</td>
+<td>清空容器，即删除容器中存储的所有键值对。</td>
+</tr>
+<tr>
+<td>swap()</td>
+<td>交换 2 个 unordered_map 容器存储的键值对，前提是必须保证这 2 个容器的类型完全相等。</td>
+</tr>
+<tr>
+<td>bucket_count()</td>
+<td>返回当前容器底层存储键值对时，使用桶（一个线性链表代表一个桶）的数量。</td>
+</tr>
+<tr>
+<td>max_bucket_count()</td>
+<td>返回当前系统中，unordered_map 容器底层最多可以使用多少桶。</td>
+</tr>
+<tr>
+<td>bucket_size(n)</td>
+<td>返回第 n 个桶中存储键值对的数量。</td>
+</tr>
+<tr>
+<td>bucket(key)</td>
+<td>返回以 key 为键的键值对所在桶的编号。</td>
+</tr>
+<tr>
+<td>load_factor()</td>
+<td>返回 unordered_map 容器中当前的负载因子。负载因子，指的是的当前容器中存储键值对的数量（size()）和使用桶数（bucket_count()）的比值，即 load_factor() = size() / bucket_count()。</td>
+</tr>
+<tr>
+<td>max_load_factor()</td>
+<td>返回或者设置当前 unordered_map 容器的负载因子。</td>
+</tr>
+<tr>
+<td>rehash(n)</td>
+<td>将当前容器底层使用桶的数量设置为 n。</td>
+</tr>
+<tr>
+<td>reserve()</td>
+<td>将存储桶的数量（也就是 bucket_count() 方法的返回值）设置为至少容纳count个元（不超过最大负载因子）所需的数量，并重新整理容器。</td>
+</tr>
+<tr>
+<td>hash_function()</td>
+<td>返回当前容器使用的哈希函数对象。</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>注意，对于实现互换 2 个相同类型 unordered_map 容器的键值对，除了可以调用该容器模板类中提供的 swap() 成员方法外，STL 标准库还提供了同名的 swap() 非成员函数。</p>
+</blockquote>
+<h4 id="创建C-unordered-map容器的方法"><a href="#创建C-unordered-map容器的方法" class="headerlink" title="创建C++ unordered_map容器的方法"></a>创建C++ unordered_map容器的方法</h4><p>常见的创建 unordered_map 容器的方法有以下几种。</p>
+<p>1) 通过调用 unordered_map 模板类的默认构造函数，可以创建空的 unordered_map 容器。比如：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">std</span>::<span class="built_in">unordered_map</span>&lt;<span class="built_in">std</span>::<span class="built_in">string</span>, <span class="built_in">std</span>::<span class="built_in">string</span>&gt; umap;</span><br></pre></td></tr></table></figure>
+
+<p>由此，就创建好了一个可存储 &lt;string,string&gt; 类型键值对的 unordered_map 容器。</p>
+<p>2) 当然，在创建 unordered_map 容器的同时，可以完成初始化操作。比如：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">std</span>::<span class="built_in">unordered_map</span>&lt;<span class="built_in">std</span>::<span class="built_in">string</span>, <span class="built_in">std</span>::<span class="built_in">string</span>&gt; umap&#123;</span><br><span class="line">    &#123;<span class="string">"Python教程"</span>,<span class="string">"http://c.biancheng.net/python/"</span>&#125;,</span><br><span class="line">    &#123;<span class="string">"Java教程"</span>,<span class="string">"http://c.biancheng.net/java/"</span>&#125;,</span><br><span class="line">    &#123;<span class="string">"Linux教程"</span>,<span class="string">"http://c.biancheng.net/linux/"</span>&#125; &#125;;</span><br></pre></td></tr></table></figure>
+
+<p>通过此方法创建的 umap 容器中，就包含有 3 个键值对元素。</p>
+<p>3) 另外，还可以调用 unordered_map 模板中提供的复制（拷贝）构造函数，将现有 unordered_map 容器中存储的键值对，复制给新建 unordered_map 容器。</p>
+<p>例如，在第二种方式创建好 umap 容器的基础上，再创建并初始化一个 umap2 容器：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">std::unordered_map&lt;std::string, std::string&gt; umap2(umap);</span><br></pre></td></tr></table></figure>
+
+<p>由此，umap2 容器中就包含有 umap 容器中所有的键值对。</p>
+<p>除此之外，C++ 11 标准中还向 unordered_map 模板类增加了移动构造函数，即以右值引用的方式将临时 unordered_map 容器中存储的所有键值对，全部复制给新建容器。例如：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 返回临时 unordered_map 容器的函数</span></span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">unordered_map</span> &lt;<span class="built_in">std</span>::<span class="built_in">string</span>, <span class="built_in">std</span>::<span class="built_in">string</span> &gt; retUmap()&#123;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">unordered_map</span>&lt;<span class="built_in">std</span>::<span class="built_in">string</span>, <span class="built_in">std</span>::<span class="built_in">string</span>&gt;tempUmap&#123;</span><br><span class="line">        &#123;<span class="string">"Python教程"</span>,<span class="string">"http://c.biancheng.net/python/"</span>&#125;,</span><br><span class="line">        &#123;<span class="string">"Java教程"</span>,<span class="string">"http://c.biancheng.net/java/"</span>&#125;,</span><br><span class="line">        &#123;<span class="string">"Linux教程"</span>,<span class="string">"http://c.biancheng.net/linux/"</span>&#125; &#125;;</span><br><span class="line">    <span class="keyword">return</span> tempUmap;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 调用移动构造函数，创建 umap2 容器</span></span><br><span class="line">std::unordered_map&lt;std::string, std::string&gt; umap2(retUmap());</span><br></pre></td></tr></table></figure>
+
+<p>注意，无论是调用复制构造函数还是拷贝构造函数，必须保证 2 个容器的类型完全相同。</p>
+<p>4) 当然，如果不想全部拷贝，可以使用 unordered_map 类模板提供的迭代器，在现有 unordered_map 容器中选择部分区域内的键值对，为新建 unordered_map 容器初始化。例如：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 传入 2 个迭代器</span></span><br><span class="line">std::unordered_map&lt;std::string, std::string&gt; umap2(++umap.begin(),umap.end());</span><br></pre></td></tr></table></figure>
+
+<p>通过此方式创建的 umap2 容器，其内部就包含 umap 容器中除第 1 个键值对外的所有其它键值对。</p>
+<h4 id="迭代器"><a href="#迭代器" class="headerlink" title="迭代器"></a>迭代器</h4><p>C++ STL 标准库中，unordered_map 容器迭代器的类型为前向迭代器（又称正向迭代器）。这意味着，假设 p 是一个前向迭代器，则其只能进行 <code>*p、p++、++p</code> 操作，且 2 个前向迭代器之间只能用 <code>==</code> 和 <code>!=</code> 运算符做比较。</p>
+<p>在 unordered_map 容器模板中，提供了下表所示的成员方法，可用来获取指向指定位置的前向迭代器。</p>
+<table>
+<thead>
+<tr>
+<th>成员方法</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>begin()</td>
+<td>返回指向容器中第一个键值对的正向迭代器。</td>
+</tr>
+<tr>
+<td>end()</td>
+<td>返回指向容器中最后一个键值对之后位置的正向迭代器。</td>
+</tr>
+<tr>
+<td>cbegin()</td>
+<td>和 begin() 功能相同，只不过在其基础上增加了 const 属性，即该方法返回的迭代器不能用于修改容器内存储的键值对。</td>
+</tr>
+<tr>
+<td>cend()</td>
+<td>和 end() 功能相同，只不过在其基础上，增加了 const 属性，即该方法返回的迭代器不能用于修改容器内存储的键值对。</td>
+</tr>
+<tr>
+<td>find(key)</td>
+<td>查找以 key 为键的键值对，如果找到，则返回一个指向该键值对的正向迭代器；反之，则返回一个指向容器中最后一个键值对之后位置的迭代器（如果 end() 方法返回的迭代器）。</td>
+</tr>
+<tr>
+<td>equal_range(key)</td>
+<td>返回一个 pair 对象，其包含 2 个迭代器，用于表明当前容器中键为 key 的键值对所在的范围。</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>值得一提的是，equal_range(key) 很少用于 unordered_map 容器，因为该容器中存储的都是键不相等的键值对，即便调用该成员方法，得到的 2 个迭代器所表示的范围中，最多只包含 1 个键值对。事实上，该成员方法更适用于 unordered_multimap 容器。</p>
+</blockquote>
+<p>下面的程序演示了上表中部分成员方法的用法：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unordered_map&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 创建 umap 容器</span></span><br><span class="line">    <span class="built_in">unordered_map</span>&lt;<span class="built_in">string</span>, <span class="built_in">string</span>&gt; umap&#123;</span><br><span class="line">        &#123;<span class="string">"Python教程"</span>,<span class="string">"http://c.biancheng.net/python/"</span>&#125;,</span><br><span class="line">        &#123;<span class="string">"Java教程"</span>,<span class="string">"http://c.biancheng.net/java/"</span>&#125;,</span><br><span class="line">        &#123;<span class="string">"Linux教程"</span>,<span class="string">"http://c.biancheng.net/linux/"</span>&#125; &#125;;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"umap 存储的键值对包括："</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="comment">// 遍历输出 umap 容器中所有的键值对</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span> iter = umap.<span class="built_in">begin</span>(); iter != umap.<span class="built_in">end</span>(); ++iter) &#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"&lt;"</span> &lt;&lt; iter-&gt;first &lt;&lt; <span class="string">", "</span> &lt;&lt; iter-&gt;second &lt;&lt; <span class="string">"&gt;"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 获取指向指定键值对的前向迭代器</span></span><br><span class="line">    <span class="built_in">unordered_map</span>&lt;<span class="built_in">string</span>, <span class="built_in">string</span>&gt;::iterator iter = umap.<span class="built_in">find</span>(<span class="string">"Java教程"</span>);</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt;<span class="string">"umap.find(\"Java教程\") = "</span> &lt;&lt; <span class="string">"&lt;"</span> &lt;&lt; iter-&gt;first &lt;&lt; <span class="string">", "</span> &lt;&lt; iter-&gt;second &lt;&lt; <span class="string">"&gt;"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>程序执行结果为：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">umap 存储的键值对包括：</span><br><span class="line">&lt;Python教程, http://c.biancheng.net/python/&gt;</span><br><span class="line">&lt;Linux教程, http://c.biancheng.net/linux/&gt;</span><br><span class="line">&lt;Java教程, http://c.biancheng.net/java/&gt;</span><br><span class="line">umap.find(<span class="string">"Java教程"</span>) = &lt;Java教程, http://c.biancheng.net/java/&gt;</span><br></pre></td></tr></table></figure>
+
+<p>需要注意的是，在操作 unordered_map 容器过程（尤其是向容器中添加新键值对）中，一旦当前容器的负载因子超过最大负载因子（默认值为 1.0），该容器就会适当增加桶的数量（通常是翻一倍），并自动执行 rehash() 成员方法，重新调整各个键值对的存储位置（此过程又称“重哈希”），此过程很可能导致之前创建的迭代器失效。</p>
+<blockquote>
+<p>所谓迭代器失效，针对的是那些用于表示容器内某个范围的迭代器，由于重哈希会重新调整每个键值对的存储位置，所以容器重哈希之后，之前表示特定范围的迭代器很可能无法再正确表示该范围。但是，重哈希并不会影响那些指向单个键值对元素的迭代器。</p>
+</blockquote>
+<p>举个例子：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unordered_map&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 创建 umap 容器</span></span><br><span class="line">    <span class="built_in">unordered_map</span>&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; umap;</span><br><span class="line">    <span class="comment">// 向 umap 容器添加 50 个键值对</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= <span class="number">50</span>; i++) &#123;</span><br><span class="line">        umap.emplace(i, i);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 获取键为 49 的键值对所在的范围</span></span><br><span class="line">    <span class="keyword">auto</span> pair = umap.equal_range(<span class="number">49</span>);</span><br><span class="line">    <span class="comment">//输出 pair 范围内的每个键值对的键的值</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span> iter = pair.first; iter != pair.second; ++iter) &#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; iter-&gt;first &lt;&lt;<span class="string">" "</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="comment">// 手动调整最大负载因子数</span></span><br><span class="line">    umap.max_load_factor(<span class="number">3.0</span>);</span><br><span class="line">    <span class="comment">// 手动调用 rehash() 函数重哈希</span></span><br><span class="line">    umap.rehash(<span class="number">10</span>);</span><br><span class="line">    <span class="comment">// 重哈希之后，pair 的范围可能会发生变化</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span> iter = pair.first; iter != pair.second; ++iter) &#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; iter-&gt;first &lt;&lt; <span class="string">" "</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>程序执行结果为：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">49</span></span><br><span class="line"><span class="number">49</span> <span class="number">17</span></span><br></pre></td></tr></table></figure>
+
+<p>观察输出结果不难发现，之前用于表示键为 49 的键值对所在范围的 2 个迭代器，重哈希之后表示的范围发生了改变。</p>
+<blockquote>
+<p>经测试，用于遍历整个容器的 begin()/end() 和 cbegin()/cend() 迭代器对，重哈希只会影响遍历容器内键值对的顺序，整个遍历的操作仍然可以顺利完成。</p>
+</blockquote>
+<h4 id="C-STL-unordered-map获取元素的4种方法"><a href="#C-STL-unordered-map获取元素的4种方法" class="headerlink" title="C++ STL unordered_map获取元素的4种方法"></a>C++ STL unordered_map获取元素的4种方法</h4><p>为了方便用户快速地从该类型容器提取出目标元素（也就是某个键值对的值），unordered_map 容器类模板中提供了以下几种方法。</p>
+<p>1) unordered_map 容器类模板中，实现了对 [ ] 运算符的重载，使得我们可以像“利用下标访问普通数组中元素”那样，通过目标键值对的键获取到该键对应的值。</p>
+<p>举个例子：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unordered_map&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 创建 umap 容器</span></span><br><span class="line">    <span class="built_in">unordered_map</span>&lt;<span class="built_in">string</span>, <span class="built_in">string</span>&gt; umap&#123;</span><br><span class="line">        &#123;<span class="string">"Python教程"</span>,<span class="string">"http://c.biancheng.net/python/"</span>&#125;,</span><br><span class="line">        &#123;<span class="string">"Java教程"</span>,<span class="string">"http://c.biancheng.net/java/"</span>&#125;,</span><br><span class="line">        &#123;<span class="string">"Linux教程"</span>,<span class="string">"http://c.biancheng.net/linux/"</span>&#125; &#125;;</span><br><span class="line">    <span class="comment">// 获取 "Java教程" 对应的值</span></span><br><span class="line">    <span class="built_in">string</span> str = umap[<span class="string">"Java教程"</span>];</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; str &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>程序输出结果为：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://c.biancheng.net/java/</span><br></pre></td></tr></table></figure>
+
+<p>需要注意的是，如果当前容器中并没有存储以 [ ] 运算符内指定的元素作为键的键值对，则此时 [ ] 运算符的功能将转变为：向当前容器中添加以目标元素为键的键值对。举个例子：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unordered_map&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 创建空 umap 容器</span></span><br><span class="line">    <span class="built_in">unordered_map</span>&lt;<span class="built_in">string</span>, <span class="built_in">string</span>&gt; umap;</span><br><span class="line">    <span class="comment">// [] 运算符在 = 右侧</span></span><br><span class="line">    <span class="built_in">string</span> str = umap[<span class="string">"STL教程"</span>];</span><br><span class="line">    <span class="comment">// [] 运算符在 = 左侧</span></span><br><span class="line">    umap[<span class="string">"C教程"</span>] = <span class="string">"http://c.biancheng.net/c/"</span>;</span><br><span class="line">   </span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span> iter = umap.<span class="built_in">begin</span>(); iter != umap.<span class="built_in">end</span>(); ++iter) &#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; iter-&gt;first &lt;&lt; <span class="string">" "</span> &lt;&lt; iter-&gt;second &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>程序执行结果为：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">C教程 http://c.biancheng.net/c/</span><br><span class="line">STL教程</span><br></pre></td></tr></table></figure>
+
+<p>可以看到，当使用 [ ] 运算符向 unordered_map 容器中添加键值对时，分为 2 种情况：</p>
+<ol>
+<li>当 [ ] 运算符位于赋值号（=）右侧时，则新添加键值对的键为 [ ] 运算符内的元素，其值为键值对要求的值类型的默认值（string 类型默认值为空字符串）；</li>
+<li>当 [ ] 运算符位于赋值号（=）左侧时，则新添加键值对的键为 [ ] 运算符内的元素，其值为赋值号右侧的元素。</li>
+</ol>
+<p>2) unordered_map 类模板中，还提供有 at() 成员方法，和使用 [ ] 运算符一样，at() 成员方法也需要根据指定的键，才能从容器中找到该键对应的值；不同之处在于，如果在当前容器中查找失败，该方法不会向容器中添加新的键值对，而是直接抛出<code>out_of_range</code>异常。</p>
+<p>举个例子：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unordered_map&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 创建 umap 容器</span></span><br><span class="line">    <span class="built_in">unordered_map</span>&lt;<span class="built_in">string</span>, <span class="built_in">string</span>&gt; umap&#123;</span><br><span class="line">        &#123;<span class="string">"Python教程"</span>,<span class="string">"http://c.biancheng.net/python/"</span>&#125;,</span><br><span class="line">        &#123;<span class="string">"Java教程"</span>,<span class="string">"http://c.biancheng.net/java/"</span>&#125;,</span><br><span class="line">        &#123;<span class="string">"Linux教程"</span>,<span class="string">"http://c.biancheng.net/linux/"</span>&#125; &#125;;</span><br><span class="line">    <span class="comment">// 获取指定键对应的值</span></span><br><span class="line">    <span class="built_in">string</span> str = umap.at(<span class="string">"Python教程"</span>);</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; str &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="comment">// 执行此语句会抛出 out_of_range 异常</span></span><br><span class="line">    <span class="comment">//cout &lt;&lt; umap.at("GO教程");</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>程序执行结果为：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://c.biancheng.net/python/</span><br></pre></td></tr></table></figure>
+
+<p>此程序中，第 14 行代码用于获取 umap 容器中键为“Python教程”对应的值，由于 umap 容器确实有符合条件的键值对，因此可以成功执行；而第 17 行代码，由于当前 umap 容器没有存储以“Go教程”为键的键值对，因此执行此语句会抛出 out_of_range 异常。</p>
+<p>3) [ ] 运算符和 at() 成员方法基本能满足大多数场景的需要。除此之外，还可以借助 unordered_map 模板中提供的 find() 成员方法。</p>
+<p>和前面方法不同的是，通过 find() 方法得到的是一个正向迭代器，该迭代器的指向分以下 2 种情况：</p>
+<ol>
+<li>当 find() 方法成功找到以指定元素作为键的键值对时，其返回的迭代器就指向该键值对；</li>
+<li>当 find() 方法查找失败时，其返回的迭代器和 end() 方法返回的迭代器一样，指向容器中最后一个键值对之后的位置。</li>
+</ol>
+<p>举个例子：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unordered_map&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 创建 umap 容器</span></span><br><span class="line">    <span class="built_in">unordered_map</span>&lt;<span class="built_in">string</span>, <span class="built_in">string</span>&gt; umap&#123;</span><br><span class="line">        &#123;<span class="string">"Python教程"</span>,<span class="string">"http://c.biancheng.net/python/"</span>&#125;,</span><br><span class="line">        &#123;<span class="string">"Java教程"</span>,<span class="string">"http://c.biancheng.net/java/"</span>&#125;,</span><br><span class="line">        &#123;<span class="string">"Linux教程"</span>,<span class="string">"http://c.biancheng.net/linux/"</span>&#125; &#125;;</span><br><span class="line">    <span class="comment">// 查找成功</span></span><br><span class="line">    <span class="built_in">unordered_map</span>&lt;<span class="built_in">string</span>, <span class="built_in">string</span>&gt;::iterator iter = umap.<span class="built_in">find</span>(<span class="string">"Python教程"</span>);</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; iter-&gt;first &lt;&lt; <span class="string">" "</span> &lt;&lt; iter-&gt;second &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="comment">// 查找失败</span></span><br><span class="line">    <span class="built_in">unordered_map</span>&lt;<span class="built_in">string</span>, <span class="built_in">string</span>&gt;::iterator iter2 = umap.<span class="built_in">find</span>(<span class="string">"GO教程"</span>);</span><br><span class="line">    <span class="keyword">if</span> (iter2 == umap.<span class="built_in">end</span>()) &#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"当前容器中没有以\"GO教程\"为键的键值对"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>程序执行结果为：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Python教程 http://c.biancheng.net/python/</span><br><span class="line">当前容器中没有以<span class="string">"GO教程"</span>为键的键值对</span><br></pre></td></tr></table></figure>
+
+<p>4) 除了 find() 成员方法之外，甚至可以借助 begin()/end() 或者 cbegin()/cend()，通过遍历整个容器中的键值对来找到目标键值对。</p>
+<p>举个例子：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#include &lt;iostream&gt;</span></span><br><span class="line"><span class="comment">#include &lt;string&gt;</span></span><br><span class="line"><span class="comment">#include &lt;unordered_map&gt;</span></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    // 创建 umap 容器</span><br><span class="line">    unordered_map&lt;string, string&gt; umap&#123;</span><br><span class="line">        &#123;<span class="string">"Python教程"</span>,<span class="string">"http://c.biancheng.net/python/"</span>&#125;,</span><br><span class="line">        &#123;<span class="string">"Java教程"</span>,<span class="string">"http://c.biancheng.net/java/"</span>&#125;,</span><br><span class="line">        &#123;<span class="string">"Linux教程"</span>,<span class="string">"http://c.biancheng.net/linux/"</span>&#125; &#125;;</span><br><span class="line">    // 遍历整个容器中存储的键值对</span><br><span class="line">    <span class="keyword">for</span> (auto iter = umap.begin(); iter != umap.end(); ++iter) &#123;</span><br><span class="line">        //判断当前的键值对是否就是要找的</span><br><span class="line">        if (!iter-&gt;first.compare("Java教程")) &#123;</span><br><span class="line">            cout &lt;&lt; iter-&gt;second &lt;&lt; endl;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>程序执行结果为：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://c.biancheng.net/java/</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>以上 4 种方法中，前 2 种方法基本能满足多数场景的需要，建议初学者首选 at() 成员方法！</p>
+</blockquote>
+<h4 id="C-unordered-map-insert-方法"><a href="#C-unordered-map-insert-方法" class="headerlink" title="C++ unordered_map insert()方法"></a>C++ unordered_map insert()方法</h4><p>为了方便用户向已建 unordered_map 容器中添加新的键值对，该容器模板中提供了 insert() 方法，unordered_map 模板类中，提供了多种语法格式的 insert() 方法，根据功能的不同，可划分为以下几种用法。</p>
+<p>1) insert() 方法可以将 pair 类型的键值对元素添加到 unordered_map 容器中，其语法格式有 2 种：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 以普通方式传递参数</span></span><br><span class="line">pair&lt;iterator,bool&gt; insert ( const value_type&amp; val );</span><br><span class="line"><span class="comment">// 以右值引用的方式传递参数</span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">P</span>&gt;</span></span><br><span class="line"><span class="class">  <span class="title">pair</span>&lt;iterator,bool&gt; <span class="title">insert</span> ( <span class="title">P</span>&amp;&amp; <span class="title">val</span> );</span></span><br></pre></td></tr></table></figure>
+
+<p>以上 2 种格式中，参数 val 表示要添加到容器中的目标键值对元素；该方法的返回值为 pair类型值，内部包含一个 iterator 迭代器和 bool 变量：</p>
+<ul>
+<li>当 insert() 将 val 成功添加到容器中时，返回的迭代器指向新添加的键值对，bool 值为 True；</li>
+<li>当 insert() 添加键值对失败时，意味着当前容器中本就存储有和要添加键值对的键相等的键值对，这种情况下，返回的迭代器将指向这个导致插入操作失败的迭代器，bool 值为 False。</li>
+</ul>
+<p>举个例子：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unordered_map&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 创建空 umap 容器</span></span><br><span class="line">    <span class="built_in">unordered_map</span>&lt;<span class="built_in">string</span>, <span class="built_in">string</span>&gt; umap;</span><br><span class="line">    <span class="comment">// 构建要添加的键值对</span></span><br><span class="line">    <span class="built_in">std</span>::pair&lt;<span class="built_in">string</span>, <span class="built_in">string</span>&gt;mypair(<span class="string">"STL教程"</span>, <span class="string">"http://c.biancheng.net/stl/"</span>);</span><br><span class="line">    <span class="comment">// 创建接收 insert() 方法返回值的pair类型变量</span></span><br><span class="line">    <span class="built_in">std</span>::pair&lt;<span class="built_in">unordered_map</span>&lt;<span class="built_in">string</span>, <span class="built_in">string</span>&gt;::iterator, <span class="keyword">bool</span>&gt; ret;</span><br><span class="line">    <span class="comment">// 调用 insert() 方法的第一种语法格式</span></span><br><span class="line">    ret = umap.insert(mypair);</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"bool = "</span> &lt;&lt; ret.second &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"iter -&gt; "</span> &lt;&lt; ret.first-&gt;first &lt;&lt;<span class="string">" "</span> &lt;&lt; ret.first-&gt;second &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">   </span><br><span class="line">    <span class="comment">// 调用 insert() 方法的第二种语法格式</span></span><br><span class="line">    ret = umap.insert(<span class="built_in">std</span>::make_pair(<span class="string">"Python教程"</span>,<span class="string">"http://c.biancheng.net/python/"</span>));</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"bool = "</span> &lt;&lt; ret.second &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"iter -&gt; "</span> &lt;&lt; ret.first-&gt;first &lt;&lt; <span class="string">" "</span> &lt;&lt; ret.first-&gt;second &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>程序执行结果为：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">bool = <span class="number">1</span></span><br><span class="line">iter -&gt; STL教程 http://c.biancheng.net/stl/</span><br><span class="line">bool = <span class="number">1</span></span><br><span class="line">iter -&gt; Python教程 http://c.biancheng.net/python/</span><br></pre></td></tr></table></figure>
+
+<p>从输出结果很容易看出，两次添加键值对的操作，insert() 方法返回值中的 bool 变量都为 1，表示添加成功，此时返回的迭代器指向的是添加成功的键值对。</p>
+<p>2) 除此之外，insert() 方法还可以指定新键值对要添加到容器中的位置，其语法格式如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 以普通方式传递 val 参数</span></span><br><span class="line"><span class="function">iterator <span class="title">insert</span> <span class="params">( const_iterator hint, <span class="keyword">const</span> value_type&amp; val )</span></span>;</span><br><span class="line"><span class="comment">// 以右值引用方法传递 val 参数</span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">P</span>&gt;</span></span><br><span class="line"><span class="class">  <span class="title">iterator</span> <span class="title">insert</span> ( <span class="title">const_iterator</span> <span class="title">hint</span>, <span class="title">P</span>&amp;&amp; <span class="title">val</span> );</span></span><br></pre></td></tr></table></figure>
+
+<p>以上 2 种语法格式中，hint 参数为迭代器，用于指定新键值对要添加到容器中的位置；val 参数指的是要添加容器中的键值对；方法的返回值为迭代器：</p>
+<ul>
+<li>如果 insert() 方法成功添加键值对，该迭代器指向新添加的键值对；</li>
+<li>如果 insert() 方法添加键值对失败，则表示容器中本就包含有相同键的键值对，该方法返回的迭代器就指向容器中键相同的键值对；</li>
+</ul>
+<blockquote>
+<p>注意，以上 2 种语法格式中，虽然通过 hint 参数指定了新键值对添加到容器中的位置，但该键值对真正存储的位置，并不是 hint 参数说了算，最终的存储位置仍取决于该键值对的键的值。</p>
+</blockquote>
+<p>举个例子：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unordered_map&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 创建空 umap 容器</span></span><br><span class="line">    <span class="built_in">unordered_map</span>&lt;<span class="built_in">string</span>, <span class="built_in">string</span>&gt; umap;</span><br><span class="line">    <span class="comment">// 构建要添加的键值对</span></span><br><span class="line">    <span class="built_in">std</span>::pair&lt;<span class="built_in">string</span>, <span class="built_in">string</span>&gt;mypair(<span class="string">"STL教程"</span>, <span class="string">"http://c.biancheng.net/stl/"</span>);</span><br><span class="line">    <span class="comment">// 创建接收 insert() 方法返回值的迭代器类型变量</span></span><br><span class="line">    <span class="built_in">unordered_map</span>&lt;<span class="built_in">string</span>, <span class="built_in">string</span>&gt;::iterator iter;</span><br><span class="line">    <span class="comment">// 调用第一种语法格式</span></span><br><span class="line">    iter = umap.insert(umap.<span class="built_in">begin</span>(), mypair);</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"iter -&gt; "</span> &lt;&lt; iter-&gt;first &lt;&lt;<span class="string">" "</span> &lt;&lt; iter-&gt;second &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 调用第二种语法格式</span></span><br><span class="line">    iter = umap.insert(umap.<span class="built_in">begin</span>(),<span class="built_in">std</span>::make_pair(<span class="string">"Python教程"</span>, <span class="string">"http://c.biancheng.net/python/"</span>));</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"iter -&gt; "</span> &lt;&lt; iter-&gt;first &lt;&lt; <span class="string">" "</span> &lt;&lt; iter-&gt;second &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>程序输出结果为：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">iter -&gt; STL教程 http://c.biancheng.net/stl/</span><br><span class="line">iter -&gt; Python教程 http://c.biancheng.net/python/</span><br></pre></td></tr></table></figure>
+
+<p>3) insert() 方法还支持将某一个 unordered_map 容器中指定区域内的所有键值对，复制到另一个 unordered_map 容器中，其语法格式如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">InputIterator</span>&gt;</span></span><br><span class="line"><span class="class">  <span class="title">void</span> <span class="title">insert</span> ( <span class="title">InputIterator</span> <span class="title">first</span>, <span class="title">InputIterator</span> <span class="title">last</span> );</span></span><br></pre></td></tr></table></figure>
+
+<p>其中 first 和 last 都为迭代器，<code>[first, last)</code>表示复制其它 unordered_map 容器中键值对的区域。</p>
+<p>举个例子：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unordered_map&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 创建并初始化 umap 容器</span></span><br><span class="line">    <span class="built_in">unordered_map</span>&lt;<span class="built_in">string</span>, <span class="built_in">string</span>&gt; umap&#123; &#123;<span class="string">"STL教程"</span>,<span class="string">"http://c.biancheng.net/stl/"</span>&#125;,</span><br><span class="line">    &#123;<span class="string">"Python教程"</span>,<span class="string">"http://c.biancheng.net/python/"</span>&#125;,</span><br><span class="line">    &#123;<span class="string">"Java教程"</span>,<span class="string">"http://c.biancheng.net/java/"</span>&#125; &#125;;</span><br><span class="line">    <span class="comment">// 创建一个空的 unordered_map 容器</span></span><br><span class="line">    <span class="built_in">unordered_map</span>&lt;<span class="built_in">string</span>, <span class="built_in">string</span>&gt; otherumap;</span><br><span class="line">    <span class="comment">// 指定要拷贝 umap 容器中键值对的范围</span></span><br><span class="line">    <span class="built_in">unordered_map</span>&lt;<span class="built_in">string</span>, <span class="built_in">string</span>&gt;::iterator first = ++umap.<span class="built_in">begin</span>();</span><br><span class="line">    <span class="built_in">unordered_map</span>&lt;<span class="built_in">string</span>, <span class="built_in">string</span>&gt;::iterator last = umap.<span class="built_in">end</span>();</span><br><span class="line">    <span class="comment">// 将指定 umap 容器中 [first,last) 区域内的键值对复制给 otherumap 容器</span></span><br><span class="line">    otherumap.insert(first, last);</span><br><span class="line">    <span class="comment">// 遍历 otherumap 容器中存储的键值对</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span> iter = otherumap.<span class="built_in">begin</span>(); iter != otherumap.<span class="built_in">end</span>(); ++iter)&#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; iter-&gt;first &lt;&lt; <span class="string">" "</span> &lt;&lt; iter-&gt;second &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>程序输出结果为：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Python教程 http:<span class="comment">//c.biancheng.net/python/</span></span><br><span class="line">Java教程 http:<span class="comment">//c.biancheng.net/java/</span></span><br></pre></td></tr></table></figure>
+
+<p>4) 除了以上 3 种方式，insert() 方法还支持一次向 unordered_map 容器添加多个键值对，其语法格式如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">insert</span> <span class="params">( <span class="built_in">initializer_list</span>&lt;value_type&gt; il )</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>其中，il 参数指的是可以用初始化列表的形式指定多个键值对元素。举个例子：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unordered_map&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 创建空的 umap 容器</span></span><br><span class="line">    <span class="built_in">unordered_map</span>&lt;<span class="built_in">string</span>, <span class="built_in">string</span>&gt; umap;</span><br><span class="line">    <span class="comment">// 向 umap 容器同时添加多个键值对</span></span><br><span class="line">    umap.insert(&#123; &#123;<span class="string">"STL教程"</span>,<span class="string">"http://c.biancheng.net/stl/"</span>&#125;,</span><br><span class="line">    &#123;<span class="string">"Python教程"</span>,<span class="string">"http://c.biancheng.net/python/"</span>&#125;,</span><br><span class="line">    &#123;<span class="string">"Java教程"</span>,<span class="string">"http://c.biancheng.net/java/"</span>&#125; &#125;);</span><br><span class="line">    <span class="comment">// 遍历输出 umap 容器中存储的键值对</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span> iter = umap.<span class="built_in">begin</span>(); iter != umap.<span class="built_in">end</span>(); ++iter)&#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; iter-&gt;first &lt;&lt; <span class="string">" "</span> &lt;&lt; iter-&gt;second &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>程序输出结果为：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">STL教程 http://c.biancheng.net/stl/</span><br><span class="line">Python教程 http://c.biancheng.net/python/</span><br><span class="line">Java教程 http://c.biancheng.net/java/</span><br></pre></td></tr></table></figure>
+
+
+<p>总的来说，unordered_map 模板类提供的 insert() 方法，有以上 4 种用法，可以根据实际场景的需要自行选择使用哪一种。</p>
+<h4 id="C-unordered-map-emplace-和emplace-hint-方法"><a href="#C-unordered-map-emplace-和emplace-hint-方法" class="headerlink" title="C++ unordered_map emplace()和emplace_hint()方法"></a>C++ unordered_map emplace()和emplace_hint()方法</h4><p>和前面学的 map、set 等容器一样，C++ 11 标准也为 unordered_map 容器新增了 emplace() 和 emplace_hint() 成员方法。我们知道，实现向已有 unordered_map 容器中添加新键值对，可以通过调用 insert() 方法，但其实还有更好的方法，即使用 emplace() 或者 emplace_hint() 方法，它们完成“向容器中添加新键值对”的效率，要比 insert() 方法高。</p>
+<h5 id="unordered-map-emplace-方法"><a href="#unordered-map-emplace-方法" class="headerlink" title="unordered_map emplace()方法"></a>unordered_map emplace()方法</h5><p>emplace() 方法的用法很简单，其语法格式如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span>... <span class="title">Args</span>&gt;</span></span><br><span class="line"><span class="class">  <span class="title">pair</span>&lt;iterator, bool&gt; <span class="title">emplace</span> ( <span class="title">Args</span>&amp;&amp;... <span class="title">args</span> );</span></span><br></pre></td></tr></table></figure>
+
+<p>其中，参数 args 表示可直接向该方法传递创建新键值对所需要的 2 个元素的值，其中第一个元素将作为键值对的键，另一个作为键值对的值。也就是说，该方法无需我们手动创建键值对，其内部会自行完成此工作。</p>
+<p>另外需要注意的是，该方法的返回值为 pair 类型值，其包含一个迭代器和一个 bool 类型值：</p>
+<ul>
+<li>当 emplace() 成功添加新键值对时，返回的迭代器指向新添加的键值对，bool 值为 True；</li>
+<li>当 emplace() 添加新键值对失败时，说明容器中本就包含一个键相等的键值对，此时返回的迭代器指向的就是容器中键相同的这个键值对，bool 值为 False。</li>
+</ul>
+<p>举个例子：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unordered_map&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 创建 umap 容器</span></span><br><span class="line">    <span class="built_in">unordered_map</span>&lt;<span class="built_in">string</span>, <span class="built_in">string</span>&gt; umap;</span><br><span class="line">    <span class="comment">// 定义一个接受 emplace() 方法的 pair 类型变量</span></span><br><span class="line">    pair&lt;<span class="built_in">unordered_map</span>&lt;<span class="built_in">string</span>, <span class="built_in">string</span>&gt;::iterator, <span class="keyword">bool</span>&gt; ret;</span><br><span class="line">    <span class="comment">// 调用 emplace() 方法</span></span><br><span class="line">    ret = umap.emplace(<span class="string">"STL教程"</span>, <span class="string">"http://c.biancheng.net/stl/"</span>);</span><br><span class="line">    <span class="comment">// 输出 ret 中包含的 2 个元素的值</span></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"bool ="</span> &lt;&lt; ret.second &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"iter -&gt;"</span> &lt;&lt; ret.first-&gt;first &lt;&lt; <span class="string">" "</span> &lt;&lt; ret.first-&gt;second &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>程序执行结果为：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">bool =<span class="number">1</span></span><br><span class="line">iter -&gt;STL教程 http://c.biancheng.net/stl/</span><br></pre></td></tr></table></figure>
+
+<p>通过执行结果中 bool 变量的值为 1 可以得知，emplace() 方法成功将新键值对添加到了 umap 容器中。</p>
+<h5 id="unordered-map-emplace-hint-方法"><a href="#unordered-map-emplace-hint-方法" class="headerlink" title="unordered_map emplace_hint()方法"></a>unordered_map emplace_hint()方法</h5><p>emplace_hint() 方法的语法格式如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span>... <span class="title">Args</span>&gt;</span></span><br><span class="line"><span class="class">  <span class="title">iterator</span> <span class="title">emplace_hint</span> ( <span class="title">const_iterator</span> <span class="title">position</span>, <span class="title">Args</span>&amp;&amp;... <span class="title">args</span> );</span></span><br></pre></td></tr></table></figure>
+
+<p>和 emplace() 方法相同，emplace_hint() 方法内部会自行构造新键值对，因此我们只需向其传递构建该键值对所需的 2 个元素（第一个作为键，另一个作为值）即可。不同之处在于：</p>
+<ul>
+<li>emplace_hint() 方法的返回值仅是一个迭代器，而不再是 pair 类型变量。当该方法将新键值对成功添加到容器中时，返回的迭代器指向新添加的键值对；反之，如果添加失败，该迭代器指向的是容器中和要添加键值对键相同的那个键值对。</li>
+<li>emplace_hint() 方法还需要传递一个迭代器作为第一个参数，该迭代器表明将新键值对添加到容器中的位置。需要注意的是，新键值对添加到容器中的位置，并不是此迭代器说了算，最终仍取决于该键值对的键的值。</li>
+</ul>
+<blockquote>
+<p>可以这样理解，emplace_hint() 方法中传入的迭代器，仅是给 unordered_map 容器提供一个建议，并不一定会被容器采纳。</p>
+</blockquote>
+<p>举个例子：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unordered_map&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 创建 umap 容器</span></span><br><span class="line">    <span class="built_in">unordered_map</span>&lt;<span class="built_in">string</span>, <span class="built_in">string</span>&gt; umap;</span><br><span class="line">    <span class="comment">// 定义一个接受 emplace_hint() 方法的迭代器</span></span><br><span class="line">    <span class="built_in">unordered_map</span>&lt;<span class="built_in">string</span>,<span class="built_in">string</span>&gt;::iterator iter;</span><br><span class="line">    <span class="comment">// 调用 empalce_hint() 方法</span></span><br><span class="line">    iter = umap.emplace_hint(umap.<span class="built_in">begin</span>(),<span class="string">"STL教程"</span>, <span class="string">"http://c.biancheng.net/stl/"</span>);</span><br><span class="line">    <span class="comment">// 输出 emplace_hint() 返回迭代器 iter 指向的键值对的内容</span></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"iter -&gt;"</span> &lt;&lt; iter-&gt;first &lt;&lt; <span class="string">" "</span> &lt;&lt; iter-&gt;second &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>程序执行结果为：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iter -&gt;STL教程 http://c.biancheng.net/stl/</span><br></pre></td></tr></table></figure>
+
+<h4 id="C-STL-unordered-map删除元素：erase-和clear"><a href="#C-STL-unordered-map删除元素：erase-和clear" class="headerlink" title="C++ STL unordered_map删除元素：erase()和clear()"></a>C++ STL unordered_map删除元素：erase()和clear()</h4><p>C++ STL 标准库为了方便用户可以随时删除 unordered_map 容器中存储的键值对，unordered_map 容器类模板中提供了以下 2 个成员方法：</p>
+<ul>
+<li>erase()：删除 unordered_map 容器中指定的键值对；</li>
+<li>clear()：删除 unordered_map 容器中所有的键值对，即清空容器。</li>
+</ul>
+<h5 id="unordered-map-erase-方法"><a href="#unordered-map-erase-方法" class="headerlink" title="unordered_map erase()方法"></a>unordered_map erase()方法</h5><p>为了满足不同场景删除 unordered_map 容器中键值对的需要，此容器的类模板中提供了 3 种语法格式的 erase() 方法。</p>
+<p>1) erase() 方法可以接受一个正向迭代器，并删除该迭代器指向的键值对。该方法的语法格式如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">iterator <span class="title">erase</span> <span class="params">( const_iterator <span class="built_in">position</span> )</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>其中 position 为指向容器中某个键值对的迭代器，该方法会返回一个指向被删除键值对之后位置的迭代器。举个例子：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unordered_map&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 创建 umap 容器</span></span><br><span class="line">    <span class="built_in">unordered_map</span>&lt;<span class="built_in">string</span>, <span class="built_in">string</span>&gt; umap&#123;</span><br><span class="line">        &#123;<span class="string">"STL教程"</span>, <span class="string">"http://c.biancheng.net/stl/"</span>&#125;,</span><br><span class="line">        &#123;<span class="string">"Python教程"</span>, <span class="string">"http://c.biancheng.net/python/"</span>&#125;,</span><br><span class="line">        &#123;<span class="string">"Java教程"</span>, <span class="string">"http://c.biancheng.net/java/"</span>&#125; &#125;;</span><br><span class="line">    <span class="comment">// 输出 umap 容器中存储的键值对</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span> iter = umap.<span class="built_in">begin</span>(); iter != umap.<span class="built_in">end</span>(); ++iter) &#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; iter-&gt;first &lt;&lt; <span class="string">" "</span> &lt;&lt; iter-&gt;second &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"erase:"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="comment">// 定义一个接收 erase() 方法的迭代器</span></span><br><span class="line">    <span class="built_in">unordered_map</span>&lt;<span class="built_in">string</span>,<span class="built_in">string</span>&gt;::iterator ret;</span><br><span class="line">    <span class="comment">// 删除容器中第一个键值对</span></span><br><span class="line">    ret = umap.erase(umap.<span class="built_in">begin</span>());</span><br><span class="line">    <span class="comment">// 输出 umap 容器中存储的键值对</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span> iter = umap.<span class="built_in">begin</span>(); iter != umap.<span class="built_in">end</span>(); ++iter) &#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; iter-&gt;first &lt;&lt; <span class="string">" "</span> &lt;&lt; iter-&gt;second &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"ret = "</span> &lt;&lt; ret-&gt;first &lt;&lt; <span class="string">" "</span> &lt;&lt; ret-&gt;second &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>程序执行结果为：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">STL教程 http://c.biancheng.net/stl/</span><br><span class="line">Python教程 http://c.biancheng.net/python/</span><br><span class="line">Java教程 http://c.biancheng.net/java/</span><br><span class="line">erase:</span><br><span class="line">Python教程 http://c.biancheng.net/python/</span><br><span class="line">Java教程 http://c.biancheng.net/java/</span><br><span class="line">ret = Python教程 http://c.biancheng.net/python/</span><br></pre></td></tr></table></figure>
+
+<p>可以看到，通过给 erase() 方法传入指向容器中第一个键值对的迭代器，该方法可以将容器中第一个键值对删除，同时返回一个指向被删除键值对之后位置的迭代器。</p>
+<blockquote>
+<p>注意，如果erase()方法删除的是容器存储的最后一个键值对，则该方法返回的迭代器，将指向容器中最后一个键值对之后的位置（等同于 end() 方法返回的迭代器）。</p>
+</blockquote>
+<p>2) 我们还可以直接将要删除键值对的键作为参数直接传给 erase() 方法，该方法会自行去 unordered_map 容器中找和给定键相同的键值对，将其删除。erase() 方法的语法格式如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">size_type <span class="title">erase</span> <span class="params">( <span class="keyword">const</span> key_type&amp; k )</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>其中，k 表示目标键值对的键的值；该方法会返回一个整数，其表示成功删除的键值对的数量。举个例子：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unordered_map&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 创建 umap 容器</span></span><br><span class="line">    <span class="built_in">unordered_map</span>&lt;<span class="built_in">string</span>, <span class="built_in">string</span>&gt; umap&#123;</span><br><span class="line">        &#123;<span class="string">"STL教程"</span>, <span class="string">"http://c.biancheng.net/stl/"</span>&#125;,</span><br><span class="line">        &#123;<span class="string">"Python教程"</span>, <span class="string">"http://c.biancheng.net/python/"</span>&#125;,</span><br><span class="line">        &#123;<span class="string">"Java教程"</span>, <span class="string">"http://c.biancheng.net/java/"</span>&#125; &#125;; </span><br><span class="line">    <span class="comment">// 输出 umap 容器中存储的键值对</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span> iter = umap.<span class="built_in">begin</span>(); iter != umap.<span class="built_in">end</span>(); ++iter) &#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; iter-&gt;first &lt;&lt; <span class="string">" "</span> &lt;&lt; iter-&gt;second &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> delNum = umap.erase(<span class="string">"Python教程"</span>);</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"delNum = "</span> &lt;&lt; delNum &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="comment">// 再次输出 umap 容器中存储的键值对</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span> iter = umap.<span class="built_in">begin</span>(); iter != umap.<span class="built_in">end</span>(); ++iter) &#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; iter-&gt;first &lt;&lt; <span class="string">" "</span> &lt;&lt; iter-&gt;second &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>程序执行结果为：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">STL教程 http://c.biancheng.net/stl/</span><br><span class="line">Python教程 http://c.biancheng.net/python/</span><br><span class="line">Java教程 http://c.biancheng.net/java/</span><br><span class="line">delNum = <span class="number">1</span></span><br><span class="line">STL教程 http://c.biancheng.net/stl/</span><br><span class="line">Java教程 http://c.biancheng.net/java/</span><br></pre></td></tr></table></figure>
+
+<p>通过输出结果可以看到，通过将 “Python教程” 传给 erase() 方法，就成功删除了 umap 容器中键为 “Python教程” 的键值对。</p>
+<p>3) 除了支持删除 unordered_map 容器中指定的某个键值对，erase() 方法还支持一次删除指定范围内的所有键值对，其语法格式如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">iterator <span class="title">erase</span> <span class="params">( const_iterator first, const_iterator last )</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>其中 first 和 last 都是正向迭代器，[first, last) 范围内的所有键值对都会被 erase() 方法删除；同时，该方法会返回一个指向被删除的最后一个键值对之后一个位置的迭代器。举个例子：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unordered_map&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 创建 umap 容器</span></span><br><span class="line">    <span class="built_in">unordered_map</span>&lt;<span class="built_in">string</span>, <span class="built_in">string</span>&gt; umap&#123;</span><br><span class="line">        &#123;<span class="string">"STL教程"</span>, <span class="string">"http://c.biancheng.net/stl/"</span>&#125;,</span><br><span class="line">        &#123;<span class="string">"Python教程"</span>, <span class="string">"http://c.biancheng.net/python/"</span>&#125;,</span><br><span class="line">        &#123;<span class="string">"Java教程"</span>, <span class="string">"http://c.biancheng.net/java/"</span>&#125; &#125;;</span><br><span class="line">    <span class="comment">// first 指向第一个键值对</span></span><br><span class="line">    <span class="built_in">unordered_map</span>&lt;<span class="built_in">string</span>, <span class="built_in">string</span>&gt;::iterator first = umap.<span class="built_in">begin</span>();</span><br><span class="line">    <span class="comment">// last 指向最后一个键值对</span></span><br><span class="line">    <span class="built_in">unordered_map</span>&lt;<span class="built_in">string</span>, <span class="built_in">string</span>&gt;::iterator last = umap.<span class="built_in">end</span>();</span><br><span class="line">    <span class="comment">// 删除[fist,last)范围内的键值对</span></span><br><span class="line">    <span class="keyword">auto</span> ret = umap.erase(first, last);</span><br><span class="line">    <span class="comment">// 输出 umap 容器中存储的键值对</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span> iter = umap.<span class="built_in">begin</span>(); iter != umap.<span class="built_in">end</span>(); ++iter) &#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; iter-&gt;first &lt;&lt; <span class="string">" "</span> &lt;&lt; iter-&gt;second &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>执行程序会发现，没有输出任何数据，因为 erase() 方法删除了 umap 容器中 [begin(), end()) 范围内所有的元素。</p>
+<h5 id="unordered-map-clear-方法"><a href="#unordered-map-clear-方法" class="headerlink" title="unordered_map clear()方法"></a>unordered_map clear()方法</h5><p>在个别场景中，可能需要一次性删除 unordered_map 容器中存储的所有键值对，可以使用 clear() 方法，其语法格式如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">clear</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
+
+<p>举个例子：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unordered_map&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 创建 umap 容器</span></span><br><span class="line">    <span class="built_in">unordered_map</span>&lt;<span class="built_in">string</span>, <span class="built_in">string</span>&gt; umap&#123;</span><br><span class="line">        &#123;<span class="string">"STL教程"</span>, <span class="string">"http://c.biancheng.net/stl/"</span>&#125;,</span><br><span class="line">        &#123;<span class="string">"Python教程"</span>, <span class="string">"http://c.biancheng.net/python/"</span>&#125;,</span><br><span class="line">        &#123;<span class="string">"Java教程"</span>, <span class="string">"http://c.biancheng.net/java/"</span>&#125; &#125;;</span><br><span class="line">    <span class="comment">// 输出 umap 容器中存储的键值对</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span> iter = umap.<span class="built_in">begin</span>(); iter != umap.<span class="built_in">end</span>(); ++iter) &#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; iter-&gt;first &lt;&lt; <span class="string">" "</span> &lt;&lt; iter-&gt;second &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 删除容器内所有键值对</span></span><br><span class="line">    umap.<span class="built_in">clear</span>();</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"umap size = "</span> &lt;&lt; umap.<span class="built_in">size</span>() &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>程序执行结果为：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">STL教程 http://c.biancheng.net/stl/</span><br><span class="line">Python教程 http://c.biancheng.net/python/</span><br><span class="line">Java教程 http://c.biancheng.net/java/</span><br><span class="line">umap size = <span class="number">0</span></span><br></pre></td></tr></table></figure>
+
+<p>显然，通过调用 clear() 方法，原本包含 3 个键值对的 umap 容器，变成了空容器。</p>
+<blockquote>
+<p>注意，虽然使用 erase() 方法的第 3 种语法格式，可能实现删除 unordered_map 容器内所有的键值对，但更推荐使用 clear() 方法。</p>
+</blockquote>
+<hr>
+<h2 id="unordered-multimap"><a href="#unordered-multimap" class="headerlink" title="unordered_multimap"></a>unordered_multimap</h2><h3 id="概述-2"><a href="#概述-2" class="headerlink" title="概述"></a>概述</h3><p>C++ STL 标准库中，除了提供有 unordered_map 无序关联容器，还提供有和 unordered_map 容器非常相似的 unordered_multimap 无序关联容器。</p>
+<p>和 unordered_map 容器一样，unordered_multimap 容器也以键值对的形式存储数据，且底层也采用哈希表结构存储各个键值对。两者唯一的不同之处在于，unordered_multimap 容器可以存储多个键相等的键值对，而 unordered_map 容器不行。</p>
+<blockquote>
+<p>《深度剖析C++ STL无序容器底层原理》一文提到，无序容器中存储的各个键值对，都会哈希存到各个桶（本质为链表）中。而对于 unordered_multimap 容器来说，其存储的所有键值对中，键相等的键值对会被哈希到同一个桶中存储。</p>
+</blockquote>
+<p>另外值得一提得是，STL 标准库中实现 unordered_multimap 容器的模板类并没有定义在以自己名称命名的头文件中，而是和 unordered_map 容器一样，定义在<code>&lt;unordered_map&gt;</code>头文件，且位于 std 命名空间中。因此，在使用 unordered_multimap 容器之前，程序中应包含如下 2 行代码：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unordered_map&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>注意，第二行代码不是必需的，但如果不用，则后续程序中在使用此容器时，需手动注明 std 命名空间（建议初学者使用）。</p>
+</blockquote>
+<p>unordered_multimap 容器模板的定义如下所示：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt; <span class="class"><span class="keyword">class</span> <span class="title">Key</span>,      // 键（<span class="title">key</span>）的类型</span></span><br><span class="line"><span class="class">           <span class="title">class</span> <span class="title">T</span>,        // 值（<span class="title">value</span>）的类型</span></span><br><span class="line"><span class="class">           <span class="title">class</span> <span class="title">Hash</span> = <span class="title">hash</span>&lt;Key&gt;,  // 底层存储键值对时采用的哈希函数</span></span><br><span class="line"><span class="class">           <span class="title">class</span> <span class="title">Pred</span> = <span class="title">equal_to</span>&lt;Key&gt;,  // 判断各个键值对的键相等的规则</span></span><br><span class="line"><span class="class">           <span class="title">class</span> <span class="title">Alloc</span> = <span class="title">allocator</span>&lt; pair&lt;const Key,T&gt; &gt; // 指定分配器对象的类型</span></span><br><span class="line"><span class="class">           &gt; <span class="title">class</span> <span class="title">unordered_multimap</span>;</span></span><br></pre></td></tr></table></figure>
+
+<p>以上 5 个参数中，必须显式给前 2 个参数传值，且除极个别的情况外，最多只使用前 4 个参数，它们各自的含义和功能如下表所示。</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>&lt;key,T&gt;</td>
+<td>前 2 个参数分别用于确定键值对中键和值的类型，也就是存储键值对的类型。</td>
+</tr>
+<tr>
+<td>Hash = hash&lt;Key&gt;</td>
+<td>用于指明容器在存储各个键值对时要使用的哈希函数，默认使用 STL 标准库提供的 hash&lt;key&gt; 哈希函数。注意，默认哈希函数只适用于基本数据类型（包括 string 类型），而不适用于自定义的结构体或者类。</td>
+</tr>
+<tr>
+<td>Pred = equal_to&lt;Key&gt;</td>
+<td>unordered_multimap 容器可以存储多个键相等的键值对，而判断是否相等的规则，由此参数指定。默认情况下，使用 STL 标准库中提供的 equal_to&lt;key&gt; 规则，该规则仅支持可直接用 == 运算符做比较的数据类型。</td>
+</tr>
+</tbody></table>
+<p>注意，当 unordered_multimap 容器中存储键值对的键为自定义类型时，默认的哈希函数 hash&lt;key&gt; 以及比较函数 equal_to&lt;key&gt; 将不再适用，这种情况下，需要我们自定义适用的哈希函数和比较函数，并分别显式传递给 Hash 参数和 Pred 参数。</p>
+<h3 id="成员方法-1"><a href="#成员方法-1" class="headerlink" title="成员方法"></a>成员方法</h3><p>和 unordered_map 容器相比，unordered_multimap 容器的类模板中没有重载 [ ] 运算符，也没有提供 at() 成员方法，除此之外它们完全一致。</p>
+<blockquote>
+<p>没有提供 [ ] 运算符和 at() 成员方法，意味着 unordered_multimap 容器无法通过指定键获取该键对应的值，因为该容器允许存储多个键相等的键值对，每个指定的键可能对应多个不同的值。</p>
+</blockquote>
+<p>unordered_multimap 类模板提供的成员方法如下表所示：</p>
+<table>
+<thead>
+<tr>
+<th>成员方法</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>begin()</td>
+<td>返回指向容器中第一个键值对的正向迭代器。</td>
+</tr>
+<tr>
+<td>end()</td>
+<td>返回指向容器中最后一个键值对之后位置的正向迭代器。</td>
+</tr>
+<tr>
+<td>cbegin()</td>
+<td>和 begin() 功能相同，只不过在其基础上增加了 const 属性，即该方法返回的迭代器不能用于修改容器内存储的键值对。</td>
+</tr>
+<tr>
+<td>cend()</td>
+<td>和 end() 功能相同，只不过在其基础上，增加了 const 属性，即该方法返回的迭代器不能用于修改容器内存储的键值对。</td>
+</tr>
+<tr>
+<td>empty()</td>
+<td>若容器为空，则返回 true；否则 false。</td>
+</tr>
+<tr>
+<td>size()</td>
+<td>返回当前容器中存有键值对的个数。</td>
+</tr>
+<tr>
+<td>max_size()</td>
+<td>返回容器所能容纳键值对的最大个数，不同的操作系统，其返回值亦不相同。</td>
+</tr>
+<tr>
+<td>find(key)</td>
+<td>查找以 key 为键的键值对，如果找到，则返回一个指向该键值对的正向迭代器；反之，则返回一个指向容器中最后一个键值对之后位置的迭代器（如果 end() 方法返回的迭代器）。</td>
+</tr>
+<tr>
+<td>count(key)</td>
+<td>在容器中查找以 key 键的键值对的个数。</td>
+</tr>
+<tr>
+<td>equal_range(key)</td>
+<td>返回一个 pair 对象，其包含 2 个迭代器，用于表明当前容器中键为 key 的键值对所在的范围。</td>
+</tr>
+<tr>
+<td>emplace()</td>
+<td>向容器中添加新键值对，效率比 insert() 方法高。</td>
+</tr>
+<tr>
+<td>emplace_hint()</td>
+<td>向容器中添加新键值对，效率比 insert() 方法高。</td>
+</tr>
+<tr>
+<td>insert()</td>
+<td>向容器中添加新键值对。</td>
+</tr>
+<tr>
+<td>erase()</td>
+<td>删除指定键值对。</td>
+</tr>
+<tr>
+<td>clear()</td>
+<td>清空容器，即删除容器中存储的所有键值对。</td>
+</tr>
+<tr>
+<td>swap()</td>
+<td>交换 2 个 unordered_multimap 容器存储的键值对，前提是必须保证这 2 个容器的类型完全相等。</td>
+</tr>
+<tr>
+<td>bucket_count()</td>
+<td>返回当前容器底层存储键值对时，使用桶（一个线性链表代表一个桶）的数量。</td>
+</tr>
+<tr>
+<td>max_bucket_count()</td>
+<td>返回当前系统中，unordered_multimap 容器底层最多可以使用多少桶。</td>
+</tr>
+<tr>
+<td>bucket_size(n)</td>
+<td>返回第 n 个桶中存储键值对的数量。</td>
+</tr>
+<tr>
+<td>bucket(key)</td>
+<td>返回以 key 为键的键值对所在桶的编号。</td>
+</tr>
+<tr>
+<td>load_factor()</td>
+<td>返回 unordered_multimap 容器中当前的负载因子。负载因子，指的是的当前容器中存储键值对的数量（size()）和使用桶数（bucket_count()）的比值，即 load_factor() = size() / bucket_count()。</td>
+</tr>
+<tr>
+<td>max_load_factor()</td>
+<td>返回或者设置当前 unordered_multimap 容器的负载因子。</td>
+</tr>
+<tr>
+<td>rehash(n)</td>
+<td>将当前容器底层使用桶的数量设置为 n。</td>
+</tr>
+<tr>
+<td>reserve()</td>
+<td>将存储桶的数量（也就是 bucket_count() 方法的返回值）设置为至少容纳count个元（不超过最大负载因子）所需的数量，并重新整理容器。</td>
+</tr>
+<tr>
+<td>hash_function()</td>
+<td>返回当前容器使用的哈希函数对象。</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>注意，对于实现互换 2 个相同类型 unordered_multimap 容器的键值对，除了可以调用该容器模板类中提供的 swap() 成员方法外，STL 标准库还提供了同名的 swap() 非成员函数。</p>
+</blockquote>
+<h3 id="创建C-unordered-multimap容器的方法"><a href="#创建C-unordered-multimap容器的方法" class="headerlink" title="创建C++ unordered_multimap容器的方法"></a>创建C++ unordered_multimap容器的方法</h3><p>常见的创建 unordered_map 容器的方法有以下几种。</p>
+<p>1) 利用 unordered_multimap 容器类模板中的默认构造函数，可以创建空的 unordered_multimap 容器。比如：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">std</span>::<span class="built_in">unordered_multimap</span>&lt;<span class="built_in">std</span>::<span class="built_in">string</span>, <span class="built_in">std</span>::<span class="built_in">string</span>&gt; myummap;</span><br></pre></td></tr></table></figure>
+
+<p>由此，就创建好了一个可存储 &lt;string, string&gt; 类型键值对的 unordered_multimap 容器，只不过当前容器是空的，即没有存储任何键值对。</p>
+<p>2) 当然，在创建空 unordered_multimap 容器的基础上，可以完成初始化操作。比如：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">unordered_multimap</span>&lt;<span class="built_in">string</span>, <span class="built_in">string</span>&gt; myummap&#123;</span><br><span class="line">    &#123;<span class="string">"Python教程"</span>,<span class="string">"http://c.biancheng.net/python/"</span>&#125;,</span><br><span class="line">    &#123;<span class="string">"Java教程"</span>,<span class="string">"http://c.biancheng.net/java/"</span>&#125;,</span><br><span class="line">    &#123;<span class="string">"Linux教程"</span>,<span class="string">"http://c.biancheng.net/linux/"</span>&#125; &#125;;</span><br></pre></td></tr></table></figure>
+
+<p>通过此方法创建的 myummap 容器中，就包含有 3 个键值对。</p>
+<p>3) 另外，unordered_multimap 模板中还提供有复制（拷贝）构造函数，可以实现在创建 unordered_multimap 容器的基础上，用另一 unordered_multimap 容器中的键值对为其初始化。</p>
+<p>例如，在第二种方式创建好 myummap 容器的基础上，再创建并初始化一个 myummap2 容器：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">unordered_multimap&lt;string, string&gt; myummap2(myummap);</span><br></pre></td></tr></table></figure>
+
+<p>由此，刚刚创建好的 myummap2 容器中，就包含有 myummap 容器中所有的键值对。</p>
+<p>除此之外，C++ 11 标准中还向 unordered_multimap 模板类增加了移动构造函数，即以右值引用的方式将临时 unordered_multimap 容器中存储的所有键值对，全部复制给新建容器。例如：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 返回临时 unordered_multimap 容器的函数</span></span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">unordered_multimap</span> &lt;<span class="built_in">std</span>::<span class="built_in">string</span>, <span class="built_in">std</span>::<span class="built_in">string</span> &gt; retUmmap() &#123;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">unordered_multimap</span>&lt;<span class="built_in">std</span>::<span class="built_in">string</span>, <span class="built_in">std</span>::<span class="built_in">string</span>&gt;tempummap&#123;</span><br><span class="line">        &#123;<span class="string">"Python教程"</span>,<span class="string">"http://c.biancheng.net/python/"</span>&#125;,</span><br><span class="line">        &#123;<span class="string">"Java教程"</span>,<span class="string">"http://c.biancheng.net/java/"</span>&#125;,</span><br><span class="line">        &#123;<span class="string">"Linux教程"</span>,<span class="string">"http://c.biancheng.net/linux/"</span>&#125; &#125;;</span><br><span class="line">    <span class="keyword">return</span> tempummap;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 创建并初始化 myummap 容器</span></span><br><span class="line">std::unordered_multimap&lt;std::string, std::string&gt; myummap(retummap());</span><br></pre></td></tr></table></figure>
+
+<p>注意，无论是调用复制构造函数还是拷贝构造函数，必须保证 2 个容器的类型完全相同。</p>
+<p>4) 当然，如果不想全部拷贝，可以使用 unordered_multimap 类模板提供的迭代器，在现有 unordered_multimap 容器中选择部分区域内的键值对，为新建 unordered_multimap 容器初始化。例如：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 传入 2 个迭代器</span></span><br><span class="line">std::unordered_multimap&lt;std::string, std::string&gt; myummap2(++myummap.begin(), myummap.end());</span><br></pre></td></tr></table></figure>
+
+<p>通过此方式创建的 myummap2 容器，其内部就包含 myummap 容器中除第 1 个键值对外的所有其它键值对。</p>
+<hr>
+<h2 id="unordered-set"><a href="#unordered-set" class="headerlink" title="unordered_set"></a>unordered_set</h2><h3 id="概述-3"><a href="#概述-3" class="headerlink" title="概述"></a>概述</h3><p>unordered_set 容器，可直译为“无序 set 容器”，即 unordered_set 容器和 set 容器很像，唯一的区别就在于 set 容器会自行对存储的数据进行排序，而 unordered_set 容器不会。</p>
+<p>总的来说，unordered_set 容器具有以下几个特性：</p>
+<ol>
+<li>不再以键值对的形式存储数据，而是直接存储数据的值；</li>
+<li>容器内部存储的各个元素的值都互不相等，且不能被修改；</li>
+<li>不会对内部存储的数据进行排序（这和该容器底层采用哈希表结构存储数据有关）。</li>
+</ol>
+<blockquote>
+<p>对于 unordered_set 容器不以键值对的形式存储数据，也可以这样认为，即 unordered_set 存储的都是键和值相等的键值对，为了节省存储空间，该类容器在实际存储时选择只存储每个键值对的值。</p>
+</blockquote>
+<p>另外，实现 unordered_set 容器的模板类定义在<code>&lt;unordered_set&gt;</code>头文件，并位于 std 命名空间中。这意味着，如果程序中需要使用该类型容器，则首先应该包含如下代码：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unordered_set&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>注意，第二行代码不是必需的，但如果不用，则程序中只要用到该容器时，必须手动注明 std 命名空间（建议初学者使用）。</p>
+</blockquote>
+<p>unordered_set 容器的类模板定义如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt; <span class="class"><span class="keyword">class</span> <span class="title">Key</span>,            // 容器中存储元素的类型</span></span><br><span class="line"><span class="class">           <span class="title">class</span> <span class="title">Hash</span> = <span class="title">hash</span>&lt;Key&gt;,    // 确定元素存储位置所用的哈希函数</span></span><br><span class="line"><span class="class">           <span class="title">class</span> <span class="title">Pred</span> = <span class="title">equal_to</span>&lt;Key&gt;,   // 判断各个元素是否相等所用的函数</span></span><br><span class="line"><span class="class">           <span class="title">class</span> <span class="title">Alloc</span> = <span class="title">allocator</span>&lt;Key&gt;   // 指定分配器对象的类型</span></span><br><span class="line"><span class="class">           &gt; <span class="title">class</span> <span class="title">unordered_set</span>;</span></span><br></pre></td></tr></table></figure>
+
+<p>可以看到，以上 4 个参数中，只有第一个参数没有默认值，这意味着如果我们想创建一个 unordered_set 容器，至少需要手动传递 1 个参数。事实上，在 99% 的实际场景中最多只需要使用前 3 个参数（各自含义如表 1 所示），最后一个参数保持默认值即可。</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Key</td>
+<td>确定容器存储元素的类型，如果读者将 unordered_set 看做是存储键和值相同的键值对的容器，则此参数则用于确定各个键值对的键和值的类型，因为它们是完全相同的，因此一定是同一数据类型的数据。</td>
+</tr>
+<tr>
+<td>Hash = hash&lt;Key&gt;</td>
+<td>指定 unordered_set 容器底层存储各个元素时，所使用的哈希函数。需要注意的是，默认哈希函数 hash&lt;Key&gt; 只适用于基本数据类型（包括 string 类型），而不适用于自定义的结构体或者类。</td>
+</tr>
+<tr>
+<td>Pred = equal_to&lt;Key&gt;</td>
+<td>unordered_set 容器内部不能存储相等的元素，而衡量 2 个元素是否相等的标准，取决于该参数指定的函数。 默认情况下，使用 STL 标准库中提供的 equal_to&lt;key&gt; 规则，该规则仅支持可直接用 == 运算符做比较的数据类型。</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>注意，如果 unordered_set 容器中存储的元素为自定义的数据类型，则默认的哈希函数 hash&lt;key&gt; 以及比较函数 equal_to&lt;key&gt; 将不再适用，只能自己设计适用该类型的哈希函数和比较函数，并显式传递给 Hash 参数和 Pred 参数。</p>
+</blockquote>
+<h3 id="成员方法-2"><a href="#成员方法-2" class="headerlink" title="成员方法"></a>成员方法</h3><table>
+<thead>
+<tr>
+<th>成员方法</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>begin()</td>
+<td>返回指向容器中第一个元素的正向迭代器。</td>
+</tr>
+<tr>
+<td>end();</td>
+<td>返回指向容器中最后一个元素之后位置的正向迭代器。</td>
+</tr>
+<tr>
+<td>cbegin()</td>
+<td>和 begin() 功能相同，只不过其返回的是 const 类型的正向迭代器。</td>
+</tr>
+<tr>
+<td>cend()</td>
+<td>和 end() 功能相同，只不过其返回的是 const 类型的正向迭代器。</td>
+</tr>
+<tr>
+<td>empty()</td>
+<td>若容器为空，则返回 true；否则 false。</td>
+</tr>
+<tr>
+<td>size()</td>
+<td>返回当前容器中存有元素的个数。</td>
+</tr>
+<tr>
+<td>max_size()</td>
+<td>返回容器所能容纳元素的最大个数，不同的操作系统，其返回值亦不相同。</td>
+</tr>
+<tr>
+<td>find(key)</td>
+<td>查找以值为 key 的元素，如果找到，则返回一个指向该元素的正向迭代器；反之，则返回一个指向容器中最后一个元素之后位置的迭代器（如果 end() 方法返回的迭代器）。</td>
+</tr>
+<tr>
+<td>count(key)</td>
+<td>在容器中查找值为 key 的元素的个数。</td>
+</tr>
+<tr>
+<td>equal_range(key)</td>
+<td>返回一个 pair 对象，其包含 2 个迭代器，用于表明当前容器中值为 key 的元素所在的范围。</td>
+</tr>
+<tr>
+<td>emplace()</td>
+<td>向容器中添加新元素，效率比 insert() 方法高。</td>
+</tr>
+<tr>
+<td>emplace_hint()</td>
+<td>向容器中添加新元素，效率比 insert() 方法高。</td>
+</tr>
+<tr>
+<td>insert()</td>
+<td>向容器中添加新元素。</td>
+</tr>
+<tr>
+<td>erase()</td>
+<td>删除指定元素。</td>
+</tr>
+<tr>
+<td>clear()</td>
+<td>清空容器，即删除容器中存储的所有元素。</td>
+</tr>
+<tr>
+<td>swap()</td>
+<td>交换 2 个 unordered_map 容器存储的元素，前提是必须保证这 2 个容器的类型完全相等。</td>
+</tr>
+<tr>
+<td>bucket_count()</td>
+<td>返回当前容器底层存储元素时，使用桶（一个线性链表代表一个桶）的数量。</td>
+</tr>
+<tr>
+<td>max_bucket_count()</td>
+<td>返回当前系统中，unordered_map 容器底层最多可以使用多少桶。</td>
+</tr>
+<tr>
+<td>bucket_size(n)</td>
+<td>返回第 n 个桶中存储元素的数量。</td>
+</tr>
+<tr>
+<td>bucket(key)</td>
+<td>返回值为 key 的元素所在桶的编号。</td>
+</tr>
+<tr>
+<td>load_factor()</td>
+<td>返回 unordered_map 容器中当前的负载因子。负载因子，指的是的当前容器中存储元素的数量（size()）和使用桶数（bucket_count()）的比值，即 load_factor() = size() / bucket_count()。</td>
+</tr>
+<tr>
+<td>max_load_factor()</td>
+<td>返回或者设置当前 unordered_map 容器的负载因子。</td>
+</tr>
+<tr>
+<td>rehash(n)</td>
+<td>将当前容器底层使用桶的数量设置为 n。</td>
+</tr>
+<tr>
+<td>reserve()</td>
+<td>将存储桶的数量（也就是 bucket_count() 方法的返回值）设置为至少容纳count个元（不超过最大负载因子）所需的数量，并重新整理容器。</td>
+</tr>
+<tr>
+<td>hash_function()</td>
+<td>返回当前容器使用的哈希函数对象。</td>
+</tr>
+</tbody></table>
+<p>注意，此容器模板类中没有重载 [ ] 运算符，也没有提供 at() 成员方法。不仅如此，由于 unordered_set 容器内部存储的元素值不能被修改，因此无论使用那个迭代器方法获得的迭代器，都不能用于修改容器中元素的值。</p>
+<p>另外，对于实现互换 2 个相同类型 unordered_set 容器的所有元素，除了调用上表中的 swap() 成员方法外，还可以使用 STL 标准库提供的 swap() 非成员函数，它们具有相同的名称，用法也相同（都只需要传入 2 个参数即可），仅是调用方式上有差别。</p>
+<h3 id="创建C-unordered-set容器"><a href="#创建C-unordered-set容器" class="headerlink" title="创建C++ unordered_set容器"></a>创建C++ unordered_set容器</h3><p>前面介绍了如何创建 unordered_map 和 unordered_multimap 容器，值得一提的是，创建它们的所有方式完全适用于 unordereded_set 容器。</p>
+<p>1) 通过调用 unordered_set 模板类的默认构造函数，可以创建空的 unordered_set 容器。比如：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">std</span>::<span class="built_in">unordered_set</span>&lt;<span class="built_in">std</span>::<span class="built_in">string</span>&gt; uset;</span><br></pre></td></tr></table></figure>
+
+<p>由此，就创建好了一个可存储 string 类型值的 unordered_set 容器，该容器底层采用默认的哈希函数 hash&lt;Key&gt; 和比较函数 equal_to&lt;Key&gt;。</p>
+<p>2) 当然，在创建 unordered_set 容器的同时，可以完成初始化操作。比如：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">std</span>::<span class="built_in">unordered_set</span>&lt;<span class="built_in">std</span>::<span class="built_in">string</span>&gt; uset&#123; <span class="string">"http://c.biancheng.net/c/"</span>,</span><br><span class="line">                                      <span class="string">"http://c.biancheng.net/java/"</span>,</span><br><span class="line">                                      <span class="string">"http://c.biancheng.net/linux/"</span> &#125;;</span><br></pre></td></tr></table></figure>
+
+<p>通过此方法创建的 uset 容器中，就包含有 3 个 string 类型元素。</p>
+<p>3) 还可以调用 unordered_set 模板中提供的复制（拷贝）构造函数，将现有 unordered_set 容器中存储的元素全部用于为新建 unordered_set 容器初始化。</p>
+<p>例如，在第二种方式创建好 uset 容器的基础上，再创建并初始化一个 uset2 容器：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="built_in">std</span>::<span class="built_in">unordered_set</span>&lt;<span class="built_in">std</span>::<span class="built_in">string</span>&gt; <span class="title">uset2</span><span class="params">(uset)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>由此，umap2 容器中就包含有 umap 容器中所有的元素。</p>
+<p>除此之外，C++ 11 标准中还向 unordered_set 模板类增加了移动构造函数，即以右值引用的方式，利用临时 unordered_set 容器中存储的所有元素，给新建容器初始化。例如：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 返回临时 unordered_set 容器的函数</span></span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">unordered_set</span> &lt;<span class="built_in">std</span>::<span class="built_in">string</span>&gt; retuset() &#123;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">unordered_set</span>&lt;<span class="built_in">std</span>::<span class="built_in">string</span>&gt; tempuset&#123; <span class="string">"http://c.biancheng.net/c/"</span>,</span><br><span class="line">                                              <span class="string">"http://c.biancheng.net/java/"</span>,</span><br><span class="line">                                              <span class="string">"http://c.biancheng.net/linux/"</span> &#125;;</span><br><span class="line">    <span class="keyword">return</span> tempuset;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 调用移动构造函数，创建 uset 容器</span></span><br><span class="line"><span class="function"><span class="built_in">std</span>::<span class="built_in">unordered_set</span>&lt;<span class="built_in">std</span>::<span class="built_in">string</span>&gt; <span class="title">uset</span><span class="params">(retuset())</span></span>;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>注意，无论是调用复制构造函数还是拷贝构造函数，必须保证 2 个容器的类型完全相同。</p>
+</blockquote>
+<p>4) 当然，如果不想全部拷贝，可以使用 unordered_set 类模板提供的迭代器，在现有 unordered_set 容器中选择部分区域内的元素，为新建 unordered_set 容器初始化。例如：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 传入 2 个迭代器</span></span><br><span class="line"><span class="function"><span class="built_in">std</span>::<span class="built_in">unordered_set</span>&lt;<span class="built_in">std</span>::<span class="built_in">string</span>&gt; <span class="title">uset2</span><span class="params">(++uset.<span class="built_in">begin</span>(),uset.<span class="built_in">end</span>())</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>通过此方式创建的 uset2 容器，其内部就包含 uset 容器中除第 1 个元素外的所有其它元素。</p>
+<h2 id="unordered-multiset"><a href="#unordered-multiset" class="headerlink" title="unordered_multiset"></a>unordered_multiset</h2><h3 id="概述-4"><a href="#概述-4" class="headerlink" title="概述"></a>概述</h3><p>前面章节介绍了 unordered_set 容器的特定和用法，在此基础上，本节再介绍一个类似的 C++ STL 无序容器，即 unordered_multiset 容器。</p>
+<p>所谓“类似”，指的是 unordered_multiset 容器大部分的特性都和 unordered_set 容器相同，包括：</p>
+<ol>
+<li>unordered_multiset 不以键值对的形式存储数据，而是直接存储数据的值；</li>
+<li>该类型容器底层采用的也是哈希表存储结构，它不会对内部存储的数据进行排序；</li>
+<li>unordered_multiset 容器内部存储的元素，其值不能被修改。</li>
+</ol>
+<p>和 unordered_set 容器不同的是，unordered_multiset 容器可以同时存储多个值相同的元素，且这些元素会存储到哈希表中同一个桶（本质就是链表）上。</p>
+<blockquote>
+<p>可以这样认为，unordered_multiset 除了能存储相同值的元素外，它和 unordered_set 容器完全相同。</p>
+</blockquote>
+<p>另外值得一提的是，实现 unordered_multiset 容器的模板类并没有定义在以该容器名命名的文件中，而是和 unordered_set 容器共用同一个<code>&lt;unordered_set&gt;</code>头文件，并且也位于 std 命名空间。因此，如果程序中需要使用该类型容器，应包含如下代码：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unordered_set&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>注意，第二行代码不是必需的，但如果不用，则程序中只要用到该容器时，必须手动注明 std 命名空间（建议初学者使用）。</p>
+</blockquote>
+<p>unordered_multiset 容器类模板的定义如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt; <span class="class"><span class="keyword">class</span> <span class="title">Key</span>,            // 容器中存储元素的类型</span></span><br><span class="line"><span class="class">           <span class="title">class</span> <span class="title">Hash</span> = <span class="title">hash</span>&lt;Key&gt;,    // 确定元素存储位置所用的哈希函数</span></span><br><span class="line"><span class="class">           <span class="title">class</span> <span class="title">Pred</span> = <span class="title">equal_to</span>&lt;Key&gt;,   // 判断各个元素是否相等所用的函数</span></span><br><span class="line"><span class="class">           <span class="title">class</span> <span class="title">Alloc</span> = <span class="title">allocator</span>&lt;Key&gt;   // 指定分配器对象的类型</span></span><br><span class="line"><span class="class">           &gt; <span class="title">class</span> <span class="title">unordered_multiset</span>;</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>需要说明的是，在 99% 的实际场景中，最多只需要使用前 3 个参数（各自含义如表 1 所示），最后一个参数保持默认值即可。</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Key</td>
+<td>确定容器存储元素的类型，如果读者将 unordered_multiset 看做是存储键和值相同的键值对的容器，则此参数则用于确定各个键值对的键和值的类型，因为它们是完全相同的，因此一定是同一数据类型的数据。</td>
+</tr>
+<tr>
+<td>Hash = hash&lt;Key&gt;</td>
+<td>指定 unordered_multiset 容器底层存储各个元素时所使用的哈希函数。需要注意的是，默认哈希函数 hash&lt;Key&gt; 只适用于基本数据类型（包括 string 类型），而不适用于自定义的结构体或者类。</td>
+</tr>
+<tr>
+<td>Pred = equal_to&lt;Key&gt;</td>
+<td>用于指定 unordered_multiset 容器判断元素值相等的规则。默认情况下，使用 STL 标准库中提供的 equal_to&lt;key&gt; 规则，该规则仅支持可直接用 == 运算符做比较的数据类型。</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>总之，如果 unordered_multiset 容器中存储的元素为自定义的数据类型，则默认的哈希函数 hash&lt;key&gt; 以及比较函数 equal_to&lt;key&gt; 将不再适用，只能自己设计适用该类型的哈希函数和比较函数，并显式传递给 Hash 参数和 Pred 参数。</p>
+</blockquote>
+<h3 id="成员函数"><a href="#成员函数" class="headerlink" title="成员函数"></a>成员函数</h3><p>unordered_multiset 模板类中提供的成员方法，无论是种类还是数量，都和 unordered_set 类模板一样，如下表所示：</p>
+<table>
+<thead>
+<tr>
+<th>成员方法</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>begin()</td>
+<td>返回指向容器中第一个元素的正向迭代器。</td>
+</tr>
+<tr>
+<td>end();</td>
+<td>返回指向容器中最后一个元素之后位置的正向迭代器。</td>
+</tr>
+<tr>
+<td>cbegin()</td>
+<td>和 begin() 功能相同，只不过其返回的是 const 类型的正向迭代器。</td>
+</tr>
+<tr>
+<td>cend()</td>
+<td>和 end() 功能相同，只不过其返回的是 const 类型的正向迭代器。</td>
+</tr>
+<tr>
+<td>empty()</td>
+<td>若容器为空，则返回 true；否则 false。</td>
+</tr>
+<tr>
+<td>size()</td>
+<td>返回当前容器中存有元素的个数。</td>
+</tr>
+<tr>
+<td>max_size()</td>
+<td>返回容器所能容纳元素的最大个数，不同的操作系统，其返回值亦不相同。</td>
+</tr>
+<tr>
+<td>find(key)</td>
+<td>查找以值为 key 的元素，如果找到，则返回一个指向该元素的正向迭代器；反之，则返回一个指向容器中最后一个元素之后位置的迭代器（如果 end() 方法返回的迭代器）。</td>
+</tr>
+<tr>
+<td>count(key)</td>
+<td>在容器中查找值为 key 的元素的个数。</td>
+</tr>
+<tr>
+<td>equal_range(key)</td>
+<td>返回一个 pair 对象，其包含 2 个迭代器，用于表明当前容器中值为 key 的元素所在的范围。</td>
+</tr>
+<tr>
+<td>emplace()</td>
+<td>向容器中添加新元素，效率比 insert() 方法高。</td>
+</tr>
+<tr>
+<td>emplace_hint()</td>
+<td>向容器中添加新元素，效率比 insert() 方法高。</td>
+</tr>
+<tr>
+<td>insert()</td>
+<td>向容器中添加新元素。</td>
+</tr>
+<tr>
+<td>erase()</td>
+<td>删除指定元素。</td>
+</tr>
+<tr>
+<td>clear()</td>
+<td>清空容器，即删除容器中存储的所有元素。</td>
+</tr>
+<tr>
+<td>swap()</td>
+<td>交换 2 个 unordered_multimap 容器存储的元素，前提是必须保证这 2 个容器的类型完全相等。</td>
+</tr>
+<tr>
+<td>bucket_count()</td>
+<td>返回当前容器底层存储元素时，使用桶（一个线性链表代表一个桶）的数量。</td>
+</tr>
+<tr>
+<td>max_bucket_count()</td>
+<td>返回当前系统中，容器底层最多可以使用多少桶。</td>
+</tr>
+<tr>
+<td>bucket_size(n)</td>
+<td>返回第 n 个桶中存储元素的数量。</td>
+</tr>
+<tr>
+<td>bucket(key)</td>
+<td>返回值为 key 的元素所在桶的编号。</td>
+</tr>
+<tr>
+<td>load_factor()</td>
+<td>返回容器当前的负载因子。所谓负载因子，指的是的当前容器中存储元素的数量（size()）和使用桶数（bucket_count()）的比值，即 load_factor() = size() / bucket_count()。</td>
+</tr>
+<tr>
+<td>max_load_factor()</td>
+<td>返回或者设置当前 unordered_map 容器的负载因子。</td>
+</tr>
+<tr>
+<td>rehash(n)</td>
+<td>将当前容器底层使用桶的数量设置为 n。</td>
+</tr>
+<tr>
+<td>reserve()</td>
+<td>将存储桶的数量（也就是 bucket_count() 方法的返回值）设置为至少容纳count个元（不超过最大负载因子）所需的数量，并重新整理容器。</td>
+</tr>
+<tr>
+<td>hash_function()</td>
+<td>返回当前容器使用的哈希函数对象。</td>
+</tr>
+</tbody></table>
+<p>注意，和 unordered_set 容器一样，unordered_multiset 模板类也没有重载 [ ] 运算符，没有提供 at() 成员方法。不仅如此，无论是由哪个成员方法返回的迭代器，都不能用于修改容器中元素的值。</p>
+<p>另外，对于互换 2 个相同类型 unordered_multiset 容器存储的所有元素，除了调用上表中的 swap() 成员方法外，STL 标准库也提供了 swap() 非成员函数。</p>
+<h3 id="创建C-unordered-multiset容器"><a href="#创建C-unordered-multiset容器" class="headerlink" title="创建C++ unordered_multiset容器"></a>创建C++ unordered_multiset容器</h3><p>考虑到不同场景的需要，unordered_multiset 容器模板类共提供了以下 4 种创建 unordered_multiset 容器的方式。</p>
+<p>1) 调用 unordered_multiset 模板类的默认构造函数，可以创建空的 unordered_multiset 容器。比如：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">std</span>::<span class="built_in">unordered_multiset</span>&lt;<span class="built_in">std</span>::<span class="built_in">string</span>&gt; umset;</span><br></pre></td></tr></table></figure>
+
+<p>由此，就创建好了一个可存储 string 类型值的 unordered_multiset 容器，该容器底层采用默认的哈希函数 hash&lt;Key&gt; 和比较函数 equal_to&lt;Key&gt;。</p>
+<p>2) 当然，在创建 unordered_multiset 容器的同时，可以进行初始化操作。比如：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">std</span>::<span class="built_in">unordered_multiset</span>&lt;<span class="built_in">std</span>::<span class="built_in">string</span>&gt; umset&#123; <span class="string">"http://c.biancheng.net/c/"</span>,</span><br><span class="line">                                            <span class="string">"http://c.biancheng.net/java/"</span>,</span><br><span class="line">                                            <span class="string">"http://c.biancheng.net/linux/"</span> &#125;;</span><br></pre></td></tr></table></figure>
+
+<p>通过此方法创建的 umset 容器中，内部存有 3 个 string 类型元素。</p>
+<p>3) 还可以调用 unordered_multiset 模板中提供的复制（拷贝）构造函数，将现有 unordered_multiset 容器中存储的元素全部用于为新建 unordered_multiset 容器初始化。</p>
+<p>例如，在第二种方式创建好 umset 容器的基础上，再创建并初始化一个 umset2 容器：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="built_in">std</span>::<span class="built_in">unordered_multiset</span>&lt;<span class="built_in">std</span>::<span class="built_in">string</span>&gt; <span class="title">umset2</span><span class="params">(umset)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>由此，umap2 容器中就包含有 umap 容器中所有的元素。</p>
+<p>除此之外，C++ 11 标准中还向 unordered_multiset 模板类增加了移动构造函数，即以右值引用的方式，利用临时 unordered_multiset 容器中存储的所有元素，给新建容器初始化。例如：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 返回临时 unordered_multiset 容器的函数</span></span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">unordered_multiset</span> &lt;<span class="built_in">std</span>::<span class="built_in">string</span>&gt; retumset() &#123;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">unordered_multiset</span>&lt;<span class="built_in">std</span>::<span class="built_in">string</span>&gt; tempumset&#123; <span class="string">"http://c.biancheng.net/c/"</span>,</span><br><span class="line">                                                    <span class="string">"http://c.biancheng.net/java/"</span>,</span><br><span class="line">                                                    <span class="string">"http://c.biancheng.net/linux/"</span> &#125;;</span><br><span class="line">    <span class="keyword">return</span> tempumset;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 调用移动构造函数，创建 umset 容器</span></span><br><span class="line"><span class="function"><span class="built_in">std</span>::<span class="built_in">unordered_multiset</span>&lt;<span class="built_in">std</span>::<span class="built_in">string</span>&gt; <span class="title">umset</span><span class="params">(retumset())</span></span>;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>注意，无论是调用复制构造函数还是拷贝构造函数，必须保证 2 个容器的类型完全相同。</p>
+</blockquote>
+<p>4) 当然，如果不想全部拷贝，可以使用 unordered_multiset 类模板提供的迭代器，在现有 unordered_multiset 容器中选择部分区域内的元素，为新建 unordered_multiset 容器初始化。例如：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 传入 2 个迭代器</span></span><br><span class="line"><span class="function"><span class="built_in">std</span>::<span class="built_in">unordered_multiset</span>&lt;<span class="built_in">std</span>::<span class="built_in">string</span>&gt; <span class="title">umset2</span><span class="params">(++umset.<span class="built_in">begin</span>(), umset.<span class="built_in">end</span>())</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>通过此方式创建的 umset2 容器，其内部就包含 umset 容器中除第 1 个元素外的所有其它元素。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/C-C/" rel="tag"># C/C++</a>
+          
+            <a href="/tags/STL/" rel="tag"># STL</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2022/05/07/C-STL%EF%BC%9A%E5%85%B3%E8%81%94%E5%AE%B9%E5%99%A8%E4%B9%8Bset%E5%92%8Cmultiset/" rel="next" title="C++STL：关联容器之set和multiset">
+                <i class="fa fa-chevron-left"></i> C++STL：关联容器之set和multiset
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/me.png"
+                alt="crossoverpptx" />
+            
+              <p class="site-author-name" itemprop="name">crossoverpptx</p>
+              <p class="site-description motion-element" itemprop="description">黑夜给了我黑色的眼睛，我却用它寻找光明</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+                <a href="/archives">
+                  <span class="site-state-item-count">43</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/crossoverpptx" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:2269041628@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#无序关联容器"><span class="nav-number">1.</span> <span class="nav-text">无序关联容器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#概述"><span class="nav-number">1.1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#无序容器种类"><span class="nav-number">1.2.</span> <span class="nav-text">无序容器种类</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#unordered-map"><span class="nav-number">2.</span> <span class="nav-text">unordered_map</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#概述-1"><span class="nav-number">2.0.1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#成员方法"><span class="nav-number">2.0.2.</span> <span class="nav-text">成员方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#创建C-unordered-map容器的方法"><span class="nav-number">2.0.3.</span> <span class="nav-text">创建C++ unordered_map容器的方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#迭代器"><span class="nav-number">2.0.4.</span> <span class="nav-text">迭代器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#C-STL-unordered-map获取元素的4种方法"><span class="nav-number">2.0.5.</span> <span class="nav-text">C++ STL unordered_map获取元素的4种方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#C-unordered-map-insert-方法"><span class="nav-number">2.0.6.</span> <span class="nav-text">C++ unordered_map insert()方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#C-unordered-map-emplace-和emplace-hint-方法"><span class="nav-number">2.0.7.</span> <span class="nav-text">C++ unordered_map emplace()和emplace_hint()方法</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#unordered-map-emplace-方法"><span class="nav-number">2.0.7.1.</span> <span class="nav-text">unordered_map emplace()方法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#unordered-map-emplace-hint-方法"><span class="nav-number">2.0.7.2.</span> <span class="nav-text">unordered_map emplace_hint()方法</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#C-STL-unordered-map删除元素：erase-和clear"><span class="nav-number">2.0.8.</span> <span class="nav-text">C++ STL unordered_map删除元素：erase()和clear()</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#unordered-map-erase-方法"><span class="nav-number">2.0.8.1.</span> <span class="nav-text">unordered_map erase()方法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#unordered-map-clear-方法"><span class="nav-number">2.0.8.2.</span> <span class="nav-text">unordered_map clear()方法</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#unordered-multimap"><span class="nav-number">3.</span> <span class="nav-text">unordered_multimap</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#概述-2"><span class="nav-number">3.1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#成员方法-1"><span class="nav-number">3.2.</span> <span class="nav-text">成员方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建C-unordered-multimap容器的方法"><span class="nav-number">3.3.</span> <span class="nav-text">创建C++ unordered_multimap容器的方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#unordered-set"><span class="nav-number">4.</span> <span class="nav-text">unordered_set</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#概述-3"><span class="nav-number">4.1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#成员方法-2"><span class="nav-number">4.2.</span> <span class="nav-text">成员方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建C-unordered-set容器"><span class="nav-number">4.3.</span> <span class="nav-text">创建C++ unordered_set容器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#unordered-multiset"><span class="nav-number">5.</span> <span class="nav-text">unordered_multiset</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#概述-4"><span class="nav-number">5.1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#成员函数"><span class="nav-number">5.2.</span> <span class="nav-text">成员函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建C-unordered-multiset容器"><span class="nav-number">5.3.</span> <span class="nav-text">创建C++ unordered_multiset容器</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">crossoverpptx</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">90.1k</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i> 访问人数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i> 访问总量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
