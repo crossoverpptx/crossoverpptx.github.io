@@ -91,7 +91,7 @@
 <meta property="og:description" content="概述forward_list 是 C++ 11 新添加的一类容器，其底层实现和 list 容器一样，采用的也是链表结构，只不过 forward_list 使用的是单链表，而 list 使用的是双向链表。">
 <meta property="og:image" content="http://yoursite.com/2022/05/03/C-STL%EF%BC%9A%E9%A1%BA%E5%BA%8F%E5%AE%B9%E5%99%A8%E4%B9%8Bforward-list/1-1.gif">
 <meta property="article:published_time" content="2022-05-03T03:31:04.000Z">
-<meta property="article:modified_time" content="2022-05-03T03:42:51.773Z">
+<meta property="article:modified_time" content="2022-05-20T09:30:17.142Z">
 <meta property="article:author" content="crossoverpptx">
 <meta property="article:tag" content="C&#x2F;C++">
 <meta property="article:tag" content="STL">
@@ -348,8 +348,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2022-05-03T11:42:51+08:00">
-                2022-05-03
+              <time title="更新于" itemprop="dateModified" datetime="2022-05-20T17:30:17+08:00">
+                2022-05-20
               </time>
             
           </span>
@@ -440,17 +440,11 @@
       
 
       
-        <h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>forward_list 是 C++ 11 新添加的一类容器，其底层实现和 list 容器一样，采用的也是链表结构，只不过 forward_list 使用的是单链表，而 list 使用的是双向链表。<a id="more"></a></p>
-<p>如下图所示：</p>
+        <h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>forward_list 是 C++ 11 新添加的一类容器，其底层实现和 list 容器一样，采用的也是链表结构，只不过 forward_list 使用的是单链表，而 list 使用的是双向链表。<a id="more"></a>如下图所示：</p>
 <p><img src="/2022/05/03/C-STL%EF%BC%9A%E9%A1%BA%E5%BA%8F%E5%AE%B9%E5%99%A8%E4%B9%8Bforward-list/1-1.gif" alt></p>
-<blockquote>
-<p>上图中，H 表示链表的表头。a) 表示单链表，b) 表示双向链表。</p>
-</blockquote>
-<p>通过上图不难看出，使用链表存储数据最大的特点在于，其并不会将数据进行集中存储（向数组那样），换句话说，链表中数据的存储位置是分散的、随机的，整个链表中数据的线性关系通过指针来维持。</p>
-<p>因此，forward_list 容器具有和 list 容器相同的特性，即擅长在序列的任何位置进行插入元素或删除元素的操作，但对于访问存储的元素，没有其它容器（如 array、vector）的效率高。</p>
+<p>上图中，H 表示链表的表头。a) 表示单链表，b) 表示双向链表。不难看出，使用链表存储数据最大的特点在于，其并不会将数据进行集中存储（向数组那样），换句话说，链表中数据的存储位置是分散的、随机的，整个链表中数据的线性关系通过指针来维持。因此，forward_list 容器具有和 list 容器相同的特性，即擅长在序列的任何位置进行插入元素或删除元素的操作，但对于访问存储的元素，没有其它容器（如 array、vector）的效率高。</p>
 <p>另外，由于单链表没有双向链表那样灵活，因此相比 list 容器，forward_list 容器的功能受到了很多限制。比如，由于单链表只能从前向后遍历，而不支持反向遍历，因此 forward_list 容器只提供前向迭代器，而不是双向迭代器。这意味着，forward_list 容器不具有 rbegin()、rend() 之类的成员函数。</p>
-<p>那么，既然 forward_list 容器具有和 list 容器相同的特性，list 容器还可以提供更多的功能函数，forward_list 容器有什么存在的必要呢？</p>
-<p>当然有，forward_list 容器底层使用单链表，也不是一无是处。比如，存储相同个数的同类型元素，单链表耗用的内存空间更少，空间利用率更高，并且对于实现某些操作单链表的执行效率也更高。</p>
+<p>那么，既然 forward_list 容器具有和 list 容器相同的特性，list 容器还可以提供更多的功能函数，forward_list 容器有什么存在的必要呢？当然有，forward_list 容器底层使用单链表，也不是一无是处。比如，存储相同个数的同类型元素，单链表耗用的内存空间更少，空间利用率更高，并且对于实现某些操作单链表的执行效率也更高。</p>
 <blockquote>
 <p>效率高是选用 forward_list 而弃用 list 容器最主要的原因，换句话说，只要是 list 容器和 forward_list 容器都能实现的操作，应优先选择 forward_list 容器。</p>
 </blockquote>
@@ -475,15 +469,15 @@
 </tr>
 <tr>
 <td>cbefore_begin()</td>
-<td>和 before_begin() 功能相同，只不过在其基础上，增加了 const 属性，不能用于修改元素。</td>
+<td>和 before_begin() 功能相同，只不过在其基础上增加了 const 属性，不能用于修改元素。</td>
 </tr>
 <tr>
 <td>cbegin()</td>
-<td>和 begin() 功能相同，只不过在其基础上，增加了 const 属性，不能用于修改元素。</td>
+<td>和 begin() 功能相同，只不过在其基础上增加了 const 属性，不能用于修改元素。</td>
 </tr>
 <tr>
 <td>cend()</td>
-<td>和 end() 功能相同，只不过在其基础上，增加了 const 属性，不能用于修改元素。</td>
+<td>和 end() 功能相同，只不过在其基础上增加了 const 属性，不能用于修改元素。</td>
 </tr>
 <tr>
 <td>empty()</td>
@@ -491,7 +485,7 @@
 </tr>
 <tr>
 <td>max_size()</td>
-<td>返回容器所能包含元素个数的最大值。这通常是一个很大的值，一般是 232-1，所以我们很少会用到这个函数。</td>
+<td>返回容器所能包含元素个数的最大值。这通常是一个很大的值，比如 2^32-1，所以我们很少会用到这个函数。</td>
 </tr>
 <tr>
 <td>front()</td>
@@ -604,7 +598,7 @@
 <p>3) 创建一个包含 n 个元素的 forward_list 容器，并为每个元素指定初始值。例如：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="built_in">std</span>::forward_list&lt;<span class="keyword">int</span>&gt; <span class="title">values</span><span class="params">(<span class="number">10</span>, <span class="number">5</span>)</span></span>;</span><br></pre></td></tr></table></figure>
 
-<p>如此就创建了一个包含 10 个元素并且值都为 5 个 values 容器。</p>
+<p>如此就创建了一个包含 10 个元素并且值都为 5 的 values 容器。</p>
 <p>4) 在已有 forward_list 容器的情况下，通过拷贝该容器可以创建新的 forward_list 容器。例如：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="built_in">std</span>::forward_list&lt;<span class="keyword">int</span>&gt; <span class="title">value1</span><span class="params">(<span class="number">10</span>)</span></span>;</span><br><span class="line"><span class="function"><span class="built_in">std</span>::forward_list&lt;<span class="keyword">int</span>&gt; <span class="title">value2</span><span class="params">(value1)</span></span>;</span><br></pre></td></tr></table></figure>
 
