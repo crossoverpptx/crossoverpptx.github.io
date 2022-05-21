@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="电影," />
+  <meta name="keywords" content="C/C++,C++11," />
 
 
 
@@ -83,19 +83,18 @@
 
 
 
-<meta name="description" content="“虽然知道自己马上就要死了，但是依然能感受到美丽的东西是美的，很开心。” 电影开头铃的父亲和电影结尾二宫女士的去世，告诉我们无尽温柔的人也无法抵挡死亡；海上的烟花会和盛开的樱花，在绽放后转瞬消逝……这些无一不蕴含对美好易逝的感叹。 但这部电影的主题却不是宣扬悲观，而是在告诉人们，死亡和失去并不可怕，重要的是珍惜身边的人，珍惜现在，好好生活。">
+<meta name="description" content="在 C++11 之前的版本（C++98 和 C++ 03）中，定义变量或者声明变量之前都必须指明它的类型，比如 int、char 等；但是在一些比较灵活的语言中，比如 C#、JavaScript、PHP、Python 等，程序员在定义变量时可以不指明具体的类型，而是让编译器（或者解释器）自己去推导，这就让代码的编写更加方便。C++11 为了顺应这种趋势也开始支持该语法，使用 auto 关键字来支持">
 <meta property="og:type" content="article">
-<meta property="og:title" content="海街日记">
-<meta property="og:url" content="http://yoursite.com/2021/03/20/%E6%B5%B7%E8%A1%97%E6%97%A5%E8%AE%B0/index.html">
+<meta property="og:title" content="C++11：auto类型推导">
+<meta property="og:url" content="http://yoursite.com/2022/05/21/C-11%EF%BC%9Aauto%E7%B1%BB%E5%9E%8B%E6%8E%A8%E5%AF%BC/index.html">
 <meta property="og:site_name" content="crossoverpptx&#39;s Blog">
-<meta property="og:description" content="“虽然知道自己马上就要死了，但是依然能感受到美丽的东西是美的，很开心。” 电影开头铃的父亲和电影结尾二宫女士的去世，告诉我们无尽温柔的人也无法抵挡死亡；海上的烟花会和盛开的樱花，在绽放后转瞬消逝……这些无一不蕴含对美好易逝的感叹。 但这部电影的主题却不是宣扬悲观，而是在告诉人们，死亡和失去并不可怕，重要的是珍惜身边的人，珍惜现在，好好生活。">
-<meta property="og:image" content="http://yoursite.com/2021/03/20/%E6%B5%B7%E8%A1%97%E6%97%A5%E8%AE%B0/%E6%B5%B7%E8%A1%97%E6%97%A5%E8%AE%B0.jpg">
-<meta property="article:published_time" content="2021-03-20T04:17:47.000Z">
-<meta property="article:modified_time" content="2022-04-08T02:30:57.114Z">
+<meta property="og:description" content="在 C++11 之前的版本（C++98 和 C++ 03）中，定义变量或者声明变量之前都必须指明它的类型，比如 int、char 等；但是在一些比较灵活的语言中，比如 C#、JavaScript、PHP、Python 等，程序员在定义变量时可以不指明具体的类型，而是让编译器（或者解释器）自己去推导，这就让代码的编写更加方便。C++11 为了顺应这种趋势也开始支持该语法，使用 auto 关键字来支持">
+<meta property="article:published_time" content="2022-05-21T13:20:52.000Z">
+<meta property="article:modified_time" content="2022-05-21T13:52:27.017Z">
 <meta property="article:author" content="crossoverpptx">
-<meta property="article:tag" content="电影">
+<meta property="article:tag" content="C&#x2F;C++">
+<meta property="article:tag" content="C++11">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://yoursite.com/2021/03/20/%E6%B5%B7%E8%A1%97%E6%97%A5%E8%AE%B0/%E6%B5%B7%E8%A1%97%E6%97%A5%E8%AE%B0.jpg">
 
 
 
@@ -125,13 +124,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2021/03/20/海街日记/"/>
+  <link rel="canonical" href="http://yoursite.com/2022/05/21/C-11：auto类型推导/"/>
 
 
 
 
 
-  <title>海街日记 | crossoverpptx's Blog</title>
+  <title>C++11：auto类型推导 | crossoverpptx's Blog</title>
   
 
 
@@ -302,7 +301,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/03/20/%E6%B5%B7%E8%A1%97%E6%97%A5%E8%AE%B0/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/05/21/C-11%EF%BC%9Aauto%E7%B1%BB%E5%9E%8B%E6%8E%A8%E5%AF%BC/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="crossoverpptx">
@@ -319,7 +318,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">海街日记</h1>
+          <h1 class="post-title" itemprop="name headline">C++11：auto类型推导</h1>
         
 
         <div class="post-meta">
@@ -331,8 +330,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-03-20T12:17:47+08:00">
-                2021-03-20
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-05-21T21:20:52+08:00">
+                2022-05-21
               </time>
             
 
@@ -347,8 +346,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2022-04-08T10:30:57+08:00">
-                2022-04-08
+              <time title="更新于" itemprop="dateModified" datetime="2022-05-21T21:52:27+08:00">
+                2022-05-21
               </time>
             
           </span>
@@ -366,8 +365,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%94%B5%E5%BD%B1/" itemprop="url" rel="index">
-                    <span itemprop="name">电影</span>
+                  <a href="/categories/C-11/" itemprop="url" rel="index">
+                    <span itemprop="name">C++11</span>
                   </a>
                 </span>
 
@@ -402,7 +401,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  152
+                  2.3k
                 </span>
               
 
@@ -418,7 +417,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  1
+                  9
                 </span>
               
             </div>
@@ -439,11 +438,84 @@
       
 
       
-        <p>“虽然知道自己马上就要死了，但是依然能感受到美丽的东西是美的，很开心。”</p>
-<p>电影开头铃的父亲和电影结尾二宫女士的去世，告诉我们无尽温柔的人也无法抵挡死亡；海上的烟花会和盛开的樱花，在绽放后转瞬消逝……这些无一不蕴含对美好易逝的感叹。</p>
-<p>但这部电影的主题却不是宣扬悲观，而是在告诉人们，死亡和失去并不可怕，重要的是珍惜身边的人，珍惜现在，好好生活。</p>
-<p><img src="/2021/03/20/%E6%B5%B7%E8%A1%97%E6%97%A5%E8%AE%B0/%E6%B5%B7%E8%A1%97%E6%97%A5%E8%AE%B0.jpg" alt></p>
+        <p>在 C++11 之前的版本（C++98 和 C++ 03）中，定义变量或者声明变量之前都必须指明它的类型，比如 int、char 等；但是在一些比较灵活的语言中，比如 C#、JavaScript、PHP、Python 等，程序员在定义变量时可以不指明具体的类型，而是让编译器（或者解释器）自己去推导，这就让代码的编写更加方便。C++11 为了顺应这种趋势也开始支持该语法，使用 auto 关键字来支持自动类型推导。<a id="more"></a></p>
+<h3 id="语法和规则"><a href="#语法和规则" class="headerlink" title="语法和规则"></a>语法和规则</h3><p>在之前的 C++ 版本中，auto 关键字用来指明变量的存储类型，它和 static 关键字是相对的。auto 表示变量是自动存储的，这也是编译器的默认规则，所以写不写都一样，一般我们也不写，这使得 auto 关键字的存在变得非常鸡肋。C++11 赋予 auto 关键字新的含义，使用它来做自动类型推导。也就是说，使用了 auto 关键字以后，编译器会在编译期间自动推导出变量的类型，这样我们就不用手动指明变量的数据类型了。</p>
+<p>auto 关键字基本的使用语法如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">auto</span> name = value;	<span class="comment">// name 是变量的名字，value 是变量的初始值。</span></span><br></pre></td></tr></table></figure>
 
+<blockquote>
+<p>注意：auto 仅仅是一个占位符，在编译器期间它会被真正的类型所替代。或者说，C++ 中的变量必须是有明确类型的，只是这个类型是由编译器自己推导出来的。</p>
+</blockquote>
+<p>auto 类型推导的简单例子：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">auto</span> n = <span class="number">10</span>;</span><br><span class="line"><span class="keyword">auto</span> f = <span class="number">12.8</span>;</span><br><span class="line"><span class="keyword">auto</span> p = &amp;n;</span><br><span class="line"><span class="keyword">auto</span> url = <span class="string">"http://c.biancheng.net/cplus/"</span>;</span><br></pre></td></tr></table></figure>
+
+<p>下面我们来解释一下：</p>
+<ul>
+<li>第 1 行中，10 是一个整数，默认是 int 类型，所以推导出变量 n 的类型是 int。</li>
+<li>第 2 行中，12.8 是一个小数，默认是 double 类型，所以推导出变量 f 的类型是 double。</li>
+<li>第 3 行中，&amp;n 的结果是一个 int* 类型的指针，所以推导出变量 p 的类型是 int*。</li>
+<li>第 4 行中，由双引号<code>&quot;&quot;</code>包围起来的字符串是 const char* 类型，所以推导出变量 url 的类型是 const char*，也即一个常量指针。</li>
+</ul>
+<p>我们也可以连续定义多个变量：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> n = <span class="number">20</span>;</span><br><span class="line"><span class="keyword">auto</span> *p = &amp;n, m = <span class="number">99</span>;</span><br></pre></td></tr></table></figure>
+
+<p>先看前面的第一个子表达式，&amp;n 的类型是 int*，编译器会根据 auto *p 推导出 auto 为 int；后面的 m 变量自然也为 int 类型，所以把 99 赋值给它也是正确的。</p>
+<p>这里我们要注意，推导的时候不能有二义性。在本例中，编译器根据第一个子表达式已经推导出 auto 为 int 类型，那么后面的 m 也只能是 int 类型，如果写作<code>m=12.5</code>就是错误的，因为 12.5 是double 类型，这和 int 是冲突的。</p>
+<p>还有一个值得注意的地方是：使用 auto 类型推导的变量必须马上初始化，这个很容易理解，因为 auto 在 C++11 中只是“占位符”，并非如 int 一样的真正的类型声明。</p>
+<h3 id="高级用法"><a href="#高级用法" class="headerlink" title="高级用法"></a>高级用法</h3><p>1) auto 除了可以独立使用，还可以和某些具体类型混合使用，这样 auto 表示的就是“半个”类型，而不是完整的类型。请看下面的代码：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span>  x = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">auto</span> *p1 = &amp;x;   <span class="comment">// p1 为 int *，auto 推导为 int</span></span><br><span class="line"><span class="keyword">auto</span>  p2 = &amp;x;   <span class="comment">// p2 为 int*，auto 推导为 int*</span></span><br><span class="line"><span class="keyword">auto</span> &amp;r1  = x;   <span class="comment">// r1 为 int&amp;，auto 推导为 int</span></span><br><span class="line"><span class="keyword">auto</span> r2 = r1;    <span class="comment">// r2 为 int，auto 推导为 int</span></span><br></pre></td></tr></table></figure>
+
+<p>下面我们来解释一下：</p>
+<ul>
+<li>第 2 行代码中，p1 为 int* 类型，也即 auto * 为 int *，所以 auto 被推导成了 int 类型。</li>
+<li>第 3 行代码中，auto 被推导为 int* 类型，前边的例子也已经演示过了。</li>
+<li>第 4 行代码中，r1 为 int &amp; 类型，auto 被推导为 int 类型。</li>
+<li>第 5 行代码是需要重点说明的，r1 本来是 int&amp; 类型，但是 auto 却被推导为 int 类型，这表明当<code>=</code>右边的表达式是一个引用类型时，auto 会把引用抛弃，直接推导出它的原始类型。</li>
+</ul>
+<p>2) 接下来，我们再来看一下 auto 和 const 的结合：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span>  x = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">auto</span> n = x;  <span class="comment">// n 为 const int ，auto 被推导为 int</span></span><br><span class="line"><span class="keyword">auto</span> f = n;        <span class="comment">// f 为 const int，auto 被推导为 int（const 属性被抛弃）</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">auto</span> &amp;r1 = x;  <span class="comment">// r1 为 const int&amp; 类型，auto 被推导为 int</span></span><br><span class="line"><span class="keyword">auto</span> &amp;r2 = r1;     <span class="comment">// r1 为 const int&amp; 类型，auto 被推导为 const int 类型</span></span><br></pre></td></tr></table></figure>
+
+<p>下面我们来解释一下：</p>
+<ul>
+<li>第 2 行代码中，n 为 const int，auto 被推导为 int。</li>
+<li>第 3 行代码中，n 为 const int 类型，但是 auto 却被推导为 int 类型，这说明当<code>=</code>右边的表达式带有 const 属性时， auto 不会使用 const 属性，而是直接推导出 non-const 类型。</li>
+<li>第 4 行代码中，auto 被推导为 int 类型，这个很容易理解，不再赘述。</li>
+<li>第 5 行代码中，r1 是 const int &amp; 类型，auto 也被推导为 const int 类型，这说明当 const 和引用结合时，auto 的推导将保留表达式的 const 类型。</li>
+</ul>
+<p>最后我们来简单总结一下 auto 与 const 结合的用法：</p>
+<ul>
+<li>当类型不为引用时，auto 的推导结果将不保留表达式的 const 属性；</li>
+<li>当类型为引用时，auto 的推导结果将保留表达式的 const 属性。</li>
+</ul>
+<h3 id="auto-的限制"><a href="#auto-的限制" class="headerlink" title="auto 的限制"></a>auto 的限制</h3><p>前面介绍推导规则的时候我们说过，使用 auto 的时候必须对变量进行初始化，这是 auto 的限制之一。那么，除此以外，auto 还有哪些其它的限制呢？</p>
+<p>1) auto 不能在函数的参数中使用。</p>
+<p>这个应该很容易理解，我们在定义函数的时候只是对参数进行了声明，指明了参数的类型，但并没有给它赋值，只有在实际调用函数的时候才会给参数赋值；而 auto 要求必须对变量进行初始化，所以这是矛盾的。</p>
+<p>2) auto 不能作用于类的非静态成员变量（也就是没有 static 关键字修饰的成员变量）中。</p>
+<p>3) auto 关键字不能定义数组，比如下面的例子就是错误的：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> url[] = <span class="string">"www.baidu.com"</span>;</span><br><span class="line"><span class="keyword">auto</span> str[] = url; <span class="comment">// str 为数组，所以不能使用 auto</span></span><br></pre></td></tr></table></figure>
+
+<p>4) auto 不能作用于模板参数，请看下面的例子：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span>&#123;</span></span><br><span class="line">    <span class="comment">//<span class="doctag">TODO:</span></span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">int</span>  <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    A&lt;<span class="keyword">int</span>&gt; C1;</span><br><span class="line">    A&lt;<span class="keyword">auto</span>&gt; C2 = C1;  <span class="comment">//错误</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="auto-的应用"><a href="#auto-的应用" class="headerlink" title="auto 的应用"></a>auto 的应用</h3><h4 id="使用-auto-定义迭代器"><a href="#使用-auto-定义迭代器" class="headerlink" title="使用 auto 定义迭代器"></a>使用 auto 定义迭代器</h4><p>auto 的一个典型应用场景是用来定义 STL 的迭代器。</p>
+<p>我们在使用 STL 容器的时候，需要使用迭代器来遍历容器里面的元素；不同容器的迭代器有不同的类型，在定义迭代器时必须指明。而迭代器的类型有时候比较复杂，书写起来很麻烦，比如下面的例子：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">vector</span>&lt; <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &gt; v;</span><br><span class="line">    <span class="built_in">vector</span>&lt; <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &gt;::iterator i = v.<span class="built_in">begin</span>();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以看出来，定义迭代器 i 的时候，类型书写比较冗长，容易出错。然而有了 auto 类型推导，我们大可不必这样，只写一个 auto 即可。</p>
+<p>修改上面的代码，使之变得非常简洁：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">vector</span>&lt; <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &gt; v;</span><br><span class="line">    <span class="keyword">auto</span> i = v.<span class="built_in">begin</span>();  <span class="comment">//使用 auto 代替具体的类型</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>auto 可以根据表达式 v.begin() 的类型（begin() 函数的返回值类型）来推导出变量 i 的类型。</p>
+<h4 id="auto-用于泛型编程"><a href="#auto-用于泛型编程" class="headerlink" title="auto 用于泛型编程"></a>auto 用于泛型编程</h4><p>auto 的另一个应用就是当我们不知道变量是什么类型，或者不希望指明具体类型的时候，比如泛型编程中。比如下面的例子：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span>&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">int</span> <span class="title">get</span><span class="params">(<span class="keyword">void</span>)</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">100</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span>&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">const</span> <span class="keyword">char</span>* <span class="title">get</span><span class="params">(<span class="keyword">void</span>)</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"www.baidu.com"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">func</span><span class="params">(<span class="keyword">void</span>)</span></span>&#123;</span><br><span class="line">    <span class="keyword">auto</span> val = T::<span class="built_in">get</span>();</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; val &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span>&#123;</span><br><span class="line">    func&lt;A&gt;();</span><br><span class="line">    func&lt;B&gt;();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>运行结果：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">100</span></span><br><span class="line">www.baidu.com</span><br></pre></td></tr></table></figure>
+
+<p>本例中的模板函数 func() 会调用所有类的静态函数 get()，并对它的返回值做统一处理，但是 get() 的返回值类型并不一样，而且不能自动转换。这种要求在以前的 C++ 版本中实现起来非常的麻烦，需要额外增加一个模板参数，并在调用时手动给该模板参数赋值，用以指明变量 val 的类型。</p>
+<p>但是有了 auto 类型自动推导，编译器就可以根据 get() 的返回值自己推导出 val 变量的类型，不用再增加一个模板参数了。</p>
+<p>下面的代码演示了不使用 auto 的解决办法：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span>&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">int</span> <span class="title">get</span><span class="params">(<span class="keyword">void</span>)</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">100</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span>&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">const</span> <span class="keyword">char</span>* <span class="title">get</span><span class="params">(<span class="keyword">void</span>)</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"http://c.biancheng.net/cplus/"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T1, <span class="keyword">typename</span> T2&gt;  <span class="comment">// 需要额外增加一个模板参数 T2</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">func</span><span class="params">(<span class="keyword">void</span>)</span></span>&#123;</span><br><span class="line">    T2 val = T1::<span class="built_in">get</span>();</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; val &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span>&#123;</span><br><span class="line">    <span class="comment">// 调用时也要手动给模板参数赋值</span></span><br><span class="line">    func&lt;A, <span class="keyword">int</span>&gt;();</span><br><span class="line">    func&lt;B, <span class="keyword">const</span> <span class="keyword">char</span>*&gt;();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -460,7 +532,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/%E7%94%B5%E5%BD%B1/" rel="tag"># 电影</a>
+            <a href="/tags/C-C/" rel="tag"># C/C++</a>
+          
+            <a href="/tags/C-11/" rel="tag"># C++11</a>
           
         </div>
       
@@ -473,8 +547,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2021/02/23/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%8F%8A%E5%BA%94%E7%94%A8-%E6%94%B9%E8%BF%9B1/" rel="next" title="二叉树的实现及应用-改进1">
-                <i class="fa fa-chevron-left"></i> 二叉树的实现及应用-改进1
+              <a href="/2022/05/09/C-STL%EF%BC%9A%E6%97%A0%E5%BA%8F%E5%85%B3%E8%81%94%E5%AE%B9%E5%99%A8/" rel="next" title="C++STL：无序关联容器">
+                <i class="fa fa-chevron-left"></i> C++STL：无序关联容器
               </a>
             
           </div>
@@ -482,10 +556,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2021/08/22/void-%E7%9A%84%E7%94%A8%E6%B3%95/" rel="prev" title="void*的用法">
-                void*的用法 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -537,8 +607,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -623,6 +702,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#语法和规则"><span class="nav-number">1.</span> <span class="nav-text">语法和规则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#高级用法"><span class="nav-number">2.</span> <span class="nav-text">高级用法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#auto-的限制"><span class="nav-number">3.</span> <span class="nav-text">auto 的限制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#auto-的应用"><span class="nav-number">4.</span> <span class="nav-text">auto 的应用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#使用-auto-定义迭代器"><span class="nav-number">4.1.</span> <span class="nav-text">使用 auto 定义迭代器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#auto-用于泛型编程"><span class="nav-number">4.2.</span> <span class="nav-text">auto 用于泛型编程</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
