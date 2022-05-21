@@ -91,7 +91,7 @@
 <meta property="og:description" content="概述STL list 容器，又称双向链表容器，即该容器的底层是以双向链表的形式实现的。这意味着，list 容器中的元素可以分散存储在内存空间里，而不是必须存储在一整块连续的内存空间中。">
 <meta property="og:image" content="http://yoursite.com/2022/05/02/C-STL%EF%BC%9A%E9%A1%BA%E5%BA%8F%E5%AE%B9%E5%99%A8%E4%B9%8Blist/pic1.jpg">
 <meta property="article:published_time" content="2022-05-02T01:38:26.000Z">
-<meta property="article:modified_time" content="2022-05-02T02:09:36.198Z">
+<meta property="article:modified_time" content="2022-05-21T01:59:53.327Z">
 <meta property="article:author" content="crossoverpptx">
 <meta property="article:tag" content="C&#x2F;C++">
 <meta property="article:tag" content="STL">
@@ -348,8 +348,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2022-05-02T10:09:36+08:00">
-                2022-05-02
+              <time title="更新于" itemprop="dateModified" datetime="2022-05-21T09:59:53+08:00">
+                2022-05-21
               </time>
             
           </span>
@@ -443,12 +443,12 @@
         <h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>STL list 容器，又称双向链表容器，即该容器的底层是以双向链表的形式实现的。这意味着，list 容器中的元素可以分散存储在内存空间里，而不是必须存储在一整块连续的内存空间中。<a id="more"></a>下图展示了 list 双向链表容器是如何存储元素的：</p>
 <p><img src="/2022/05/02/C-STL%EF%BC%9A%E9%A1%BA%E5%BA%8F%E5%AE%B9%E5%99%A8%E4%B9%8Blist/pic1.jpg" alt></p>
 <p>可以看到，list 容器中各个元素的前后顺序是靠指针来维系的，每个元素都配备了 2 个指针，分别指向它的前一个元素和后一个元素。其中第一个元素的前向指针总为 null，因为它前面没有元素；同样，尾部元素的后向指针也总为 null。</p>
-<p>基于这样的存储结构，list 容器具有一些其它容器（array、vector 和 deque）所不具备的优势，即它可以在序列已知的任何位置快速插入或删除元素（时间复杂度为<code>O(1)</code>）。并且在 list 容器中移动元素，也比其它容器的效率高。</p>
+<p>基于这样的存储结构，list 容器具有一些其它容器（array、vector 和 deque）所不具备的优势，即它可以在序列已知的任何位置快速插入或删除元素（时间复杂度为O(1)），并且在 list 容器中移动元素，也比其它容器的效率高。</p>
 <p>使用 list 容器的缺点是，它不能像 array 和 vector 那样，通过位置直接访问元素。举个例子，如果要访问 list 容器中的第 6 个元素，它不支持<code>容器对象名[6]</code>这种语法格式，正确的做法是从容器中第一个元素或最后一个元素开始遍历容器，直到找到该位置。</p>
 <blockquote>
 <p>实际场景中，如何需要对序列进行大量添加或删除元素的操作，而直接访问元素的需求却很少，这种情况建议使用 list 容器存储序列。</p>
 </blockquote>
-<p>list 容器以模板类 list&lt;T&gt;（T 为存储元素的类型）的形式在<code>&lt;list&gt;</code>头文件中，并位于 std 命名空间中。因此，在使用该容器之前，代码中需要包含下面两行代码：</p>
+<p>list 容器以模板类 list&lt;T&gt;（T 为存储元素的类型）的形式在&lt;list&gt;头文件中，并位于 std 命名空间中。因此，在使用该容器之前，代码中需要包含下面两行代码：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;list&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br></pre></td></tr></table></figure>
 
 <blockquote>
@@ -479,19 +479,19 @@
 </tr>
 <tr>
 <td>cbegin()</td>
-<td>和 begin() 功能相同，只不过在其基础上，增加了 const 属性，不能用于修改元素。</td>
+<td>和 begin() 功能相同，只不过在其基础上增加了 const 属性，不能用于修改元素。</td>
 </tr>
 <tr>
 <td>cend()</td>
-<td>和 end() 功能相同，只不过在其基础上，增加了 const 属性，不能用于修改元素。</td>
+<td>和 end() 功能相同，只不过在其基础上增加了 const 属性，不能用于修改元素。</td>
 </tr>
 <tr>
 <td>crbegin()</td>
-<td>和 rbegin() 功能相同，只不过在其基础上，增加了 const 属性，不能用于修改元素。</td>
+<td>和 rbegin() 功能相同，只不过在其基础上增加了 const 属性，不能用于修改元素。</td>
 </tr>
 <tr>
 <td>crend()</td>
-<td>和 rend() 功能相同，只不过在其基础上，增加了 const 属性，不能用于修改元素。</td>
+<td>和 rend() 功能相同，只不过在其基础上增加了 const 属性，不能用于修改元素。</td>
 </tr>
 <tr>
 <td>empty()</td>
@@ -503,7 +503,7 @@
 </tr>
 <tr>
 <td>max_size()</td>
-<td>返回容器所能包含元素个数的最大值。这通常是一个很大的值，一般是 232-1，所以我们很少会用到这个函数。</td>
+<td>返回容器所能包含元素个数的最大值。这通常是一个很大的值，一般是 2^32-1，所以我们很少会用到这个函数。</td>
 </tr>
 <tr>
 <td>front()</td>
@@ -608,13 +608,13 @@
 <p>3) 创建一个包含 n 个元素的 list 容器，并为每个元素指定初始值。例如：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="built_in">std</span>::<span class="built_in">list</span>&lt;<span class="keyword">int</span>&gt; <span class="title">values</span><span class="params">(<span class="number">10</span>, <span class="number">5</span>)</span></span>;</span><br></pre></td></tr></table></figure>
 
-<p>如此就创建了一个包含 10 个元素并且值都为 5 个 values 容器。</p>
+<p>如此就创建了一个包含 10 个元素并且值都为 5 的 values 容器。</p>
 <p>4) 在已有 list 容器的情况下，通过拷贝该容器可以创建新的 list 容器。例如：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="built_in">std</span>::<span class="built_in">list</span>&lt;<span class="keyword">int</span>&gt; <span class="title">value1</span><span class="params">(<span class="number">10</span>)</span></span>;</span><br><span class="line"><span class="function"><span class="built_in">std</span>::<span class="built_in">list</span>&lt;<span class="keyword">int</span>&gt; <span class="title">value2</span><span class="params">(value1)</span></span>;</span><br></pre></td></tr></table></figure>
 
 <p>注意，采用此方式，必须保证新旧容器存储的元素类型一致。</p>
 <p>5) 通过拷贝其他类型容器（或者普通数组）中指定区域内的元素，可以创建新的 list 容器。例如：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 拷贝普通数组，创建list容器</span></span><br><span class="line"><span class="keyword">int</span> a[] = &#123; <span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span> &#125;;</span><br><span class="line"><span class="function"><span class="built_in">std</span>::<span class="built_in">list</span>&lt;<span class="keyword">int</span>&gt; <span class="title">values</span><span class="params">(a, a+<span class="number">5</span>)</span></span>;</span><br><span class="line"><span class="comment">// 拷贝其它类型的容器，创建 list 容器</span></span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">array</span>&lt;<span class="keyword">int</span>, 5&gt; arr&#123; <span class="number">11</span>,<span class="number">12</span>,<span class="number">13</span>,<span class="number">14</span>,<span class="number">15</span> &#125;;</span><br><span class="line"><span class="function"><span class="built_in">std</span>::<span class="built_in">list</span>&lt;<span class="keyword">int</span>&gt; <span class="title">alues</span><span class="params">(arr.<span class="built_in">begin</span>()+<span class="number">2</span>, arr.<span class="built_in">end</span>())</span></span>;<span class="comment">// 拷贝arr容器中的&#123;13,14,15&#125;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 拷贝普通数组，创建list容器</span></span><br><span class="line"><span class="keyword">int</span> a[] = &#123; <span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span> &#125;;</span><br><span class="line"><span class="function"><span class="built_in">std</span>::<span class="built_in">list</span>&lt;<span class="keyword">int</span>&gt; <span class="title">values</span><span class="params">(a, a+<span class="number">5</span>)</span></span>;</span><br><span class="line"><span class="comment">// 拷贝其它类型的容器，创建 list 容器</span></span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">array</span>&lt;<span class="keyword">int</span>, 5&gt; arr&#123; <span class="number">11</span>,<span class="number">12</span>,<span class="number">13</span>,<span class="number">14</span>,<span class="number">15</span> &#125;;</span><br><span class="line"><span class="function"><span class="built_in">std</span>::<span class="built_in">list</span>&lt;<span class="keyword">int</span>&gt; <span class="title">alues</span><span class="params">(arr.<span class="built_in">begin</span>()+<span class="number">2</span>, arr.<span class="built_in">end</span>())</span></span>;	<span class="comment">// 拷贝arr容器中的&#123;13,14,15&#125;</span></span><br></pre></td></tr></table></figure>
 
 <h3 id="迭代器"><a href="#迭代器" class="headerlink" title="迭代器"></a>迭代器</h3><p>只有运用迭代器，才能访问 list 容器中存储的各个元素。list 模板类提供了如下表所示的这些迭代器函数：</p>
 <table>
@@ -657,12 +657,9 @@
 <td>和 rend() 功能相同，只不过在其基础上，反向迭代器增加了 const 属性，即不能用于修改元素。</td>
 </tr>
 </tbody></table>
-<blockquote>
 <p>除此之外，C++ 11 新添加的 begin() 和 end() 全局函数也同样适用于 list 容器。即当操作对象为 list 容器时，其功能分别和上表中的 begin()、end() 成员函数相同。</p>
-</blockquote>
 <p>这些成员函数通常是成对使用的，即 begin()/end()、rbegin()/rend()、cbegin()/cend()、crbegin()/crend() 各自成对搭配使用。其中，begin()/end() 和 cbegin/cend() 的功能是类似的，同样 rbegin()/rend() 和 crbegin()/crend() 的功能是类似的。</p>
-<p>前面章节已经详细介绍了 array、vector、deque 容器的迭代器，和它们相比，list 容器迭代器最大的不同在于，其配备的迭代器类型为双向迭代器，而不再是随机访问迭代器。</p>
-<p>这意味着，假设 p1 和 p2 都是双向迭代器，则它们支持使用 <code>++p1</code>、 <code>p1++</code>、 <code>p1--</code>、 <code>p1++</code>、 <code>*p1</code>、 <code>p1==p2</code> 以及 <code>p1!=p2</code> 运算符，但不支持以下操作（其中 i 为整数）：</p>
+<p>前面章节已经详细介绍了 array、vector、deque 容器的迭代器，和它们相比，list 容器迭代器最大的不同在于，其配备的迭代器类型为双向迭代器，而不再是随机访问迭代器。这意味着，假设 p1 和 p2 都是双向迭代器，则它们支持使用 <code>++p1</code>、 <code>p1++</code>、 <code>p1--</code>、 <code>p1++</code>、 <code>*p1</code>、 <code>p1==p2</code> 以及 <code>p1!=p2</code> 运算符，但不支持以下操作（其中 i 为整数）：</p>
 <ul>
 <li><code>p1[i]</code>：不能通过下标访问 list 容器中指定位置处的元素。</li>
 <li><code>p1-=i</code>、<code>p1+=i</code>、<code>p1+i</code>、<code>p1-i</code>：双向迭代器 p1 不支持使用 <code>-=、+=、+、-</code> 运算符。</li>
@@ -688,14 +685,14 @@
 <blockquote>
 <p>list 容器不支持随机访问，未提供下标操作符 [] 和 at() 成员函数，也没有提供 data() 成员函数。</p>
 </blockquote>
-<p>通过 front() 和 back() 成员函数，可以分别获得 list 容器中第一个元素和最后一个元素的引用形式。举个例子：</p>
+<p>1) 通过 front() 和 back() 成员函数，可以分别获得 list 容器中第一个元素和最后一个元素的引用形式。举个例子：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;list&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">list</span>&lt;<span class="keyword">int</span>&gt; mylist&#123; <span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span> &#125;;</span><br><span class="line">    <span class="keyword">int</span> &amp;first = mylist.front();</span><br><span class="line">    <span class="keyword">int</span> &amp;last = mylist.back();</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; first &lt;&lt; <span class="string">" "</span> &lt;&lt; last &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    first = <span class="number">10</span>;</span><br><span class="line">    last = <span class="number">20</span>;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; mylist.front() &lt;&lt; <span class="string">" "</span> &lt;&lt; mylist.back() &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>输出结果为：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span> <span class="number">4</span></span><br><span class="line"><span class="number">10</span> <span class="number">20</span></span><br></pre></td></tr></table></figure>
 
 <p>可以看到，通过 front() 和 back() 的返回值，我们不仅能分别获取当前 list 容器中的首尾元素，必要时还能修改它们的值。</p>
-<p>除此之外，如果想访问 list 容存储的其他元素，就只能使用 list 容器的迭代器。例如：</p>
+<p>2) 除此之外，如果想访问 list 容存储的其他元素，就只能使用 list 容器的迭代器。例如：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;list&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">const</span> <span class="built_in">std</span>::<span class="built_in">list</span>&lt;<span class="keyword">int</span>&gt; mylist&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>&#125;;</span><br><span class="line">    <span class="keyword">auto</span> it = mylist.<span class="built_in">begin</span>();</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; *it &lt;&lt; <span class="string">" "</span>;</span><br><span class="line">    ++it;</span><br><span class="line">    <span class="keyword">while</span> (it!=mylist.<span class="built_in">end</span>())</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; *it &lt;&lt; <span class="string">" "</span>;</span><br><span class="line">        ++it;  </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>运行结果为：</p>
@@ -715,13 +712,13 @@
 <li>insert()：在指定位置插入新元素；</li>
 <li>splice()：将其他 list 容器存储的多个元素添加到当前 list 容器的指定位置处。</li>
 </ul>
-<p>以上这些成员方法中，除了 insert() 和 splice() 方法有多种语法格式外，其它成员方法都仅有 1 种语法格式，下面程序演示了它们的具体用法。</p>
+<p>以上这些成员方法中，除了 insert() 和 splice() 方法有多种语法格式外，其它成员方法都仅有 1 种语法格式。下面程序演示了它们的具体用法：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;list&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">list</span>&lt;<span class="keyword">int</span>&gt; values&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;;</span><br><span class="line">    values.push_front(<span class="number">0</span>);<span class="comment">//&#123;0,1,2,3&#125;</span></span><br><span class="line">    values.push_back(<span class="number">4</span>); <span class="comment">//&#123;0,1,2,3,4&#125;</span></span><br><span class="line">    values.emplace_front(<span class="number">-1</span>);<span class="comment">//&#123;-1,0,1,2,3,4&#125;</span></span><br><span class="line">    values.emplace_back(<span class="number">5</span>);  <span class="comment">//&#123;-1,0,1,2,3,4,5&#125;</span></span><br><span class="line">   </span><br><span class="line">    <span class="comment">// emplace(pos,value),其中 pos 表示指明位置的迭代器，value为要插入的元素值</span></span><br><span class="line">    values.emplace(values.<span class="built_in">end</span>(), <span class="number">6</span>);<span class="comment">//&#123;-1,0,1,2,3,4,5,6&#125;</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span> p = values.<span class="built_in">begin</span>(); p != values.<span class="built_in">end</span>(); ++p) &#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; *p &lt;&lt; <span class="string">" "</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>输出结果为：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">-1</span>,<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span></span><br></pre></td></tr></table></figure>
 
-<h4 id="list-insert-成员方法"><a href="#list-insert-成员方法" class="headerlink" title="list insert()成员方法"></a>list insert()成员方法</h4><p>insert() 成员方法的语法格式有 4 种，如下表所示。</p>
+<h4 id="list-insert-成员方法"><a href="#list-insert-成员方法" class="headerlink" title="list insert()成员方法"></a>list insert()成员方法</h4><p>insert() 成员方法的语法格式有 4 种，如下表所示：</p>
 <table>
 <thead>
 <tr>
@@ -746,7 +743,7 @@
 <td>在迭代器 pos 指定的位置之前，插入初始化列表（用大括号 { } 括起来的多个元素，中间有逗号隔开）中所有的元素，并返回表示第一个新插入元素位置的迭代器。</td>
 </tr>
 </tbody></table>
-<p>下面的程序演示了如何使用 insert() 方法向 list 容器中插入元素。</p>
+<p>下面的程序演示了如何使用 insert() 方法向 list 容器中插入元素：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;list&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;array&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">list</span>&lt;<span class="keyword">int</span>&gt; values&#123; <span class="number">1</span>,<span class="number">2</span> &#125;;</span><br><span class="line">    <span class="comment">// 第一种格式用法</span></span><br><span class="line">    values.insert(values.<span class="built_in">begin</span>() , <span class="number">3</span>); <span class="comment">// &#123;3,1,2&#125;</span></span><br><span class="line">    <span class="comment">// 第二种格式用法</span></span><br><span class="line">    values.insert(values.<span class="built_in">end</span>(), <span class="number">2</span>, <span class="number">5</span>); <span class="comment">// &#123;3,1,2,5,5&#125;</span></span><br><span class="line">    <span class="comment">// 第三种格式用法</span></span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">array</span>&lt;<span class="keyword">int</span>, 3&gt;test&#123; <span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span> &#125;;</span><br><span class="line">    values.insert(values.<span class="built_in">end</span>(), test.<span class="built_in">begin</span>(), test.<span class="built_in">end</span>()); <span class="comment">// &#123;3,1,2,5,5,7,8,9&#125;</span></span><br><span class="line">    <span class="comment">// 第四种格式用法</span></span><br><span class="line">    values.insert(values.<span class="built_in">end</span>(), &#123; <span class="number">10</span>,<span class="number">11</span> &#125;); <span class="comment">// &#123;3,1,2,5,5,7,8,9,10,11&#125;</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span> p = values.<span class="built_in">begin</span>(); p != values.<span class="built_in">end</span>(); ++p)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; *p &lt;&lt; <span class="string">" "</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>输出结果为：</p>
@@ -782,7 +779,7 @@
 <p>程序执行结果为：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mylist1 包含 <span class="number">0</span>个元素</span><br><span class="line">mylist2 包含 <span class="number">7</span>个元素</span><br><span class="line">mylist2:<span class="number">1</span> <span class="number">10</span> <span class="number">20</span> <span class="number">30</span> <span class="number">3</span> <span class="number">4</span> <span class="number">2</span></span><br></pre></td></tr></table></figure>
 
-<h3 id="删除元素"><a href="#删除元素" class="headerlink" title="删除元素"></a>删除元素</h3><p>对 list 容器存储的元素执行删除操作，需要借助该容器模板类提供的成员函数。幸运的是，相比其它 STL 容器模板类，list 模板类提供了更多用来实现此操作的成员函数（如下表所示）。</p>
+<h3 id="删除元素"><a href="#删除元素" class="headerlink" title="删除元素"></a>删除元素</h3><p>对 list 容器存储的元素执行删除操作，需要借助该容器模板类提供的成员函数。幸运的是，相比其它 STL 容器模板类，list 模板类提供了更多用来实现此操作的成员函数，如下表所示：</p>
 <table>
 <thead>
 <tr>
