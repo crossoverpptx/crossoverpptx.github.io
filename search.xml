@@ -2963,7 +2963,7 @@ bat脚本命令说明：<figure class="highlight python"><table><tr><td class="c
   <entry>
     <title>C++STL：关联容器之map和multimap</title>
     <url>/2022/05/05/C-STL%EF%BC%9A%E5%85%B3%E8%81%94%E5%AE%B9%E5%99%A8%E4%B9%8Bmap%E5%92%8Cmultimap/</url>
-    <content><![CDATA[<h2 id="map"><a href="#map" class="headerlink" title="map"></a>map</h2><h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>作为关联式容器的一种，map 容器存储的都是 pair 对象，也就是用 pair 类模板创建的键值对。其中，各个键值对的键和值可以是任意数据类型，包括 C++ 基本数据类型（int、double 等）、使用结构体或类自定义的类型。<a id="more"></a></p>
+    <content><![CDATA[<h2 id="map"><a href="#map" class="headerlink" title="map"></a>map</h2><h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>作为关联式容器的一种，map 容器存储的都是 pair 对象，也就是用 pair 类模板创建的键值对。其中，各个键值对的键和值可以是任意数据类型，包括 C++ 基本数据类型（int、double 等）、结构体或类自定义的类型。<a id="more"></a></p>
 <blockquote>
 <p>通常情况下，map 容器中存储的各个键值对都选用 string 字符串作为键的类型。</p>
 </blockquote>
@@ -3087,13 +3087,10 @@ bat脚本命令说明：<figure class="highlight python"><table><tr><td class="c
 <td>在当前 map 容器中，查找键为 key 的键值对的个数并返回。注意，由于 map 容器中各键值对的键的值是唯一的，因此该函数的返回值最大为 1。</td>
 </tr>
 </tbody></table>
-<h3 id="创建C-map容器的几种方法"><a href="#创建C-map容器的几种方法" class="headerlink" title="创建C++ map容器的几种方法"></a>创建C++ map容器的几种方法</h3><p>map 容器的模板类中包含多种构造函数，因此创建 map 容器的方式也有多种，下面就几种常用的创建 map 容器的方法，做一一介绍。</p>
+<h3 id="创建C-map容器的几种方法"><a href="#创建C-map容器的几种方法" class="headerlink" title="创建C++ map容器的几种方法"></a>创建C++ map容器的几种方法</h3><p>map 容器的模板类中包含多种构造函数，因此创建 map 容器的方式也有多种，下面介绍几种常用的创建 map 容器的方法。</p>
 <p>1) 通过调用 map 容器类的默认构造函数，可以创建出一个空的 map 容器，比如：</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="built_in">std</span>::<span class="built_in">map</span>&lt;<span class="built_in">std</span>::<span class="built_in">string</span>, <span class="keyword">int</span>&gt; myMap;</span><br></pre></td></tr></table></figure>
 
-<blockquote>
-<p>如果程序中已经默认指定了 std 命令空间，这里可以省略 <code>std::</code>。</p>
-</blockquote>
 <p>通过此方式创建出的 myMap 容器，初始状态下是空的，即没有存储任何键值对。鉴于空 map 容器可以根据需要随时添加新的键值对，因此创建空 map 容器是比较常用的。</p>
 <p>2) 当然在创建 map 容器的同时，也可以进行初始化，比如：</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="built_in">std</span>::<span class="built_in">map</span>&lt;<span class="built_in">std</span>::<span class="built_in">string</span>, <span class="keyword">int</span>&gt; myMap&#123; &#123;<span class="string">"C语言教程"</span>,<span class="number">10</span>&#125;,&#123;<span class="string">"STL教程"</span>,<span class="number">20</span>&#125; &#125;;</span><br></pre></td></tr></table></figure>
@@ -3227,7 +3224,7 @@ bat脚本命令说明：<figure class="highlight python"><table><tr><td class="c
 <p>lower_bound(key) 和 upper_bound(key) 更多用于 multimap 容器，在 map 容器中很少用到。</p>
 </blockquote>
 <p>4) equal_range(key) 成员方法可以看做是 lower_bound(key) 和 upper_bound(key) 的结合体，该方法会返回一个 pair 对象，其中的 2 个元素都是迭代器类型，其中 pair.first 实际上就是 lower_bound(key) 的返回值，而 pair.second 则等同于 upper_bound(key) 的返回值。</p>
-<p>显然，equal_range(key) 成员方法表示的一个范围，位于此范围中的键值对，其键的值都为 key。举个例子：</p>
+<p>显然，equal_range(key) 成员方法表示的是一个范围，位于此范围中的键值对，其键的值都为 key。举个例子：</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;utility&gt;  // pair</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;map&gt;      // map</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;       // string</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 创建并初始化 map 容器</span></span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">map</span>&lt;<span class="built_in">string</span>, <span class="built_in">string</span>&gt;myMap&#123; &#123;<span class="string">"STL教程"</span>,<span class="string">"http://c.biancheng.net/stl/"</span>&#125;,</span><br><span class="line">                                   &#123;<span class="string">"C语言教程"</span>,<span class="string">"http://c.biancheng.net/c/"</span>&#125;,</span><br><span class="line">                                   &#123;<span class="string">"Java教程"</span>,<span class="string">"http://c.biancheng.net/java/"</span>&#125; &#125;;</span><br><span class="line">    <span class="comment">// 创建一个 pair 对象，来接收 equal_range() 的返回值</span></span><br><span class="line">    pair &lt;<span class="built_in">std</span>::<span class="built_in">map</span>&lt;<span class="built_in">string</span>, <span class="built_in">string</span>&gt;::iterator, <span class="built_in">std</span>::<span class="built_in">map</span>&lt;<span class="built_in">string</span>, <span class="built_in">string</span>&gt;::iterator&gt; myPair = myMap.equal_range(<span class="string">"C语言教程"</span>);</span><br><span class="line">    <span class="comment">// 通过遍历，输出 myPair 指定范围内的键值对</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span> iter = myPair.first; iter != myPair.second; ++iter) &#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; iter-&gt;first &lt;&lt; <span class="string">" "</span> &lt;&lt; iter-&gt;second &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>程序执行结果为：</p>
@@ -3316,7 +3313,7 @@ bat脚本命令说明：<figure class="highlight python"><table><tr><td class="c
 
 <p>从执行结果中不难看出，程序中共执行了 3 次插入操作，其中成功了 2 次，失败了 1 次：</p>
 <ul>
-<li>对于插入成功的 insert() 方法，其返回的 pair 对象中包含一个指向新插入键值对的迭代器和值为 1 的 bool 变量</li>
+<li>对于插入成功的 insert() 方法，其返回的 pair 对象中包含一个指向新插入键值对的迭代器和值为 1 的 bool 变量。</li>
 <li>对于插入失败的 insert() 方法，同样会返回一个 pair 对象，其中包含一个指向 map 容器中键为 “STL教程” 的键值对和值为 0 的 bool 变量。</li>
 </ul>
 <p>另外，在程序中的第 22 行代码，还可以使用如下 2 种方式创建临时的键值对变量，它们是等价的：</p>
@@ -3395,16 +3392,13 @@ bat脚本命令说明：<figure class="highlight python"><table><tr><td class="c
 <hr>
 <h2 id="multimap"><a href="#multimap" class="headerlink" title="multimap"></a>multimap</h2><h3 id="概述-1"><a href="#概述-1" class="headerlink" title="概述"></a>概述</h3><p>在掌握 C++ STL map 容器的基础上，本节介绍一个和 map 相似的关联容器，即 multimap 容器。</p>
 <p>所谓“相似”，指的是 multimap 容器具有和 map 相同的特性，即 multimap 容器也用于存储 pair&lt;const K, T&gt; 类型的键值对（其中 K 表示键的类型，T 表示值的类型），其中各个键值对的键的值不能做修改；并且，该容器也会自行根据键的大小对存储的所有键值对做排序操作。和 map 容器的区别在于，multimap 容器中可以同时存储多（≥2）个键相同的键值对。</p>
-<p>和 map 容器一样，实现 multimap 容器的类模板也定义在<code>&lt;map&gt;</code>头文件，并位于 std 命名空间中。因此，在使用 multimap 容器前，程序应包含如下代码：</p>
+<p>和 map 容器一样，实现 multimap 容器的类模板也定义在&lt;map&gt;头文件，并位于 std 命名空间中。因此，在使用 multimap 容器前，程序应包含如下代码：</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;map&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br></pre></td></tr></table></figure>
 
 <p>multimap 容器类模板的定义如下：</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt; <span class="class"><span class="keyword">class</span> <span class="title">Key</span>,                                   // 指定键（<span class="title">key</span>）的类型</span></span><br><span class="line"><span class="class">           <span class="title">class</span> <span class="title">T</span>,                                     // 指定值（<span class="title">value</span>）的类型</span></span><br><span class="line"><span class="class">           <span class="title">class</span> <span class="title">Compare</span> = <span class="title">less</span>&lt;Key&gt;,                   // 指定排序规则</span></span><br><span class="line"><span class="class">           <span class="title">class</span> <span class="title">Alloc</span> = <span class="title">allocator</span>&lt;pair&lt;const Key,T&gt; &gt;  // 指定分配器对象的类型</span></span><br><span class="line"><span class="class">           &gt; <span class="title">class</span> <span class="title">multimap</span>;</span></span><br></pre></td></tr></table></figure>
 
-<p>可以看到，multimap 容器模板有 4 个参数，其中后 2 个参数都设有默认值。</p>
-<blockquote>
-<p>大多数场景中，我们只需要设定前 2 个参数的值，有些场景可能会用到第 3 个参数，但最后一个参数几乎不会用到。</p>
-</blockquote>
+<p>可以看到，multimap 容器模板有 4 个参数，其中后 2 个参数都设有默认值。大多数场景中，我们只需要设定前 2 个参数的值，有些场景可能会用到第 3 个参数，但最后一个参数几乎不会用到。</p>
 <h3 id="成员函数-1"><a href="#成员函数-1" class="headerlink" title="成员函数"></a>成员函数</h3><table>
 <thead>
 <tr>
@@ -3569,17 +3563,19 @@ bat脚本命令说明：<figure class="highlight python"><table><tr><td class="c
 <blockquote>
 <p>对于初学者来说，切勿尝试直接修改 set 容器中已存储元素的值，这很有可能破坏 set 容器中元素的有序性，最正确的修改 set 容器中元素值的做法是：先删除该元素，然后再添加一个修改后的元素。</p>
 </blockquote>
-<p>set 容器定义于<code>&lt;set&gt;</code>头文件，并位于 std 命名空间中。因此如果想在程序中使用 set 容器，该程序代码应先包含如下语句：</p>
+<p>set 容器定义于&lt;set&gt;头文件，并位于 std 命名空间中。因此如果想在程序中使用 set 容器，该程序代码应先包含如下语句：</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;set&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br></pre></td></tr></table></figure>
 
+<blockquote>
 <p>注意，第二行代码不是必需的，如果不用，则后续程序中在使用 set 容器时，需手动注明 std 命名空间（建议初学者使用）。</p>
+</blockquote>
 <p>set 容器的类模板定义如下：</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt; <span class="class"><span class="keyword">class</span> <span class="title">T</span>,                        // 键 <span class="title">key</span> 和值 <span class="title">value</span> 的类型</span></span><br><span class="line"><span class="class">           <span class="title">class</span> <span class="title">Compare</span> = <span class="title">less</span>&lt;T&gt;,        // 指定 <span class="title">set</span> 容器内部的排序规则</span></span><br><span class="line"><span class="class">           <span class="title">class</span> <span class="title">Alloc</span> = <span class="title">allocator</span>&lt;T&gt;      // 指定分配器对象的类型</span></span><br><span class="line"><span class="class">           &gt; <span class="title">class</span> <span class="title">set</span>;</span></span><br></pre></td></tr></table></figure>
 
-<p>注意，由于 set 容器存储的各个键值对，其键和值完全相同，也就意味着它们的类型相同，因此 set 容器类模板的定义中，仅有第 1 个参数用于设定存储数据的类型。</p>
 <blockquote>
-<p>对于 set 类模板中的 3 个参数，后 2 个参数自带默认值，且几乎所有场景中只需使用前 2 个参数，第 3 个参数不会用到。</p>
+<p>注意，由于 set 容器存储的各个键值对，其键和值完全相同，也就意味着它们的类型相同，因此 set 容器类模板的定义中，仅有第 1 个参数用于设定存储数据的类型。</p>
 </blockquote>
+<p>对于 set 类模板中的 3 个参数，后 2 个参数自带默认值，且几乎所有场景中只需使用前 2 个参数，第 3 个参数不会用到。</p>
 <h3 id="成员函数"><a href="#成员函数" class="headerlink" title="成员函数"></a>成员函数</h3><p>下表列出了 set 容器提供的常用成员方法以及各自的功能：</p>
 <table>
 <thead>
@@ -3685,7 +3681,7 @@ bat脚本命令说明：<figure class="highlight python"><table><tr><td class="c
 <p>2) 除此之外，set 类模板还支持在创建 set 容器的同时，对其进行初始化。例如：</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="built_in">std</span>::<span class="built_in">set</span>&lt;<span class="built_in">std</span>::<span class="built_in">string</span>&gt; myset&#123;<span class="string">"http://c.biancheng.net/java/"</span>,</span><br><span class="line">                            <span class="string">"http://c.biancheng.net/stl/"</span>,</span><br><span class="line">                            <span class="string">"http://c.biancheng.net/python/"</span>&#125;;</span><br></pre></td></tr></table></figure>
 
-<p>由此即创建好了包含 3 个 string 元素的 myset 容器。由于其采用默认的 std::less&lt;T&gt; 规则，因此其内部存储 string 元素的顺序如下所示：</p>
+<p>由此即创建好了包含 3 个 string 元素的 myset 容器。由于其采用默认的 <code>std::less&lt;T&gt;</code> 规则，因此其内部存储 string 元素的顺序如下所示：</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="string">"http://c.biancheng.net/java/"</span></span><br><span class="line"><span class="string">"http://c.biancheng.net/python/"</span></span><br><span class="line"><span class="string">"http://c.biancheng.net/stl/"</span></span><br></pre></td></tr></table></figure>
 
 
@@ -3911,6 +3907,7 @@ bat脚本命令说明：<figure class="highlight python"><table><tr><td class="c
 <p>程序执行结果为：</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="number">1</span>、myset size = <span class="number">5</span></span><br><span class="line"><span class="number">2</span>、myset size = <span class="number">0</span></span><br></pre></td></tr></table></figure>
 
+<hr>
 <h2 id="multiset"><a href="#multiset" class="headerlink" title="multiset"></a>multiset</h2><h3 id="概述-1"><a href="#概述-1" class="headerlink" title="概述"></a>概述</h3><p>前面对 set 容器做了详细的介绍。回忆一下，set 容器具有以下几个特性：</p>
 <ul>
 <li>不再以键值对的方式存储数据，因为 set 容器专门用于存储键和值相等的键值对，因此该容器中真正存储的是各个键值对的值（value）；</li>
@@ -3922,7 +3919,7 @@ bat脚本命令说明：<figure class="highlight python"><table><tr><td class="c
 <blockquote>
 <p>也就是说，multiset 容器和 set 容器唯一的差别在于，multiset 容器允许存储多个值相同的元素，而 set 容器中只能存储互不相同的元素。</p>
 </blockquote>
-<p>和 set 类模板一样，multiset 类模板也定义在<code>&lt;set&gt;</code>头文件，并位于 std 命名空间中。这意味着，如果想在程序中使用 multiset 容器，该程序代码应包含如下语句：</p>
+<p>和 set 类模板一样，multiset 类模板也定义在&lt;set&gt;头文件，并位于 std 命名空间中。这意味着，如果想在程序中使用 multiset 容器，该程序代码应包含如下语句：</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;set&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br></pre></td></tr></table></figure>
 
 <blockquote>
@@ -4102,7 +4099,7 @@ bat脚本命令说明：<figure class="highlight python"><table><tr><td class="c
 <li>和关联容器相比，无序容器擅长通过指定键查找对应的值（平均时间复杂度为 O(1)）；但对于使用迭代器遍历容器中存储的元素，无序容器的执行效率则不如关联容器。</li>
 </ol>
 <h3 id="无序容器种类"><a href="#无序容器种类" class="headerlink" title="无序容器种类"></a>无序容器种类</h3><p>和关联容器一样，无序容器只是一类容器的统称，其包含有 4 个具体容器，分别为 unordered_map、unordered_multimap、unordered_set 以及 unordered_multiset。</p>
-<p>下表这 4 种无序容器的功能做了详细的介绍：</p>
+<p>下表对这 4 种无序容器的功能做了详细的介绍：</p>
 <table>
 <thead>
 <tr>
@@ -4129,9 +4126,8 @@ bat脚本命令说明：<figure class="highlight python"><table><tr><td class="c
 </tbody></table>
 <p>以上 4 种无序容器的名称，仅是在前面所学的 4 种关联容器名称的基础上，添加了 “unordered_”，其实它们仅有一个区别，即 map 容器内存会对存储的键值对进行排序，而 unordered_map 不会。</p>
 <blockquote>
-<p>也就是说，C++ 11 标准的 STL 中，在已提供有 4 种关联式容器的基础上，又新增了各自的“unordered”版本（无序版本、哈希版本），提高了查找指定元素的效率。</p>
+<p>也就是说，C++ 11 标准的 STL 中，在已提供有 4 种关联式容器的基础上，又新增了各自的“unordered”版本（无序版本、哈希版本），提高了查找指定元素的效率。既然无序容器和之前所学的关联容器类似，那么在实际使用中应该选哪种容器呢？总的来说，实际场景中如果涉及大量遍历容器的操作，建议首选关联容器；反之，如果更多的操作是通过键获取对应的值，则应首选无序容器。</p>
 </blockquote>
-<p>既然无序容器和之前所学的关联容器类似，那么在实际使用中应该选哪种容器呢？总的来说，实际场景中如果涉及大量遍历容器的操作，建议首选关联容器；反之，如果更多的操作是通过键获取对应的值，则应首选无序容器。</p>
 <p>这里以 unordered_map 容器为例，举个例子（不必深究该容器的具体用法）：</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unordered_map&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 创建并初始化一个 unordered_map 容器，其存储的 &lt;string,string&gt; 类型的键值对</span></span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">unordered_map</span>&lt;<span class="built_in">std</span>::<span class="built_in">string</span>, <span class="built_in">std</span>::<span class="built_in">string</span>&gt; my_uMap&#123;</span><br><span class="line">        &#123;<span class="string">"C语言教程"</span>,<span class="string">"http://c.biancheng.net/c/"</span>&#125;,</span><br><span class="line">        &#123;<span class="string">"Python教程"</span>,<span class="string">"http://c.biancheng.net/python/"</span>&#125;,</span><br><span class="line">        &#123;<span class="string">"Java教程"</span>,<span class="string">"http://c.biancheng.net/java/"</span>&#125; &#125;;</span><br><span class="line">    <span class="comment">// 查找指定键对应的值，效率比关联式容器高</span></span><br><span class="line">    <span class="built_in">string</span> str = my_uMap.at(<span class="string">"C语言教程"</span>);</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"str = "</span> &lt;&lt; str &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="comment">// 使用迭代器遍历哈希容器，效率不如关联式容器</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span> iter = my_uMap.<span class="built_in">begin</span>(); iter != my_uMap.<span class="built_in">end</span>(); ++iter)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">// pair 类型键值对分为 2 部分</span></span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; iter-&gt;first &lt;&lt; <span class="string">" "</span> &lt;&lt; iter-&gt;second &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -4314,7 +4310,9 @@ bat脚本命令说明：<figure class="highlight python"><table><tr><td class="c
 <p>除此之外，C++ 11 标准中还向 unordered_map 模板类增加了移动构造函数，即以右值引用的方式将临时 unordered_map 容器中存储的所有键值对，全部复制给新建容器。例如：</p>
 <figure class="highlight"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 返回临时 unordered_map 容器的函数</span></span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">unordered_map</span> &lt;<span class="built_in">std</span>::<span class="built_in">string</span>, <span class="built_in">std</span>::<span class="built_in">string</span> &gt; retUmap()&#123;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">unordered_map</span>&lt;<span class="built_in">std</span>::<span class="built_in">string</span>, <span class="built_in">std</span>::<span class="built_in">string</span>&gt;tempUmap&#123;</span><br><span class="line">        &#123;<span class="string">"Python教程"</span>,<span class="string">"http://c.biancheng.net/python/"</span>&#125;,</span><br><span class="line">        &#123;<span class="string">"Java教程"</span>,<span class="string">"http://c.biancheng.net/java/"</span>&#125;,</span><br><span class="line">        &#123;<span class="string">"Linux教程"</span>,<span class="string">"http://c.biancheng.net/linux/"</span>&#125; &#125;;</span><br><span class="line">    <span class="keyword">return</span> tempUmap;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 调用移动构造函数，创建 umap2 容器</span></span><br><span class="line">std::unordered_map&lt;std::string, std::string&gt; umap2(retUmap());</span><br></pre></td></tr></table></figure>
 
+<blockquote>
 <p>注意，无论是调用复制构造函数还是拷贝构造函数，必须保证 2 个容器的类型完全相同。</p>
+</blockquote>
 <p>4) 当然，如果不想全部拷贝，可以使用 unordered_map 类模板提供的迭代器，在现有 unordered_map 容器中选择部分区域内的键值对，为新建 unordered_map 容器初始化。例如：</p>
 <figure class="highlight"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 传入 2 个迭代器</span></span><br><span class="line">std::unordered_map&lt;std::string, std::string&gt; umap2(++umap.begin(),umap.end());</span><br></pre></td></tr></table></figure>
 
@@ -4367,7 +4365,7 @@ bat脚本命令说明：<figure class="highlight python"><table><tr><td class="c
 <p>所谓迭代器失效，针对的是那些用于表示容器内某个范围的迭代器，由于重哈希会重新调整每个键值对的存储位置，所以容器重哈希之后，之前表示特定范围的迭代器很可能无法再正确表示该范围。但是，重哈希并不会影响那些指向单个键值对元素的迭代器。</p>
 </blockquote>
 <p>举个例子：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unordered_map&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 创建 umap 容器</span></span><br><span class="line">    <span class="built_in">unordered_map</span>&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; umap;</span><br><span class="line">    <span class="comment">// 向 umap 容器添加 50 个键值对</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= <span class="number">50</span>; i++) &#123;</span><br><span class="line">        umap.emplace(i, i);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 获取键为 49 的键值对所在的范围</span></span><br><span class="line">    <span class="keyword">auto</span> pair = umap.equal_range(<span class="number">49</span>);</span><br><span class="line">    <span class="comment">//输出 pair 范围内的每个键值对的键的值</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span> iter = pair.first; iter != pair.second; ++iter) &#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; iter-&gt;first &lt;&lt;<span class="string">" "</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="comment">// 手动调整最大负载因子数</span></span><br><span class="line">    umap.max_load_factor(<span class="number">3.0</span>);</span><br><span class="line">    <span class="comment">// 手动调用 rehash() 函数重哈希</span></span><br><span class="line">    umap.rehash(<span class="number">10</span>);</span><br><span class="line">    <span class="comment">// 重哈希之后，pair 的范围可能会发生变化</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span> iter = pair.first; iter != pair.second; ++iter) &#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; iter-&gt;first &lt;&lt; <span class="string">" "</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unordered_map&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 创建 umap 容器</span></span><br><span class="line">    <span class="built_in">unordered_map</span>&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; umap;</span><br><span class="line">    <span class="comment">// 向 umap 容器添加 50 个键值对</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= <span class="number">50</span>; i++) &#123;</span><br><span class="line">        umap.emplace(i, i);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 获取键为 49 的键值对所在的范围</span></span><br><span class="line">    <span class="keyword">auto</span> pair = umap.equal_range(<span class="number">49</span>);</span><br><span class="line">    <span class="comment">// 输出 pair 范围内的每个键值对的键的值</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span> iter = pair.first; iter != pair.second; ++iter) &#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; iter-&gt;first &lt;&lt;<span class="string">" "</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="comment">// 手动调整最大负载因子数</span></span><br><span class="line">    umap.max_load_factor(<span class="number">3.0</span>);</span><br><span class="line">    <span class="comment">// 手动调用 rehash() 函数重哈希</span></span><br><span class="line">    umap.rehash(<span class="number">10</span>);</span><br><span class="line">    <span class="comment">// 重哈希之后，pair 的范围可能会发生变化</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span> iter = pair.first; iter != pair.second; ++iter) &#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; iter-&gt;first &lt;&lt; <span class="string">" "</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>程序执行结果为：</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="number">49</span></span><br><span class="line"><span class="number">49</span> <span class="number">17</span></span><br></pre></td></tr></table></figure>
@@ -4376,7 +4374,7 @@ bat脚本命令说明：<figure class="highlight python"><table><tr><td class="c
 <blockquote>
 <p>经测试，用于遍历整个容器的 begin()/end() 和 cbegin()/cend() 迭代器对，重哈希只会影响遍历容器内键值对的顺序，整个遍历的操作仍然可以顺利完成。</p>
 </blockquote>
-<h4 id="C-STL-unordered-map获取元素的4种方法"><a href="#C-STL-unordered-map获取元素的4种方法" class="headerlink" title="C++ STL unordered_map获取元素的4种方法"></a>C++ STL unordered_map获取元素的4种方法</h4><p>为了方便用户快速地从该类型容器提取出目标元素（也就是某个键值对的值），unordered_map 容器类模板中提供了以下几种方法。</p>
+<h4 id="C-STL-unordered-map获取元素的几种方法"><a href="#C-STL-unordered-map获取元素的几种方法" class="headerlink" title="C++ STL unordered_map获取元素的几种方法"></a>C++ STL unordered_map获取元素的几种方法</h4><p>为了方便用户快速地从该类型容器提取出目标元素（也就是某个键值对的值），unordered_map 容器类模板中提供了以下几种方法。</p>
 <p>1) unordered_map 容器类模板中，实现了对 [ ] 运算符的重载，使得我们可以像“利用下标访问普通数组中元素”那样，通过目标键值对的键获取到该键对应的值。</p>
 <p>举个例子：</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unordered_map&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 创建 umap 容器</span></span><br><span class="line">    <span class="built_in">unordered_map</span>&lt;<span class="built_in">string</span>, <span class="built_in">string</span>&gt; umap&#123;</span><br><span class="line">        &#123;<span class="string">"Python教程"</span>,<span class="string">"http://c.biancheng.net/python/"</span>&#125;,</span><br><span class="line">        &#123;<span class="string">"Java教程"</span>,<span class="string">"http://c.biancheng.net/java/"</span>&#125;,</span><br><span class="line">        &#123;<span class="string">"Linux教程"</span>,<span class="string">"http://c.biancheng.net/linux/"</span>&#125; &#125;;</span><br><span class="line">    <span class="comment">// 获取 "Java教程" 对应的值</span></span><br><span class="line">    <span class="built_in">string</span> str = umap[<span class="string">"Java教程"</span>];</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; str &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -4425,7 +4423,7 @@ bat脚本命令说明：<figure class="highlight python"><table><tr><td class="c
 <blockquote>
 <p>以上 4 种方法中，前 2 种方法基本能满足多数场景的需要，建议初学者首选 at() 成员方法！</p>
 </blockquote>
-<h4 id="C-unordered-map-insert-方法"><a href="#C-unordered-map-insert-方法" class="headerlink" title="C++ unordered_map insert()方法"></a>C++ unordered_map insert()方法</h4><p>为了方便用户向已建 unordered_map 容器中添加新的键值对，该容器模板中提供了 insert() 方法，unordered_map 模板类中，提供了多种语法格式的 insert() 方法，根据功能的不同，可划分为以下几种用法。</p>
+<h4 id="C-unordered-map-insert-方法"><a href="#C-unordered-map-insert-方法" class="headerlink" title="C++ unordered_map insert()方法"></a>C++ unordered_map insert()方法</h4><p>为了方便向已建 unordered_map 容器中添加新的键值对，该容器模板中提供了 insert() 方法，unordered_map 模板类中，提供了多种语法格式的 insert() 方法，根据功能的不同，可划分为以下几种用法。</p>
 <p>1) insert() 方法可以将 pair 类型的键值对元素添加到 unordered_map 容器中，其语法格式有 2 种：</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 以普通方式传递参数</span></span><br><span class="line">pair&lt;iterator,bool&gt; insert ( const value_type&amp; val );</span><br><span class="line"><span class="comment">// 以右值引用的方式传递参数</span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">P</span>&gt;</span></span><br><span class="line"><span class="class">  <span class="title">pair</span>&lt;iterator,bool&gt; <span class="title">insert</span> ( <span class="title">P</span>&amp;&amp; <span class="title">val</span> );</span></span><br></pre></td></tr></table></figure>
 
@@ -4478,7 +4476,7 @@ bat脚本命令说明：<figure class="highlight python"><table><tr><td class="c
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">STL教程 http://c.biancheng.net/stl/</span><br><span class="line">Python教程 http://c.biancheng.net/python/</span><br><span class="line">Java教程 http://c.biancheng.net/java/</span><br></pre></td></tr></table></figure>
 
 
-<p>总的来说，unordered_map 模板类提供的 insert() 方法，有以上 4 种用法，可以根据实际场景的需要自行选择使用哪一种。</p>
+<p>总的来说，unordered_map 模板类提供的 insert() 方法有以上 4 种，我们可以根据实际场景的需要自行选择使用哪一种。</p>
 <h4 id="C-unordered-map-emplace-和emplace-hint-方法"><a href="#C-unordered-map-emplace-和emplace-hint-方法" class="headerlink" title="C++ unordered_map emplace()和emplace_hint()方法"></a>C++ unordered_map emplace()和emplace_hint()方法</h4><p>和前面学的 map、set 等容器一样，C++ 11 标准也为 unordered_map 容器新增了 emplace() 和 emplace_hint() 成员方法。我们知道，实现向已有 unordered_map 容器中添加新键值对，可以通过调用 insert() 方法，但其实还有更好的方法，即使用 emplace() 或者 emplace_hint() 方法，它们完成“向容器中添加新键值对”的效率，要比 insert() 方法高。</p>
 <h5 id="unordered-map-emplace-方法"><a href="#unordered-map-emplace-方法" class="headerlink" title="unordered_map emplace()方法"></a>unordered_map emplace()方法</h5><p>emplace() 方法的用法很简单，其语法格式如下：</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span>... <span class="title">Args</span>&gt;</span></span><br><span class="line"><span class="class">  <span class="title">pair</span>&lt;iterator, bool&gt; <span class="title">emplace</span> ( <span class="title">Args</span>&amp;&amp;... <span class="title">args</span> );</span></span><br></pre></td></tr></table></figure>
@@ -4566,7 +4564,7 @@ bat脚本命令说明：<figure class="highlight python"><table><tr><td class="c
 <h2 id="unordered-multimap"><a href="#unordered-multimap" class="headerlink" title="unordered_multimap"></a>unordered_multimap</h2><h3 id="概述-2"><a href="#概述-2" class="headerlink" title="概述"></a>概述</h3><p>C++ STL 标准库中，除了提供有 unordered_map 无序关联容器，还提供有和 unordered_map 容器非常相似的 unordered_multimap 无序关联容器。</p>
 <p>和 unordered_map 容器一样，unordered_multimap 容器也以键值对的形式存储数据，且底层也采用哈希表结构存储各个键值对。两者唯一的不同之处在于，unordered_multimap 容器可以存储多个键相等的键值对，而 unordered_map 容器不行。</p>
 <blockquote>
-<p>《深度剖析C++ STL无序容器底层原理》一文提到，无序容器中存储的各个键值对，都会哈希存到各个桶（本质为链表）中。而对于 unordered_multimap 容器来说，其存储的所有键值对中，键相等的键值对会被哈希到同一个桶中存储。</p>
+<p>无序容器中存储的各个键值对，都会哈希存到各个桶（本质为链表）中。而对于 unordered_multimap 容器来说，其存储的所有键值对中，键相等的键值对会被哈希到同一个桶中存储。</p>
 </blockquote>
 <p>另外值得一提得是，STL 标准库中实现 unordered_multimap 容器的模板类并没有定义在以自己名称命名的头文件中，而是和 unordered_map 容器一样，定义在<code>&lt;unordered_map&gt;</code>头文件，且位于 std 命名空间中。因此，在使用 unordered_multimap 容器之前，程序中应包含如下 2 行代码：</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unordered_map&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br></pre></td></tr></table></figure>
@@ -4757,7 +4755,7 @@ bat脚本命令说明：<figure class="highlight python"><table><tr><td class="c
 <p>unordered_set 容器的类模板定义如下：</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt; <span class="class"><span class="keyword">class</span> <span class="title">Key</span>,            // 容器中存储元素的类型</span></span><br><span class="line"><span class="class">           <span class="title">class</span> <span class="title">Hash</span> = <span class="title">hash</span>&lt;Key&gt;,    // 确定元素存储位置所用的哈希函数</span></span><br><span class="line"><span class="class">           <span class="title">class</span> <span class="title">Pred</span> = <span class="title">equal_to</span>&lt;Key&gt;,   // 判断各个元素是否相等所用的函数</span></span><br><span class="line"><span class="class">           <span class="title">class</span> <span class="title">Alloc</span> = <span class="title">allocator</span>&lt;Key&gt;   // 指定分配器对象的类型</span></span><br><span class="line"><span class="class">           &gt; <span class="title">class</span> <span class="title">unordered_set</span>;</span></span><br></pre></td></tr></table></figure>
 
-<p>可以看到，以上 4 个参数中，只有第一个参数没有默认值，这意味着如果我们想创建一个 unordered_set 容器，至少需要手动传递 1 个参数。事实上，在 99% 的实际场景中最多只需要使用前 3 个参数（各自含义如表 1 所示），最后一个参数保持默认值即可。</p>
+<p>可以看到，以上 4 个参数中，只有第一个参数没有默认值，这意味着如果我们想创建一个 unordered_set 容器，至少需要手动传递 1 个参数。事实上，在 99% 的实际场景中最多只需要使用前 3 个参数（各自含义如下表所示），最后一个参数保持默认值即可。</p>
 <table>
 <thead>
 <tr>
@@ -4936,9 +4934,7 @@ bat脚本命令说明：<figure class="highlight python"><table><tr><td class="c
 <p>unordered_multiset 容器类模板的定义如下：</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt; <span class="class"><span class="keyword">class</span> <span class="title">Key</span>,            // 容器中存储元素的类型</span></span><br><span class="line"><span class="class">           <span class="title">class</span> <span class="title">Hash</span> = <span class="title">hash</span>&lt;Key&gt;,    // 确定元素存储位置所用的哈希函数</span></span><br><span class="line"><span class="class">           <span class="title">class</span> <span class="title">Pred</span> = <span class="title">equal_to</span>&lt;Key&gt;,   // 判断各个元素是否相等所用的函数</span></span><br><span class="line"><span class="class">           <span class="title">class</span> <span class="title">Alloc</span> = <span class="title">allocator</span>&lt;Key&gt;   // 指定分配器对象的类型</span></span><br><span class="line"><span class="class">           &gt; <span class="title">class</span> <span class="title">unordered_multiset</span>;</span></span><br></pre></td></tr></table></figure>
 
-<blockquote>
-<p>需要说明的是，在 99% 的实际场景中，最多只需要使用前 3 个参数（各自含义如表 1 所示），最后一个参数保持默认值即可。</p>
-</blockquote>
+<p>需要说明的是，在 99% 的实际场景中，最多只需要使用前 3 个参数（各自含义如下表所示），最后一个参数保持默认值即可。</p>
 <table>
 <thead>
 <tr>
@@ -5093,7 +5089,7 @@ bat脚本命令说明：<figure class="highlight python"><table><tr><td class="c
 <blockquote>
 <p>注意，无论是调用复制构造函数还是拷贝构造函数，必须保证 2 个容器的类型完全相同。</p>
 </blockquote>
-<p>4) 当然，如果不想全部拷贝，可以使用 unordered_multiset 类模板提供的迭代器，在现有 unordered_multiset 容器中选择部分区域内的元素，为新建 unordered_multiset 容器初始化。例如：</p>
+<p>4) 当然，如果不想全部拷贝，可以使用 unordered_multiset 类模板提供的迭代器，在现有 unordered_multiset 容器中选择部分区域内的元素，为新建的 unordered_multiset 容器初始化。例如：</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 传入 2 个迭代器</span></span><br><span class="line"><span class="function"><span class="built_in">std</span>::<span class="built_in">unordered_multiset</span>&lt;<span class="built_in">std</span>::<span class="built_in">string</span>&gt; <span class="title">umset2</span><span class="params">(++umset.<span class="built_in">begin</span>(), umset.<span class="built_in">end</span>())</span></span>;</span><br></pre></td></tr></table></figure>
 
 <p>通过此方式创建的 umset2 容器，其内部就包含 umset 容器中除第 1 个元素外的所有其它元素。</p>

@@ -90,7 +90,7 @@
 <meta property="og:site_name" content="crossoverpptx&#39;s Blog">
 <meta property="og:description" content="set概述前面介绍了 map 容器和 multimap 容器，类似地，C++ STL 标准库中还提供有 set 和 multiset 这 2 个容器，它们也属于关联容器。">
 <meta property="article:published_time" content="2022-05-07T09:43:03.000Z">
-<meta property="article:modified_time" content="2022-05-07T10:14:00.100Z">
+<meta property="article:modified_time" content="2022-05-21T10:20:56.348Z">
 <meta property="article:author" content="crossoverpptx">
 <meta property="article:tag" content="C&#x2F;C++">
 <meta property="article:tag" content="STL">
@@ -346,8 +346,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2022-05-07T18:14:00+08:00">
-                2022-05-07
+              <time title="更新于" itemprop="dateModified" datetime="2022-05-21T18:20:56+08:00">
+                2022-05-21
               </time>
             
           </span>
@@ -449,17 +449,19 @@
 <blockquote>
 <p>对于初学者来说，切勿尝试直接修改 set 容器中已存储元素的值，这很有可能破坏 set 容器中元素的有序性，最正确的修改 set 容器中元素值的做法是：先删除该元素，然后再添加一个修改后的元素。</p>
 </blockquote>
-<p>set 容器定义于<code>&lt;set&gt;</code>头文件，并位于 std 命名空间中。因此如果想在程序中使用 set 容器，该程序代码应先包含如下语句：</p>
+<p>set 容器定义于&lt;set&gt;头文件，并位于 std 命名空间中。因此如果想在程序中使用 set 容器，该程序代码应先包含如下语句：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;set&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br></pre></td></tr></table></figure>
 
+<blockquote>
 <p>注意，第二行代码不是必需的，如果不用，则后续程序中在使用 set 容器时，需手动注明 std 命名空间（建议初学者使用）。</p>
+</blockquote>
 <p>set 容器的类模板定义如下：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt; <span class="class"><span class="keyword">class</span> <span class="title">T</span>,                        // 键 <span class="title">key</span> 和值 <span class="title">value</span> 的类型</span></span><br><span class="line"><span class="class">           <span class="title">class</span> <span class="title">Compare</span> = <span class="title">less</span>&lt;T&gt;,        // 指定 <span class="title">set</span> 容器内部的排序规则</span></span><br><span class="line"><span class="class">           <span class="title">class</span> <span class="title">Alloc</span> = <span class="title">allocator</span>&lt;T&gt;      // 指定分配器对象的类型</span></span><br><span class="line"><span class="class">           &gt; <span class="title">class</span> <span class="title">set</span>;</span></span><br></pre></td></tr></table></figure>
 
-<p>注意，由于 set 容器存储的各个键值对，其键和值完全相同，也就意味着它们的类型相同，因此 set 容器类模板的定义中，仅有第 1 个参数用于设定存储数据的类型。</p>
 <blockquote>
-<p>对于 set 类模板中的 3 个参数，后 2 个参数自带默认值，且几乎所有场景中只需使用前 2 个参数，第 3 个参数不会用到。</p>
+<p>注意，由于 set 容器存储的各个键值对，其键和值完全相同，也就意味着它们的类型相同，因此 set 容器类模板的定义中，仅有第 1 个参数用于设定存储数据的类型。</p>
 </blockquote>
+<p>对于 set 类模板中的 3 个参数，后 2 个参数自带默认值，且几乎所有场景中只需使用前 2 个参数，第 3 个参数不会用到。</p>
 <h3 id="成员函数"><a href="#成员函数" class="headerlink" title="成员函数"></a>成员函数</h3><p>下表列出了 set 容器提供的常用成员方法以及各自的功能：</p>
 <table>
 <thead>
@@ -565,7 +567,7 @@
 <p>2) 除此之外，set 类模板还支持在创建 set 容器的同时，对其进行初始化。例如：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">std</span>::<span class="built_in">set</span>&lt;<span class="built_in">std</span>::<span class="built_in">string</span>&gt; myset&#123;<span class="string">"http://c.biancheng.net/java/"</span>,</span><br><span class="line">                            <span class="string">"http://c.biancheng.net/stl/"</span>,</span><br><span class="line">                            <span class="string">"http://c.biancheng.net/python/"</span>&#125;;</span><br></pre></td></tr></table></figure>
 
-<p>由此即创建好了包含 3 个 string 元素的 myset 容器。由于其采用默认的 std::less&lt;T&gt; 规则，因此其内部存储 string 元素的顺序如下所示：</p>
+<p>由此即创建好了包含 3 个 string 元素的 myset 容器。由于其采用默认的 <code>std::less&lt;T&gt;</code> 规则，因此其内部存储 string 元素的顺序如下所示：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"http://c.biancheng.net/java/"</span></span><br><span class="line"><span class="string">"http://c.biancheng.net/python/"</span></span><br><span class="line"><span class="string">"http://c.biancheng.net/stl/"</span></span><br></pre></td></tr></table></figure>
 
 
@@ -791,6 +793,7 @@
 <p>程序执行结果为：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>、myset size = <span class="number">5</span></span><br><span class="line"><span class="number">2</span>、myset size = <span class="number">0</span></span><br></pre></td></tr></table></figure>
 
+<hr>
 <h2 id="multiset"><a href="#multiset" class="headerlink" title="multiset"></a>multiset</h2><h3 id="概述-1"><a href="#概述-1" class="headerlink" title="概述"></a>概述</h3><p>前面对 set 容器做了详细的介绍。回忆一下，set 容器具有以下几个特性：</p>
 <ul>
 <li>不再以键值对的方式存储数据，因为 set 容器专门用于存储键和值相等的键值对，因此该容器中真正存储的是各个键值对的值（value）；</li>
@@ -802,7 +805,7 @@
 <blockquote>
 <p>也就是说，multiset 容器和 set 容器唯一的差别在于，multiset 容器允许存储多个值相同的元素，而 set 容器中只能存储互不相同的元素。</p>
 </blockquote>
-<p>和 set 类模板一样，multiset 类模板也定义在<code>&lt;set&gt;</code>头文件，并位于 std 命名空间中。这意味着，如果想在程序中使用 multiset 容器，该程序代码应包含如下语句：</p>
+<p>和 set 类模板一样，multiset 类模板也定义在&lt;set&gt;头文件，并位于 std 命名空间中。这意味着，如果想在程序中使用 multiset 容器，该程序代码应包含如下语句：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;set&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br></pre></td></tr></table></figure>
 
 <blockquote>
@@ -1187,7 +1190,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">90.2k</span>
+    <span title="Site words total count">90.1k</span>
   
 </div>
 
