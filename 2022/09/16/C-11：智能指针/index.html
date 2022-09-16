@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="C/C++,C++11," />
 
 
 
@@ -83,13 +83,17 @@
 
 
 
-<meta name="description" content="黑夜给了我黑色的眼睛，我却用它寻找光明">
-<meta property="og:type" content="website">
-<meta property="og:title" content="crossoverpptx&#39;s Blog">
-<meta property="og:url" content="http://yoursite.com/categories/mysql/index.html">
+<meta name="description" content="一、什么是智能指针在C++中没有垃圾回收机制，必须自己释放分配的内存，否则就会造成内存泄露。解决这个问题最有效的方法是使用智能指针（smart pointer）。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C++11：智能指针">
+<meta property="og:url" content="http://yoursite.com/2022/09/16/C-11%EF%BC%9A%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/index.html">
 <meta property="og:site_name" content="crossoverpptx&#39;s Blog">
-<meta property="og:description" content="黑夜给了我黑色的眼睛，我却用它寻找光明">
+<meta property="og:description" content="一、什么是智能指针在C++中没有垃圾回收机制，必须自己释放分配的内存，否则就会造成内存泄露。解决这个问题最有效的方法是使用智能指针（smart pointer）。">
+<meta property="article:published_time" content="2022-09-16T02:25:22.000Z">
+<meta property="article:modified_time" content="2022-09-16T03:58:10.667Z">
 <meta property="article:author" content="crossoverpptx">
+<meta property="article:tag" content="C&#x2F;C++">
+<meta property="article:tag" content="C++11">
 <meta name="twitter:card" content="summary">
 
 
@@ -120,13 +124,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/categories/mysql/"/>
+  <link rel="canonical" href="http://yoursite.com/2022/09/16/C-11：智能指针/"/>
 
 
 
 
 
-  <title>分类: mysql | crossoverpptx's Blog</title>
+  <title>C++11：智能指针 | crossoverpptx's Blog</title>
   
 
 
@@ -145,7 +149,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -283,83 +287,243 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block category">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>mysql<small>分类</small>
-        </h1>
-      </div>
+  
 
-      
-        
+  
+  
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/09/16/C-11%EF%BC%9A%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="crossoverpptx">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/me.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="crossoverpptx's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2021/01/05/Linux%E4%B8%8B%E9%80%9A%E8%BF%87python%E7%9A%84pymysql%E6%A8%A1%E5%9D%97%E5%90%91mysql%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8C%81%E7%BB%AD%E6%8F%92%E5%85%A5%E5%9B%BE%E7%89%87%E6%95%B0%E6%8D%AE/" itemprop="url">
-              
-                <span itemprop="name">Linux下通过python的pymysql模块向mysql数据库持续插入图片数据</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">C++11：智能指针</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2021-01-05T17:55:44+08:00"
-              content="2021-01-05" >
-          01-05
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-09-16T10:25:22+08:00">
+                2022-09-16
+              </time>
+            
 
-    </header>
-  </article>
+            
+              <span class="post-meta-divider">|</span>
+            
 
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2022-09-16T11:58:10+08:00">
+                2022-09-16
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C-11/" itemprop="url" rel="index">
+                    <span itemprop="name">C++11</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i> 浏览
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1.1k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  4
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-        
+      
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+      
+        <h1 id="一、什么是智能指针"><a href="#一、什么是智能指针" class="headerlink" title="一、什么是智能指针"></a>一、什么是智能指针</h1><p>在C++中没有垃圾回收机制，必须自己释放分配的内存，否则就会造成内存泄露。解决这个问题最有效的方法是使用智能指针（smart pointer）。<a id="more"></a>智能指针是存储指向动态分配（堆）对象指针的类，用于生存期的控制，能够确保在离开指针所在作用域时，自动地销毁动态分配的对象，防止内存泄露。随着C++的发展，有三个解决方案，一个方案对应着一种智能指针。</p>
+<ul>
+<li>将指针的管理权转移给另外一个对象。对应C++98的auto_ptr。</li>
+<li>防止拷贝。对应C++11的unique_ptr。</li>
+<li>引用计数。对应C++11的shared_ptr。</li>
+</ul>
+<p>其实，C++一共提供了四种智能指针：auto_ptr， unique_ptr，shared_ptr，weak_ptr。其中后三个是C++11新增的，第一个由C++98提出，已经被C++11弃用。智能指针都包含在memory库中，要使用智能指针必须包含这个库。</p>
+<h1 id="二、auto-ptr"><a href="#二、auto-ptr" class="headerlink" title="二、auto_ptr"></a>二、auto_ptr</h1><p>  auto_ptr的原理是：将资源的管理权由一个对象转移给另外一个对象。但auto_ptr存在下面一些问题：</p>
+<h2 id="1、auto-ptr不能共享所有权"><a href="#1、auto-ptr不能共享所有权" class="headerlink" title="1、auto_ptr不能共享所有权"></a>1、auto_ptr不能共享所有权</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="built_in">auto_ptr</span>&lt;<span class="keyword">int</span>&gt; <span class="title">p1</span><span class="params">(<span class="keyword">new</span> <span class="keyword">int</span>)</span></span>;</span><br><span class="line"><span class="function"><span class="built_in">auto_ptr</span>&lt;<span class="keyword">int</span>&gt; <span class="title">p2</span><span class="params">(p1)</span></span>; <span class="comment">// 拷贝</span></span><br><span class="line"><span class="built_in">auto_ptr</span>&lt;<span class="keyword">int</span>&gt; p3;</span><br><span class="line">p3 = p1; <span class="comment">// 赋值</span></span><br></pre></td></tr></table></figure>
+<p>这样会导致p1，p2，p3同时指向p1内部的原始指针，由于每一个auto_ptr在被销毁的时候都会删除其所指向的对象，原始指针就会被重复删除3次，为了解决这个问题，要么禁用拷贝与赋值运算符，要么设计当auto_ptr拷贝或者赋值的时候对原始指针的所有权转移到新对象去。</p>
+<h2 id="2、auto-ptr不能指向数组"><a href="#2、auto-ptr不能指向数组" class="headerlink" title="2、auto_ptr不能指向数组"></a>2、auto_ptr不能指向数组</h2><h2 id="3、auto-ptr不能作为容器成员"><a href="#3、auto-ptr不能作为容器成员" class="headerlink" title="3、auto_ptr不能作为容器成员"></a>3、auto_ptr不能作为容器成员</h2><h2 id="4、auto-ptr不能通过赋值操作来初始化"><a href="#4、auto-ptr不能通过赋值操作来初始化" class="headerlink" title="4、auto_ptr不能通过赋值操作来初始化"></a>4、auto_ptr不能通过赋值操作来初始化</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">std</span>::<span class="built_in">auto_ptr</span>&lt;<span class="keyword">int</span>&gt; p = <span class="keyword">new</span> <span class="keyword">int</span>(<span class="number">42</span>) <span class="comment">// 错</span></span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">auto_ptr</span>&lt;<span class="keyword">int</span>&gt; p(<span class="keyword">new</span> <span class="keyword">int</span>(<span class="number">42</span>)) <span class="comment">// 对</span></span><br></pre></td></tr></table></figure>
 
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2021/01/05/Linux%E4%B8%8B%E4%BF%AE%E6%94%B9mysql%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AF%86%E7%A0%81%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E6%B3%95/" itemprop="url">
-              
-                <span itemprop="name">Linux下修改mysql数据库密码的几种方法</span>
-              
-            </a>
-        
-      </h2>
+<h1 id="三、unique-ptr"><a href="#三、unique-ptr" class="headerlink" title="三、unique_ptr"></a>三、unique_ptr</h1><p>unique_ptr可以看成是auto_ptr的替代品，用法如下：</p>
+<h2 id="1、不支持拷贝构造和赋值运算函数"><a href="#1、不支持拷贝构造和赋值运算函数" class="headerlink" title="1、不支持拷贝构造和赋值运算函数"></a>1、不支持拷贝构造和赋值运算函数</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="built_in">unique_ptr</span>&lt;Obj&gt; <span class="title">ap</span><span class="params">(<span class="keyword">new</span> Obj)</span></span>;</span><br><span class="line"><span class="function"><span class="built_in">unique_ptr</span> <span class="title">one</span><span class="params">(ap)</span></span>; <span class="comment">// 会出错</span></span><br><span class="line"><span class="built_in">unique_ptr</span> two= one; <span class="comment">// 会出错</span></span><br></pre></td></tr></table></figure>
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2021-01-05T16:18:41+08:00"
-              content="2021-01-05" >
-          01-05
-        </time>
-      </div>
+<h2 id="2、可以移动构造和移动赋值操作"><a href="#2、可以移动构造和移动赋值操作" class="headerlink" title="2、可以移动构造和移动赋值操作"></a>2、可以移动构造和移动赋值操作</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="built_in">unique_ptr</span>&lt;Obj&gt; <span class="title">Getobj</span><span class="params">()</span></span>;</span><br><span class="line">&#123;</span><br><span class="line">     <span class="function"><span class="built_in">unique_ptr</span>&lt;Obj&gt; <span class="title">ptr</span><span class="params">(<span class="keyword">new</span> Obj)</span></span>;</span><br><span class="line">     <span class="keyword">return</span> ptr;</span><br><span class="line">&#125;</span><br><span class="line">unique&lt;Obj&gt; ptr = Getobj;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="built_in">unique_ptr</span>&lt;Obj&gt; <span class="title">ptr1</span><span class="params">(<span class="keyword">new</span> Obj())</span></span>;</span><br><span class="line"><span class="function"><span class="built_in">unique_ptr</span>&lt;Obj&gt; <span class="title">ptr2</span><span class="params">(<span class="built_in">std</span>::<span class="built_in">move</span>(ptr1))</span></span>;</span><br></pre></td></tr></table></figure>
 
-    </header>
-  </article>
+<h1 id="四、shared-ptr"><a href="#四、shared-ptr" class="headerlink" title="四、shared_ptr"></a>四、shared_ptr</h1><p>如果程序要使用多个指向同一个对象的指针，那么可以使用shared_ptr。基本使用方法如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">shared_ptr</span> &lt;<span class="keyword">int</span>&gt; p1(<span class="keyword">new</span> <span class="keyword">int</span> (<span class="number">5</span>));</span><br><span class="line"><span class="built_in">shared_ptr</span>&lt;<span class="keyword">int</span>&gt; p2 = make_shared&lt;<span class="keyword">int</span>&gt;(<span class="number">10</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> * pint = <span class="keyword">new</span> <span class="keyword">int</span>(<span class="number">10</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//shared_ptr&lt;int&gt;p3 = pint; //error</span></span><br><span class="line"><span class="comment">//p3 = pint; //error</span></span><br><span class="line"></span><br><span class="line">use_count() <span class="comment">//计数数量</span></span><br><span class="line"></span><br><span class="line">unique() <span class="comment">//是否只被一个使用</span></span><br></pre></td></tr></table></figure>
 
-
+<h1 id="五、weak-ptr"><a href="#五、weak-ptr" class="headerlink" title="五、weak_ptr"></a>五、weak_ptr</h1><p>shared_ptr是一种强引用关系，智能指针直接引用对象，代码会引起循环引用，从而造成内存泄漏。</p>
+<p>weak_ptr用于配合shared_ptr使用并不影响对象的生命周期，即存在与否并不影响对象的引用计数器，weak_ptr并没有重载operator-&gt; 和operator* 操作符，因此不可直接通过weak_ptr使用对象。提供了expired()与lock()成员函数，前者用于判断weak_ptr指向的对象是否已被销毁，后者返回其所指对象shared_ptr智能指针（对象销毁时，返回空shared_ptr）。</p>
+<p>weak_ptr被设计为shared_ptr共同工作，可以从一个shared_ptr或者另一个weak_ptr对象构造，获得资源观测权，但weak_ptr没有共享资源，它的构造不会引起指针引用计数的增加。</p>
+<p>使用weak_ptr的use_count()可以观测资源的引用计数，另一个成员函数expired()的功能等价use_count()==0但更快，表示被观测资源（也就是shared_ptr管理的资源）已经不复存在。</p>
+<p>weak_ptr可以使用一个非常重要的成员函数lock()从被观测的shared_ptr获得一个可用的shared_ptr对象，从而操作资源，但当expired==true的时候，lock()函数将返回一个存储空指针的shared_ptr。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="built_in">shared_ptr</span>&lt;<span class="keyword">int</span>&gt; <span class="title">spi1</span><span class="params">(<span class="keyword">new</span> <span class="keyword">int</span>(<span class="number">100</span>))</span></span>;</span><br><span class="line"><span class="function"><span class="built_in">shared_ptr</span>&lt;<span class="keyword">int</span>&gt; <span class="title">spi2</span><span class="params">(spi1)</span></span>;</span><br><span class="line">weak_ptr&lt;<span class="keyword">int</span>&gt; wp1 = spi1; <span class="comment">//观察spi1，不增加引用计数</span></span><br><span class="line"><span class="built_in">cout</span>&lt;&lt;wp1.use_count()&lt;&lt;<span class="built_in">endl</span>; <span class="comment">//观察，不能使用 *、-&gt;</span></span><br><span class="line"><span class="built_in">cout</span>&lt;&lt;wp1.expired() &lt;&lt; <span class="built_in">endl</span>; <span class="comment">//观察，不能使用 *、-&gt;</span></span><br><span class="line"><span class="keyword">auto</span> spi1 = wp1.lock();</span><br><span class="line"><span class="keyword">if</span>(spi) &#123;</span><br><span class="line">	<span class="built_in">cout</span>&lt;&lt;*spi&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
+    
+    
+    
 
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/C-C/" rel="tag"># C/C++</a>
+          
+            <a href="/tags/C-11/" rel="tag"># C++11</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2022/08/16/%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2/" rel="next" title="傅里叶变换">
+                <i class="fa fa-chevron-left"></i> 傅里叶变换
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -367,6 +531,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -387,8 +555,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -473,6 +650,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#一、什么是智能指针"><span class="nav-number">1.</span> <span class="nav-text">一、什么是智能指针</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#二、auto-ptr"><span class="nav-number">2.</span> <span class="nav-text">二、auto_ptr</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1、auto-ptr不能共享所有权"><span class="nav-number">2.1.</span> <span class="nav-text">1、auto_ptr不能共享所有权</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2、auto-ptr不能指向数组"><span class="nav-number">2.2.</span> <span class="nav-text">2、auto_ptr不能指向数组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3、auto-ptr不能作为容器成员"><span class="nav-number">2.3.</span> <span class="nav-text">3、auto_ptr不能作为容器成员</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4、auto-ptr不能通过赋值操作来初始化"><span class="nav-number">2.4.</span> <span class="nav-text">4、auto_ptr不能通过赋值操作来初始化</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#三、unique-ptr"><span class="nav-number">3.</span> <span class="nav-text">三、unique_ptr</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1、不支持拷贝构造和赋值运算函数"><span class="nav-number">3.1.</span> <span class="nav-text">1、不支持拷贝构造和赋值运算函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2、可以移动构造和移动赋值操作"><span class="nav-number">3.2.</span> <span class="nav-text">2、可以移动构造和移动赋值操作</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#四、shared-ptr"><span class="nav-number">4.</span> <span class="nav-text">四、shared_ptr</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#五、weak-ptr"><span class="nav-number">5.</span> <span class="nav-text">五、weak_ptr</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -637,6 +830,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
