@@ -5449,4 +5449,52 @@ bat脚本命令说明：<figure class="highlight python"><table><tr><td class="c
         <tag>随笔</tag>
       </tags>
   </entry>
+  <entry>
+    <title>图像灰度化处理</title>
+    <url>/2022/10/10/%E5%9B%BE%E5%83%8F%E7%81%B0%E5%BA%A6%E5%8C%96%E5%A4%84%E7%90%86/</url>
+    <content><![CDATA[<h1 id="1-图像灰度化"><a href="#1-图像灰度化" class="headerlink" title="1. 图像灰度化"></a>1. 图像灰度化</h1><p>在RGB模型中，如果R=G=B时，则彩色表示一种灰度颜色，其中R=G=B的值叫灰度值，因此，灰度图像每个像素只需一个字节存放灰度值（又称强度值、亮度值），灰度范围为0-255，当灰度为255的时候，表示最亮（纯白）；当灰度为0的时候，表示最暗（纯黑）。</p>
+<p>灰度化的好处是：相较于彩色图像灰度图像占内存更小，运行速度更快；灰度图像后可以在视觉上增加对比，突出目标区域。</p>
+<a id="more"></a>
+
+<h1 id="2-图像灰度化处理方法"><a href="#2-图像灰度化处理方法" class="headerlink" title="2. 图像灰度化处理方法"></a>2. 图像灰度化处理方法</h1><p>图像灰度化处理有三种常用方法：最大值法、平均值法和加权平均法。</p>
+<h2 id="2-1-最大值法"><a href="#2-1-最大值法" class="headerlink" title="2.1 最大值法"></a>2.1 最大值法</h2><p>最大值法，即直接取R,B,G三个分量中数值最大的分量的数值（0视为最小，255视为最大）。公式为：R=G=B=max(R,G,B)。</p>
+<h2 id="2-2-平均值法"><a href="#2-2-平均值法" class="headerlink" title="2.2 平均值法"></a>2.2 平均值法</h2><p>平均值法，即取R,B,G三个分量中数值的均值。公式为：R=G=B=(R+G+B)/3。</p>
+<h2 id="2-3-加权平均法"><a href="#2-3-加权平均法" class="headerlink" title="2.3 加权平均法"></a>2.3 加权平均法</h2><p>根据重要性及其它指标，将三个分量以不同的权值进行加权平均。由于人眼对绿色的敏感最高，对蓝色敏感最低，因此，按下式对RGB三分量进行加权平均能得到较合理的灰度图像：<br>$$<br>Gray(i,j)=0.299<em>R(i,j)+0.578</em>G(i,j)+0.114*B(i,j)<br>$$</p>
+<h1 id="3-图像灰度化处理方法的Python实现"><a href="#3-图像灰度化处理方法的Python实现" class="headerlink" title="3. 图像灰度化处理方法的Python实现"></a>3. 图像灰度化处理方法的Python实现</h1><p>代码如下：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2 <span class="keyword">as</span> cv</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">img = cv.imread(<span class="string">'lenna.png'</span>)</span><br><span class="line">img1 = cv.cvtColor(img, cv.COLOR_BGR2RGB) <span class="comment"># BGR转化为RGB格式</span></span><br><span class="line">plt.imshow(img1)</span><br><span class="line">plt.title(<span class="string">'Src_img'</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+<p>图像如下：</p>
+<p><img src="/2022/10/10/%E5%9B%BE%E5%83%8F%E7%81%B0%E5%BA%A6%E5%8C%96%E5%A4%84%E7%90%86/3.0.1.png" alt></p>
+<h2 id="3-1-最大值法"><a href="#3-1-最大值法" class="headerlink" title="3.1 最大值法"></a>3.1 最大值法</h2><p>代码如下：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">Max_Gray</span><span class="params">(srcImg_path)</span>:</span></span><br><span class="line">    img = cv.imread(srcImg_path)</span><br><span class="line">    h,w = img.shape[<span class="number">0</span>:<span class="number">2</span>] <span class="comment"># 获取图像尺寸</span></span><br><span class="line">    gray = np.zeros((h,w),dtype=img.dtype) <span class="comment"># 自定义空白单通道图像，用于存放灰度图</span></span><br><span class="line">    <span class="comment"># 对原图像进行遍历，然后分别灰度化</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(h):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(w):</span><br><span class="line">            gray[i,j] = max(img[i,j,<span class="number">0</span>],img[i,j,<span class="number">1</span>],img[i,j,<span class="number">2</span>]) <span class="comment"># 求3通道中最大值</span></span><br><span class="line">    gray = cv.cvtColor(gray,cv.COLOR_BGR2RGB)</span><br><span class="line">    plt.imshow(gray)</span><br><span class="line">    plt.title(<span class="string">'Max_Gray'</span>)</span><br><span class="line">    <span class="comment">#plt.axis('on')</span></span><br><span class="line">    plt.show()</span><br></pre></td></tr></table></figure>
+
+<p>图像如下：</p>
+<p><img src="/2022/10/10/%E5%9B%BE%E5%83%8F%E7%81%B0%E5%BA%A6%E5%8C%96%E5%A4%84%E7%90%86/3.1.1.png" alt></p>
+<h2 id="3-2-平均值法"><a href="#3-2-平均值法" class="headerlink" title="3.2 平均值法"></a>3.2 平均值法</h2><p>代码如下：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">Avrage_Gray</span><span class="params">(srcImg_path)</span>:</span></span><br><span class="line">    img = cv.imread(srcImg_path)</span><br><span class="line">    h,w = img.shape[<span class="number">0</span>:<span class="number">2</span>] <span class="comment"># 获取图像尺寸</span></span><br><span class="line">    gray = np.zeros((h,w),dtype=img.dtype) <span class="comment"># 自定义空白单通道图像，用于存放灰度图</span></span><br><span class="line">    <span class="comment"># 对原图像进行遍历，然后分别灰度化</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(h):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(w):</span><br><span class="line">            gray[i,j] = (int(img[i,j,<span class="number">0</span>])+int(img[i,j,<span class="number">1</span>])+int(img[i,j,<span class="number">2</span>]))/<span class="number">3</span> <span class="comment"># 求3通道像素的平均值作为灰度值</span></span><br><span class="line">    gray = cv.cvtColor(gray,cv.COLOR_BGR2RGB)</span><br><span class="line">    plt.imshow(gray)</span><br><span class="line">    plt.title(<span class="string">'Avrage_Gray'</span>)</span><br><span class="line">    <span class="comment">#plt.axis('on')</span></span><br><span class="line">    plt.show()</span><br></pre></td></tr></table></figure>
+
+<p>图像如下：</p>
+<p><img src="/2022/10/10/%E5%9B%BE%E5%83%8F%E7%81%B0%E5%BA%A6%E5%8C%96%E5%A4%84%E7%90%86/3.2.1.png" alt></p>
+<h2 id="3-3-加权平均法"><a href="#3-3-加权平均法" class="headerlink" title="3.3 加权平均法"></a>3.3 加权平均法</h2><p>代码如下：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">WeightedAvrage_Gray</span><span class="params">(srcImg_path)</span>:</span></span><br><span class="line">    img = cv.imread(srcImg_path)</span><br><span class="line">    h,w = img.shape[<span class="number">0</span>:<span class="number">2</span>] <span class="comment"># 获取图像尺寸</span></span><br><span class="line">    gray = np.zeros((h,w),dtype=img.dtype) <span class="comment"># 自定义空白单通道图像，用于存放灰度图</span></span><br><span class="line">    <span class="comment"># 对原图像进行遍历，然后分别灰度化</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(h):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(w):</span><br><span class="line">            gray[i,j] = <span class="number">0.114</span>*int(img[i,j,<span class="number">0</span>])+<span class="number">0.578</span>*int(img[i,j,<span class="number">1</span>])+<span class="number">0.299</span>*int(img[i,j,<span class="number">2</span>])</span><br><span class="line">    gray = cv.cvtColor(gray,cv.COLOR_BGR2RGB)</span><br><span class="line">    plt.imshow(gray)</span><br><span class="line">    plt.title(<span class="string">'WeightedAvrage_Gray'</span>)</span><br><span class="line">    <span class="comment">#plt.axis('on')</span></span><br><span class="line">    plt.show()</span><br></pre></td></tr></table></figure>
+
+<p>图像如下：</p>
+<p><img src="/2022/10/10/%E5%9B%BE%E5%83%8F%E7%81%B0%E5%BA%A6%E5%8C%96%E5%A4%84%E7%90%86/3.3.1.png" alt></p>
+<h2 id="3-4-最大值法、平均值法和加权平均法的比较"><a href="#3-4-最大值法、平均值法和加权平均法的比较" class="headerlink" title="3.4 最大值法、平均值法和加权平均法的比较"></a>3.4 最大值法、平均值法和加权平均法的比较</h2><p>综上，3种方法的灰度处理图像如下所示：</p>
+<p><img src="/2022/10/10/%E5%9B%BE%E5%83%8F%E7%81%B0%E5%BA%A6%E5%8C%96%E5%A4%84%E7%90%86/3.4.png" alt></p>
+<p>可以发现，最大值法转换的灰度图亮度最高，平均值法产生的灰度图像较暗，加权平均法得到的灰度图像明暗介于两者之间。</p>
+<p>3.5 opencv-python中灰度处理方法的应用<br>opencv-python中有图像灰度处理的接口，直接调用即可：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">img = cv.imread(<span class="string">'lenna.png'</span>)</span><br><span class="line">img1 = cv.cvtColor(img, cv.COLOR_BGR2RGB) <span class="comment"># BGR转化为RGB格式</span></span><br><span class="line">plt.subplot(<span class="number">121</span>)</span><br><span class="line">plt.imshow(img1)</span><br><span class="line">plt.title(<span class="string">'Src_img'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 灰度转换</span></span><br><span class="line">image2 = cv.cvtColor(img, cv.COLOR_BGR2GRAY)</span><br><span class="line">plt.subplot(<span class="number">122</span>)</span><br><span class="line">plt.imshow(image2, plt.cm.gray)</span><br><span class="line">plt.title(<span class="string">'Gray_img'</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+<p> 图像如下：</p>
+<p><img src="/2022/10/10/%E5%9B%BE%E5%83%8F%E7%81%B0%E5%BA%A6%E5%8C%96%E5%A4%84%E7%90%86/3.5.png" alt></p>
+]]></content>
+      <categories>
+        <category>计算机视觉</category>
+      </categories>
+      <tags>
+        <tag>计算机视觉</tag>
+        <tag>图像处理</tag>
+      </tags>
+  </entry>
 </search>
