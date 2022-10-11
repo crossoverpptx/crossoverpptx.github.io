@@ -401,7 +401,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  781
+                  736
                 </span>
               
 
@@ -442,39 +442,43 @@
 <p>STL 最初由惠普实验室开发，于 1998 年被定为国际标准，正式成为 C++ 标准库的重要组成部分。如今 STL 已完全被内置到支持 C++ 的编译器中，无需额外安装。STL 就位于各个 C++ 的头文件中，即它并非以二进制代码的形式提供，而是以源代码的形式提供。</p>
 <p>从根本上说，STL 是一些容器、算法和其他一些组件的集合，所有容器和算法都是总结了几十年来算法和数据结构的研究成果，汇集了许多计算机专家学者经验的基础上实现的，因此可以说，STL 基本上达到了各种存储方法和相关算法的高度优化。注意，这里提到的容器，本质上就是封装有数据结构的模板类，例如 list、vector、set、map 等。</p>
 <h3 id="STL-的组成"><a href="#STL-的组成" class="headerlink" title="STL 的组成"></a>STL 的组成</h3><p>通常认为，STL 是由容器、算法、迭代器、函数对象、适配器、内存分配器这 6 部分构成，其中后面 4 部分是为前 2 部分服务的，如下表所示：</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
-<th align="left">STL的组成</th>
-<th align="center">含义</th>
+<th style="text-align:left">STL的组成</th>
+<th style="text-align:center">含义</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="left">容器</td>
-<td align="center">一些封装数据结构的模板类，例如 vector 向量容器、list 列表容器等。</td>
+<tbody>
+<tr>
+<td style="text-align:left">容器</td>
+<td style="text-align:center">一些封装数据结构的模板类，例如 vector 向量容器、list 列表容器等。</td>
 </tr>
 <tr>
-<td align="left">算法</td>
-<td align="center">STL 提供了非常多（大约 100 个）的数据结构算法，它们都被设计成一个个的模板函数，这些算法在 std 命名空间中定义，其中大部分算法都包含在头文件 &lt;algorithm&gt; 中，少部分位于头文件 &lt;numeric&gt; 中。</td>
+<td style="text-align:left">算法</td>
+<td style="text-align:center">STL 提供了非常多（大约 100 个）的数据结构算法，它们都被设计成一个个的模板函数，这些算法在 std 命名空间中定义，其中大部分算法都包含在头文件 \<algorithm> 中，少部分位于头文件 \<numeric> 中。</numeric></algorithm></td>
 </tr>
 <tr>
-<td align="left">迭代器</td>
-<td align="center">在 C++ STL 中，对容器中数据的读和写，是通过迭代器完成的，扮演着容器和算法之间的胶合剂。</td>
+<td style="text-align:left">迭代器</td>
+<td style="text-align:center">在 C++ STL 中，对容器中数据的读和写，是通过迭代器完成的，扮演着容器和算法之间的胶合剂。</td>
 </tr>
 <tr>
-<td align="left">函数对象</td>
-<td align="center">如果一个类将 () 运算符重载为成员函数，这个类就称为函数对象类，这个类的对象就是函数对象（又称仿函数）。</td>
+<td style="text-align:left">函数对象</td>
+<td style="text-align:center">如果一个类将 () 运算符重载为成员函数，这个类就称为函数对象类，这个类的对象就是函数对象（又称仿函数）。</td>
 </tr>
 <tr>
-<td align="left">适配器</td>
-<td align="center">可以使一个类的接口（模板的参数）适配成用户指定的形式，从而让原本不能在一起工作的两个类工作在一起。值得一提的是，容器、迭代器和函数都有适配器。</td>
+<td style="text-align:left">适配器</td>
+<td style="text-align:center">可以使一个类的接口（模板的参数）适配成用户指定的形式，从而让原本不能在一起工作的两个类工作在一起。值得一提的是，容器、迭代器和函数都有适配器。</td>
 </tr>
 <tr>
-<td align="left">内存分配器</td>
-<td align="center">为容器类模板提供自定义的内存申请和释放功能，由于往往只有高级用户才有改变内存分配策略的需求，因此内存分配器对于一般用户来说，并不常用。</td>
+<td style="text-align:left">内存分配器</td>
+<td style="text-align:center">为容器类模板提供自定义的内存申请和释放功能，由于往往只有高级用户才有改变内存分配策略的需求，因此内存分配器对于一般用户来说，并不常用。</td>
 </tr>
-</tbody></table>
-<p>另外，在惠普实验室最初发行的版本中，STL 被组织成 48 个头文件；但在 C++ 标准中，它们被重新组织为 13 个头文件，分别是：&lt;iterator&gt;、&lt;functional&gt;、&lt;vector&gt;、&lt;deque&gt;、&lt;list&gt;、&lt;queue&gt;、&lt;stack&gt;、&lt;set&gt;、&lt;map&gt;、&lt;algorithm&gt;、&lt;numeric&gt;、&lt;memory&gt;和&lt;utility&gt;。</p>
+</tbody>
+</table>
+</div>
+<p>另外，在惠普实验室最初发行的版本中，STL 被组织成 48 个头文件；但在 C++ 标准中，它们被重新组织为 13 个头文件，分别是：\<iterator>、\<functional>、\<vector>、\<deque>、\<list>、\<queue>、\<stack>、\<set>、\<map>、\<algorithm>、\<numeric>、\<memory>和\<utility>。</utility></memory></numeric></algorithm></map></set></stack></queue></list></deque></vector></functional></iterator></p>
 
       
     </div>
@@ -710,7 +714,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">102.3k</span>
+    <span title="Site words total count">102.1k</span>
   
 </div>
 
@@ -1224,6 +1228,26 @@
   
 
   
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
   
 
 

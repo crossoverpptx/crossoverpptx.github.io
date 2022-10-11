@@ -400,7 +400,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  180
+                  179
                 </span>
               
 
@@ -439,16 +439,9 @@
       
         <p><strong>本文介绍几种常见情况下mysql数据库的密码修改方法。</strong></p>
 <a id="more"></a>
-
 <hr>
-<h2 id="未设置密码，可以通过mysql直接登录数据库"><a href="#未设置密码，可以通过mysql直接登录数据库" class="headerlink" title="未设置密码，可以通过mysql直接登录数据库"></a>未设置密码，可以通过mysql直接登录数据库</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; use mysql;</span><br><span class="line">mysql&gt; update user set password=password(<span class="string">"111111"</span>) where user=<span class="string">'root'</span>;</span><br><span class="line">mysql&gt; flush privileges;</span><br><span class="line">mysql&gt; exit;</span><br></pre></td></tr></table></figure>
-<hr>
-<h2 id="若已知密码，需要修改密码"><a href="#若已知密码，需要修改密码" class="headerlink" title="若已知密码，需要修改密码"></a>若已知密码，需要修改密码</h2><p>除了上述方法，也可以在mysql系统外，使用mysqladmin。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysqladmin -u root -p password <span class="string">"111111"</span></span><br><span class="line">Enter password: 【输入原来的密码】</span><br></pre></td></tr></table></figure>
-<hr>
-<h2 id="若忘记数据库密码，需要修改密码"><a href="#若忘记数据库密码，需要修改密码" class="headerlink" title="若忘记数据库密码，需要修改密码"></a>若忘记数据库密码，需要修改密码</h2><p>1、先停止数据库服务，修改/etc/my.cnf文件，在[mysqld]末尾添加skip-grant-tables；</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[mysqld]</span><br><span class="line">skip-grant-tables</span><br></pre></td></tr></table></figure>
-<p>2、重新启动数据库，可以通过mysql直接登录数据库；<br>3、修改密码完成后，删除skip-grant-tables。</p>
+<h2 id="未设置密码，可以通过mysql直接登录数据库"><a href="#未设置密码，可以通过mysql直接登录数据库" class="headerlink" title="未设置密码，可以通过mysql直接登录数据库"></a>未设置密码，可以通过mysql直接登录数据库</h2><h2 id><a href="#" class="headerlink" title></a><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; use mysql;</span><br><span class="line">mysql&gt; update user set password=password(<span class="string">"111111"</span>) where user=<span class="string">'root'</span>;</span><br><span class="line">mysql&gt; flush privileges;</span><br><span class="line">mysql&gt; exit;</span><br></pre></td></tr></table></figure></h2><h2 id="若已知密码，需要修改密码"><a href="#若已知密码，需要修改密码" class="headerlink" title="若已知密码，需要修改密码"></a>若已知密码，需要修改密码</h2><p>除了上述方法，也可以在mysql系统外，使用mysqladmin。</p>
+<h2 id="-1"><a href="#-1" class="headerlink" title></a><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysqladmin -u root -p password <span class="string">"111111"</span></span><br><span class="line">Enter password: 【输入原来的密码】</span><br></pre></td></tr></table></figure></h2><h2 id="若忘记数据库密码，需要修改密码"><a href="#若忘记数据库密码，需要修改密码" class="headerlink" title="若忘记数据库密码，需要修改密码"></a>若忘记数据库密码，需要修改密码</h2><p>1、先停止数据库服务，修改/etc/my.cnf文件，在[mysqld]末尾添加skip-grant-tables；<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[mysqld]</span><br><span class="line">skip-grant-tables</span><br></pre></td></tr></table></figure><br>2、重新启动数据库，可以通过mysql直接登录数据库；<br>3、修改密码完成后，删除skip-grant-tables。</p>
 
       
     </div>
@@ -648,7 +641,19 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#未设置密码，可以通过mysql直接登录数据库"><span class="nav-number">1.</span> <span class="nav-text">未设置密码，可以通过mysql直接登录数据库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#若已知密码，需要修改密码"><span class="nav-number">2.</span> <span class="nav-text">若已知密码，需要修改密码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#若忘记数据库密码，需要修改密码"><span class="nav-number">3.</span> <span class="nav-text">若忘记数据库密码，需要修改密码</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#未设置密码，可以通过mysql直接登录数据库"><span class="nav-number">1.</span> <span class="nav-text">未设置密码，可以通过mysql直接登录数据库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">2.</span> <span class="nav-text">1
+2
+3
+4
+mysql&gt; use mysql;
+mysql&gt; update user set password&#x3D;password(&quot;111111&quot;) where user&#x3D;&#39;root&#39;;
+mysql&gt; flush privileges;
+mysql&gt; exit;
+</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#若已知密码，需要修改密码"><span class="nav-number">3.</span> <span class="nav-text">若已知密码，需要修改密码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#-1"><span class="nav-number">4.</span> <span class="nav-text">1
+2
+mysqladmin -u root -p password &quot;111111&quot;
+Enter password: 【输入原来的密码】
+</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#若忘记数据库密码，需要修改密码"><span class="nav-number">5.</span> <span class="nav-text">若忘记数据库密码，需要修改密码</span></a></li></ol></div>
             
 
           </div>
@@ -682,7 +687,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">102.3k</span>
+    <span title="Site words total count">102.1k</span>
   
 </div>
 
@@ -1196,6 +1201,26 @@
   
 
   
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
   
 
 

@@ -447,7 +447,6 @@
       
         <h2 id="KVM简介"><a href="#KVM简介" class="headerlink" title="KVM简介"></a>KVM简介</h2><p>Kernel-based Virtual Machine的简称，是一个开源的系统虚拟化模块，自Linux2.6.20之后集成在Linux的各个主要发行版本中。它使用Linux自身的调度器进行管理，所以相对于Xen，其核心源码很少。KVM目前已成为学术界的主流VMM之一。</p>
 <a id="more"></a>
-
 <hr>
 <h2 id="安装前提"><a href="#安装前提" class="headerlink" title="安装前提"></a>安装前提</h2><ol>
 <li><p>Kvm的安装，需要一定的硬件和软件支持：</p>
@@ -464,33 +463,21 @@
 <li>使用yum安装命令进行安装相关软件包</li>
 </ol>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install kvm qemu-kvm virt-viewer virt-manager libvirt libvirt-python python-virtinst bridge-utils tunctl</span><br></pre></td></tr></table></figure>
-
 <blockquote>
 <ul>
-<li>kvm是属于内核模块；</li>
+<li><p>kvm是属于内核模块；</p>
+</li>
+<li><p>qemu-kvm是kvm的一个管理工具的引擎；</p>
+</li>
+<li><p>libvirt和libvirt-client提供访问和控制虚拟客户端的接口；</p>
+</li>
+<li><p>python-virtinst中有很多用于安装虚拟机的程序，如virt-install，virt-clone等；</p>
+</li>
+<li><p>bridge-utils是一个和网桥有关的程序。</p>
+</li>
 </ul>
 </blockquote>
-<blockquote>
-<ul>
-<li>qemu-kvm是kvm的一个管理工具的引擎；</li>
-</ul>
-</blockquote>
-<blockquote>
-<ul>
-<li>libvirt和libvirt-client提供访问和控制虚拟客户端的接口；</li>
-</ul>
-</blockquote>
-<blockquote>
-<ul>
-<li>python-virtinst中有很多用于安装虚拟机的程序，如virt-install，virt-clone等；</li>
-</ul>
-</blockquote>
-<blockquote>
-<ul>
-<li>bridge-utils是一个和网桥有关的程序。</li>
-</ul>
-</blockquote>
-<ol start="3">
+<ol>
 <li>安装完毕后，Reboot机器</li>
 </ol>
 <hr>
@@ -511,15 +498,15 @@
 <li>virt-manager图形工具<br>安装kvm成功后，会在system tools中有一个virtual machine manager。Kvm虚拟机的安装维护，主要通过此工具。</li>
 </ol>
 <p><img src="/2021/01/02/KVM/1.png" alt></p>
-<ol start="2">
+<ol>
 <li>新建kvm虚拟机<br>virtual machine manager 在首次登陆后，会自动创建一个本地的kvm连接。右击选择“new”即可新建虚拟机。</li>
 </ol>
 <p><img src="/2021/01/02/KVM/2.png" alt></p>
-<ol start="3">
+<ol>
 <li>源文件选择<br>Kvm的源文件安装方式有四种，我们主要熟知第一种和第四种。第一种为选择本地的镜像文件安装，第四种为选择从其他虚拟机（vmware）迁移过来的虚拟机文件，选择后点击“Forward”。</li>
 </ol>
 <p><img src="/2021/01/02/KVM/3.png" alt></p>
-<ol start="4">
+<ol>
 <li><p>选择源文件路径OS type 和Version可以默认，选择路径后点击“Forward”。</p>
 <p><img src="/2021/01/02/KVM/4.png" alt></p>
 </li>
@@ -528,7 +515,7 @@
 </li>
 </ol>
 <p><img src="/2021/01/02/KVM/5.png" alt></p>
-<ol start="6">
+<ol>
 <li><p>设置和网络<br>勾选“customize……install”，这样在点击Finish后，我们可以再具体配置虚拟机的其他选项。<br>Advancde options 下可以设置虚拟机的网络连接类型和MAC地址。</p>
 <p><img src="/2021/01/02/KVM/6.png" alt></p>
 </li>
@@ -769,7 +756,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">102.3k</span>
+    <span title="Site words total count">102.1k</span>
   
 </div>
 
@@ -1283,6 +1270,26 @@
   
 
   
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
   
 
 

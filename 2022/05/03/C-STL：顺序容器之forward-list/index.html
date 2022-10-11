@@ -448,14 +448,16 @@
 <blockquote>
 <p>效率高是选用 forward_list 而弃用 list 容器最主要的原因，换句话说，只要是 list 容器和 forward_list 容器都能实现的操作，应优先选择 forward_list 容器。</p>
 </blockquote>
-<h3 id="成员函数"><a href="#成员函数" class="headerlink" title="成员函数"></a>成员函数</h3><table>
+<h3 id="成员函数"><a href="#成员函数" class="headerlink" title="成员函数"></a>成员函数</h3><div class="table-container">
+<table>
 <thead>
 <tr>
 <th>成员函数</th>
 <th>功能</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>before_begin()</td>
 <td>返回一个前向迭代器，其指向容器中第一个元素之前的位置。</td>
 </tr>
@@ -559,49 +561,40 @@
 <td>reverse()</td>
 <td>反转容器中元素的顺序。</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <p>除此之外，C++ 11 标准库还新增加了 begin() 和 end() 这 2 个函数，和 forward_list 容器包含的 begin() 和 end() 成员函数不同，标准库提供的这 2 个函数的操作对象，既可以是容器，还可以是普通数组。当操作对象是容器时，它和容器包含的 begin() 和 end() 成员函数的功能完全相同；如果操作对象是普通数组，则 begin() 函数返回的是指向数组第一个元素的指针，同样 end() 返回指向数组中最后一个元素之后一个位置的指针（注意不是最后一个元素）。</p>
 <p>forward_list 容器还有一个<code>std::swap(x , y)</code>非成员函数（其中 x 和 y 是存储相同类型元素的 forward_list 容器），它和 swap() 成员函数的功能完全相同，仅使用语法上有差异。</p>
 <p>下面的样例演示了部分成员函数的用法：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;forward_list&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">std</span>::forward_list&lt;<span class="keyword">int</span>&gt; values&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;;</span><br><span class="line">    values.emplace_front(<span class="number">4</span>); <span class="comment">// &#123;4,1,2,3&#125;</span></span><br><span class="line">    values.emplace_after(values.before_begin(), <span class="number">5</span>); <span class="comment">// &#123;5,4,1,2,3&#125;</span></span><br><span class="line">    values.reverse(); <span class="comment">// &#123;3,2,1,4,5&#125;</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span> it = values.<span class="built_in">begin</span>(); it != values.<span class="built_in">end</span>(); ++it) &#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; *it &lt;&lt; <span class="string">" "</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>运行结果为：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">3</span> <span class="number">2</span> <span class="number">1</span> <span class="number">4</span> <span class="number">5</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="和使用forward-list容器相关的函数"><a href="#和使用forward-list容器相关的函数" class="headerlink" title="和使用forward_list容器相关的函数"></a>和使用forward_list容器相关的函数</h4><p>我们知道，forward_list 容器中是不提供 size() 函数的，但如果想要获取 forward_list 容器中存储元素的个数，可以使用头文件 &lt;iterator&gt; 中的 distance() 函数。举个例子：</p>
+<h4 id="和使用forward-list容器相关的函数"><a href="#和使用forward-list容器相关的函数" class="headerlink" title="和使用forward_list容器相关的函数"></a>和使用forward_list容器相关的函数</h4><p>我们知道，forward_list 容器中是不提供 size() 函数的，但如果想要获取 forward_list 容器中存储元素的个数，可以使用头文件 \<iterator> 中的 distance() 函数。举个例子：</iterator></p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;forward_list&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iterator&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">std</span>::forward_list&lt;<span class="keyword">int</span>&gt; my_words&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>&#125;;</span><br><span class="line">    <span class="keyword">int</span> count = <span class="built_in">std</span>::distance(<span class="built_in">std</span>::<span class="built_in">begin</span>(my_words), <span class="built_in">std</span>::<span class="built_in">end</span>(my_words));</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; count;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>运行结果为：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">4</span></span><br></pre></td></tr></table></figure>
-
 <p>并且，forward_list 容器迭代器的移动除了使用 <code>++</code> 运算符单步移动，还能使用 advance() 函数，比如：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;forward_list&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">std</span>::forward_list&lt;<span class="keyword">int</span>&gt; values&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>&#125;;</span><br><span class="line">    <span class="keyword">auto</span> it = values.<span class="built_in">begin</span>();</span><br><span class="line">    advance(it, <span class="number">2</span>);</span><br><span class="line">    <span class="keyword">while</span> (it!=values.<span class="built_in">end</span>())</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; *it &lt;&lt; <span class="string">" "</span>;</span><br><span class="line">        ++it;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>运行结果为：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">3</span> <span class="number">4</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="forward-list-容器的创建"><a href="#forward-list-容器的创建" class="headerlink" title="forward_list 容器的创建"></a>forward_list 容器的创建</h3><p>由于 forward_list 容器以模板类 forward_list&lt;T&gt;（T 为存储元素的类型）的形式被包含在 <forward_list> 头文件中，并定义在 std 命名空间中。因此，在使用该容器之前，代码中需包含下面两行代码：</forward_list></p>
+<h3 id="forward-list-容器的创建"><a href="#forward-list-容器的创建" class="headerlink" title="forward_list 容器的创建"></a>forward_list 容器的创建</h3><p>由于 forward_list 容器以模板类 forward_list\<T>（T 为存储元素的类型）的形式被包含在 <forward_list> 头文件中，并定义在 std 命名空间中。因此，在使用该容器之前，代码中需包含下面两行代码：</forward_list></T></p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;forward_list&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br></pre></td></tr></table></figure>
-
 <blockquote>
 <p>std 命名空间也可以在使用 forward_list 容器时额外注明，两种方式都可以。</p>
 </blockquote>
 <p>创建 forward_list 容器的方式，大致分为以下 5 种。</p>
 <p>1) 创建一个没有任何元素的空 forward_list 容器：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">std</span>::forward_list&lt;<span class="keyword">int</span>&gt; values;</span><br></pre></td></tr></table></figure>
-
 <p>由于 forward_list 容器在创建后也可以添加元素，因此这种创建方式很常见。</p>
 <p>2) 创建一个包含 n 个元素的 forward_list 容器：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="built_in">std</span>::forward_list&lt;<span class="keyword">int</span>&gt; <span class="title">values</span><span class="params">(<span class="number">10</span>)</span></span>;</span><br></pre></td></tr></table></figure>
-
 <p>通过此方式创建 values 容器，其中包含 10 个元素，每个元素的值都为相应类型的默认值（int类型的默认值为 0）。</p>
 <p>3) 创建一个包含 n 个元素的 forward_list 容器，并为每个元素指定初始值。例如：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="built_in">std</span>::forward_list&lt;<span class="keyword">int</span>&gt; <span class="title">values</span><span class="params">(<span class="number">10</span>, <span class="number">5</span>)</span></span>;</span><br></pre></td></tr></table></figure>
-
 <p>如此就创建了一个包含 10 个元素并且值都为 5 的 values 容器。</p>
 <p>4) 在已有 forward_list 容器的情况下，通过拷贝该容器可以创建新的 forward_list 容器。例如：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="built_in">std</span>::forward_list&lt;<span class="keyword">int</span>&gt; <span class="title">value1</span><span class="params">(<span class="number">10</span>)</span></span>;</span><br><span class="line"><span class="function"><span class="built_in">std</span>::forward_list&lt;<span class="keyword">int</span>&gt; <span class="title">value2</span><span class="params">(value1)</span></span>;</span><br></pre></td></tr></table></figure>
-
 <p>注意，采用此方式，必须保证新旧容器存储的元素类型一致。</p>
 <p>5) 通过拷贝其他类型容器（或者普通数组）中指定区域内的元素，可以创建新的 forward_list 容器。例如：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 拷贝普通数组，创建forward_list容器</span></span><br><span class="line"><span class="keyword">int</span> a[] = &#123; <span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span> &#125;;</span><br><span class="line"><span class="function"><span class="built_in">std</span>::forward_list&lt;<span class="keyword">int</span>&gt; <span class="title">values</span><span class="params">(a, a+<span class="number">5</span>)</span></span>;</span><br><span class="line"><span class="comment">// 拷贝其它类型的容器，创建forward_list容器</span></span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">array</span>&lt;<span class="keyword">int</span>, 5&gt; arr&#123; <span class="number">11</span>,<span class="number">12</span>,<span class="number">13</span>,<span class="number">14</span>,<span class="number">15</span> &#125;;</span><br><span class="line"><span class="function"><span class="built_in">std</span>::forward_list&lt;<span class="keyword">int</span>&gt; <span class="title">values</span><span class="params">(arr.<span class="built_in">begin</span>()+<span class="number">2</span>, arr.<span class="built_in">end</span>())</span></span>; <span class="comment">// 拷贝arr容器中的&#123;13,14,15&#125;</span></span><br></pre></td></tr></table></figure>
@@ -839,7 +832,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">102.3k</span>
+    <span title="Site words total count">102.1k</span>
   
 </div>
 
@@ -1353,6 +1346,26 @@
   
 
   
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
   
 
 

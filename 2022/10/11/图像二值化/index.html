@@ -448,15 +448,12 @@
         <h1 id="1-图像二值化"><a href="#1-图像二值化" class="headerlink" title="1. 图像二值化"></a>1. 图像二值化</h1><p>图像二值化就是将图像上的像素点的灰度值设置为0或255，也就是将整个图像呈现出明显的黑白效果的过程。图像的二值化使图像中数据量大为减少，从而能凸显出目标的轮廓。</p>
 <p>要得到二值化图像，首先要把图像灰度化，然后将256个亮度等级的灰度图像通过适当的阈值选取而获得仍然可以反映图像整体和局部特征的二值化图像。所有灰度大于或等于阈值的像素被判定为属于特定物体，其灰度值为255，否则这些像素点被排除在物体区域以外，灰度值为0，表示背景或者例外的物体区域。</p>
 <a id="more"></a>
-
 <h1 id="2-图像二值化方法及Python实现"><a href="#2-图像二值化方法及Python实现" class="headerlink" title="2. 图像二值化方法及Python实现"></a>2. 图像二值化方法及Python实现</h1><p>比较常用的二值化方法有：简单二值法，平均值法，双峰法和OTSU法等。</p>
 <h2 id="2-1-简单二值法"><a href="#2-1-简单二值法" class="headerlink" title="2.1 简单二值法"></a>2.1 简单二值法</h2><p>将图像灰度化后，我们选择127(灰度值范围的一半)作为阈值，即将像素值大于127的像素值全部设为255，小于127的全部设为0。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">Easy_Binarization</span><span class="params">(srcImg_path)</span>:</span></span><br><span class="line">    img = cv.imread(srcImg_path)</span><br><span class="line">    img_gray = cv.cvtColor(img, cv.COLOR_BGR2GRAY)</span><br><span class="line">    img_gray[img_gray&gt;<span class="number">127</span>] = <span class="number">255</span></span><br><span class="line">    img_gray[img_gray&lt;=<span class="number">127</span>] = <span class="number">0</span></span><br><span class="line">    plt.imshow(img_gray, cmap=<span class="string">'gray'</span>)</span><br><span class="line">    plt.title(<span class="string">'Easy_Binarization'</span>)</span><br><span class="line">    plt.show()</span><br></pre></td></tr></table></figure>
-
 <p><img src="/2022/10/11/%E5%9B%BE%E5%83%8F%E4%BA%8C%E5%80%BC%E5%8C%96/2.1.png" alt></p>
 <h2 id="2-2-平均值法"><a href="#2-2-平均值法" class="headerlink" title="2.2 平均值法"></a>2.2 平均值法</h2><p>为了应对每张图片的灰度值大不相同，阈值取为图像本身的平均值。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">Mean_Binarization</span><span class="params">(srcImg_path)</span>:</span></span><br><span class="line">    img = cv.imread(srcImg_path)</span><br><span class="line">    img_gray = cv.cvtColor(img, cv.COLOR_BGR2GRAY)</span><br><span class="line">    threshold = np.mean(img_gray)</span><br><span class="line">    print(threshold)</span><br><span class="line">    img_gray[img_gray&gt;threshold] = <span class="number">255</span></span><br><span class="line">    img_gray[img_gray&lt;=threshold] = <span class="number">0</span></span><br><span class="line">    plt.imshow(img_gray, cmap=<span class="string">'gray'</span>)</span><br><span class="line">    plt.title(<span class="string">'Mean_Binarization'</span>)</span><br><span class="line">    plt.show()</span><br></pre></td></tr></table></figure>
-
 <p><img src="/2022/10/11/%E5%9B%BE%E5%83%8F%E4%BA%8C%E5%80%BC%E5%8C%96/2.2.png" alt></p>
 <p>实验中该方法计算的阈值为123。</p>
 <h2 id="2-3-双峰法"><a href="#2-3-双峰法" class="headerlink" title="2.3 双峰法"></a>2.3 双峰法</h2><p>直方图是图像的重要特质，它可以帮助我们分析图像中的灰度变化。因此，如果物体与背景的灰度值对比明显，直方图就会包含双峰，它们分别为图像的前景和背景，而它们之间的谷底即为边缘附近相对较少数目的像素点，一般来讲，这个最小值就为最优二值化的分界点，通过这个点可以把前景和背景很好地分开。</p>
@@ -467,11 +464,15 @@
 <p>OTSU法也称作最大类间方差法，因为按照大津法求得的阈值进行图像二值化分割后，前景与背景图像的类间方差最大。它被认为是图像分割中阈值选取的最佳算法，计算简单，不受图像亮度和对比度的影响，因此在数字图像处理上得到了广泛的应用。它是按图像的灰度特性，将图像分成背景和前景两部分。因方差是灰度分布均匀性的一种度量,背景和前景之间的类间方差越大,说明构成图像的两部分的差别越大,当部分前景错分为背景或部分背景错分为前景都会导致类间差别变小。因此,使类间方差最大的分割意味着错分概率最小。</p>
 <p>具体计算阈值方法如下：<br>设阈值为t, 将原图转化成灰度图后，将其高与宽存于h,w，并将小于阈值的灰度值存储在前景front中，大于等于阈值的存在背景back中。如下所示：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 阈值：t</span></span><br><span class="line">h, w = img.shape[:<span class="number">2</span>]</span><br><span class="line">front = img[img &lt; t]</span><br><span class="line">back = img[img &gt;= t]</span><br></pre></td></tr></table></figure>
-
 <p> 显然，前景与背景的长度和应与h, w的乘积相等，即：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">len(front) + len(back) == h * w.</span><br></pre></td></tr></table></figure>
-
-<p>设前景像素数量占总像素数量的比重为frontP，背景像素数量占总像素数量的比重为backP，前景和背景的灰度平均值分别为frontMean和backMean，总平均灰度值为m，则方差公式可写成：<br>$$<br>v=frontP<em>(frontMean-m)^2+backP</em>(backMean-m)^2<br>$$<br>又因为：<br>$$<br>m=frontP<em>frontMean+backP<em>backMean<br>$$<br>上式可化简为：<br>$$<br>v=frontP</em>backP</em>(frontMean-backMean)^2<br>$$<br>实验代码如下：</p>
+<p>设前景像素数量占总像素数量的比重为frontP，背景像素数量占总像素数量的比重为backP，前景和背景的灰度平均值分别为frontMean和backMean，总平均灰度值为m，则方差公式可写成：</p>
+<script type="math/tex; mode=display">
+v=frontP*(frontMean-m)^2+backP*(backMean-m)^2</script><p>又因为：</p>
+<script type="math/tex; mode=display">
+m=frontP*frontMean+backP*backMean</script><p>上式可化简为：</p>
+<script type="math/tex; mode=display">
+v=frontP*backP*(frontMean-backMean)^2</script><p>实验代码如下：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">Otsu</span><span class="params">(srcImg_path)</span>:</span></span><br><span class="line">    img = cv.imread(srcImg_path)</span><br><span class="line">    img = cv.cvtColor(img, cv.COLOR_BGR2GRAY)</span><br><span class="line">    h, w = img.shape[:<span class="number">2</span>]</span><br><span class="line">    threshold_t = <span class="number">0</span></span><br><span class="line">    max_g = <span class="number">0</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> t <span class="keyword">in</span> range(<span class="number">255</span>):</span><br><span class="line">        front = img[img &lt; t]</span><br><span class="line">        back = img[img &gt;= t]</span><br><span class="line">        front_p = len(front) / (h * w)</span><br><span class="line">        back_p = len(back) / (h * w)</span><br><span class="line">        front_mean = np.mean(front) <span class="keyword">if</span> len(front) &gt; <span class="number">0</span> <span class="keyword">else</span> <span class="number">0.</span></span><br><span class="line">        back_mean = np.mean(back) <span class="keyword">if</span> len(back) &gt; <span class="number">0</span> <span class="keyword">else</span> <span class="number">0.</span></span><br><span class="line">        </span><br><span class="line">        g = front_p * back_p * ((front_mean - back_mean)**<span class="number">2</span>)</span><br><span class="line">        <span class="keyword">if</span> g &gt; max_g:</span><br><span class="line">            max_g = g</span><br><span class="line">            threshold_t = t</span><br><span class="line">    print(<span class="string">f"threshold = <span class="subst">&#123;threshold_t&#125;</span>"</span>)</span><br><span class="line"></span><br><span class="line">    img[img &lt; threshold_t] = <span class="number">0</span></span><br><span class="line">    img[img &gt;= threshold_t] = <span class="number">255</span></span><br><span class="line">    plt.imshow(img, cmap=<span class="string">'gray'</span>)</span><br><span class="line">    plt.title(<span class="string">'Otsu'</span>)</span><br><span class="line">    plt.show()</span><br></pre></td></tr></table></figure>
 <p>二值化图像如下：</p>
 <p><img src="/2022/10/11/%E5%9B%BE%E5%83%8F%E4%BA%8C%E5%80%BC%E5%8C%96/2.4.png" alt></p>
@@ -479,23 +480,18 @@
 <h1 id="3-opencv-python中二值化方法的应用"><a href="#3-opencv-python中二值化方法的应用" class="headerlink" title="3. opencv-python中二值化方法的应用"></a>3. opencv-python中二值化方法的应用</h1><p>在OpenCV中，分为简单的阈值分割与自适应阈值分割。</p>
 <h2 id="3-1-简单阈值分割（Simple-Thresholding）"><a href="#3-1-简单阈值分割（Simple-Thresholding）" class="headerlink" title="3.1 简单阈值分割（Simple Thresholding）"></a>3.1 简单阈值分割（Simple Thresholding）</h2><p>函数原型如下：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">retval, dst = cv.threshold(src, thresh, maxval, type[, dst])</span><br></pre></td></tr></table></figure>
-
 <p>参数说明：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">第一个参数src为原图，需要注意的是输入的图像需为灰度图。</span><br><span class="line">第二个参数thresh即为阈值，用于对像素值的分类(一般定义为<span class="number">127</span>)。</span><br><span class="line">第三个参数maxval是最大值，即超过阈值后所定义的值(<span class="number">255</span>)。</span><br><span class="line">第四个参数type，在Simple Thresholding中一共有五种不同的方式：</span><br><span class="line">cv.THRESH_BINARY</span><br><span class="line">cv.THRESH_BINARY_INV</span><br><span class="line">cv.THRESH_TRUNC</span><br><span class="line">cv.THRESH_TOZERO</span><br><span class="line">cv.THRESH_TOZERO_INV</span><br></pre></td></tr></table></figure>
-
 <p>测试代码如下：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">img = cv.imread(<span class="string">'lenna.jpg'</span>)</span><br><span class="line">img = cv.cvtColor(img, cv.COLOR_BGR2RGB)</span><br><span class="line">img_gray = cv.cvtColor(img, cv.COLOR_RGB2GRAY)</span><br><span class="line">ret,thresh1 = cv.threshold(img_gray,<span class="number">127</span>,<span class="number">255</span>,cv.THRESH_BINARY)</span><br><span class="line">ret,thresh2 = cv.threshold(img_gray,<span class="number">127</span>,<span class="number">255</span>,cv.THRESH_BINARY_INV)</span><br><span class="line">ret,thresh3 = cv.threshold(img_gray,<span class="number">127</span>,<span class="number">255</span>,cv.THRESH_TRUNC)</span><br><span class="line">ret,thresh4 = cv.threshold(img_gray,<span class="number">127</span>,<span class="number">255</span>,cv.THRESH_TOZERO)</span><br><span class="line">ret,thresh5 = cv.threshold(img_gray,<span class="number">127</span>,<span class="number">255</span>,cv.THRESH_TOZERO_INV)</span><br><span class="line"></span><br><span class="line">titles = [<span class="string">'Original Image'</span>,<span class="string">'BINARY'</span>,<span class="string">'BINARY_INV'</span>,<span class="string">'TRUNC'</span>,<span class="string">'TOZERO'</span>,<span class="string">'TOZERO_INV'</span>]</span><br><span class="line">images = [img, thresh1, thresh2, thresh3, thresh4, thresh5]</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">6</span>):</span><br><span class="line">    plt.subplot(<span class="number">2</span>,<span class="number">3</span>,i+<span class="number">1</span>),plt.imshow(images[i],<span class="string">'gray'</span>)</span><br><span class="line">    plt.title(titles[i])</span><br><span class="line">    plt.axis(<span class="string">'off'</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-
 <p>下图是5种方式的实际效果：</p>
 <p><img src="/2022/10/11/%E5%9B%BE%E5%83%8F%E4%BA%8C%E5%80%BC%E5%8C%96/3.1.png" alt></p>
 <h2 id="3-2-自适应阈值分割（Adaptive-Thresholding）"><a href="#3-2-自适应阈值分割（Adaptive-Thresholding）" class="headerlink" title="3.2 自适应阈值分割（Adaptive Thresholding）"></a>3.2 自适应阈值分割（Adaptive Thresholding）</h2><p>函数原型如下：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dst = cv.adaptiveThreshold(src, maxValue, adaptiveMethod, thresholdType, blockSize, C[, dst])</span><br></pre></td></tr></table></figure>
-
 <p>其中src, maxValue和thresholdType与Simple Thresholding相同。</p>
 <p>在自适应阈值分割中，adaptive method(阈值的计算方式)有两种：<br>cv.ADAPTIVE_THRESH_MEAN_C: 邻域面积(blockSize * blockSize)的平均值并减去C.<br>cv.ADAPTIVE_THRESH_GAUSSIAN_C: 邻域面积的高斯加权总和然后减去C.</p>
 <p>下面是它们的实际效果(对于thresholdType在这里选择cv.THRESH_BINARY），测试代码如下：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">img = cv.imread(<span class="string">'lenna.jpg'</span>)</span><br><span class="line">img = cv.cvtColor(img, cv.COLOR_BGR2RGB)</span><br><span class="line">img_gray = cv.cvtColor(img, cv.COLOR_RGB2GRAY)</span><br><span class="line">ret,th1 = cv.threshold(img_gray,<span class="number">127</span>,<span class="number">255</span>,cv.THRESH_BINARY)</span><br><span class="line">th2 = cv.adaptiveThreshold(img_gray,<span class="number">255</span>,cv.ADAPTIVE_THRESH_MEAN_C,\</span><br><span class="line">            cv.THRESH_BINARY,<span class="number">11</span>,<span class="number">2</span>)</span><br><span class="line">th3 = cv.adaptiveThreshold(img_gray,<span class="number">255</span>,cv.ADAPTIVE_THRESH_GAUSSIAN_C,\</span><br><span class="line">            cv.THRESH_BINARY,<span class="number">11</span>,<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">titles = [<span class="string">'Original Image'</span>, <span class="string">'Simple Thresholding'</span>,</span><br><span class="line">            <span class="string">'Adaptive Mean Thresholding'</span>, <span class="string">'Adaptive Gaussian Thresholding'</span>]</span><br><span class="line">images = [img, th1, th2, th3]</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">4</span>):</span><br><span class="line">    plt.subplot(<span class="number">2</span>,<span class="number">2</span>,i+<span class="number">1</span>),plt.imshow(images[i],<span class="string">'gray'</span>)</span><br><span class="line">    plt.title(titles[i])</span><br><span class="line">    plt.axis(<span class="string">'off'</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-
 <p>效果如下：</p>
 <p><img src="/2022/10/11/%E5%9B%BE%E5%83%8F%E4%BA%8C%E5%80%BC%E5%8C%96/3.2.png" alt></p>
 <p>发现没有像之前otsu那样输出一张类似的图片，但是，它将图像中的边框描绘了出来，实际应用中这样的方式更适合处理文字形式的图片。</p>
@@ -730,7 +726,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">102.3k</span>
+    <span title="Site words total count">102.1k</span>
   
 </div>
 
@@ -1244,6 +1240,26 @@
   
 
   
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
   
 
 

@@ -442,24 +442,20 @@
 <li>virsh 工具是构建在 libvirt 管理 API 上，可作为 xm 命令和图形客户端管理程序（virt-manager）的替代工具。非特权用户只能以只读模式使用 virsh。您可使用 virsh 为客户端机器执行脚本。</li>
 </ul>
 <a id="more"></a>
-
 <hr>
 <h2 id="使用前提"><a href="#使用前提" class="headerlink" title="使用前提"></a>使用前提</h2><ol>
 <li>安装虚拟化相关组件<br>安装qemu-kvm（用户态管理工具）<br>安装libvirt（命令行管理工具）<br>安装virt-install（安装kvm工具）<br>安装bridge-utils（桥接设备管理工具）<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y qemu-kvm libvirt virt-install bridge-utils</span><br></pre></td></tr></table></figure></li>
 <li>启动libvirtd服务<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">systemctl enable libvirtd</span><br><span class="line">systemctl start  libvirtd</span><br><span class="line">systemctl status  libvirtd</span><br></pre></td></tr></table></figure></li>
 <li>安装virt-manager<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y install virt-manager</span><br></pre></td></tr></table></figure>
-
 </li>
 </ol>
 <p>使用可视化创建的虚拟机xml文件位置：/etc/libvirt/qemu/</p>
 <hr>
 <h2 id="常用的虚拟机管理命令"><a href="#常用的虚拟机管理命令" class="headerlink" title="常用的虚拟机管理命令"></a>常用的虚拟机管理命令</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 列出所有的虚拟机</span></span><br><span class="line">virsh list --all</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示虚拟机信息</span></span><br><span class="line">virsh dominfo *	( *为虚拟机名称 )</span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义虚拟机</span></span><br><span class="line">virsh define *.xml</span><br><span class="line"></span><br><span class="line"><span class="comment"># 启动虚拟机</span></span><br><span class="line">virsh start *</span><br><span class="line"></span><br><span class="line"><span class="comment"># 强制关闭虚拟机/关闭虚拟机</span></span><br><span class="line">virsh destroy */virsh shutdown *</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除虚拟机</span></span><br><span class="line">virsh undefine *</span><br><span class="line"></span><br><span class="line"><span class="comment"># 挂起虚拟机</span></span><br><span class="line">virsh suspend *</span><br><span class="line"></span><br><span class="line"><span class="comment"># 恢复被挂起的虚拟机</span></span><br><span class="line">virsh resume *</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看虚拟机网卡信息</span></span><br><span class="line">virsh domiflist *</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加网卡</span></span><br><span class="line">virsh attach-interface * --type * --source * --model * --live --config</span><br><span class="line">（第一个*为虚拟机名称，后三个*依次为Type Source Model）</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除网卡</span></span><br><span class="line">virsh detach-interface * --type  * --mac  *  --live --config</span><br><span class="line">（第一个*为虚拟机名称，后两个*依次为Type MAC）</span><br></pre></td></tr></table></figure>
-
 <hr>
 <h2 id="通过xml文件创建虚拟机"><a href="#通过xml文件创建虚拟机" class="headerlink" title="通过xml文件创建虚拟机"></a>通过xml文件创建虚拟机</h2><ol>
 <li>创建空镜像<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">qemu-img create -f qcow2  *.qcow2  <span class="number">100</span>G	（*为虚拟机名称，大小自定义）</span><br></pre></td></tr></table></figure></li>
 <li>配置xml并启动虚拟机，xml文件配置可通过可视化创建虚拟机生成的xml文件作为模板。<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">virsh define *.xml</span><br><span class="line">virsh start  *</span><br></pre></td></tr></table></figure>
-
 </li>
 </ol>
 <hr>
@@ -704,7 +700,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">102.3k</span>
+    <span title="Site words total count">102.1k</span>
   
 </div>
 
@@ -1218,6 +1214,26 @@
   
 
   
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
   
 
 

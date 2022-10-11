@@ -449,15 +449,11 @@
 <h2 id="1、auto-ptr不能共享所有权"><a href="#1、auto-ptr不能共享所有权" class="headerlink" title="1、auto_ptr不能共享所有权"></a>1、auto_ptr不能共享所有权</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="built_in">auto_ptr</span>&lt;<span class="keyword">int</span>&gt; <span class="title">p1</span><span class="params">(<span class="keyword">new</span> <span class="keyword">int</span>)</span></span>;</span><br><span class="line"><span class="function"><span class="built_in">auto_ptr</span>&lt;<span class="keyword">int</span>&gt; <span class="title">p2</span><span class="params">(p1)</span></span>; <span class="comment">// 拷贝</span></span><br><span class="line"><span class="built_in">auto_ptr</span>&lt;<span class="keyword">int</span>&gt; p3;</span><br><span class="line">p3 = p1; <span class="comment">// 赋值</span></span><br></pre></td></tr></table></figure>
 <p>这样会导致p1，p2，p3同时指向p1内部的原始指针，由于每一个auto_ptr在被销毁的时候都会删除其所指向的对象，原始指针就会被重复删除3次，为了解决这个问题，要么禁用拷贝与赋值运算符，要么设计当auto_ptr拷贝或者赋值的时候对原始指针的所有权转移到新对象去。</p>
 <h2 id="2、auto-ptr不能指向数组"><a href="#2、auto-ptr不能指向数组" class="headerlink" title="2、auto_ptr不能指向数组"></a>2、auto_ptr不能指向数组</h2><h2 id="3、auto-ptr不能作为容器成员"><a href="#3、auto-ptr不能作为容器成员" class="headerlink" title="3、auto_ptr不能作为容器成员"></a>3、auto_ptr不能作为容器成员</h2><h2 id="4、auto-ptr不能通过赋值操作来初始化"><a href="#4、auto-ptr不能通过赋值操作来初始化" class="headerlink" title="4、auto_ptr不能通过赋值操作来初始化"></a>4、auto_ptr不能通过赋值操作来初始化</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">std</span>::<span class="built_in">auto_ptr</span>&lt;<span class="keyword">int</span>&gt; p = <span class="keyword">new</span> <span class="keyword">int</span>(<span class="number">42</span>) <span class="comment">// 错</span></span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">auto_ptr</span>&lt;<span class="keyword">int</span>&gt; p(<span class="keyword">new</span> <span class="keyword">int</span>(<span class="number">42</span>)) <span class="comment">// 对</span></span><br></pre></td></tr></table></figure>
-
 <h1 id="三、unique-ptr"><a href="#三、unique-ptr" class="headerlink" title="三、unique_ptr"></a>三、unique_ptr</h1><p>unique_ptr可以看成是auto_ptr的替代品，用法如下：</p>
 <h2 id="1、不支持拷贝构造和赋值运算函数"><a href="#1、不支持拷贝构造和赋值运算函数" class="headerlink" title="1、不支持拷贝构造和赋值运算函数"></a>1、不支持拷贝构造和赋值运算函数</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="built_in">unique_ptr</span>&lt;Obj&gt; <span class="title">ap</span><span class="params">(<span class="keyword">new</span> Obj)</span></span>;</span><br><span class="line"><span class="function"><span class="built_in">unique_ptr</span> <span class="title">one</span><span class="params">(ap)</span></span>; <span class="comment">// 会出错</span></span><br><span class="line"><span class="built_in">unique_ptr</span> two= one; <span class="comment">// 会出错</span></span><br></pre></td></tr></table></figure>
-
 <h2 id="2、可以移动构造和移动赋值操作"><a href="#2、可以移动构造和移动赋值操作" class="headerlink" title="2、可以移动构造和移动赋值操作"></a>2、可以移动构造和移动赋值操作</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="built_in">unique_ptr</span>&lt;Obj&gt; <span class="title">Getobj</span><span class="params">()</span></span>;</span><br><span class="line">&#123;</span><br><span class="line">     <span class="function"><span class="built_in">unique_ptr</span>&lt;Obj&gt; <span class="title">ptr</span><span class="params">(<span class="keyword">new</span> Obj)</span></span>;</span><br><span class="line">     <span class="keyword">return</span> ptr;</span><br><span class="line">&#125;</span><br><span class="line">unique&lt;Obj&gt; ptr = Getobj;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="built_in">unique_ptr</span>&lt;Obj&gt; <span class="title">ptr1</span><span class="params">(<span class="keyword">new</span> Obj())</span></span>;</span><br><span class="line"><span class="function"><span class="built_in">unique_ptr</span>&lt;Obj&gt; <span class="title">ptr2</span><span class="params">(<span class="built_in">std</span>::<span class="built_in">move</span>(ptr1))</span></span>;</span><br></pre></td></tr></table></figure>
-
 <h1 id="四、shared-ptr"><a href="#四、shared-ptr" class="headerlink" title="四、shared_ptr"></a>四、shared_ptr</h1><p>如果程序要使用多个指向同一个对象的指针，那么可以使用shared_ptr。基本使用方法如下：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">shared_ptr</span> &lt;<span class="keyword">int</span>&gt; p1(<span class="keyword">new</span> <span class="keyword">int</span> (<span class="number">5</span>));</span><br><span class="line"><span class="built_in">shared_ptr</span>&lt;<span class="keyword">int</span>&gt; p2 = make_shared&lt;<span class="keyword">int</span>&gt;(<span class="number">10</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> * pint = <span class="keyword">new</span> <span class="keyword">int</span>(<span class="number">10</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//shared_ptr&lt;int&gt;p3 = pint; //error</span></span><br><span class="line"><span class="comment">//p3 = pint; //error</span></span><br><span class="line"></span><br><span class="line">use_count() <span class="comment">//计数数量</span></span><br><span class="line"></span><br><span class="line">unique() <span class="comment">//是否只被一个使用</span></span><br></pre></td></tr></table></figure>
-
 <h1 id="五、weak-ptr"><a href="#五、weak-ptr" class="headerlink" title="五、weak_ptr"></a>五、weak_ptr</h1><p>shared_ptr是一种强引用关系，智能指针直接引用对象，代码会引起循环引用，从而造成内存泄漏。</p>
 <p>weak_ptr用于配合shared_ptr使用并不影响对象的生命周期，即存在与否并不影响对象的引用计数器，weak_ptr并没有重载operator-&gt; 和operator* 操作符，因此不可直接通过weak_ptr使用对象。提供了expired()与lock()成员函数，前者用于判断weak_ptr指向的对象是否已被销毁，后者返回其所指对象shared_ptr智能指针（对象销毁时，返回空shared_ptr）。</p>
 <p>weak_ptr被设计为shared_ptr共同工作，可以从一个shared_ptr或者另一个weak_ptr对象构造，获得资源观测权，但weak_ptr没有共享资源，它的构造不会引起指针引用计数的增加。</p>
@@ -698,7 +694,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">102.3k</span>
+    <span title="Site words total count">102.1k</span>
   
 </div>
 
@@ -1212,6 +1208,26 @@
   
 
   
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
   
 
 

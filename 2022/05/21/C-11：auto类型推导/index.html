@@ -442,39 +442,34 @@
 <h3 id="语法和规则"><a href="#语法和规则" class="headerlink" title="语法和规则"></a>语法和规则</h3><p>在之前的 C++ 版本中，auto 关键字用来指明变量的存储类型，它和 static 关键字是相对的。auto 表示变量是自动存储的，这也是编译器的默认规则，所以写不写都一样，一般我们也不写，这使得 auto 关键字的存在变得非常鸡肋。C++11 赋予 auto 关键字新的含义，使用它来做自动类型推导。也就是说，使用了 auto 关键字以后，编译器会在编译期间自动推导出变量的类型，这样我们就不用手动指明变量的数据类型了。</p>
 <p>auto 关键字基本的使用语法如下：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">auto</span> name = value;	<span class="comment">// name 是变量的名字，value 是变量的初始值。</span></span><br></pre></td></tr></table></figure>
-
 <blockquote>
 <p>注意：auto 仅仅是一个占位符，在编译器期间它会被真正的类型所替代。或者说，C++ 中的变量必须是有明确类型的，只是这个类型是由编译器自己推导出来的。</p>
 </blockquote>
 <p>auto 类型推导的简单例子：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">auto</span> n = <span class="number">10</span>;</span><br><span class="line"><span class="keyword">auto</span> f = <span class="number">12.8</span>;</span><br><span class="line"><span class="keyword">auto</span> p = &amp;n;</span><br><span class="line"><span class="keyword">auto</span> url = <span class="string">"http://c.biancheng.net/cplus/"</span>;</span><br></pre></td></tr></table></figure>
-
 <p>下面我们来解释一下：</p>
 <ul>
 <li>第 1 行中，10 是一个整数，默认是 int 类型，所以推导出变量 n 的类型是 int。</li>
 <li>第 2 行中，12.8 是一个小数，默认是 double 类型，所以推导出变量 f 的类型是 double。</li>
-<li>第 3 行中，&amp;n 的结果是一个 int* 类型的指针，所以推导出变量 p 的类型是 int*。</li>
-<li>第 4 行中，由双引号<code>&quot;&quot;</code>包围起来的字符串是 const char* 类型，所以推导出变量 url 的类型是 const char*，也即一个常量指针。</li>
+<li>第 3 行中，&amp;n 的结果是一个 int<em> 类型的指针，所以推导出变量 p 的类型是 int</em>。</li>
+<li>第 4 行中，由双引号<code>&quot;&quot;</code>包围起来的字符串是 const char<em> 类型，所以推导出变量 url 的类型是 const char</em>，也即一个常量指针。</li>
 </ul>
 <p>我们也可以连续定义多个变量：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> n = <span class="number">20</span>;</span><br><span class="line"><span class="keyword">auto</span> *p = &amp;n, m = <span class="number">99</span>;</span><br></pre></td></tr></table></figure>
-
-<p>先看前面的第一个子表达式，&amp;n 的类型是 int*，编译器会根据 auto *p 推导出 auto 为 int；后面的 m 变量自然也为 int 类型，所以把 99 赋值给它也是正确的。</p>
+<p>先看前面的第一个子表达式，&amp;n 的类型是 int<em>，编译器会根据 auto </em>p 推导出 auto 为 int；后面的 m 变量自然也为 int 类型，所以把 99 赋值给它也是正确的。</p>
 <p>这里我们要注意，推导的时候不能有二义性。在本例中，编译器根据第一个子表达式已经推导出 auto 为 int 类型，那么后面的 m 也只能是 int 类型，如果写作<code>m=12.5</code>就是错误的，因为 12.5 是double 类型，这和 int 是冲突的。</p>
 <p>还有一个值得注意的地方是：使用 auto 类型推导的变量必须马上初始化，这个很容易理解，因为 auto 在 C++11 中只是“占位符”，并非如 int 一样的真正的类型声明。</p>
 <h3 id="高级用法"><a href="#高级用法" class="headerlink" title="高级用法"></a>高级用法</h3><p>1) auto 除了可以独立使用，还可以和某些具体类型混合使用，这样 auto 表示的就是“半个”类型，而不是完整的类型。请看下面的代码：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span>  x = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">auto</span> *p1 = &amp;x;   <span class="comment">// p1 为 int *，auto 推导为 int</span></span><br><span class="line"><span class="keyword">auto</span>  p2 = &amp;x;   <span class="comment">// p2 为 int*，auto 推导为 int*</span></span><br><span class="line"><span class="keyword">auto</span> &amp;r1  = x;   <span class="comment">// r1 为 int&amp;，auto 推导为 int</span></span><br><span class="line"><span class="keyword">auto</span> r2 = r1;    <span class="comment">// r2 为 int，auto 推导为 int</span></span><br></pre></td></tr></table></figure>
-
 <p>下面我们来解释一下：</p>
 <ul>
-<li>第 2 行代码中，p1 为 int* 类型，也即 auto * 为 int *，所以 auto 被推导成了 int 类型。</li>
+<li>第 2 行代码中，p1 为 int<em> 类型，也即 auto </em> 为 int *，所以 auto 被推导成了 int 类型。</li>
 <li>第 3 行代码中，auto 被推导为 int* 类型，前边的例子也已经演示过了。</li>
 <li>第 4 行代码中，r1 为 int &amp; 类型，auto 被推导为 int 类型。</li>
 <li>第 5 行代码是需要重点说明的，r1 本来是 int&amp; 类型，但是 auto 却被推导为 int 类型，这表明当<code>=</code>右边的表达式是一个引用类型时，auto 会把引用抛弃，直接推导出它的原始类型。</li>
 </ul>
 <p>2) 接下来，我们再来看一下 auto 和 const 的结合：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span>  x = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">auto</span> n = x;  <span class="comment">// n 为 const int ，auto 被推导为 int</span></span><br><span class="line"><span class="keyword">auto</span> f = n;        <span class="comment">// f 为 const int，auto 被推导为 int（const 属性被抛弃）</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">auto</span> &amp;r1 = x;  <span class="comment">// r1 为 const int&amp; 类型，auto 被推导为 int</span></span><br><span class="line"><span class="keyword">auto</span> &amp;r2 = r1;     <span class="comment">// r1 为 const int&amp; 类型，auto 被推导为 const int 类型</span></span><br></pre></td></tr></table></figure>
-
 <p>下面我们来解释一下：</p>
 <ul>
 <li>第 2 行代码中，n 为 const int，auto 被推导为 int。</li>
@@ -493,25 +488,19 @@
 <p>2) auto 不能作用于类的非静态成员变量（也就是没有 static 关键字修饰的成员变量）中。</p>
 <p>3) auto 关键字不能定义数组，比如下面的例子就是错误的：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> url[] = <span class="string">"www.baidu.com"</span>;</span><br><span class="line"><span class="keyword">auto</span> str[] = url; <span class="comment">// str 为数组，所以不能使用 auto</span></span><br></pre></td></tr></table></figure>
-
 <p>4) auto 不能作用于模板参数，请看下面的例子：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span>&#123;</span></span><br><span class="line">    <span class="comment">//<span class="doctag">TODO:</span></span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">int</span>  <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    A&lt;<span class="keyword">int</span>&gt; C1;</span><br><span class="line">    A&lt;<span class="keyword">auto</span>&gt; C2 = C1;  <span class="comment">//错误</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <h3 id="auto-的应用"><a href="#auto-的应用" class="headerlink" title="auto 的应用"></a>auto 的应用</h3><h4 id="使用-auto-定义迭代器"><a href="#使用-auto-定义迭代器" class="headerlink" title="使用 auto 定义迭代器"></a>使用 auto 定义迭代器</h4><p>auto 的一个典型应用场景是用来定义 STL 的迭代器。</p>
 <p>我们在使用 STL 容器的时候，需要使用迭代器来遍历容器里面的元素；不同容器的迭代器有不同的类型，在定义迭代器时必须指明。而迭代器的类型有时候比较复杂，书写起来很麻烦，比如下面的例子：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">vector</span>&lt; <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &gt; v;</span><br><span class="line">    <span class="built_in">vector</span>&lt; <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &gt;::iterator i = v.<span class="built_in">begin</span>();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>可以看出来，定义迭代器 i 的时候，类型书写比较冗长，容易出错。然而有了 auto 类型推导，我们大可不必这样，只写一个 auto 即可。</p>
 <p>修改上面的代码，使之变得非常简洁：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">vector</span>&lt; <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &gt; v;</span><br><span class="line">    <span class="keyword">auto</span> i = v.<span class="built_in">begin</span>();  <span class="comment">//使用 auto 代替具体的类型</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>auto 可以根据表达式 v.begin() 的类型（begin() 函数的返回值类型）来推导出变量 i 的类型。</p>
 <h4 id="auto-用于泛型编程"><a href="#auto-用于泛型编程" class="headerlink" title="auto 用于泛型编程"></a>auto 用于泛型编程</h4><p>auto 的另一个应用就是当我们不知道变量是什么类型，或者不希望指明具体类型的时候，比如泛型编程中。比如下面的例子：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span>&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">int</span> <span class="title">get</span><span class="params">(<span class="keyword">void</span>)</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">100</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span>&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">const</span> <span class="keyword">char</span>* <span class="title">get</span><span class="params">(<span class="keyword">void</span>)</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"www.baidu.com"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">func</span><span class="params">(<span class="keyword">void</span>)</span></span>&#123;</span><br><span class="line">    <span class="keyword">auto</span> val = T::<span class="built_in">get</span>();</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; val &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span>&#123;</span><br><span class="line">    func&lt;A&gt;();</span><br><span class="line">    func&lt;B&gt;();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>运行结果：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">100</span></span><br><span class="line">www.baidu.com</span><br></pre></td></tr></table></figure>
-
 <p>本例中的模板函数 func() 会调用所有类的静态函数 get()，并对它的返回值做统一处理，但是 get() 的返回值类型并不一样，而且不能自动转换。这种要求在以前的 C++ 版本中实现起来非常的麻烦，需要额外增加一个模板参数，并在调用时手动给该模板参数赋值，用以指明变量 val 的类型。</p>
 <p>但是有了 auto 类型自动推导，编译器就可以根据 get() 的返回值自己推导出 val 变量的类型，不用再增加一个模板参数了。</p>
 <p>下面的代码演示了不使用 auto 的解决办法：</p>
@@ -750,7 +739,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">102.3k</span>
+    <span title="Site words total count">102.1k</span>
   
 </div>
 
@@ -1264,6 +1253,26 @@
   
 
   
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
   
 
 

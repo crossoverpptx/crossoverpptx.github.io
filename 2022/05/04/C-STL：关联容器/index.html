@@ -442,9 +442,10 @@
 <blockquote>
 <p>弃用顺序容器，转而选用关联容器存储元素，往往就是看中了关联容器可以快速查找、读取或者删除所存储的元素，同时该类型容器插入元素的效率也比序列式容器高。</p>
 </blockquote>
-<p>也就是说，使用关联容器存储的元素，都是一个一个的“键值对”（ &lt;key,value&gt; ），这是和顺序容器最大的不同。除此之外，顺序容器中存储的元素默认都是未经过排序的，而使用关联容器存储的元素，默认会根据各元素的键值的大小做升序排序。</p>
+<p>也就是说，使用关联容器存储的元素，都是一个一个的“键值对”（ <key,value> ），这是和顺序容器最大的不同。除此之外，顺序容器中存储的元素默认都是未经过排序的，而使用关联容器存储的元素，默认会根据各元素的键值的大小做升序排序。</key,value></p>
 <p>关联容器所具备的这些特性，归咎于 STL 标准库在实现该类型容器时，底层选用了 「红黑树」这种数据结构来组织和存储各个键值对。</p>
 <h4 id="关联容器种类"><a href="#关联容器种类" class="headerlink" title="关联容器种类"></a>关联容器种类</h4><p>C++ STL 标准库提供了 4 种关联容器，分别为 map、set、multimap、multiset，其各自的特点如下表所示：</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -452,74 +453,65 @@
 <th>特点</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>map</td>
-<td>定义在 &lt;map&gt; 头文件中，使用该容器存储的数据，其各个元素的键必须是唯一的（即不能重复），该容器会根据各元素键的大小，默认进行升序排序（调用 std::less&lt;T&gt;）。</td>
+<td>定义在 \<map> 头文件中，使用该容器存储的数据，其各个元素的键必须是唯一的（即不能重复），该容器会根据各元素键的大小，默认进行升序排序（调用 std::less\<T>）。</T></map></td>
 </tr>
 <tr>
 <td>set</td>
-<td>定义在 &lt;set&gt; 头文件中，使用该容器存储的数据，各个元素键和值完全相同，且各个元素的值不能重复（保证了各元素键的唯一性）。该容器会自动根据各个元素的键（其实也就是元素值）的大小进行升序排序（调用 std::less&lt;T&gt;）。</td>
+<td>定义在 \<set> 头文件中，使用该容器存储的数据，各个元素键和值完全相同，且各个元素的值不能重复（保证了各元素键的唯一性）。该容器会自动根据各个元素的键（其实也就是元素值）的大小进行升序排序（调用 std::less\<T>）。</T></set></td>
 </tr>
 <tr>
 <td>multimap</td>
-<td>定义在 &lt;map&gt; 头文件中，和 map 容器唯一的不同在于，multimap 容器中存储元素的键可以重复。</td>
+<td>定义在 \<map> 头文件中，和 map 容器唯一的不同在于，multimap 容器中存储元素的键可以重复。</map></td>
 </tr>
 <tr>
 <td>multiset</td>
-<td>定义在 &lt;set&gt; 头文件中，和 set 容器唯一的不同在于，multiset 容器中存储元素的值可以重复（一旦值重复，则意味着键也是重复的）。</td>
+<td>定义在 \<set> 头文件中，和 set 容器唯一的不同在于，multiset 容器中存储元素的值可以重复（一旦值重复，则意味着键也是重复的）。</set></td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <blockquote>
 <p>除此之外，C++ 11 还新增了 4 种哈希容器，即 unordered_map、unordered_multimap 以及 unordered_set、unordered_multiset。严格来说，它们也属于关联式容器，但哈希容器底层采用的是哈希表，而不是红黑树。</p>
 </blockquote>
 <h3 id="pair-用法详解"><a href="#pair-用法详解" class="headerlink" title="pair 用法详解"></a>pair 用法详解</h3><p>我们知道，关联容器存储的是“键值对”形式的数据，比如：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="string">"C语言教程"</span>, <span class="string">"http://c.biancheng.net/c/"</span>&gt;</span><br><span class="line">&lt;<span class="string">"Python教程"</span>, <span class="string">"http://c.biancheng.net/python/"</span>&gt;</span><br><span class="line">&lt;<span class="string">"Java教程"</span>, <span class="string">"http://c.biancheng.net/java/"</span>&gt;</span><br></pre></td></tr></table></figure>
-
 <p>如上所示，每行都表示一个键值对，其中第一个元素作为键（key），第二个元素作为值（value）。</p>
 <blockquote>
 <p>注意，基于各个关联容器存储数据的特点，只有各个键值对中的键和值全部对应相等时，才能使用 set 和 multiset 关联容器存储，否则就要选用 map 或者 multimap 关联容器。</p>
 </blockquote>
-<p>考虑到“键值对”并不是普通类型数据，C++ STL 标准库提供了 pair 类模板，其专门用来将 2 个普通元素 first 和 second（可以是 C++ 基本数据类型、结构体、类自定的类型）创建成一个新元素&lt;first, second&gt;。通过其构成的元素格式不难看出，使用 pair 类模板来创建“键值对”形式的元素，再合适不过。</p>
-<p>注意，pair 类模板定义在&lt;utility&gt;头文件中，所以在使用该类模板之前，需引入此头文件。</p>
+<p>考虑到“键值对”并不是普通类型数据，C++ STL 标准库提供了 pair 类模板，其专门用来将 2 个普通元素 first 和 second（可以是 C++ 基本数据类型、结构体、类自定的类型）创建成一个新元素<first, second>。通过其构成的元素格式不难看出，使用 pair 类模板来创建“键值对”形式的元素，再合适不过。</first,></p>
+<p>注意，pair 类模板定义在\<utility>头文件中，所以在使用该类模板之前，需引入此头文件。</utility></p>
 <p>1) 在 C++ 11 标准之前，pair 类模板中提供了以下 3 种构造函数：</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1) 默认构造函数，即创建空的 pair 对象</span></span><br><span class="line">pair();</span><br><span class="line"><span class="comment">// 2) 直接使用 2 个元素初始化成 pair 对象</span></span><br><span class="line">pair (<span class="keyword">const</span> first_type&amp; a, <span class="keyword">const</span> second_type&amp; b);</span><br><span class="line"><span class="comment">// 3) 拷贝（复制）构造函数，即借助另一个 pair 对象，创建新的 pair 对象</span></span><br><span class="line">template&lt;class U, class V&gt; pair (const pair&lt;U,V&gt;&amp; pr);</span><br></pre></td></tr></table></figure>
-
 <p>在 C++ 11 标准中，在引入右值引用的基础上，pair 类模板中又增添了如下 2 个构造函数：</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 4) 移动构造函数</span></span><br><span class="line">template&lt;class U, class V&gt; pair (pair&lt;U,V&gt;&amp;&amp; pr);</span><br><span class="line"><span class="comment">// 5) 使用右值引用参数，创建 pair 对象</span></span><br><span class="line">template&lt;class U, class V&gt; pair (U&amp;&amp; a, V&amp;&amp; b);</span><br></pre></td></tr></table></figure>
-
 <p>除此之外，C++ 11 标准中 pair 类模板还新增加了如下一种构造函数：<code>pair (piecewise_construct_t pwc, tuple&lt;Args1...&gt; first_args, tuple&lt;Args2...&gt; second_args);</code>，但该构造 pair 类模板的方式很少用到。</p>
 <p>下面程序演示了以上几种创建 pair 对象的方法：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;utility&gt;      // pair</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;       // string</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 调用构造函数 1，也就是默认构造函数</span></span><br><span class="line">    pair &lt;<span class="built_in">string</span>, <span class="keyword">double</span>&gt; pair1;</span><br><span class="line">    <span class="comment">// 调用第 2 种构造函数</span></span><br><span class="line">    pair &lt;<span class="built_in">string</span>, <span class="built_in">string</span>&gt; pair2(<span class="string">"STL教程"</span>,<span class="string">"http://c.biancheng.net/stl/"</span>);  </span><br><span class="line">    <span class="comment">// 调用拷贝构造函数</span></span><br><span class="line">    pair &lt;<span class="built_in">string</span>, <span class="built_in">string</span>&gt; pair3(pair2);</span><br><span class="line">    <span class="comment">// 调用移动构造函数</span></span><br><span class="line">    pair &lt;<span class="built_in">string</span>, <span class="built_in">string</span>&gt; pair4(make_pair(<span class="string">"C++教程"</span>, <span class="string">"http://c.biancheng.net/cplus/"</span>));</span><br><span class="line">    <span class="comment">// 调用第 5 种构造函数</span></span><br><span class="line">    pair &lt;<span class="built_in">string</span>, <span class="built_in">string</span>&gt; pair5(<span class="built_in">string</span>(<span class="string">"Python教程"</span>), <span class="built_in">string</span>(<span class="string">"http://c.biancheng.net/python/"</span>));  </span><br><span class="line">   </span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"pair1: "</span> &lt;&lt; pair1.first &lt;&lt; <span class="string">" "</span> &lt;&lt; pair1.second &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"pair2: "</span>&lt;&lt; pair2.first &lt;&lt; <span class="string">" "</span> &lt;&lt; pair2.second &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"pair3: "</span> &lt;&lt; pair3.first &lt;&lt; <span class="string">" "</span> &lt;&lt; pair3.second &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"pair4: "</span> &lt;&lt; pair4.first &lt;&lt; <span class="string">" "</span> &lt;&lt; pair4.second &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"pair5: "</span> &lt;&lt; pair5.first &lt;&lt; <span class="string">" "</span> &lt;&lt; pair5.second &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>程序输出结果为：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">pair1: <span class="number">0</span></span><br><span class="line">pair2: STL教程 http://c.biancheng.net/stl/</span><br><span class="line">pair3: STL教程 http://c.biancheng.net/stl/</span><br><span class="line">pair4: C++教程 http://c.biancheng.net/cplus/</span><br><span class="line">pair5: Python教程 http://c.biancheng.net/python/</span><br></pre></td></tr></table></figure>
-
-<p>上面程序在创建 pair4 对象时，调用了 make_pair() 函数，它也是 &lt;utility&gt; 头文件提供的，其功能是生成一个 pair 对象。因此，当我们将 make_pair() 函数的返回值（是一个临时对象）作为参数传递给 pair() 构造函数时，其调用的是移动构造函数，而不是拷贝构造函数。</p>
+<p>上面程序在创建 pair4 对象时，调用了 make_pair() 函数，它也是 \<utility> 头文件提供的，其功能是生成一个 pair 对象。因此，当我们将 make_pair() 函数的返回值（是一个临时对象）作为参数传递给 pair() 构造函数时，其调用的是移动构造函数，而不是拷贝构造函数。</utility></p>
 <p>在上面程序的基础上，C++ 11 还允许我们手动为 pair1 对象赋值，比如：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">pair1.first = <span class="string">"Java教程"</span>;</span><br><span class="line">pair1.second = <span class="string">"http://c.biancheng.net/java/"</span>;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">"new pair1: "</span> &lt;&lt; pair1.first &lt;&lt; <span class="string">" "</span> &lt;&lt; pair1.second &lt;&lt; <span class="built_in">endl</span>;</span><br></pre></td></tr></table></figure>
-
 <p>执行结果为：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">new pair1: Java教程 http://c.biancheng.net/java/</span><br></pre></td></tr></table></figure>
-
 <p>同时，上面程序中 pair4 对象的创建过程，还可以写成如下形式，它们是完全等价的：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pair &lt;<span class="built_in">string</span>, <span class="built_in">string</span>&gt; pair4 = make_pair(<span class="string">"C++教程"</span>, <span class="string">"http://c.biancheng.net/cplus/"</span>);</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">"pair4: "</span> &lt;&lt; pair4.first &lt;&lt; <span class="string">" "</span> &lt;&lt; pair4.second &lt;&lt; <span class="built_in">endl</span>;</span><br></pre></td></tr></table></figure>
-
 <p>2) <code>&lt;utility&gt;</code>头文件中除了提供创建 pair 对象的方法之外，还为 pair 对象重载了 <code>&lt;、&lt;=、&gt;、&gt;=、==、!=</code> 这 6 个运算符，其运算规则是：对于进行比较的 2 个 pair 对象，先比较 pair.first 元素的大小，如果相等则继续比较 pair.second 元素的大小。</p>
 <blockquote>
 <p>注意，对于进行比较的 2 个 pair 对象，其对应的键和值的类型比较相同，否则将没有可比性，同时编译器提示没有相匹配的运算符，即找不到合适的重载运算符。</p>
 </blockquote>
 <p>举个例子：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;utility&gt;      // pair</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;       // string</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    pair &lt;<span class="built_in">string</span>, <span class="keyword">int</span>&gt; pair1(<span class="string">"STL教程"</span>, <span class="number">20</span>);</span><br><span class="line">    pair &lt;<span class="built_in">string</span>, <span class="keyword">int</span>&gt; pair2(<span class="string">"C++教程"</span>, <span class="number">20</span>);</span><br><span class="line">    pair &lt;<span class="built_in">string</span>, <span class="keyword">int</span>&gt; pair3(<span class="string">"C++教程"</span>, <span class="number">30</span>);</span><br><span class="line">    <span class="comment">// pair1和pair2的key不同，value相同</span></span><br><span class="line">    <span class="keyword">if</span> (pair1 != pair2) &#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"pair != pair2"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// pair2和pair3的key相同，value不同</span></span><br><span class="line">    <span class="keyword">if</span> (pair2 != pair3) &#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"pair2 != pair3"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>程序执行结果为：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pair != pair2</span><br><span class="line">pair2 != pair3</span><br></pre></td></tr></table></figure>
-
 <p>3) 最后需要指出的是，pair类模板还提供有一个 swap() 成员函数，能够互换 2 个 pair 对象的键值对，其操作成功的前提是这 2 个 pair 对象的键和值的类型要相同。例如：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;utility&gt;      // pair</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;       // string</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    pair &lt;<span class="built_in">string</span>, <span class="keyword">int</span>&gt; pair1(<span class="string">"pair"</span>, <span class="number">10</span>);                   </span><br><span class="line">    pair &lt;<span class="built_in">string</span>, <span class="keyword">int</span>&gt; pair2(<span class="string">"pair2"</span>, <span class="number">20</span>);</span><br><span class="line">    <span class="comment">// 交换 pair1 和 pair2 的键值对</span></span><br><span class="line">    pair1.swap(pair2);</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"pair1: "</span> &lt;&lt; pair1.first &lt;&lt; <span class="string">" "</span> &lt;&lt; pair1.second &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"pair2: "</span> &lt;&lt; pair2.first &lt;&lt; <span class="string">" "</span> &lt;&lt; pair2.second &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>程序执行结果为：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pair1: pair2 <span class="number">20</span></span><br><span class="line">pair2: pair <span class="number">10</span></span><br></pre></td></tr></table></figure>
-
 
       
     </div>
@@ -755,7 +747,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">102.3k</span>
+    <span title="Site words total count">102.1k</span>
   
 </div>
 
@@ -1269,6 +1261,26 @@
   
 
   
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
   
 
 

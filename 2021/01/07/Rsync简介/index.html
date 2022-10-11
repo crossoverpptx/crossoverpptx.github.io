@@ -403,7 +403,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  483
+                  482
                 </span>
               
 
@@ -442,7 +442,6 @@
       
         <p><strong>Rsync是一个远程数据同步工具，可以实现Windows系统间、Linux系统间以及Windows和Linux系统间的数据同步。</strong><br><strong>本文具体介绍Windows to Windows的使用。</strong></p>
 <a id="more"></a>
-
 <hr>
 <h2 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h2><ul>
 <li>服务端：win2008R2 64bit<br>ip：10.10.4.175<br>数据库：mysql</li>
@@ -452,16 +451,17 @@
 <hr>
 <h2 id="软件安装及配置"><a href="#软件安装及配置" class="headerlink" title="软件安装及配置"></a>软件安装及配置</h2><h3 id="服务端"><a href="#服务端" class="headerlink" title="服务端"></a>服务端</h3><ol>
 <li>解压服务端软件cwRsyncServer_4.0.5_Installe.zip安装，安装过程选择默认即可。</li>
-<li>打开cwRsyncServer安装路径C:\Program Files(x86)\ICW，其中rsyncd.conf是cwRsyncServer配置文件。修改文件内容如下：<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">use chroot = false</span><br><span class="line">strict modes = false</span><br><span class="line">hosts allow = <span class="number">10.10</span><span class="number">.4</span><span class="number">.75</span> <span class="comment">#限制了只允许10.10.4.75进行连接</span></span><br><span class="line">uid = <span class="number">0</span></span><br><span class="line">gid = <span class="number">0</span></span><br><span class="line">max connections = <span class="number">10</span></span><br><span class="line">strict modes = false</span><br><span class="line">log file = rsyncd.log</span><br><span class="line">lock file = rsyncd.lock</span><br><span class="line">[test] <span class="comment">#模块名称，可自定义</span></span><br><span class="line">path = /cygdrive/e/MySQL Server <span class="number">5.1</span>/data <span class="comment">#需要同步的文件目录</span></span><br><span class="line">read only = false</span><br><span class="line">transfer logging = yes</span><br><span class="line">auth users = test <span class="comment">#用户名</span></span><br><span class="line">secrets file = /cygdrive/c/Program Files (x86)/ICW/rsyncd.secrets <span class="comment">#用户和密码文件，内容为：test:111111</span></span><br><span class="line">comment = test</span><br></pre></td></tr></table></figure></li>
+<li>打开cwRsyncServer安装路径C:\Program Files(x86)\ICW，其中rsyncd.conf是cwRsyncServer配置文件。修改文件内容如下：<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">use chroot = false</span><br><span class="line">strict modes = false</span><br><span class="line">hosts allow = <span class="number">10.10</span><span class="number">.4</span><span class="number">.75</span> <span class="comment">#限制了只允许10.10.4.75进行连接</span></span><br><span class="line">uid = <span class="number">0</span></span><br><span class="line">gid = <span class="number">0</span></span><br><span class="line">max connections = <span class="number">10</span></span><br><span class="line">strict modes = false</span><br><span class="line">log file = rsyncd.log</span><br><span class="line">lock file = rsyncd.lock</span><br><span class="line">[test] <span class="comment">#模块名称，可自定义</span></span><br><span class="line">path = /cygdrive/e/MySQL Server <span class="number">5.1</span>/data <span class="comment">#需要同步的文件目录</span></span><br><span class="line">read only = false</span><br><span class="line">transfer logging = yes</span><br><span class="line">auth users = test <span class="comment">#用户名</span></span><br><span class="line">secrets file = /cygdrive/c/Program Files (x86)/ICW/rsyncd.secrets <span class="comment">#用户和密码文件，内容为：test:111111</span></span><br><span class="line">comment = test</span><br></pre></td></tr></table></figure>
+<strong>注意：默认rsync使用873端口，自行开启windows 873端口，如果想使用其他端口自行添加port参数。</strong></li>
+<li><p>在服务中找到RsyncServer，更改成自动启动，然后确认即可。</p>
+<p><img src="/2021/01/07/Rsync%E7%AE%80%E4%BB%8B/1.png" alt></p>
+</li>
 </ol>
-<p><strong>注意：默认rsync使用873端口，自行开启windows 873端口，如果想使用其他端口自行添加port参数。</strong><br>3. 在服务中找到RsyncServer，更改成自动启动，然后确认即可。</p>
-<p>  <img src="/2021/01/07/Rsync%E7%AE%80%E4%BB%8B/1.png" alt></p>
 <h3 id="客户端"><a href="#客户端" class="headerlink" title="客户端"></a>客户端</h3><ol>
 <li>将客户端软件cwRsyncClient.rar解压到E盘cwRsync目录下。</li>
 <li>在E:\cwRsync目录下创建一个密码文件password.txt，内容为111111。</li>
 <li>在E:\cwRsync目录下创建一个bat文件rsync.bat。批处理文件内容如下：<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd E:\cwRsync</span><br><span class="line">rsync -artzvP --delete --password-file=/cygdrive/e/cwRsync/password.txt unary@<span class="number">10.10</span><span class="number">.4</span><span class="number">.175</span>::test <span class="string">"/cygdrive/e/MySQL Server 5.1/data"</span></span><br></pre></td></tr></table></figure>
 bat脚本命令说明：<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd 客户端软件解压目录</span><br><span class="line">rsync -artzvP --delete --password-file=客户端密码文件路径 用户名@服务端ip::模块名称 客户端数据同步目录</span><br></pre></td></tr></table></figure>
-
 </li>
 </ol>
 <hr>
@@ -701,7 +701,7 @@ bat脚本命令说明：<figure class="highlight python"><table><tr><td class="g
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">102.3k</span>
+    <span title="Site words total count">102.1k</span>
   
 </div>
 
@@ -1215,6 +1215,26 @@ bat脚本命令说明：<figure class="highlight python"><table><tr><td class="g
   
 
   
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
   
 
 

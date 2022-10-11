@@ -439,26 +439,30 @@
 
       
         <h3 id="容器"><a href="#容器" class="headerlink" title="容器"></a>容器</h3><p>简单的理解容器，它就是一些模板类的集合，但和普通模板类不同的是，容器中封装的是组织数据的方法（也就是数据结构）。<a id="more"></a>STL 提供有 3 类标准容器，分别是顺序容器、排序容器和哈希容器，其中后两类容器有时也统称为关联容器。它们各自的含义如下表所示：</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
-<th align="left">容器种类</th>
-<th align="center">功能</th>
+<th style="text-align:left">容器种类</th>
+<th style="text-align:center">功能</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="left">顺序容器</td>
-<td align="center">主要包括 vector 向量容器、list 列表容器以及 deque 双端队列容器。之所以被称为顺序容器，是因为元素在容器中的位置同元素的值无关，即容器不是排序的。将元素插入容器时，指定在什么位置，元素就会位于什么位置。</td>
+<tbody>
+<tr>
+<td style="text-align:left">顺序容器</td>
+<td style="text-align:center">主要包括 vector 向量容器、list 列表容器以及 deque 双端队列容器。之所以被称为顺序容器，是因为元素在容器中的位置同元素的值无关，即容器不是排序的。将元素插入容器时，指定在什么位置，元素就会位于什么位置。</td>
 </tr>
 <tr>
-<td align="left">排序容器</td>
-<td align="center">包括 set 集合容器、multiset多重集合容器、map映射容器以及 multimap 多重映射容器。排序容器中的元素默认是由小到大排序好的，即便是插入元素，元素也会插入到适当位置。所以排序容器在查找时具有非常好的性能。</td>
+<td style="text-align:left">排序容器</td>
+<td style="text-align:center">包括 set 集合容器、multiset多重集合容器、map映射容器以及 multimap 多重映射容器。排序容器中的元素默认是由小到大排序好的，即便是插入元素，元素也会插入到适当位置。所以排序容器在查找时具有非常好的性能。</td>
 </tr>
 <tr>
-<td align="left">哈希容器</td>
-<td align="center">C++ 11 新加入 4 种关联容器，分别是 unordered_set 哈希集合、unordered_multiset 哈希多重集合、unordered_map 哈希映射以及 unordered_multimap 哈希多重映射。和排序容器不同，哈希容器中的元素是未排序的，元素的位置由哈希函数确定。</td>
+<td style="text-align:left">哈希容器</td>
+<td style="text-align:center">C++ 11 新加入 4 种关联容器，分别是 unordered_set 哈希集合、unordered_multiset 哈希多重集合、unordered_map 哈希映射以及 unordered_multimap 哈希多重映射。和排序容器不同，哈希容器中的元素是未排序的，元素的位置由哈希函数确定。</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <hr>
 <h3 id="迭代器"><a href="#迭代器" class="headerlink" title="迭代器"></a>迭代器</h3><p>无论是顺序容器还是关联容器，最常做的操作无疑是遍历容器中存储的元素，而实现此操作，多数情况会选用“迭代器（iterator）”来实现。那么，迭代器到底是什么呢？</p>
 <p>我们知道，尽管不同容器的内部结构各异，但它们本质上都是用来存储大量数据的，换句话说，都是一串能存储多个数据的存储单元。因此，诸如数据的排序、查找、求和等需要对数据进行遍历的操作方法应该是类似的。</p>
@@ -473,67 +477,71 @@
 </li>
 <li><p>随机访问迭代器（random access iterator）<br>随机访问迭代器具有双向迭代器的全部功能。除此之外，假设 p 是一个随机访问迭代器，i 是一个整型变量或常量，则 p 还支持以下操作：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">p+=i：使得 p 往后移动 i 个元素。</span><br><span class="line">p-=i：使得 p 往前移动 i 个元素。</span><br><span class="line">p+i：返回 p 后面第 i 个元素的迭代器。</span><br><span class="line">p-i：返回 p 前面第 i 个元素的迭代器。</span><br><span class="line">p[i]：返回 p 后面第 i 个元素的引用。</span><br></pre></td></tr></table></figure>
-
 <p>此外，两个随机访问迭代器 p1、p2 还可以用 &lt;、&gt;、&lt;=、&gt;= 运算符进行比较。另外，表达式 p2-p1 也是有定义的，其返回值表示 p2 所指向元素和 p1 所指向元素的序号之差（也可以说是 p2 和 p1 之间的元素个数减1）。</p>
 </li>
 </ul>
 <p>下表所示，是 C++ 11 标准中不同容器指定使用的迭代器类型：</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
-<th align="left">容器</th>
-<th align="left">对应的迭代器类型</th>
+<th style="text-align:left">容器</th>
+<th style="text-align:left">对应的迭代器类型</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="left">array</td>
-<td align="left">随机访问迭代器</td>
+<tbody>
+<tr>
+<td style="text-align:left">array</td>
+<td style="text-align:left">随机访问迭代器</td>
 </tr>
 <tr>
-<td align="left">vector</td>
-<td align="left">随机访问迭代器</td>
+<td style="text-align:left">vector</td>
+<td style="text-align:left">随机访问迭代器</td>
 </tr>
 <tr>
-<td align="left">deque</td>
-<td align="left">随机访问迭代器</td>
+<td style="text-align:left">deque</td>
+<td style="text-align:left">随机访问迭代器</td>
 </tr>
 <tr>
-<td align="left">list</td>
-<td align="left">双向迭代器</td>
+<td style="text-align:left">list</td>
+<td style="text-align:left">双向迭代器</td>
 </tr>
 <tr>
-<td align="left">set / multiset</td>
-<td align="left">双向迭代器</td>
+<td style="text-align:left">set / multiset</td>
+<td style="text-align:left">双向迭代器</td>
 </tr>
 <tr>
-<td align="left">map / multimap</td>
-<td align="left">双向迭代器</td>
+<td style="text-align:left">map / multimap</td>
+<td style="text-align:left">双向迭代器</td>
 </tr>
 <tr>
-<td align="left">forward_list</td>
-<td align="left">前向迭代器</td>
+<td style="text-align:left">forward_list</td>
+<td style="text-align:left">前向迭代器</td>
 </tr>
 <tr>
-<td align="left">unordered_map / unordered_multimap</td>
-<td align="left">前向迭代器</td>
+<td style="text-align:left">unordered_map / unordered_multimap</td>
+<td style="text-align:left">前向迭代器</td>
 </tr>
 <tr>
-<td align="left">unordered_set / unordered_multiset</td>
-<td align="left">前向迭代器</td>
+<td style="text-align:left">unordered_set / unordered_multiset</td>
+<td style="text-align:left">前向迭代器</td>
 </tr>
 <tr>
-<td align="left">stack</td>
-<td align="left">不支持迭代器</td>
+<td style="text-align:left">stack</td>
+<td style="text-align:left">不支持迭代器</td>
 </tr>
 <tr>
-<td align="left">queue</td>
-<td align="left">不支持迭代器</td>
+<td style="text-align:left">queue</td>
+<td style="text-align:left">不支持迭代器</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <blockquote>
 <p>注意，容器适配器 stack 和 queue 没有迭代器，它们包含有一些成员函数，可以用来对元素进行访问。</p>
 </blockquote>
 <h4 id="迭代器的定义方式"><a href="#迭代器的定义方式" class="headerlink" title="迭代器的定义方式"></a>迭代器的定义方式</h4><p>尽管不同容器对应着不同类别的迭代器，但这些迭代器有着较为统一的定义方式，具体分为 4 种，如下表所示：</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -541,7 +549,8 @@
 <th>具体格式</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>正向迭代器</td>
 <td>容器类名::iterator  迭代器名;</td>
 </tr>
@@ -557,7 +566,9 @@
 <td>常量反向迭代器</td>
 <td>容器类名::const_reverse_iterator  迭代器名;</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <p>值得一提的是，上表中的反向迭代器全称为 “反向迭代器适配器”。</p>
 <p>通过定义以上几种迭代器，就可以读取它指向的元素，*迭代器名就表示迭代器指向的元素。其中，常量迭代器和非常量迭代器的分别在于，通过非常量迭代器还能修改其指向的元素。另外，反向迭代器和正向迭代器的区别在于：对正向迭代器进行 ++ 操作时，迭代器会指向容器中的后一个元素；而对反向迭代器进行 ++ 操作时，迭代器会指向容器中的前一个元素。</p>
 <blockquote>
@@ -567,19 +578,14 @@
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v&#123; <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span> &#125;; <span class="comment">// 初始化v，有10个元素</span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"第一种遍历方法："</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; v.<span class="built_in">size</span>(); ++i)</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; v[i] &lt;&lt; <span class="string">" "</span>;    <span class="comment">// 像普通数组一样使用vector容器</span></span><br><span class="line"></span><br><span class="line">    </span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;::iterator i;    <span class="comment">// 创建一个正向迭代器，当然，vector也支持其他3种定义迭代器的方式</span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span> &lt;&lt; <span class="string">"第二种遍历方法："</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">for</span> (i = v.<span class="built_in">begin</span>(); i != v.<span class="built_in">end</span>(); ++i)  <span class="comment">// 用 "!=" 比较两个迭代器</span></span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; *i &lt;&lt; <span class="string">" "</span>;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span> &lt;&lt; <span class="string">"第三种遍历方法："</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">for</span> (i = v.<span class="built_in">begin</span>(); i &lt; v.<span class="built_in">end</span>(); ++i) <span class="comment">// 用 "&lt;" 比较两个迭代器</span></span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; *i &lt;&lt; <span class="string">" "</span>;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span> &lt;&lt; <span class="string">"第四种遍历方法："</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    i = v.<span class="built_in">begin</span>();</span><br><span class="line">    <span class="keyword">while</span> (i &lt; v.<span class="built_in">end</span>()) &#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; *i &lt;&lt; <span class="string">" "</span>;</span><br><span class="line">        i += <span class="number">1</span>; <span class="comment">// 随机访问迭代器支持 "+=" 的操作</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>运行结果为：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">第一种遍历方法：</span><br><span class="line"><span class="number">1</span> <span class="number">2</span> <span class="number">3</span> <span class="number">4</span> <span class="number">5</span> <span class="number">6</span> <span class="number">7</span> <span class="number">8</span> <span class="number">9</span> <span class="number">10</span></span><br><span class="line">第二种遍历方法：</span><br><span class="line"><span class="number">1</span> <span class="number">2</span> <span class="number">3</span> <span class="number">4</span> <span class="number">5</span> <span class="number">6</span> <span class="number">7</span> <span class="number">8</span> <span class="number">9</span> <span class="number">10</span></span><br><span class="line">第三种遍历方法：</span><br><span class="line"><span class="number">1</span> <span class="number">2</span> <span class="number">3</span> <span class="number">4</span> <span class="number">5</span> <span class="number">6</span> <span class="number">7</span> <span class="number">8</span> <span class="number">9</span> <span class="number">10</span></span><br><span class="line">第四种遍历方法：</span><br><span class="line"><span class="number">1</span> <span class="number">2</span> <span class="number">3</span> <span class="number">4</span> <span class="number">5</span> <span class="number">6</span> <span class="number">7</span> <span class="number">8</span> <span class="number">9</span> <span class="number">10</span></span><br></pre></td></tr></table></figure>
-
 <p>2) 再举一个例子，我们知道，list 容器的迭代器是双向迭代器。假设 v 和 i 的定义如下：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建一个list容器 v</span></span><br><span class="line"><span class="built_in">list</span>&lt;<span class="keyword">int</span>&gt; v;</span><br><span class="line"><span class="comment">// 创建一个常量正向迭代器，同样，list也支持其他三种定义迭代器的方式</span></span><br><span class="line"><span class="built_in">list</span>&lt;<span class="keyword">int</span>&gt;::const_iterator i;</span><br></pre></td></tr></table></figure>
-
 <p>则以下代码是合法的：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(i = v.<span class="built_in">begin</span>(); i != v.<span class="built_in">end</span>(); ++i)</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; *i;</span><br></pre></td></tr></table></figure>
-
 <p>以下代码则不合法，因为双向迭代器不支持用 “&lt;” 进行比较：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(i = v.<span class="built_in">begin</span>(); i &lt; v.<span class="built_in">end</span>(); ++i)</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; *i;</span><br></pre></td></tr></table></figure>
-
 <p>以下代码也不合法，因为双向迭代器不支持用下标随机访问元素：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; v.<span class="built_in">size</span>(); ++i)</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; v[i];</span><br></pre></td></tr></table></figure>
-
 <h4 id="补充知识"><a href="#补充知识" class="headerlink" title="补充知识"></a>补充知识</h4><p>其实在 C++ 中，数组也是容器，数组的迭代器就是指针，而且是随机访问迭代器。例如，对于数组 int a[10]，int * 类型的指针就是其迭代器，则 a、a+1、a+2 都是 a 的迭代器。</p>
 
       
@@ -816,7 +822,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">102.3k</span>
+    <span title="Site words total count">102.1k</span>
   
 </div>
 
@@ -1330,6 +1336,26 @@
   
 
   
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
   
 
 
