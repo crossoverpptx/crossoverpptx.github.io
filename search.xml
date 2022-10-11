@@ -3934,8 +3934,9 @@ v=frontP*backP*(frontMean-backMean)^2</script><p>实验代码如下：</p>
 <h1 id="2-图像灰度化处理方法"><a href="#2-图像灰度化处理方法" class="headerlink" title="2. 图像灰度化处理方法"></a>2. 图像灰度化处理方法</h1><p>图像灰度化处理有三种常用方法：最大值法、平均值法和加权平均法。</p>
 <h2 id="2-1-最大值法"><a href="#2-1-最大值法" class="headerlink" title="2.1 最大值法"></a>2.1 最大值法</h2><p>最大值法，即直接取R,B,G三个分量中数值最大的分量的数值（0视为最小，255视为最大）。公式为：R=G=B=max(R,G,B)。</p>
 <h2 id="2-2-平均值法"><a href="#2-2-平均值法" class="headerlink" title="2.2 平均值法"></a>2.2 平均值法</h2><p>平均值法，即取R,B,G三个分量中数值的均值。公式为：R=G=B=(R+G+B)/3。</p>
-<h2 id="2-3-加权平均法"><a href="#2-3-加权平均法" class="headerlink" title="2.3 加权平均法"></a>2.3 加权平均法</h2><p>根据重要性及其它指标，将三个分量以不同的权值进行加权平均。由于人眼对绿色的敏感最高，对蓝色敏感最低，因此，按下式对RGB三分量进行加权平均能得到较合理的灰度图像：1</p>
-<script type="math/tex; mode=display">Gray(i,j)=0.299*R(i,j)+0.578*G(i,j)+0.114*B(i,j)</script><h1 id="3-图像灰度化处理方法的Python实现"><a href="#3-图像灰度化处理方法的Python实现" class="headerlink" title="3. 图像灰度化处理方法的Python实现"></a>3. 图像灰度化处理方法的Python实现</h1><p>代码如下：</p>
+<h2 id="2-3-加权平均法"><a href="#2-3-加权平均法" class="headerlink" title="2.3 加权平均法"></a>2.3 加权平均法</h2><p>根据重要性及其它指标，将三个分量以不同的权值进行加权平均。由于人眼对绿色的敏感最高，对蓝色敏感最低，因此，按下式对RGB三分量进行加权平均能得到较合理的灰度图像：</p>
+<script type="math/tex; mode=display">
+Gray(i,j)=0.299*R(i,j)+0.578*G(i,j)+0.114*B(i,j)</script><h1 id="3-图像灰度化处理方法的Python实现"><a href="#3-图像灰度化处理方法的Python实现" class="headerlink" title="3. 图像灰度化处理方法的Python实现"></a>3. 图像灰度化处理方法的Python实现</h1><p>代码如下：</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2 <span class="keyword">as</span> cv</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">img = cv.imread(<span class="string">'lenna.png'</span>)</span><br><span class="line">img1 = cv.cvtColor(img, cv.COLOR_BGR2RGB) <span class="comment"># BGR转化为RGB格式</span></span><br><span class="line">plt.imshow(img1)</span><br><span class="line">plt.title(<span class="string">'Src_img'</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
 <p>图像如下：</p>
 <p><img src="/2022/10/10/%E5%9B%BE%E5%83%8F%E7%81%B0%E5%BA%A6%E5%8C%96%E5%A4%84%E7%90%86/3.0.1.png" alt></p>
