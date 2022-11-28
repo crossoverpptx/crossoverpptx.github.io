@@ -83,14 +83,14 @@
 
 
 
-<meta name="description" content="本文介绍 C++11 中使用 using 定义别名的用法。">
+<meta name="description" content="lambda 源自希腊字母表中第 11 位的 λ，在计算机科学领域，它则被用来表示一种匿名函数。所谓匿名函数，简单地理解就是没有名称的函数，又常被称为 lambda 函数或者 lambda 表达式。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="C++11：使用using定义别名">
-<meta property="og:url" content="http://yoursite.com/2022/06/06/C-11%EF%BC%9A%E4%BD%BF%E7%94%A8using%E5%AE%9A%E4%B9%89%E5%88%AB%E5%90%8D/index.html">
+<meta property="og:title" content="C++11：lambda匿名函数">
+<meta property="og:url" content="http://yoursite.com/2022/11/27/C-11%EF%BC%9Alambda%E5%8C%BF%E5%90%8D%E5%87%BD%E6%95%B0/index.html">
 <meta property="og:site_name" content="crossoverpptx&#39;s Blog">
-<meta property="og:description" content="本文介绍 C++11 中使用 using 定义别名的用法。">
-<meta property="article:published_time" content="2022-06-06T01:45:14.000Z">
-<meta property="article:modified_time" content="2022-06-06T02:06:15.615Z">
+<meta property="og:description" content="lambda 源自希腊字母表中第 11 位的 λ，在计算机科学领域，它则被用来表示一种匿名函数。所谓匿名函数，简单地理解就是没有名称的函数，又常被称为 lambda 函数或者 lambda 表达式。">
+<meta property="article:published_time" content="2022-11-27T14:55:41.000Z">
+<meta property="article:modified_time" content="2022-11-28T08:02:25.271Z">
 <meta property="article:author" content="crossoverpptx">
 <meta property="article:tag" content="C&#x2F;C++">
 <meta property="article:tag" content="C++11">
@@ -124,13 +124,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2022/06/06/C-11：使用using定义别名/"/>
+  <link rel="canonical" href="http://yoursite.com/2022/11/27/C-11：lambda匿名函数/"/>
 
 
 
 
 
-  <title>C++11：使用using定义别名 | crossoverpptx's Blog</title>
+  <title>C++11：lambda匿名函数 | crossoverpptx's Blog</title>
   
 
 
@@ -301,7 +301,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/06/06/C-11%EF%BC%9A%E4%BD%BF%E7%94%A8using%E5%AE%9A%E4%B9%89%E5%88%AB%E5%90%8D/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/11/27/C-11%EF%BC%9Alambda%E5%8C%BF%E5%90%8D%E5%87%BD%E6%95%B0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="crossoverpptx">
@@ -318,7 +318,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">C++11：使用using定义别名</h1>
+          <h1 class="post-title" itemprop="name headline">C++11：lambda匿名函数</h1>
         
 
         <div class="post-meta">
@@ -330,8 +330,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-06-06T09:45:14+08:00">
-                2022-06-06
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-11-27T22:55:41+08:00">
+                2022-11-27
               </time>
             
 
@@ -346,8 +346,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2022-06-06T10:06:15+08:00">
-                2022-06-06
+              <time title="更新于" itemprop="dateModified" datetime="2022-11-28T16:02:25+08:00">
+                2022-11-28
               </time>
             
           </span>
@@ -401,7 +401,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1.2k
+                  2k
                 </span>
               
 
@@ -417,7 +417,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  4
+                  8
                 </span>
               
             </div>
@@ -438,39 +438,87 @@
       
 
       
-        <p>本文介绍 C++11 中使用 using 定义别名的用法。<a id="more"></a></p>
-<h3 id="using简介"><a href="#using简介" class="headerlink" title="using简介"></a>using简介</h3><p>大家都知道，在 C++ 中可以通过 typedef 重定义一个类型：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">unsigned</span> <span class="keyword">int</span> <span class="keyword">uint_t</span>;</span><br></pre></td></tr></table></figure>
-<p>被重定义的类型并不是一个新的类型，仅仅只是原有的类型取了一个新的名字。因此，下面这样将不是合法的函数重载：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">func</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">int</span>)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">func</span><span class="params">(<span class="keyword">uint_t</span>)</span></span>; <span class="comment">// error: redefinition</span></span><br></pre></td></tr></table></figure>
-<p>使用 typedef 重定义类型是很方便的，但它也有一些限制，比如，无法重定义一个模板。想象下面这个场景：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="built_in">std</span>::<span class="built_in">map</span>&lt;<span class="built_in">std</span>::<span class="built_in">string</span>, <span class="keyword">int</span>&gt; <span class="keyword">map_int_t</span>;</span><br><span class="line"><span class="comment">// ...</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="built_in">std</span>::<span class="built_in">map</span>&lt;<span class="built_in">std</span>::<span class="built_in">string</span>, <span class="built_in">std</span>::<span class="built_in">string</span>&gt; <span class="keyword">map_str_t</span>;</span><br><span class="line"><span class="comment">// ...</span></span><br></pre></td></tr></table></figure>
-<p>我们需要的其实是一个固定以 std::string 为 key 的 map，它可以映射到 int 或另一个 std::string。然而这个简单的需求仅通过 typedef 却很难办到。</p>
-<p>因此，在 C++98/03 中往往不得不这样写：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Val&gt;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">str_map</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">typedef</span> <span class="built_in">std</span>::<span class="built_in">map</span>&lt;<span class="built_in">std</span>::<span class="built_in">string</span>, Val&gt; type;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">// ...</span></span><br><span class="line">str_map&lt;<span class="keyword">int</span>&gt;::type map1;</span><br><span class="line"><span class="comment">// ...</span></span><br></pre></td></tr></table></figure>
-<p>一个虽然简单但却略显烦琐的 str_map 外敷类是必要的。这明显让我们在复用某些泛型代码时非常难受。</p>
-<p>现在，在 C++11 中终于出现了可以重定义一个模板的语法。请看下面的示例：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Val&gt;</span><br><span class="line"><span class="keyword">using</span> <span class="keyword">str_map_t</span> = <span class="built_in">std</span>::<span class="built_in">map</span>&lt;<span class="built_in">std</span>::<span class="built_in">string</span>, Val&gt;;</span><br><span class="line"><span class="comment">// ...</span></span><br><span class="line"><span class="keyword">str_map_t</span>&lt;<span class="keyword">int</span>&gt; map1;</span><br></pre></td></tr></table></figure>
-<p>这里使用新的 using 别名语法定义了 std::map 的模板别名 str_map_t。比起前面使用外敷模板加 typedef 构建的 str_map，它完全就像是一个新的 map 类模板，因此，简洁了很多。</p>
-<h3 id="using应用"><a href="#using应用" class="headerlink" title="using应用"></a>using应用</h3><h4 id="重定义普通类型"><a href="#重定义普通类型" class="headerlink" title="重定义普通类型"></a>重定义普通类型</h4><p>实际上，using 的别名语法覆盖了 typedef 的全部功能。先来看看对普通类型的重定义示例，将这两种语法对比一下：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 重定义unsigned int</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">unsigned</span> <span class="keyword">int</span> <span class="keyword">uint_t</span>;</span><br><span class="line"><span class="keyword">using</span> <span class="keyword">uint_t</span> = <span class="keyword">unsigned</span> <span class="keyword">int</span>;</span><br><span class="line"><span class="comment">// 重定义std::map</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="built_in">std</span>::<span class="built_in">map</span>&lt;<span class="built_in">std</span>::<span class="built_in">string</span>, <span class="keyword">int</span>&gt; <span class="keyword">map_int_t</span>;</span><br><span class="line"><span class="keyword">using</span> <span class="keyword">map_int_t</span> = <span class="built_in">std</span>::<span class="built_in">map</span>&lt;<span class="built_in">std</span>::<span class="built_in">string</span>, <span class="keyword">int</span>&gt;;</span><br></pre></td></tr></table></figure>
-<p>可以看到，在重定义普通类型上，两种使用方法的效果是等价的，唯一不同的是定义语法。</p>
-<h4 id="重定义函数指针"><a href="#重定义函数指针" class="headerlink" title="重定义函数指针"></a>重定义函数指针</h4><p>typedef 的定义方法和变量的声明类似：像声明一个变量一样，声明一个重定义类型，之后在声明之前加上 typedef 即可。这种写法凸显了 C/C++ 中的语法一致性，但有时却会增加代码的阅读难度。比如重定义一个函数指针时：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">typedef</span> <span class="title">void</span> <span class="params">(*<span class="keyword">func_t</span>)</span><span class="params">(<span class="keyword">int</span>, <span class="keyword">int</span>)</span></span>;</span><br></pre></td></tr></table></figure>
-<p>与之相比，using 后面总是立即跟随新标识符（Identifier），之后使用类似赋值的语法，把现有的类型（type-id）赋给新类型：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> <span class="keyword">func_t</span> = <span class="keyword">void</span> (*)(<span class="keyword">int</span>, <span class="keyword">int</span>);</span><br></pre></td></tr></table></figure>
-<p>从上面的对比中可以发现，C++11 的 using 别名语法比 typedef 更加清晰。因为 typedef 的别名语法本质上类似一种解方程的思路。而 using 语法通过赋值来定义别名，和我们平时的思考方式一致。</p>
-<h4 id="重定义模板"><a href="#重定义模板" class="headerlink" title="重定义模板"></a>重定义模板</h4><p>下面再通过一个对比示例，看看新的 using 语法是如何定义模板别名的。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* C++98/03 */</span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">func_t</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="function"><span class="keyword">typedef</span> <span class="title">void</span> <span class="params">(*type)</span><span class="params">(T, T)</span></span>;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">// 使用 func_t 模板</span></span><br><span class="line"><span class="keyword">func_t</span>&lt;<span class="keyword">int</span>&gt;::type xx_1;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* C++11 */</span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="keyword">using</span> <span class="keyword">func_t</span> = <span class="keyword">void</span> (*)(T, T);</span><br><span class="line"><span class="comment">// 使用 func_t 模板</span></span><br><span class="line"><span class="keyword">func_t</span>&lt;<span class="keyword">int</span>&gt; xx_2;</span><br></pre></td></tr></table></figure>
-<p>从示例中可以看出，通过 using 定义模板别名的语法，只是在普通类型别名语法的基础上增加 template 的参数列表。使用 using 可以轻松地创建一个新的模板别名，而不需要像 C++98/03 那样使用烦琐的外敷模板。</p>
-<p>需要注意的是，using 语法和 typedef 一样，并不会创造新的类型。也就是说，上面示例中 C++11 的 using 写法只是 typedef 的等价物。虽然 using 重定义的 func_t 是一个模板，但 func_t\<int> 定义的 xx_2 并不是一个由类模板实例化后的类，而是 void(*)(int, int) 的别名。</int></p>
-<p>因此，下面这样写：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">foo</span><span class="params">(<span class="keyword">void</span> (*func_call)(<span class="keyword">int</span>, <span class="keyword">int</span>))</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">foo</span><span class="params">(<span class="keyword">func_t</span>&lt;<span class="keyword">int</span>&gt; func_call)</span></span>; <span class="comment">// error: redefinition</span></span><br></pre></td></tr></table></figure>
-<p>同样是无法实现重载的，func_t\<int> 只是 void(*)(int, int) 类型的等价物。</int></p>
-<p>可以发现，using 重定义的 func_t 是一个模板，但它既不是类模板也不是函数模板（函数模板实例化后是一个函数），而是一种新的模板形式：模板别名（alias template）。</p>
-<p>其实，通过 using 可以轻松定义任意类型的模板表达方式。比如下面这样：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="keyword">using</span> <span class="keyword">type_t</span> = T;</span><br><span class="line"><span class="comment">// ...</span></span><br><span class="line"><span class="keyword">type_t</span>&lt;<span class="keyword">int</span>&gt; i;</span><br></pre></td></tr></table></figure>
-<p>type_t 实例化后的类型和它的模板参数类型等价。这里，type_t\<int> 将等价于 int。</int></p>
+        <p>lambda 源自希腊字母表中第 11 位的 λ，在计算机科学领域，它则被用来表示一种匿名函数。所谓匿名函数，简单地理解就是没有名称的函数，又常被称为 lambda 函数或者 lambda 表达式。</p>
+<a id="more"></a>
+<h2 id="1-lambda匿名函数的定义"><a href="#1-lambda匿名函数的定义" class="headerlink" title="1. lambda匿名函数的定义"></a>1. lambda匿名函数的定义</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[capture](parameters)<span class="keyword">mutable</span> -&gt;<span class="keyword">return</span>-type&#123;statement&#125;</span><br></pre></td></tr></table></figure>
+<p>参数说明：</p>
+<ul>
+<li>[capture]：捕捉列表，[] 是lambda引出符，编译器根据该引出符判断接下来的代码是否是lambda函数。捕捉列表用于捕捉父域中的变量以供lambda函数使用，捕捉列表可以由多个项组成，用”,”分割。[var]表示以值传递方式捕捉父域中的变量var，[=]表示以值传递方式捕捉父域中的所有变量（包括this），[&amp;var]表示以引用传递方式捕捉父域中的变量var，[&amp;]表示以引用传递方式捕捉父域中的所有变量（包括this）,[this]表示以值传递方式捕捉当前的this指针。</li>
+<li>(parameters)：参数列表，与普通函数的参数列表一致，如果不需要参数传递，则可以连同括号()一起省略。</li>
+<li>mutable：mutable修饰符，默认情况下，lambda函数总是一个const函数，mutable可以取消其常量性。在使用该修饰符时，参数列表不可省略（即使参数为空）。</li>
+<li>-&gt;return-type：返回类型，用追踪返回类型形式声明函数的返回类型，不需要返回值的时候可以连同符号-&gt;一起省略。在返回类型明确的情况下，也可以省略该部分，让编译器对返回类型进行推导。</li>
+<li>{statement}：函数体，内容与普通函数一样，不过除了可以使用参数之外，还可以使用所有捕获的变量。</li>
+</ul>
+<h3 id="lambda匿名函数中的-外部变量"><a href="#lambda匿名函数中的-外部变量" class="headerlink" title="lambda匿名函数中的[外部变量]"></a>lambda匿名函数中的[外部变量]</h3><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>外部变量格式</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>[]</td>
+<td>空方括号表示当前 lambda 匿名函数中不导入任何外部变量。</td>
+</tr>
+<tr>
+<td>[=]</td>
+<td>只有一个 = 等号，表示以值传递的方式导入所有外部变量；</td>
+</tr>
+<tr>
+<td>[&amp;]</td>
+<td>只有一个 &amp; 符号，表示以引用传递的方式导入所有外部变量；</td>
+</tr>
+<tr>
+<td>[val1,val2,…]</td>
+<td>表示以值传递的方式导入 val1、val2 等指定的外部变量，同时多个变量之间没有先后次序；</td>
+</tr>
+<tr>
+<td>[&amp;val1,&amp;val2,…]</td>
+<td>表示以引用传递的方式导入 val1、val2等指定的外部变量，多个变量之间没有前后次序；</td>
+</tr>
+<tr>
+<td>[val,&amp;val2,…]</td>
+<td>以上 2 种方式还可以混合使用，变量之间没有前后次序。</td>
+</tr>
+<tr>
+<td>[=,&amp;val1,…]</td>
+<td>表示除 val1 以引用传递的方式导入外，其它外部变量都以值传递的方式导入。</td>
+</tr>
+<tr>
+<td>[this]</td>
+<td>表示以值传递的方式导入当前的 this 指针。</td>
+</tr>
+</tbody>
+</table>
+</div>
+<blockquote>
+<p> 注意，单个外部变量不允许以相同的传递方式导入多次。例如 [=，val1] 中，val1 先后被以值传递的方式导入了 2 次，这是非法的。</p>
+</blockquote>
+<h3 id="最简单的lambda匿名函数"><a href="#最简单的lambda匿名函数" class="headerlink" title="最简单的lambda匿名函数"></a>最简单的lambda匿名函数</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[]&#123;&#125;</span><br></pre></td></tr></table></figure>
+<p>此 lambda 匿名函数未引入任何外部变量（[] 内为空），也没有传递任何参数，没有指定 mutable、noexcept 等关键字，没有返回值和函数体。所以，这是一个没有任何功能的 lambda 匿名函数。</p>
+<h2 id="2-lambda匿名函数的使用"><a href="#2-lambda匿名函数的使用" class="headerlink" title="2. lambda匿名函数的使用"></a>2. lambda匿名函数的使用</h2><h3 id="2-1-lambda匿名函数的定义和使用"><a href="#2-1-lambda匿名函数的定义和使用" class="headerlink" title="2.1 lambda匿名函数的定义和使用"></a>2.1 lambda匿名函数的定义和使用</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> num[<span class="number">4</span>] = &#123; <span class="number">4</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">1</span> &#125;;</span><br><span class="line">    <span class="comment">// 对数组 num 中的元素进行升序排序</span></span><br><span class="line">    sort(num, num + <span class="number">4</span>, [=](<span class="keyword">int</span> x, <span class="keyword">int</span> y) -&gt; <span class="keyword">bool</span> &#123; <span class="keyword">return</span> x &lt; y; &#125;);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> n : num) &#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; n &lt;&lt; <span class="string">" "</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>以上程序通过调用 sort() 函数实现了对 num 数组中元素的升序排序，其中就用到了 lambda 匿名函数。而如果使用普通函数，需以如下代码实现：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 自定义的升序排序规则</span></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">sort_up</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span>  x &lt; y;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> num[<span class="number">4</span>] = &#123; <span class="number">4</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">1</span> &#125;;</span><br><span class="line">    <span class="comment">// 对数组 num 中的元素进行升序排序</span></span><br><span class="line">    sort(num, num + <span class="number">4</span>, sort_up);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> n : num) &#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; n &lt;&lt; <span class="string">" "</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>此程序中 sort_up() 函数的功能和上一个程序中的 lambda 匿名函数完全相同。显然在类似的场景中，使用 lambda 匿名函数更有优势。</p>
+<p>除此之外，虽然 lambda 匿名函数没有函数名称，但我们仍可以为其手动设置一个名称，比如：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// display 即为 lambda 匿名函数的函数名</span></span><br><span class="line">    <span class="keyword">auto</span> <span class="built_in">display</span> = [](<span class="keyword">int</span> a,<span class="keyword">int</span> b) -&gt; <span class="keyword">void</span>&#123;<span class="built_in">cout</span> &lt;&lt; a &lt;&lt; <span class="string">" "</span> &lt;&lt; b;&#125;;</span><br><span class="line">    <span class="comment">// 调用 lambda 函数</span></span><br><span class="line">    <span class="built_in">display</span>(<span class="number">10</span>,<span class="number">20</span>); <span class="comment">// 输出：10 20</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>可以看到，程序中使用 auto 关键字为 lambda 匿名函数设定了一个函数名，由此我们即可在作用域内调用该函数。</p>
+<h3 id="2-2-值传递和引用传递的区别"><a href="#2-2-值传递和引用传递的区别" class="headerlink" title="2.2 值传递和引用传递的区别"></a>2.2 值传递和引用传递的区别</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 全局变量</span></span><br><span class="line"><span class="keyword">int</span> all_num = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 局部变量</span></span><br><span class="line">    <span class="keyword">int</span> num_1 = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">int</span> num_2 = <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">int</span> num_3 = <span class="number">3</span>;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"lambda1:\n"</span>;</span><br><span class="line">    <span class="keyword">auto</span> lambda1 = [=] &#123;</span><br><span class="line">        <span class="comment">// 全局变量可以访问甚至修改</span></span><br><span class="line">        all_num = <span class="number">10</span>;</span><br><span class="line">        <span class="comment">// 函数体内只能使用外部变量，而无法对它们进行修改</span></span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; num_1 &lt;&lt; <span class="string">" "</span></span><br><span class="line">            &lt;&lt; num_2 &lt;&lt; <span class="string">" "</span></span><br><span class="line">            &lt;&lt; num_3 &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    &#125;;</span><br><span class="line">    lambda1();</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; all_num &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"lambda2:\n"</span>;</span><br><span class="line">    <span class="keyword">auto</span> lambda2 = [&amp;] &#123;</span><br><span class="line">        all_num = <span class="number">100</span>;</span><br><span class="line">        num_1 = <span class="number">10</span>;</span><br><span class="line">        num_2 = <span class="number">20</span>;</span><br><span class="line">        num_3 = <span class="number">30</span>;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; num_1 &lt;&lt; <span class="string">" "</span></span><br><span class="line">            &lt;&lt; num_2 &lt;&lt; <span class="string">" "</span></span><br><span class="line">            &lt;&lt; num_3 &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    &#125;;</span><br><span class="line">    lambda2();</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; all_num &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>程序执行结果为：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">lambda1:</span><br><span class="line"><span class="number">1</span> <span class="number">2</span> <span class="number">3</span></span><br><span class="line"><span class="number">10</span></span><br><span class="line">lambda2:</span><br><span class="line"><span class="number">10</span> <span class="number">20</span> <span class="number">30</span></span><br><span class="line"><span class="number">100</span></span><br></pre></td></tr></table></figure>
+<p>可以看到，在创建 lambda1 和 lambda2 匿名函数的作用域中，有 num_1、num_2 和 num_3 这 3 个局部变量，另外还有 all_num 全局变量。其中，lambda1 匿名函数是以 [=] 值传递的方式导入的局部变量，这意味着默认情况下，此函数内部无法修改这 3 个局部变量的值，但全局变量 all_num 除外。相对地，lambda2 匿名函数以 [&amp;] 引用传递的方式导入这 3 个局部变量，因此在该函数的内部就可以访问这 3 个局部变量，还可以任意修改它们。同样，也可以访问甚至修改全局变量。当然，如果我们想在 lambda1 匿名函数的基础上修改外部变量的值，可以借助 mutable 关键字，例如：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">auto</span> lambda1 = [=]() <span class="keyword">mutable</span>&#123;</span><br><span class="line">    num_1 = <span class="number">10</span>;</span><br><span class="line">    num_2 = <span class="number">20</span>;</span><br><span class="line">    num_3 = <span class="number">30</span>;</span><br><span class="line">    <span class="comment">// 函数体内只能使用外部变量，而无法对它们进行修改</span></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; num_1 &lt;&lt; <span class="string">" "</span></span><br><span class="line">         &lt;&lt; num_2 &lt;&lt; <span class="string">" "</span></span><br><span class="line">         &lt;&lt; num_3 &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>由此，就可以在 lambda1 匿名函数中修改外部变量的值。但需要注意的是，这里修改的仅是 num_1、num_2、num_3 拷贝的那一份的值，真正外部变量的值并不会发生改变。</p>
+<h3 id="2-3-执行抛出异常类型"><a href="#2-3-执行抛出异常类型" class="headerlink" title="2.3 执行抛出异常类型"></a>2.3 执行抛出异常类型</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">auto</span> except = []()<span class="keyword">throw</span>(<span class="keyword">int</span>) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="number">10</span>;</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        except();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">catch</span> (<span class="keyword">int</span>) &#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"捕获到了整形异常"</span>;	<span class="comment">// 输出：捕获到了整形异常</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>可以看到，except 匿名数组中指定函数体中可以抛出整形异常，因此当函数体中真正发生整形异常时，可以借助 try-catch 块成功捕获并处理。</p>
+<p>在此基础上，再看一下反例：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">auto</span> except1 = []()<span class="keyword">noexcept</span> &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="number">100</span>;</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="keyword">auto</span> except2 = []()<span class="keyword">throw</span>(<span class="keyword">char</span>) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="number">10</span>;</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        except1();</span><br><span class="line">        except2();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">catch</span> (<span class="keyword">int</span>) &#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"捕获到了整形异常"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>此程序运行会直接崩溃，原因很简单，except1 匿名函数指定了函数体中不发生任何异常，但函数体中却发生了整形异常；except2 匿名函数指定函数体可能会发生字符异常，但函数体中却发生了整形异常。由于指定异常类型和真正发生的异常类型不匹配，导致 try-catch 无法捕获，最终程序运行崩溃。</p>
+<blockquote>
+<p>如果不使用 noexcept 或者 throw()，则 lambda 匿名函数的函数体中允许发生任何类型的异常。</p>
+</blockquote>
 
       
     </div>
@@ -503,8 +551,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2022/05/25/C-11%EF%BC%9Adecltype%E7%B1%BB%E5%9E%8B%E6%8E%A8%E5%AF%BC/" rel="next" title="C++11：decltype类型推导">
-                <i class="fa fa-chevron-left"></i> C++11：decltype类型推导
+              <a href="/2022/10/12/%E5%9B%BE%E5%83%8F%E6%BB%A4%E6%B3%A2/" rel="next" title="图像滤波">
+                <i class="fa fa-chevron-left"></i> 图像滤波
               </a>
             
           </div>
@@ -512,10 +560,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2022/06/23/C-11%EF%BC%9A%E5%8F%B3%E5%80%BC%E5%BC%95%E7%94%A8/" rel="prev" title="C++11：右值引用">
-                C++11：右值引用 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -672,7 +716,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#using简介"><span class="nav-number">1.</span> <span class="nav-text">using简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#using应用"><span class="nav-number">2.</span> <span class="nav-text">using应用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#重定义普通类型"><span class="nav-number">2.1.</span> <span class="nav-text">重定义普通类型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#重定义函数指针"><span class="nav-number">2.2.</span> <span class="nav-text">重定义函数指针</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#重定义模板"><span class="nav-number">2.3.</span> <span class="nav-text">重定义模板</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-lambda匿名函数的定义"><span class="nav-number">1.</span> <span class="nav-text">1. lambda匿名函数的定义</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#lambda匿名函数中的-外部变量"><span class="nav-number">1.1.</span> <span class="nav-text">lambda匿名函数中的[外部变量]</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#最简单的lambda匿名函数"><span class="nav-number">1.2.</span> <span class="nav-text">最简单的lambda匿名函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-lambda匿名函数的使用"><span class="nav-number">2.</span> <span class="nav-text">2. lambda匿名函数的使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-lambda匿名函数的定义和使用"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 lambda匿名函数的定义和使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-值传递和引用传递的区别"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 值传递和引用传递的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-执行抛出异常类型"><span class="nav-number">2.3.</span> <span class="nav-text">2.3 执行抛出异常类型</span></a></li></ol></li></ol></div>
             
 
           </div>
