@@ -5371,4 +5371,31 @@ Gray(i,j)=0.299*R(i,j)+0.578*G(i,j)+0.114*B(i,j)</script><h1 id="3-图像灰度�
         <tag>C++11</tag>
       </tags>
   </entry>
+  <entry>
+    <title>C++11：支持函数模板的默认模板参数</title>
+    <url>/2022/12/25/C-11%EF%BC%9A%E6%94%AF%E6%8C%81%E5%87%BD%E6%95%B0%E6%A8%A1%E6%9D%BF%E7%9A%84%E9%BB%98%E8%AE%A4%E6%A8%A1%E6%9D%BF%E5%8F%82%E6%95%B0/</url>
+    <content><![CDATA[<p>在 C++98/03 标准中，类模板可以有默认的模板参数，如下：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> U = <span class="keyword">int</span>, U N = <span class="number">0</span>&gt;</span><br><span class="line">struct Foo</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>但是却不支持函数的默认模板参数：<a id="more"></a></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T = <span class="keyword">int</span>&gt;  <span class="comment">// error in C++98/03: default template arguments</span></span><br><span class="line"><span class="keyword">void</span> func()</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>现在这一限制在 C++11 中被解除了。上面的 func 函数在 C++11 中可以直接使用，代码如下：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    func();   <span class="comment">//T = int</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>此时模板参数 T 的类型就为默认值 int。从上面的例子中可以看出，当所有模板参数都有默认参数时，函数模板的调用如同一个普通函数。但对于类模板而言，哪怕所有参数都有默认参数，在使用时也必须在模板名后跟随<code>&lt;&gt;</code>来实例化。</p>
+<p>除了上面提到的部分之外，函数模板的默认模板参数在使用规则上和其他的默认参数也有一些不同，它没有必须写在参数表最后的限制。甚至于，根据实际场景中函数模板被调用的情形，编译器还可以自行推导出部分模板参数的类型。</p>
+<p>这意味着，当默认模板参数和编译器自行推导出模板参数类型的能力一起结合使用时，代码的书写将变得异常灵活。我们可以指定函数中的一部分模板参数采用默认参数，而另一部分使用自动推导，比如下面的例子：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> R = <span class="keyword">int</span>, <span class="keyword">typename</span> U&gt;</span><br><span class="line">R func(U val)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> val;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    func(<span class="number">97</span>);               <span class="comment">// R=int, U=int</span></span><br><span class="line">    func&lt;<span class="keyword">char</span>&gt;(<span class="number">97</span>);         <span class="comment">// R=char, U=int</span></span><br><span class="line">    func&lt;<span class="keyword">double</span>, <span class="keyword">int</span>&gt;(<span class="number">97</span>);  <span class="comment">// R=double, U=int</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>C++11 标准中，我们可以像 func(97) 这样调用模板函数，因为编译器可以根据实参 97 自行推导出模板参数 U 的类型为 int，并且根据返回值 val=97 推导出 R 的类型也为 int；而 func<char>(97) 手动指定了模板参数 R 的类型为 char（默认模板参数将无效），并通过实参 97 推导出了 U = int；最后 func<double,int>(97) 手动指定的 R 和 U 的类型值，因此无需编译器自行推导。</double,int></char></p>
+<p>再次强调，当默认模板参数和自行推导的模板参数同时使用时，若无法推导出函数模板参数的类型，编译器会选择使用默认模板参数；如果模板参数即无法推导出来，又未设置其默认值，则编译器直接报错。例如：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> U = <span class="keyword">double</span>&gt;</span><br><span class="line"><span class="keyword">void</span> func(T val1 = <span class="number">0</span>, U val2 = <span class="number">0</span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">int</span> main()</span><br><span class="line">&#123;</span><br><span class="line">    func(<span class="string">'c'</span>); <span class="comment">//T=char, U=double</span></span><br><span class="line">    func();    <span class="comment">//编译报错</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>其中，func(‘c’) 的这种调用方式，编译器通过实参 ‘c’ 可以推导出 T=char，但由于未传递第 2 个实参，因此模板参数 U 使用的是默认参数 double；但 func() 的调用方式是不行的，虽然 val1 设置有默认值，但编译器无法通过该默认值推导出模板参数 T 的类型。由此不难看出，编译器的自动推导能力并没有想象的那么强大。</p>
+<p>总的来说，C++11 支持为函数模板中的参数设置默认值，在实际使用过程中，我们可以选择使用默认值，也可以尝试由编译器自行推导得到，还可以亲自指定各个模板参数的类型。</p>
+]]></content>
+      <categories>
+        <category>C++11</category>
+      </categories>
+      <tags>
+        <tag>C/C++</tag>
+        <tag>C++11</tag>
+      </tags>
+  </entry>
 </search>
