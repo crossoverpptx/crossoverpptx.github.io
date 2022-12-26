@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="虚拟化," />
+  <meta name="keywords" content="C/C++,C++11," />
 
 
 
@@ -83,16 +83,17 @@
 
 
 
-<meta name="description" content="Virsh简介 virsh 是用来管理客户端及其管理程序的命令行界面工具。 virsh 工具是构建在 libvirt 管理 API 上，可作为 xm 命令和图形客户端管理程序（virt-manager）的替代工具。非特权用户只能以只读模式使用 virsh。您可使用 virsh 为客户端机器执行脚本。">
+<meta name="description" content="C++11 标准新引入了一种类模板，命名为 tuple（元组）。tuple 最大的特点是：实例化的对象可以存储任意数量、任意类型的数据。 tuple 的应用场景很广泛，例如当需要存储多个不同类型的元素时，可以使用 tuple；当函数需要返回多个数据时，可以将这些数据存储在 tuple 中，函数只需返回一个 tuple 对象即可。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="KVM之virsh管理命令">
-<meta property="og:url" content="http://yoursite.com/2021/01/03/KVM%E4%B9%8Bvirsh%E7%AE%A1%E7%90%86%E5%91%BD%E4%BB%A4/index.html">
+<meta property="og:title" content="C++11：tuple元组">
+<meta property="og:url" content="http://yoursite.com/2022/12/26/C-11%EF%BC%9Atuple%E5%85%83%E7%BB%84/index.html">
 <meta property="og:site_name" content="crossoverpptx&#39;s Blog">
-<meta property="og:description" content="Virsh简介 virsh 是用来管理客户端及其管理程序的命令行界面工具。 virsh 工具是构建在 libvirt 管理 API 上，可作为 xm 命令和图形客户端管理程序（virt-manager）的替代工具。非特权用户只能以只读模式使用 virsh。您可使用 virsh 为客户端机器执行脚本。">
-<meta property="article:published_time" content="2021-01-03T07:28:21.000Z">
-<meta property="article:modified_time" content="2022-04-08T02:10:15.162Z">
+<meta property="og:description" content="C++11 标准新引入了一种类模板，命名为 tuple（元组）。tuple 最大的特点是：实例化的对象可以存储任意数量、任意类型的数据。 tuple 的应用场景很广泛，例如当需要存储多个不同类型的元素时，可以使用 tuple；当函数需要返回多个数据时，可以将这些数据存储在 tuple 中，函数只需返回一个 tuple 对象即可。">
+<meta property="article:published_time" content="2022-12-26T02:48:05.000Z">
+<meta property="article:modified_time" content="2022-12-26T02:57:51.952Z">
 <meta property="article:author" content="crossoverpptx">
-<meta property="article:tag" content="虚拟化">
+<meta property="article:tag" content="C&#x2F;C++">
+<meta property="article:tag" content="C++11">
 <meta name="twitter:card" content="summary">
 
 
@@ -123,13 +124,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2021/01/03/KVM之virsh管理命令/"/>
+  <link rel="canonical" href="http://yoursite.com/2022/12/26/C-11：tuple元组/"/>
 
 
 
 
 
-  <title>KVM之virsh管理命令 | crossoverpptx's Blog</title>
+  <title>C++11：tuple元组 | crossoverpptx's Blog</title>
   
 
 
@@ -300,7 +301,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/01/03/KVM%E4%B9%8Bvirsh%E7%AE%A1%E7%90%86%E5%91%BD%E4%BB%A4/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/12/26/C-11%EF%BC%9Atuple%E5%85%83%E7%BB%84/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="crossoverpptx">
@@ -317,7 +318,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">KVM之virsh管理命令</h1>
+          <h1 class="post-title" itemprop="name headline">C++11：tuple元组</h1>
         
 
         <div class="post-meta">
@@ -329,8 +330,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-01-03T15:28:21+08:00">
-                2021-01-03
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-12-26T10:48:05+08:00">
+                2022-12-26
               </time>
             
 
@@ -345,8 +346,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2022-04-08T10:10:15+08:00">
-                2022-04-08
+              <time title="更新于" itemprop="dateModified" datetime="2022-12-26T10:57:51+08:00">
+                2022-12-26
               </time>
             
           </span>
@@ -364,8 +365,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%99%9A%E6%8B%9F%E5%8C%96/" itemprop="url" rel="index">
-                    <span itemprop="name">虚拟化</span>
+                  <a href="/categories/C-11/" itemprop="url" rel="index">
+                    <span itemprop="name">C++11</span>
                   </a>
                 </span>
 
@@ -400,7 +401,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  516
+                  1.5k
                 </span>
               
 
@@ -416,7 +417,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  2
+                  6
                 </span>
               
             </div>
@@ -437,36 +438,68 @@
       
 
       
-        <h2 id="Virsh简介"><a href="#Virsh简介" class="headerlink" title="Virsh简介"></a>Virsh简介</h2><ul>
-<li>virsh 是用来管理客户端及其管理程序的命令行界面工具。</li>
-<li>virsh 工具是构建在 libvirt 管理 API 上，可作为 xm 命令和图形客户端管理程序（virt-manager）的替代工具。非特权用户只能以只读模式使用 virsh。您可使用 virsh 为客户端机器执行脚本。</li>
-</ul>
+        <p>C++11 标准新引入了一种类模板，命名为 tuple（元组）。tuple 最大的特点是：实例化的对象可以存储任意数量、任意类型的数据。</p>
+<p>tuple 的应用场景很广泛，例如当需要存储多个不同类型的元素时，可以使用 tuple；当函数需要返回多个数据时，可以将这些数据存储在 tuple 中，函数只需返回一个 tuple 对象即可。</p>
 <a id="more"></a>
-<hr>
-<h2 id="使用前提"><a href="#使用前提" class="headerlink" title="使用前提"></a>使用前提</h2><ol>
-<li>安装虚拟化相关组件<br>安装qemu-kvm（用户态管理工具）<br>安装libvirt（命令行管理工具）<br>安装virt-install（安装kvm工具）<br>安装bridge-utils（桥接设备管理工具）<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y qemu-kvm libvirt virt-install bridge-utils</span><br></pre></td></tr></table></figure></li>
-<li>启动libvirtd服务<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">systemctl enable libvirtd</span><br><span class="line">systemctl start  libvirtd</span><br><span class="line">systemctl status  libvirtd</span><br></pre></td></tr></table></figure></li>
-<li>安装virt-manager<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y install virt-manager</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>使用可视化创建的虚拟机xml文件位置：/etc/libvirt/qemu/</p>
-<hr>
-<h2 id="常用的虚拟机管理命令"><a href="#常用的虚拟机管理命令" class="headerlink" title="常用的虚拟机管理命令"></a>常用的虚拟机管理命令</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 列出所有的虚拟机</span></span><br><span class="line">virsh list --all</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示虚拟机信息</span></span><br><span class="line">virsh dominfo *	( *为虚拟机名称 )</span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义虚拟机</span></span><br><span class="line">virsh define *.xml</span><br><span class="line"></span><br><span class="line"><span class="comment"># 启动虚拟机</span></span><br><span class="line">virsh start *</span><br><span class="line"></span><br><span class="line"><span class="comment"># 强制关闭虚拟机/关闭虚拟机</span></span><br><span class="line">virsh destroy */virsh shutdown *</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除虚拟机</span></span><br><span class="line">virsh undefine *</span><br><span class="line"></span><br><span class="line"><span class="comment"># 挂起虚拟机</span></span><br><span class="line">virsh suspend *</span><br><span class="line"></span><br><span class="line"><span class="comment"># 恢复被挂起的虚拟机</span></span><br><span class="line">virsh resume *</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看虚拟机网卡信息</span></span><br><span class="line">virsh domiflist *</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加网卡</span></span><br><span class="line">virsh attach-interface * --type * --source * --model * --live --config</span><br><span class="line">（第一个*为虚拟机名称，后三个*依次为Type Source Model）</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除网卡</span></span><br><span class="line">virsh detach-interface * --type  * --mac  *  --live --config</span><br><span class="line">（第一个*为虚拟机名称，后两个*依次为Type MAC）</span><br></pre></td></tr></table></figure>
-<hr>
-<h2 id="通过xml文件创建虚拟机"><a href="#通过xml文件创建虚拟机" class="headerlink" title="通过xml文件创建虚拟机"></a>通过xml文件创建虚拟机</h2><ol>
-<li>创建空镜像<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">qemu-img create -f qcow2  *.qcow2  <span class="number">100</span>G	（*为虚拟机名称，大小自定义）</span><br></pre></td></tr></table></figure></li>
-<li>配置xml并启动虚拟机，xml文件配置可通过可视化创建虚拟机生成的xml文件作为模板。<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">virsh define *.xml</span><br><span class="line">virsh start  *</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<hr>
-<h2 id="通过存储池iSCSI创建虚拟机"><a href="#通过存储池iSCSI创建虚拟机" class="headerlink" title="通过存储池iSCSI创建虚拟机"></a>通过存储池iSCSI创建虚拟机</h2><ol>
-<li>定义存储池<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">virsh pool-define-<span class="keyword">as</span> --name unary --type iscsi --source-host <span class="number">10.10</span><span class="number">.4</span><span class="number">.75</span> --source-dev iqn<span class="number">.2020</span><span class="number">-01.</span>com.unary:<span class="number">208450552</span>df3636922c9fbb0b0c71f45.d41d8cd98f00b204e9800998ecf8427e.v<span class="number">.4</span>a2a26d3.st<span class="number">.20200102193701</span> --target /dev/disk/by-path</span><br></pre></td></tr></table></figure></li>
-<li>创建存储池<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">virsh pool-build unary</span><br></pre></td></tr></table></figure></li>
-<li>激活存储池<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">virsh pool-start unary</span><br></pre></td></tr></table></figure></li>
-<li>查看存储池<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">virsh pool-list –all</span><br></pre></td></tr></table></figure></li>
-<li>创建空镜像</li>
-<li>配置xml并启动虚拟机</li>
-</ol>
+<h2 id="1-tuple对象的创建"><a href="#1-tuple对象的创建" class="headerlink" title="1. tuple对象的创建"></a>1. tuple对象的创建</h2><p>tuple 本质是一个以可变模板参数定义的类模板，它定义在 <tuple> 头文件并位于 std 命名空间中。因此要想使用 tuple 类模板，程序中需要首先引入以下代码：</tuple></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;tuple&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="built_in">std</span>::tuple;</span><br></pre></td></tr></table></figure>
+<p>实例化 tuple 模板类对象常用的方法有两种，一种是借助该类的构造函数，另一种是借助 make_tuple() 函数。</p>
+<h4 id="1-1-类的构造函数"><a href="#1-1-类的构造函数" class="headerlink" title="1.1 类的构造函数"></a>1.1 类的构造函数</h4><p>tuple 模板类提供有很多构造函数，包括：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>) 默认构造函数</span><br><span class="line"><span class="function"><span class="keyword">constexpr</span> <span class="title">tuple</span><span class="params">()</span></span>;</span><br><span class="line"><span class="number">2</span>) 拷贝构造函数</span><br><span class="line">tuple (<span class="keyword">const</span> tuple&amp; tpl);</span><br><span class="line"><span class="number">3</span>) 移动构造函数</span><br><span class="line">tuple (tuple&amp;&amp; tpl);</span><br><span class="line"><span class="number">4</span>) 隐式类型转换构造函数</span><br><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span>... <span class="title">UTypes</span>&gt;</span></span><br><span class="line"><span class="class">    <span class="title">tuple</span> (<span class="title">const</span> <span class="title">tuple</span>&lt;UTypes...&gt;&amp; <span class="title">tpl</span>);</span> <span class="comment">//左值方式</span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span>... <span class="title">UTypes</span>&gt;</span></span><br><span class="line"><span class="class">    <span class="title">tuple</span> (<span class="title">tuple</span>&lt;UTypes...&gt;&amp;&amp; <span class="title">tpl</span>);</span>      <span class="comment">//右值方式</span></span><br><span class="line"><span class="number">5</span>) 支持初始化列表的构造函数</span><br><span class="line"><span class="function"><span class="keyword">explicit</span> <span class="title">tuple</span> <span class="params">(<span class="keyword">const</span> Types&amp;... elems)</span></span>;  <span class="comment">//左值方式</span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span>... <span class="title">UTypes</span>&gt;</span></span><br><span class="line"><span class="class">    <span class="title">explicit</span> <span class="title">tuple</span> (<span class="title">UTypes</span>&amp;&amp;... <span class="title">elems</span>);</span>  <span class="comment">//右值方式</span></span><br><span class="line"><span class="number">6</span>) 将pair对象转换为tuple对象</span><br><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">U1</span>, <span class="title">class</span> <span class="title">U2</span>&gt;</span></span><br><span class="line"><span class="class">    <span class="title">tuple</span> (<span class="title">const</span> <span class="title">pair</span>&lt;U1,U2&gt;&amp; <span class="title">pr</span>);</span>       <span class="comment">//左值方式</span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">U1</span>, <span class="title">class</span> <span class="title">U2</span>&gt;</span></span><br><span class="line"><span class="class">    <span class="title">tuple</span> (<span class="title">pair</span>&lt;U1,U2&gt;&amp;&amp; <span class="title">pr</span>);</span>            <span class="comment">//右值方式</span></span><br></pre></td></tr></table></figure>
+<p>举个例子：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;     // std::cout</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;tuple&gt;        // std::tuple</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="built_in">std</span>::tuple;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">std</span>::tuple&lt;<span class="keyword">int</span>, <span class="keyword">char</span>&gt; first;                             <span class="comment">// 1)   first&#123;&#125;</span></span><br><span class="line">    std::tuple&lt;int, char&gt; second(first);                     // 2)   second&#123;&#125;</span><br><span class="line">    std::tuple&lt;int, char&gt; third(std::make_tuple(20, 'b'));   // 3)   third&#123;20,'b'&#125;</span><br><span class="line">    std::tuple&lt;long, char&gt; fourth(third);                    // 4)的左值方式, fourth&#123;20,'b'&#125;</span><br><span class="line">    std::tuple&lt;int, char&gt; fifth(10, 'a');                    // 5)的右值方式, fifth&#123;10.'a'&#125;</span><br><span class="line">    std::tuple&lt;int, char&gt; sixth(std::make_pair(30, 'c'));    // 6)的右值方式, sixth&#123;30,''c&#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="1-2-make-tuple-函数"><a href="#1-2-make-tuple-函数" class="headerlink" title="1.2 make_tuple()函数"></a>1.2 make_tuple()函数</h4><p>上面程序中，我们已经用到了 make_tuple() 函数，它以模板的形式定义在 <tuple> 头文件中，功能是创建一个 tuple 右值对象（或者临时对象）。</tuple></p>
+<p>对于 make_tuple() 函数创建了 tuple 对象，我们可以上面程序中那样作为移动构造函数的参数，也可以这样用：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">auto</span> first = <span class="built_in">std</span>::make_tuple (<span class="number">10</span>,<span class="string">'a'</span>);   <span class="comment">// tuple &lt; int, char &gt;</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> a = <span class="number">0</span>; <span class="keyword">int</span> b[<span class="number">3</span>];</span><br><span class="line"><span class="keyword">auto</span> second = <span class="built_in">std</span>::make_tuple (a,b);     <span class="comment">// tuple &lt; int, int* &gt;</span></span><br></pre></td></tr></table></figure>
+<p>程序中分别创建了 first 和 second 两个 tuple 对象，它们的类型可以直接用 auto 表示。</p>
+<h2 id="2-tuple常用函数"><a href="#2-tuple常用函数" class="headerlink" title="2. tuple常用函数"></a>2. tuple常用函数</h2><p>为了方便在实际开发中使用 tuple 对象，tupe 模板类提供了一个功能实用的成员函数，<tuple> 头文件中也提供了一些和操作 tuple 对象相关的函数模板和类模板，如下表所示：</tuple></p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>函数或类模板</th>
+<th>描 述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>tup1.swap(tup2) swap(tup1, tup2)</td>
+<td>tup1 和 tup2 表示类型相同的两个 tuple 对象，tuple 模板类中定义有一个 swap() 成员函数，<tuple> 头文件还提供了一个同名的 swap() 全局函数。  swap() 函数的功能是交换两个 tuple 对象存储的内容。</tuple></td>
+</tr>
+<tr>
+<td>get<num>(tup)</num></td>
+<td>tup 表示某个 tuple 对象，num 是一个整数，get() 是 <tuple> 头文件提供的全局函数，功能是返回 tup 对象中第 num+1 个元素。</tuple></td>
+</tr>
+<tr>
+<td>tuple_size<type>::value</type></td>
+<td>tuple_size 是定义在 <tuple> 头文件的类模板，它只有一个成员变量 value，功能是获取某个 tuple 对象中元素的个数，type 为该tuple 对象的类型。</tuple></td>
+</tr>
+<tr>
+<td>tuple_element<I, type>::type</I,></td>
+<td>tuple_element 是定义在 <tuple> 头文件的类模板，它只有一个成员变量 type，功能是获取某个 tuple 对象第 I+1 个元素的类型。</tuple></td>
+</tr>
+<tr>
+<td>forward_as_tuple<args...></args...></td>
+<td>args… 表示 tuple 对象存储的多个元素，该函数的功能是创建一个 tuple 对象，内部存储的 args… 元素都是右值引用形式的。</td>
+</tr>
+<tr>
+<td>tie(args…) = tup</td>
+<td>tup 表示某个 tuple 对象，tie() 是 <tuple> 头文件提供的，功能是将 tup 内存储的元素逐一赋值给 args… 指定的左值变量。</tuple></td>
+</tr>
+<tr>
+<td>tuple_cat(args…)</td>
+<td>args… 表示多个 tuple 对象，该函数是 <tuple> 头文件提供的，功能是创建一个 tuple 对象，此对象包含 args… 指定的所有 tuple 对象内的元素。</tuple></td>
+</tr>
+</tbody>
+</table>
+</div>
+<blockquote>
+<p>tuple 模板类对赋值运算符 = 进行了重载，使得同类型的 tuple 对象可以直接赋值。此外，tuple 模板类还重载了 ==、!=、&lt;、&gt;、&gt;=、&lt;= 这几个比较运算符，同类型的 tuple 对象可以相互比较（逐个比较各个元素）。</p>
+</blockquote>
+<p>以下程序演示了上表中一部分函数模板和类模板的功能：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;tuple&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> <span class="built_in">size</span>;</span><br><span class="line">    <span class="comment">//创建一个 tuple 对象存储 10 和 'x'</span></span><br><span class="line">    std::tuple&lt;int, char&gt; mytuple(10, 'x');</span><br><span class="line">    <span class="comment">//计算 mytuple 存储元素的个数</span></span><br><span class="line">    <span class="built_in">size</span> = <span class="built_in">std</span>::tuple_size&lt;<span class="keyword">decltype</span>(mytuple)&gt;::value;</span><br><span class="line">    <span class="comment">//输出 mytuple 中存储的元素</span></span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">get</span>&lt;<span class="number">0</span>&gt;(mytuple) &lt;&lt; <span class="string">" "</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">get</span>&lt;<span class="number">1</span>&gt;(mytuple) &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">    <span class="comment">//修改指定的元素</span></span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">get</span>&lt;<span class="number">0</span>&gt;(mytuple) = <span class="number">100</span>;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">get</span>&lt;<span class="number">0</span>&gt;(mytuple) &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">    <span class="comment">//使用 makde_tuple() 创建一个 tuple 对象</span></span><br><span class="line">    <span class="keyword">auto</span> bar = <span class="built_in">std</span>::make_tuple(<span class="string">"test"</span>, <span class="number">3.1</span>, <span class="number">14</span>);</span><br><span class="line">    <span class="comment">//拆解 bar 对象，分别赋值给 mystr、mydou、myint</span></span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">char</span>* mystr = <span class="literal">nullptr</span>;</span><br><span class="line">    <span class="keyword">double</span> mydou;</span><br><span class="line">    <span class="keyword">int</span> myint;</span><br><span class="line">    <span class="comment">//使用 tie() 时，如果不想接受某个元素的值，实参可以用 std::ignore 代替</span></span><br><span class="line">    <span class="built_in">std</span>::tie(mystr, mydou, myint) = bar;</span><br><span class="line">    <span class="comment">//std::tie(std::ignore, std::ignore, myint) = bar;  //只接收第 3 个整形值</span></span><br><span class="line">    <span class="comment">//将 mytuple 和 bar 中的元素整合到 1 个 tuple 对象中</span></span><br><span class="line">    <span class="keyword">auto</span> mycat = <span class="built_in">std</span>::tuple_cat(mytuple, bar);</span><br><span class="line">    <span class="built_in">size</span> = <span class="built_in">std</span>::tuple_size&lt;<span class="keyword">decltype</span>(mycat)&gt;::value;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="built_in">size</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>程序执行结果为：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">10</span> x</span><br><span class="line"><span class="number">100</span></span><br><span class="line"><span class="number">5</span></span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -484,7 +517,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/%E8%99%9A%E6%8B%9F%E5%8C%96/" rel="tag"># 虚拟化</a>
+            <a href="/tags/C-C/" rel="tag"># C/C++</a>
+          
+            <a href="/tags/C-11/" rel="tag"># C++11</a>
           
         </div>
       
@@ -497,8 +532,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2021/01/02/KVM/" rel="next" title="KVM">
-                <i class="fa fa-chevron-left"></i> KVM
+              <a href="/2022/12/25/C-11%EF%BC%9A%E6%94%AF%E6%8C%81%E5%87%BD%E6%95%B0%E6%A8%A1%E6%9D%BF%E7%9A%84%E9%BB%98%E8%AE%A4%E6%A8%A1%E6%9D%BF%E5%8F%82%E6%95%B0/" rel="next" title="C++11：支持函数模板的默认模板参数">
+                <i class="fa fa-chevron-left"></i> C++11：支持函数模板的默认模板参数
               </a>
             
           </div>
@@ -506,10 +541,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2021/01/04/%E3%80%8A%E7%83%AD%E9%A3%8E%C2%B7%E9%9A%8F%E6%84%9F%E5%BD%95%E5%9B%9B%E5%8D%81%E4%B8%80%E3%80%8B/" rel="prev" title="《热风·随感录四十一》">
-                《热风·随感录四十一》 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -666,7 +697,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Virsh简介"><span class="nav-number">1.</span> <span class="nav-text">Virsh简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用前提"><span class="nav-number">2.</span> <span class="nav-text">使用前提</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常用的虚拟机管理命令"><span class="nav-number">3.</span> <span class="nav-text">常用的虚拟机管理命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#通过xml文件创建虚拟机"><span class="nav-number">4.</span> <span class="nav-text">通过xml文件创建虚拟机</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#通过存储池iSCSI创建虚拟机"><span class="nav-number">5.</span> <span class="nav-text">通过存储池iSCSI创建虚拟机</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-tuple对象的创建"><span class="nav-number">1.</span> <span class="nav-text">1. tuple对象的创建</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1-类的构造函数"><span class="nav-number">1.0.1.</span> <span class="nav-text">1.1 类的构造函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-make-tuple-函数"><span class="nav-number">1.0.2.</span> <span class="nav-text">1.2 make_tuple()函数</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-tuple常用函数"><span class="nav-number">2.</span> <span class="nav-text">2. tuple常用函数</span></a></li></ol></div>
             
 
           </div>

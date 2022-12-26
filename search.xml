@@ -5398,4 +5398,78 @@ Gray(i,j)=0.299*R(i,j)+0.578*G(i,j)+0.114*B(i,j)</script><h1 id="3-图像灰度�
         <tag>C++11</tag>
       </tags>
   </entry>
+  <entry>
+    <title>C++11：tuple元组</title>
+    <url>/2022/12/26/C-11%EF%BC%9Atuple%E5%85%83%E7%BB%84/</url>
+    <content><![CDATA[<p>C++11 标准新引入了一种类模板，命名为 tuple（元组）。tuple 最大的特点是：实例化的对象可以存储任意数量、任意类型的数据。</p>
+<p>tuple 的应用场景很广泛，例如当需要存储多个不同类型的元素时，可以使用 tuple；当函数需要返回多个数据时，可以将这些数据存储在 tuple 中，函数只需返回一个 tuple 对象即可。</p>
+<a id="more"></a>
+<h2 id="1-tuple对象的创建"><a href="#1-tuple对象的创建" class="headerlink" title="1. tuple对象的创建"></a>1. tuple对象的创建</h2><p>tuple 本质是一个以可变模板参数定义的类模板，它定义在 <tuple> 头文件并位于 std 命名空间中。因此要想使用 tuple 类模板，程序中需要首先引入以下代码：</tuple></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;tuple&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="built_in">std</span>::tuple;</span><br></pre></td></tr></table></figure>
+<p>实例化 tuple 模板类对象常用的方法有两种，一种是借助该类的构造函数，另一种是借助 make_tuple() 函数。</p>
+<h4 id="1-1-类的构造函数"><a href="#1-1-类的构造函数" class="headerlink" title="1.1 类的构造函数"></a>1.1 类的构造函数</h4><p>tuple 模板类提供有很多构造函数，包括：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="number">1</span>) 默认构造函数</span><br><span class="line"><span class="function"><span class="keyword">constexpr</span> <span class="title">tuple</span><span class="params">()</span></span>;</span><br><span class="line"><span class="number">2</span>) 拷贝构造函数</span><br><span class="line">tuple (<span class="keyword">const</span> tuple&amp; tpl);</span><br><span class="line"><span class="number">3</span>) 移动构造函数</span><br><span class="line">tuple (tuple&amp;&amp; tpl);</span><br><span class="line"><span class="number">4</span>) 隐式类型转换构造函数</span><br><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span>... <span class="title">UTypes</span>&gt;</span></span><br><span class="line"><span class="class">    <span class="title">tuple</span> (<span class="title">const</span> <span class="title">tuple</span>&lt;UTypes...&gt;&amp; <span class="title">tpl</span>);</span> <span class="comment">//左值方式</span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span>... <span class="title">UTypes</span>&gt;</span></span><br><span class="line"><span class="class">    <span class="title">tuple</span> (<span class="title">tuple</span>&lt;UTypes...&gt;&amp;&amp; <span class="title">tpl</span>);</span>      <span class="comment">//右值方式</span></span><br><span class="line"><span class="number">5</span>) 支持初始化列表的构造函数</span><br><span class="line"><span class="function"><span class="keyword">explicit</span> <span class="title">tuple</span> <span class="params">(<span class="keyword">const</span> Types&amp;... elems)</span></span>;  <span class="comment">//左值方式</span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span>... <span class="title">UTypes</span>&gt;</span></span><br><span class="line"><span class="class">    <span class="title">explicit</span> <span class="title">tuple</span> (<span class="title">UTypes</span>&amp;&amp;... <span class="title">elems</span>);</span>  <span class="comment">//右值方式</span></span><br><span class="line"><span class="number">6</span>) 将pair对象转换为tuple对象</span><br><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">U1</span>, <span class="title">class</span> <span class="title">U2</span>&gt;</span></span><br><span class="line"><span class="class">    <span class="title">tuple</span> (<span class="title">const</span> <span class="title">pair</span>&lt;U1,U2&gt;&amp; <span class="title">pr</span>);</span>       <span class="comment">//左值方式</span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">U1</span>, <span class="title">class</span> <span class="title">U2</span>&gt;</span></span><br><span class="line"><span class="class">    <span class="title">tuple</span> (<span class="title">pair</span>&lt;U1,U2&gt;&amp;&amp; <span class="title">pr</span>);</span>            <span class="comment">//右值方式</span></span><br></pre></td></tr></table></figure>
+<p>举个例子：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;     // std::cout</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;tuple&gt;        // std::tuple</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="built_in">std</span>::tuple;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">std</span>::tuple&lt;<span class="keyword">int</span>, <span class="keyword">char</span>&gt; first;                             <span class="comment">// 1)   first&#123;&#125;</span></span><br><span class="line">    std::tuple&lt;int, char&gt; second(first);                     // 2)   second&#123;&#125;</span><br><span class="line">    std::tuple&lt;int, char&gt; third(std::make_tuple(20, 'b'));   // 3)   third&#123;20,'b'&#125;</span><br><span class="line">    std::tuple&lt;long, char&gt; fourth(third);                    // 4)的左值方式, fourth&#123;20,'b'&#125;</span><br><span class="line">    std::tuple&lt;int, char&gt; fifth(10, 'a');                    // 5)的右值方式, fifth&#123;10.'a'&#125;</span><br><span class="line">    std::tuple&lt;int, char&gt; sixth(std::make_pair(30, 'c'));    // 6)的右值方式, sixth&#123;30,''c&#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="1-2-make-tuple-函数"><a href="#1-2-make-tuple-函数" class="headerlink" title="1.2 make_tuple()函数"></a>1.2 make_tuple()函数</h4><p>上面程序中，我们已经用到了 make_tuple() 函数，它以模板的形式定义在 <tuple> 头文件中，功能是创建一个 tuple 右值对象（或者临时对象）。</tuple></p>
+<p>对于 make_tuple() 函数创建了 tuple 对象，我们可以上面程序中那样作为移动构造函数的参数，也可以这样用：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">auto</span> first = <span class="built_in">std</span>::make_tuple (<span class="number">10</span>,<span class="string">'a'</span>);   <span class="comment">// tuple &lt; int, char &gt;</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> a = <span class="number">0</span>; <span class="keyword">int</span> b[<span class="number">3</span>];</span><br><span class="line"><span class="keyword">auto</span> second = <span class="built_in">std</span>::make_tuple (a,b);     <span class="comment">// tuple &lt; int, int* &gt;</span></span><br></pre></td></tr></table></figure>
+<p>程序中分别创建了 first 和 second 两个 tuple 对象，它们的类型可以直接用 auto 表示。</p>
+<h2 id="2-tuple常用函数"><a href="#2-tuple常用函数" class="headerlink" title="2. tuple常用函数"></a>2. tuple常用函数</h2><p>为了方便在实际开发中使用 tuple 对象，tupe 模板类提供了一个功能实用的成员函数，<tuple> 头文件中也提供了一些和操作 tuple 对象相关的函数模板和类模板，如下表所示：</tuple></p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>函数或类模板</th>
+<th>描 述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>tup1.swap(tup2) swap(tup1, tup2)</td>
+<td>tup1 和 tup2 表示类型相同的两个 tuple 对象，tuple 模板类中定义有一个 swap() 成员函数，<tuple> 头文件还提供了一个同名的 swap() 全局函数。  swap() 函数的功能是交换两个 tuple 对象存储的内容。</tuple></td>
+</tr>
+<tr>
+<td>get<num>(tup)</num></td>
+<td>tup 表示某个 tuple 对象，num 是一个整数，get() 是 <tuple> 头文件提供的全局函数，功能是返回 tup 对象中第 num+1 个元素。</tuple></td>
+</tr>
+<tr>
+<td>tuple_size<type>::value</type></td>
+<td>tuple_size 是定义在 <tuple> 头文件的类模板，它只有一个成员变量 value，功能是获取某个 tuple 对象中元素的个数，type 为该tuple 对象的类型。</tuple></td>
+</tr>
+<tr>
+<td>tuple_element<I, type>::type</I,></td>
+<td>tuple_element 是定义在 <tuple> 头文件的类模板，它只有一个成员变量 type，功能是获取某个 tuple 对象第 I+1 个元素的类型。</tuple></td>
+</tr>
+<tr>
+<td>forward_as_tuple<args...></args...></td>
+<td>args… 表示 tuple 对象存储的多个元素，该函数的功能是创建一个 tuple 对象，内部存储的 args… 元素都是右值引用形式的。</td>
+</tr>
+<tr>
+<td>tie(args…) = tup</td>
+<td>tup 表示某个 tuple 对象，tie() 是 <tuple> 头文件提供的，功能是将 tup 内存储的元素逐一赋值给 args… 指定的左值变量。</tuple></td>
+</tr>
+<tr>
+<td>tuple_cat(args…)</td>
+<td>args… 表示多个 tuple 对象，该函数是 <tuple> 头文件提供的，功能是创建一个 tuple 对象，此对象包含 args… 指定的所有 tuple 对象内的元素。</tuple></td>
+</tr>
+</tbody>
+</table>
+</div>
+<blockquote>
+<p>tuple 模板类对赋值运算符 = 进行了重载，使得同类型的 tuple 对象可以直接赋值。此外，tuple 模板类还重载了 ==、!=、&lt;、&gt;、&gt;=、&lt;= 这几个比较运算符，同类型的 tuple 对象可以相互比较（逐个比较各个元素）。</p>
+</blockquote>
+<p>以下程序演示了上表中一部分函数模板和类模板的功能：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;tuple&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> <span class="built_in">size</span>;</span><br><span class="line">    <span class="comment">//创建一个 tuple 对象存储 10 和 'x'</span></span><br><span class="line">    std::tuple&lt;int, char&gt; mytuple(10, 'x');</span><br><span class="line">    <span class="comment">//计算 mytuple 存储元素的个数</span></span><br><span class="line">    <span class="built_in">size</span> = <span class="built_in">std</span>::tuple_size&lt;<span class="keyword">decltype</span>(mytuple)&gt;::value;</span><br><span class="line">    <span class="comment">//输出 mytuple 中存储的元素</span></span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">get</span>&lt;<span class="number">0</span>&gt;(mytuple) &lt;&lt; <span class="string">" "</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">get</span>&lt;<span class="number">1</span>&gt;(mytuple) &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">    <span class="comment">//修改指定的元素</span></span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">get</span>&lt;<span class="number">0</span>&gt;(mytuple) = <span class="number">100</span>;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">get</span>&lt;<span class="number">0</span>&gt;(mytuple) &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">    <span class="comment">//使用 makde_tuple() 创建一个 tuple 对象</span></span><br><span class="line">    <span class="keyword">auto</span> bar = <span class="built_in">std</span>::make_tuple(<span class="string">"test"</span>, <span class="number">3.1</span>, <span class="number">14</span>);</span><br><span class="line">    <span class="comment">//拆解 bar 对象，分别赋值给 mystr、mydou、myint</span></span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">char</span>* mystr = <span class="literal">nullptr</span>;</span><br><span class="line">    <span class="keyword">double</span> mydou;</span><br><span class="line">    <span class="keyword">int</span> myint;</span><br><span class="line">    <span class="comment">//使用 tie() 时，如果不想接受某个元素的值，实参可以用 std::ignore 代替</span></span><br><span class="line">    <span class="built_in">std</span>::tie(mystr, mydou, myint) = bar;</span><br><span class="line">    <span class="comment">//std::tie(std::ignore, std::ignore, myint) = bar;  //只接收第 3 个整形值</span></span><br><span class="line">    <span class="comment">//将 mytuple 和 bar 中的元素整合到 1 个 tuple 对象中</span></span><br><span class="line">    <span class="keyword">auto</span> mycat = <span class="built_in">std</span>::tuple_cat(mytuple, bar);</span><br><span class="line">    <span class="built_in">size</span> = <span class="built_in">std</span>::tuple_size&lt;<span class="keyword">decltype</span>(mycat)&gt;::value;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="built_in">size</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>程序执行结果为：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="number">10</span> x</span><br><span class="line"><span class="number">100</span></span><br><span class="line"><span class="number">5</span></span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>C++11</category>
+      </categories>
+      <tags>
+        <tag>C/C++</tag>
+        <tag>C++11</tag>
+      </tags>
+  </entry>
 </search>
