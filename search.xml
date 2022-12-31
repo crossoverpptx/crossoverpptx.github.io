@@ -5708,23 +5708,23 @@ Gray(i,j)=0.299*R(i,j)+0.578*G(i,j)+0.114*B(i,j)</script><h1 id="3-图像灰度�
 </tr>
 <tr>
 <td>signed short</td>
-<td></td>
-<td></td>
+<td>short int（有符号短整型）</td>
+<td>至少 16 位（2 个字节）</td>
 </tr>
 <tr>
 <td>signed short int</td>
-<td></td>
-<td></td>
+<td>short int（有符号短整型）</td>
+<td>至少 16 位（2 个字节）</td>
 </tr>
 <tr>
 <td>unsigned short</td>
 <td>unsigned short int（无符号短整型）</td>
-<td></td>
+<td>至少 16 位（2 个字节）</td>
 </tr>
 <tr>
 <td>unsigned short int</td>
-<td></td>
-<td></td>
+<td>unsigned short int（无符号短整型）</td>
+<td>至少 16 位（2 个字节）</td>
 </tr>
 <tr>
 <td>int</td>
@@ -5733,23 +5733,23 @@ Gray(i,j)=0.299*R(i,j)+0.578*G(i,j)+0.114*B(i,j)</script><h1 id="3-图像灰度�
 </tr>
 <tr>
 <td>signed</td>
-<td></td>
-<td></td>
+<td>int（有符号整形）</td>
+<td>至少 16 位（2 个字节）</td>
 </tr>
 <tr>
 <td>signed int</td>
-<td></td>
-<td></td>
+<td>int（有符号整形）</td>
+<td>至少 16 位（2 个字节）</td>
 </tr>
 <tr>
 <td>unsigned</td>
 <td>unsigned int（无符号整形）</td>
-<td></td>
+<td>至少 16 位（2 个字节）</td>
 </tr>
 <tr>
 <td>unsigned int</td>
-<td></td>
-<td></td>
+<td>unsigned int（无符号整形）</td>
+<td>至少 16 位（2 个字节）</td>
 </tr>
 <tr>
 <td>long</td>
@@ -5758,28 +5758,28 @@ Gray(i,j)=0.299*R(i,j)+0.578*G(i,j)+0.114*B(i,j)</script><h1 id="3-图像灰度�
 </tr>
 <tr>
 <td>long int</td>
-<td></td>
-<td></td>
+<td>long int（有符号长整形）</td>
+<td>至少 32 位（4 个字节）</td>
 </tr>
 <tr>
 <td>signed long</td>
-<td></td>
-<td></td>
+<td>long int（有符号长整形）</td>
+<td>至少 32 位（4 个字节）</td>
 </tr>
 <tr>
 <td>signed long int</td>
-<td></td>
-<td></td>
+<td>long int（有符号长整形）</td>
+<td>至少 32 位（4 个字节）</td>
 </tr>
 <tr>
 <td>unsigned long</td>
 <td>unsigned long int（无符号长整形）</td>
-<td></td>
+<td>至少 32 位（4 个字节）</td>
 </tr>
 <tr>
 <td>unsigned long int</td>
-<td></td>
-<td></td>
+<td>unsigned long int（无符号长整形）</td>
+<td>至少 32 位（4 个字节）</td>
 </tr>
 <tr>
 <td>long long（C++11）</td>
@@ -5788,27 +5788,28 @@ Gray(i,j)=0.299*R(i,j)+0.578*G(i,j)+0.114*B(i,j)</script><h1 id="3-图像灰度�
 </tr>
 <tr>
 <td>long long int（C++11）</td>
-<td></td>
-<td></td>
+<td>long long int（有符号超长整形）</td>
+<td>至少 64 位（8 个字节）</td>
 </tr>
 <tr>
 <td>signed long long（C++11）</td>
-<td></td>
-<td></td>
+<td>long long int（有符号超长整形）</td>
+<td>至少 64 位（8 个字节）</td>
 </tr>
 <tr>
 <td>signed long long int（C++11）</td>
-<td></td>
-<td></td>
+<td>long long int（有符号超长整形）</td>
+<td>至少 64 位（8 个字节）</td>
 </tr>
 <tr>
 <td>unsigned long long（C++11）</td>
 <td>unsigned long long int（无符号超长整型）</td>
-<td></td>
+<td>至少 64 位（8 个字节）</td>
 </tr>
 <tr>
 <td>unsigned long long int（C++11）</td>
-<td></td>
+<td>unsigned long long int（无符号超长整型）</td>
+<td>至少 64 位（8 个字节）</td>
 </tr>
 </tbody>
 </table>
@@ -5825,16 +5826,7 @@ Gray(i,j)=0.299*R(i,j)+0.578*G(i,j)+0.114*B(i,j)</script><h1 id="3-图像灰度�
 <blockquote>
 <p>如果不添加任何标识，则所有的整数都会默认为 int 类型。</p>
 </blockquote>
-<p>对于 long long 类型来说，如果想了解当前平台上 long long 整形的取值范围，可以使用<code>&lt;climits&gt;</code>头文件中与 long long 整形相关的 3 个宏，分别为 LLONG_MIN、LLONG_MAX 和 ULLONG_MIN：</p>
-<ol>
-<li><p>LLONG_MIN：代表当前平台上最小的 long long 类型整数；</p>
-</li>
-<li><p>LLONG_MAX：代表当前平台上最大的 long long 类型整数；</p>
-</li>
-<li><p>ULLONG_MIN：代表当前平台上最大的 unsigned long long 类型整数（无符号超长整型的最小值为 0）。</p>
-<p>举个例子：</p>
-</li>
-</ol>
+<p>对于 long long 类型来说，如果想了解当前平台上 long long 整形的取值范围，可以使用<code>&lt;climits&gt;</code>头文件中与 long long 整形相关的 3 个宏，分别为 LLONG_MIN、LLONG_MAX 和 ULLONG_MIN：<br>1）LLONG_MIN：代表当前平台上最小的 long long 类型整数；<br>2）LLONG_MAX：代表当前平台上最大的 long long 类型整数；<br>3）ULLONG_MIN：代表当前平台上最大的 unsigned long long 类型整数（无符号超长整型的最小值为 0）。<br>举个例子：</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iomanip&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;climits&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt;<span class="string">"long long最大值："</span> &lt;&lt; LLONG_MIN &lt;&lt;<span class="string">" "</span>&lt;&lt; hex &lt;&lt; LLONG_MIN &lt;&lt;<span class="string">"\n"</span>;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; dec &lt;&lt;<span class="string">"long long最小值："</span> &lt;&lt; LLONG_MAX &lt;&lt; <span class="string">" "</span> &lt;&lt; hex &lt;&lt; LLONG_MAX &lt;&lt; <span class="string">"\n"</span>;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; dec &lt;&lt; <span class="string">"unsigned long long最大值："</span> &lt;&lt; ULLONG_MAX &lt;&lt; <span class="string">" "</span> &lt;&lt; hex &lt;&lt; ULLONG_MAX;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>程序执行结果为（不唯一）：</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">long</span> <span class="keyword">long</span>最大值：<span class="number">-9223372036854775808</span> <span class="number">8000000000000000</span></span><br><span class="line"><span class="keyword">long</span> <span class="keyword">long</span>最小值：<span class="number">9223372036854775807</span> <span class="number">7f</span>ffffffffffffff</span><br><span class="line"><span class="keyword">unsigned</span> <span class="keyword">long</span> <span class="keyword">long</span>最大值：<span class="number">18446744073709551615</span> ffffffffffffffff</span><br></pre></td></tr></table></figure>
@@ -5845,14 +5837,12 @@ Gray(i,j)=0.299*R(i,j)+0.578*G(i,j)+0.114*B(i,j)</script><h1 id="3-图像灰度�
 </blockquote>
 <p>C++98/03 标准中，将一个指针初始化为空指针的方式有 2 种：</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> *p = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">int</span> *p = <span class="literal">NULL</span>; <span class="comment">//推荐使用</span></span><br></pre></td></tr></table></figure>
-<p>可以看到，我们可以将指针明确指向 0（0x0000 0000）这个内存空间。一方面，明确指针的指向可以避免其成为野指针；另一方面，大多数操作系统都不允许用户对地址为 0 的内存空间执行写操作，若用户在程序中尝试修改其内容，则程序运行会直接报错。</p>
-<p>相比第一种方式，我们更习惯将指针初始化为 NULL。值得一提的是，NULL 并不是 C++ 的关键字，它是 C++ 为我们事先定义好的一个宏，并且它的值往往就是字面量 0（#define NULL 0）。</p>
+<p>可以看到，我们可以将指针明确指向 0（0x0000 0000）这个内存空间。一方面，明确指针的指向可以避免其成为野指针；另一方面，大多数操作系统都不允许用户对地址为 0 的内存空间执行写操作，若用户在程序中尝试修改其内容，则程序运行会直接报错。<br>相比第一种方式，我们更习惯将指针初始化为 NULL。值得一提的是，NULL 并不是 C++ 的关键字，它是 C++ 为我们事先定义好的一个宏，并且它的值往往就是字面量 0（#define NULL 0）。</p>
 <p>C++ 中将 NULL 定义为字面常量 0，虽然能满足大部分场景的需要，但个别情况下，它会导致程序的运行和我们的预期不符。例如：</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">isnull</span><span class="params">(<span class="keyword">void</span> *c)</span></span>&#123;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"void*c"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">isnull</span><span class="params">(<span class="keyword">int</span> n)</span></span>&#123;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"int n"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    isnull(<span class="number">0</span>);</span><br><span class="line">    isnull(<span class="literal">NULL</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>程序执行结果为：</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> n</span><br><span class="line"><span class="keyword">int</span> n</span><br></pre></td></tr></table></figure>
-<p>对于 isnull(0) 来说，显然它真正调用的是参数为整形的 isnull() 函数；而对于 isnull(NULL)，我们期望它实际调用的是参数为 void*c 的 isnull() 函数，但观察程序的执行结果不难看出，并不符合我们的预期。</p>
-<p>C++ 98/03 标准中，如果我们想令 isnull(NULL) 实际调用的是 isnull(void* c)，就需要对 NULL（或者 0）进行强制类型转换：</p>
+<p>对于 isnull(0) 来说，显然它真正调用的是参数为整形的 isnull() 函数；而对于 isnull(NULL)，我们期望它实际调用的是参数为 void<em>c 的 isnull() 函数，但观察程序的执行结果不难看出，并不符合我们的预期。</em><br>C++ 98/03 标准中，如果我们想令 isnull(NULL) 实际调用的是 isnull(void* c)，就需要对 NULL（或者 0）进行强制类型转换：</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">isnull( (<span class="keyword">void</span>*)<span class="literal">NULL</span> );</span><br><span class="line">isnull( (<span class="keyword">void</span>*)<span class="number">0</span> );</span><br></pre></td></tr></table></figure>
 <p>如此，才会成功调用我们预期的函数。</p>
 <p>由于 C++ 98 标准使用期间，NULL 已经得到了广泛的应用，出于兼容性的考虑，C++11 标准并没有对 NULL 的宏定义做任何修改。为了修正 C++ 存在的这一 BUG，C++ 标准委员会最终决定另其炉灶，在 C++11 标准中引入一个新关键字，即 nullptr。</p>
