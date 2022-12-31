@@ -90,7 +90,7 @@
 <meta property="og:site_name" content="crossoverpptx&#39;s Blog">
 <meta property="og:description" content="本文介绍 C++11 标准中新添加的 long long 超长整型和 nullptr 初始化空指针。">
 <meta property="article:published_time" content="2022-12-31T00:42:06.000Z">
-<meta property="article:modified_time" content="2022-12-31T01:26:33.472Z">
+<meta property="article:modified_time" content="2022-12-31T01:31:44.597Z">
 <meta property="article:author" content="crossoverpptx">
 <meta property="article:tag" content="C&#x2F;C++">
 <meta property="article:tag" content="C++11">
@@ -346,7 +346,7 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2022-12-31T09:26:33+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2022-12-31T09:31:44+08:00">
                 2022-12-31
               </time>
             
@@ -591,7 +591,7 @@
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">isnull</span><span class="params">(<span class="keyword">void</span> *c)</span></span>&#123;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"void*c"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">isnull</span><span class="params">(<span class="keyword">int</span> n)</span></span>&#123;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"int n"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    isnull(<span class="number">0</span>);</span><br><span class="line">    isnull(<span class="literal">NULL</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>程序执行结果为：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> n</span><br><span class="line"><span class="keyword">int</span> n</span><br></pre></td></tr></table></figure>
-<p>对于 isnull(0) 来说，显然它真正调用的是参数为整形的 isnull() 函数；而对于 isnull(NULL)，我们期望它实际调用的是参数为 void<em>c 的 isnull() 函数，但观察程序的执行结果不难看出，并不符合我们的预期。</em><br>C++ 98/03 标准中，如果我们想令 isnull(NULL) 实际调用的是 isnull(void* c)，就需要对 NULL（或者 0）进行强制类型转换：</p>
+<p>对于 isnull(0) 来说，显然它真正调用的是参数为整形的 isnull() 函数；而对于 isnull(NULL)，我们期望它实际调用的是参数为 void*c 的 isnull() 函数，但观察程序的执行结果不难看出，并不符合我们的预期。<br>C++ 98/03 标准中，如果我们想令 isnull(NULL) 实际调用的是 isnull(void* c)，就需要对 NULL（或者 0）进行强制类型转换：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">isnull( (<span class="keyword">void</span>*)<span class="literal">NULL</span> );</span><br><span class="line">isnull( (<span class="keyword">void</span>*)<span class="number">0</span> );</span><br></pre></td></tr></table></figure>
 <p>如此，才会成功调用我们预期的函数。</p>
 <p>由于 C++ 98 标准使用期间，NULL 已经得到了广泛的应用，出于兼容性的考虑，C++11 标准并没有对 NULL 的宏定义做任何修改。为了修正 C++ 存在的这一 BUG，C++ 标准委员会最终决定另其炉灶，在 C++11 标准中引入一个新关键字，即 nullptr。</p>
