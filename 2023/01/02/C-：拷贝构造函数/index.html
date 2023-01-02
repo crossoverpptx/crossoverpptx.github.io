@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="mysql," />
+  <meta name="keywords" content="C/C++," />
 
 
 
@@ -83,16 +83,16 @@
 
 
 
-<meta name="description" content="本文介绍几种常见情况下mysql数据库的密码修改方法。">
+<meta name="description" content="1. 拷贝和拷贝构造函数拷贝和复制是一个意思，对应的英文单词都是copy。对于计算机来说，拷贝是指用一份原有的、已经存在的数据创建出一份新的数据，最终的结果是多了一份相同的数据。例如，将 Word 文档拷贝到U盘去复印店打印，将 D 盘的图片拷贝到桌面以方便浏览，将重要的文件上传到百度网盘以防止丢失等，都是「创建一份新数据」的意思。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Linux下修改mysql数据库密码的几种方法">
-<meta property="og:url" content="http://yoursite.com/2021/01/05/Linux%E4%B8%8B%E4%BF%AE%E6%94%B9mysql%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AF%86%E7%A0%81%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E6%B3%95/index.html">
+<meta property="og:title" content="C++：拷贝构造函数">
+<meta property="og:url" content="http://yoursite.com/2023/01/02/C-%EF%BC%9A%E6%8B%B7%E8%B4%9D%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0/index.html">
 <meta property="og:site_name" content="crossoverpptx&#39;s Blog">
-<meta property="og:description" content="本文介绍几种常见情况下mysql数据库的密码修改方法。">
-<meta property="article:published_time" content="2021-01-05T08:18:41.000Z">
-<meta property="article:modified_time" content="2022-04-08T04:59:33.834Z">
+<meta property="og:description" content="1. 拷贝和拷贝构造函数拷贝和复制是一个意思，对应的英文单词都是copy。对于计算机来说，拷贝是指用一份原有的、已经存在的数据创建出一份新的数据，最终的结果是多了一份相同的数据。例如，将 Word 文档拷贝到U盘去复印店打印，将 D 盘的图片拷贝到桌面以方便浏览，将重要的文件上传到百度网盘以防止丢失等，都是「创建一份新数据」的意思。">
+<meta property="article:published_time" content="2023-01-02T09:28:09.000Z">
+<meta property="article:modified_time" content="2023-01-02T11:09:18.520Z">
 <meta property="article:author" content="crossoverpptx">
-<meta property="article:tag" content="mysql">
+<meta property="article:tag" content="C&#x2F;C++">
 <meta name="twitter:card" content="summary">
 
 
@@ -123,13 +123,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2021/01/05/Linux下修改mysql数据库密码的几种方法/"/>
+  <link rel="canonical" href="http://yoursite.com/2023/01/02/C-：拷贝构造函数/"/>
 
 
 
 
 
-  <title>Linux下修改mysql数据库密码的几种方法 | crossoverpptx's Blog</title>
+  <title>C++：拷贝构造函数 | crossoverpptx's Blog</title>
   
 
 
@@ -300,7 +300,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/01/05/Linux%E4%B8%8B%E4%BF%AE%E6%94%B9mysql%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AF%86%E7%A0%81%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E6%B3%95/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2023/01/02/C-%EF%BC%9A%E6%8B%B7%E8%B4%9D%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="crossoverpptx">
@@ -317,7 +317,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Linux下修改mysql数据库密码的几种方法</h1>
+          <h1 class="post-title" itemprop="name headline">C++：拷贝构造函数</h1>
         
 
         <div class="post-meta">
@@ -329,8 +329,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-01-05T16:18:41+08:00">
-                2021-01-05
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2023-01-02T17:28:09+08:00">
+                2023-01-02
               </time>
             
 
@@ -345,8 +345,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2022-04-08T12:59:33+08:00">
-                2022-04-08
+              <time title="更新于" itemprop="dateModified" datetime="2023-01-02T19:09:18+08:00">
+                2023-01-02
               </time>
             
           </span>
@@ -364,8 +364,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/mysql/" itemprop="url" rel="index">
-                    <span itemprop="name">mysql</span>
+                  <a href="/categories/C-C/" itemprop="url" rel="index">
+                    <span itemprop="name">C/C++</span>
                   </a>
                 </span>
 
@@ -400,7 +400,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  179
+                  2k
                 </span>
               
 
@@ -416,7 +416,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  1
+                  7
                 </span>
               
             </div>
@@ -437,11 +437,36 @@
       
 
       
-        <p><strong>本文介绍几种常见情况下mysql数据库的密码修改方法。</strong></p>
-<a id="more"></a>
-<hr>
-<h2 id="未设置密码，可以通过mysql直接登录数据库"><a href="#未设置密码，可以通过mysql直接登录数据库" class="headerlink" title="未设置密码，可以通过mysql直接登录数据库"></a>未设置密码，可以通过mysql直接登录数据库</h2><h2 id><a href="#" class="headerlink" title></a><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; use mysql;</span><br><span class="line">mysql&gt; update user set password=password(<span class="string">"111111"</span>) where user=<span class="string">'root'</span>;</span><br><span class="line">mysql&gt; flush privileges;</span><br><span class="line">mysql&gt; exit;</span><br></pre></td></tr></table></figure></h2><h2 id="若已知密码，需要修改密码"><a href="#若已知密码，需要修改密码" class="headerlink" title="若已知密码，需要修改密码"></a>若已知密码，需要修改密码</h2><p>除了上述方法，也可以在mysql系统外，使用mysqladmin。</p>
-<h2 id="-1"><a href="#-1" class="headerlink" title></a><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysqladmin -u root -p password <span class="string">"111111"</span></span><br><span class="line">Enter password: 【输入原来的密码】</span><br></pre></td></tr></table></figure></h2><h2 id="若忘记数据库密码，需要修改密码"><a href="#若忘记数据库密码，需要修改密码" class="headerlink" title="若忘记数据库密码，需要修改密码"></a>若忘记数据库密码，需要修改密码</h2><p>1、先停止数据库服务，修改/etc/my.cnf文件，在[mysqld]末尾添加skip-grant-tables；<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[mysqld]</span><br><span class="line">skip-grant-tables</span><br></pre></td></tr></table></figure><br>2、重新启动数据库，可以通过mysql直接登录数据库；<br>3、修改密码完成后，删除skip-grant-tables。</p>
+        <h2 id="1-拷贝和拷贝构造函数"><a href="#1-拷贝和拷贝构造函数" class="headerlink" title="1. 拷贝和拷贝构造函数"></a>1. 拷贝和拷贝构造函数</h2><p>拷贝和复制是一个意思，对应的英文单词都是<code>copy</code>。对于计算机来说，拷贝是指用一份原有的、已经存在的数据创建出一份新的数据，最终的结果是多了一份相同的数据。例如，将 Word 文档拷贝到U盘去复印店打印，将 D 盘的图片拷贝到桌面以方便浏览，将重要的文件上传到百度网盘以防止丢失等，都是「创建一份新数据」的意思。<a id="more"></a></p>
+<p>在 C++ 中，拷贝并没有脱离它本来的含义，只是将这个含义进行了“特化”，是指用已经存在的对象创建出一个新的对象。从本质上讲，对象也是一份数据，因为它会占用内存。严格来说，对象的创建包括两个阶段，首先要分配内存空间，然后再进行初始化：</p>
+<ol>
+<li>分配内存很好理解，就是在堆区、栈区或者全局数据区留出足够多的字节。这个时候的内存还比较“原始”，没有被“教化”，它所包含的数据一般是零值或者随机值，没有实际的意义。</li>
+<li>初始化就是首次对内存赋值，让它的数据有意义。注意是首次赋值，再次赋值不叫初始化。初始化的时候还可以为对象分配其他的资源（打开文件、连接网络、动态分配内存等），或者提前进行一些计算（根据价格和数量计算出总价、根据长度和宽度计算出矩形的面积等）等。说白了，初始化就是调用构造函数。</li>
+</ol>
+<p>很明显，这里所说的拷贝是在初始化阶段进行的，也就是用其它对象的数据来初始化新对象的内存。那么，如何用拷贝的方式来初始化一个对象呢？其实这样的例子比比皆是，string 类就是一个典型的例子。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">func</span><span class="params">(<span class="built_in">string</span> str)</span></span>&#123;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;str&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">string</span> s1 = <span class="string">"http://c.biancheng.net"</span>;</span><br><span class="line">    <span class="function"><span class="built_in">string</span> <span class="title">s2</span><span class="params">(s1)</span></span>;</span><br><span class="line">    <span class="built_in">string</span> s3 = s1;</span><br><span class="line">    <span class="built_in">string</span> s4 = s1 + <span class="string">" "</span> + s2;</span><br><span class="line">    func(s1);</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;s1&lt;&lt;<span class="built_in">endl</span>&lt;&lt;s2&lt;&lt;<span class="built_in">endl</span>&lt;&lt;s3&lt;&lt;<span class="built_in">endl</span>&lt;&lt;s4&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">   </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行结果：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">http:<span class="comment">//c.biancheng.net</span></span><br><span class="line">http:<span class="comment">//c.biancheng.net</span></span><br><span class="line">http:<span class="comment">//c.biancheng.net</span></span><br><span class="line">http:<span class="comment">//c.biancheng.net</span></span><br><span class="line">http:<span class="comment">//c.biancheng.net http://c.biancheng.net</span></span><br></pre></td></tr></table></figure>
+<p>s1、s2、s3、s4 以及 func() 的形参 str，都是使用拷贝的方式来初始化的。</p>
+<blockquote>
+<p>对于 s1，表面上看起来是将一个字符串直接赋值给了 s1，实际上在内部进行了类型转换，将 const char * 类型转换为 string 类型后才赋值的，这其实涉及到C++转换构造函数的知识。s4 也是类似的道理。</p>
+</blockquote>
+<p>对于 s1、s2、s3、s4，都是将其它对象的数据拷贝给当前对象，以完成当前对象的初始化。<br>对于 func() 的形参 str，其实在定义时就为它分配了内存，但是此时并没有初始化，只有等到调用 func() 时，才会将其它对象的数据拷贝给 str 以完成初始化。<br>当以拷贝的方式初始化一个对象时，会调用一个特殊的构造函数，就是拷贝构造函数（Copy Constructor）。</p>
+<p>下面的例子演示了拷贝构造函数的定义和使用：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span>&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    Student(<span class="built_in">string</span> name = <span class="string">""</span>, <span class="keyword">int</span> age = <span class="number">0</span>, <span class="keyword">float</span> score = <span class="number">0.0f</span>);  <span class="comment">//普通构造函数</span></span><br><span class="line">    Student(<span class="keyword">const</span> Student &amp;stu);  <span class="comment">//拷贝构造函数（声明）</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">display</span><span class="params">()</span></span>;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="built_in">string</span> m_name;</span><br><span class="line">    <span class="keyword">int</span> m_age;</span><br><span class="line">    <span class="keyword">float</span> m_score;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">Student::Student(<span class="built_in">string</span> name, <span class="keyword">int</span> age, <span class="keyword">float</span> score): m_name(name), m_age(age), m_score(score)&#123; &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//拷贝构造函数（定义）</span></span><br><span class="line">Student::Student(<span class="keyword">const</span> Student &amp;stu)&#123;</span><br><span class="line">    <span class="keyword">this</span>-&gt;m_name = stu.m_name;</span><br><span class="line">    <span class="keyword">this</span>-&gt;m_age = stu.m_age;</span><br><span class="line">    <span class="keyword">this</span>-&gt;m_score = stu.m_score;</span><br><span class="line">   </span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;<span class="string">"Copy constructor was called."</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Student::display</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;m_name&lt;&lt;<span class="string">"的年龄是"</span>&lt;&lt;m_age&lt;&lt;<span class="string">"，成绩是"</span>&lt;&lt;m_score&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="function">Student <span class="title">stu1</span><span class="params">(<span class="string">"小明"</span>, <span class="number">16</span>, <span class="number">90.5</span>)</span></span>;</span><br><span class="line">    Student stu2 = stu1;  <span class="comment">//调用拷贝构造函数</span></span><br><span class="line">    <span class="function">Student <span class="title">stu3</span><span class="params">(stu1)</span></span>;  <span class="comment">//调用拷贝构造函数</span></span><br><span class="line">    stu1.<span class="built_in">display</span>();</span><br><span class="line">    stu2.<span class="built_in">display</span>();</span><br><span class="line">    stu3.<span class="built_in">display</span>();</span><br><span class="line">   </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行结果：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Copy constructor was called.</span><br><span class="line">Copy constructor was called.</span><br><span class="line">小明的年龄是<span class="number">16</span>，成绩是<span class="number">90.5</span></span><br><span class="line">小明的年龄是<span class="number">16</span>，成绩是<span class="number">90.5</span></span><br><span class="line">小明的年龄是<span class="number">16</span>，成绩是<span class="number">90.5</span></span><br></pre></td></tr></table></figure>
+<p>第 8 行是拷贝构造函数的声明，第 20 行是拷贝构造函数的定义。拷贝构造函数只有一个参数，它的类型是当前类的引用，而且一般都是 const 引用。</p>
+<h3 id="1-1-为什么必须是当前类的引用呢？"><a href="#1-1-为什么必须是当前类的引用呢？" class="headerlink" title="1.1 为什么必须是当前类的引用呢？"></a>1.1 为什么必须是当前类的引用呢？</h3><p>如果拷贝构造函数的参数不是当前类的引用，而是当前类的对象，那么在调用拷贝构造函数时，会将另外一个对象直接传递给形参，这本身就是一次拷贝，会再次调用拷贝构造函数，然后又将一个对象直接传递给了形参，将继续调用拷贝构造函数……这个过程会一直持续下去，没有尽头，陷入死循环。只有当参数是当前类的引用时，才不会导致再次调用拷贝构造函数，这不仅是逻辑上的要求，也是 C++ 语法的要求。</p>
+<h3 id="1-2-为什么是-const-引用呢？"><a href="#1-2-为什么是-const-引用呢？" class="headerlink" title="1.2 为什么是 const 引用呢？"></a>1.2 为什么是 const 引用呢？</h3><p>拷贝构造函数的目的是用其它对象的数据来初始化当前对象，并没有期望更改其它对象的数据，添加 const 限制后，这个含义更加明确了。<br>另外一个原因是，添加 const 限制后，可以将 const 对象和非 const 对象传递给形参了，因为非 const 类型可以转换为 const 类型。如果没有 const 限制，就不能将 const 对象传递给形参，因为 const 类型不能转换为非 const 类型，这就意味着，不能使用 const 对象来初始化当前对象了。</p>
+<p>以上面的 Student 类为例，将 const 去掉后，拷贝构造函数的原型变为：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Student::Student(Student &amp;stu);</span><br></pre></td></tr></table></figure>
+<p>此时，下面的代码就会发生错误：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">const</span> Student <span class="title">stu1</span><span class="params">(<span class="string">"小明"</span>, <span class="number">16</span>, <span class="number">90.5</span>)</span></span>;</span><br><span class="line">Student stu2 = stu1;</span><br><span class="line"><span class="function">Student <span class="title">stu3</span><span class="params">(stu1)</span></span>;</span><br></pre></td></tr></table></figure>
+<p>stu1 是 const 类型，在初始化 stu2、stu3 时，编译器希望调用<code>Student::Student(const Student &amp;stu)</code>，但是这个函数却不存在，又不能将 const Student 类型转换为 Student 类型去调用<code>Student::Student(Student &amp;stu)</code>，所以最终调用失败了。</p>
+<p>当然，也可以再添加一个参数为 const 引用的拷贝构造函数，这样就不会出错了。换句话说，一个类可以同时存在两个拷贝构造函数，一个函数的参数为 const 引用，另一个函数的参数为非 const 引用。</p>
+<h2 id="2-默认拷贝构造函数"><a href="#2-默认拷贝构造函数" class="headerlink" title="2. 默认拷贝构造函数"></a>2. 默认拷贝构造函数</h2><p>其实，即使我们没学习过拷贝构造函数，实际上却已经在使用拷贝的方式创建对象了，并且也没有引发什么错误。这是因为，如果程序员没有显式地定义拷贝构造函数，那么编译器会自动生成一个默认的拷贝构造函数。这个默认的拷贝构造函数很简单，就是使用“老对象”的成员变量对“新对象”的成员变量进行一一赋值，和上面 Student 类的拷贝构造函数非常类似。</p>
+<p>对于简单的类，默认拷贝构造函数一般是够用的，我们也没有必要再显式地定义一个功能类似的拷贝构造函数。但是当类持有其它资源时，如动态分配的内存、打开的文件、指向其他数据的<a href="http://c.biancheng.net/c/80/" target="_blank" rel="noopener">指针</a>、网络连接等，默认拷贝构造函数就不能拷贝这些资源，我们必须显式地定义拷贝构造函数，以完整地拷贝对象的所有数据。</p>
 
       
     </div>
@@ -459,7 +484,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/mysql/" rel="tag"># mysql</a>
+            <a href="/tags/C-C/" rel="tag"># C/C++</a>
           
         </div>
       
@@ -472,8 +497,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2021/01/04/%E3%80%8A%E7%83%AD%E9%A3%8E%C2%B7%E9%9A%8F%E6%84%9F%E5%BD%95%E5%9B%9B%E5%8D%81%E4%B8%80%E3%80%8B/" rel="next" title="《热风·随感录四十一》">
-                <i class="fa fa-chevron-left"></i> 《热风·随感录四十一》
+              <a href="/2023/01/01/%E6%A2%85%E5%AD%90%E9%B8%A1%E4%B9%8B%E5%91%B3/" rel="next" title="梅子鸡之味">
+                <i class="fa fa-chevron-left"></i> 梅子鸡之味
               </a>
             
           </div>
@@ -481,10 +506,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2021/01/05/redhat7-6%E9%85%8D%E7%BD%AE163yum%E6%BA%90/" rel="prev" title="redhat7.6配置163yum源">
-                redhat7.6配置163yum源 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -641,19 +662,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#未设置密码，可以通过mysql直接登录数据库"><span class="nav-number">1.</span> <span class="nav-text">未设置密码，可以通过mysql直接登录数据库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">2.</span> <span class="nav-text">1
-2
-3
-4
-mysql&gt; use mysql;
-mysql&gt; update user set password&#x3D;password(&quot;111111&quot;) where user&#x3D;&#39;root&#39;;
-mysql&gt; flush privileges;
-mysql&gt; exit;
-</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#若已知密码，需要修改密码"><span class="nav-number">3.</span> <span class="nav-text">若已知密码，需要修改密码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#-1"><span class="nav-number">4.</span> <span class="nav-text">1
-2
-mysqladmin -u root -p password &quot;111111&quot;
-Enter password: 【输入原来的密码】
-</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#若忘记数据库密码，需要修改密码"><span class="nav-number">5.</span> <span class="nav-text">若忘记数据库密码，需要修改密码</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-拷贝和拷贝构造函数"><span class="nav-number">1.</span> <span class="nav-text">1. 拷贝和拷贝构造函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-为什么必须是当前类的引用呢？"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 为什么必须是当前类的引用呢？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-为什么是-const-引用呢？"><span class="nav-number">1.2.</span> <span class="nav-text">1.2 为什么是 const 引用呢？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-默认拷贝构造函数"><span class="nav-number">2.</span> <span class="nav-text">2. 默认拷贝构造函数</span></a></li></ol></div>
             
 
           </div>
