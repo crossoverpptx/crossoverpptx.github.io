@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="C/C++,C++11," />
 
 
 
@@ -83,13 +83,17 @@
 
 
 
-<meta name="description" content="黑夜给了我黑色的眼睛，我却用它寻找光明">
-<meta property="og:type" content="website">
-<meta property="og:title" content="crossoverpptx&#39;s Blog">
-<meta property="og:url" content="http://yoursite.com/page/4/index.html">
+<meta name="description" content="通过学习《C++11移动构造函数》我们知道，C++11 标准中借助右值引用可以为指定类添加移动构造函数，这样当使用该类的右值对象（可以理解为临时对象）初始化同类对象时，编译器会优先选择移动构造函数。 需要注意，移动构造函数的调用时机是：用同类的右值对象初始化新对象。那么，用当前类的左值对象（有名称，能获取其存储地址的实例对象）初始化同类对象时，是否就无法调用移动构造函数了呢？当然不是，C++11">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C++11：move函数将左值强制转换为右值">
+<meta property="og:url" content="http://yoursite.com/2023/01/04/C-11%EF%BC%9Amove%E5%87%BD%E6%95%B0%E5%B0%86%E5%B7%A6%E5%80%BC%E5%BC%BA%E5%88%B6%E8%BD%AC%E6%8D%A2%E4%B8%BA%E5%8F%B3%E5%80%BC/index.html">
 <meta property="og:site_name" content="crossoverpptx&#39;s Blog">
-<meta property="og:description" content="黑夜给了我黑色的眼睛，我却用它寻找光明">
+<meta property="og:description" content="通过学习《C++11移动构造函数》我们知道，C++11 标准中借助右值引用可以为指定类添加移动构造函数，这样当使用该类的右值对象（可以理解为临时对象）初始化同类对象时，编译器会优先选择移动构造函数。 需要注意，移动构造函数的调用时机是：用同类的右值对象初始化新对象。那么，用当前类的左值对象（有名称，能获取其存储地址的实例对象）初始化同类对象时，是否就无法调用移动构造函数了呢？当然不是，C++11">
+<meta property="article:published_time" content="2023-01-04T00:54:35.000Z">
+<meta property="article:modified_time" content="2023-01-04T01:27:50.637Z">
 <meta property="article:author" content="crossoverpptx">
+<meta property="article:tag" content="C&#x2F;C++">
+<meta property="article:tag" content="C++11">
 <meta name="twitter:card" content="summary">
 
 
@@ -120,13 +124,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/page/4/"/>
+  <link rel="canonical" href="http://yoursite.com/2023/01/04/C-11：move函数将左值强制转换为右值/"/>
 
 
 
 
 
-  <title>crossoverpptx's Blog</title>
+  <title>C++11：move函数将左值强制转换为右值 | crossoverpptx's Blog</title>
   
 
 
@@ -145,8 +149,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -283,9 +286,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -298,7 +301,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/11/27/C-11%EF%BC%9Alambda%E5%8C%BF%E5%90%8D%E5%87%BD%E6%95%B0/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2023/01/04/C-11%EF%BC%9Amove%E5%87%BD%E6%95%B0%E5%B0%86%E5%B7%A6%E5%80%BC%E5%BC%BA%E5%88%B6%E8%BD%AC%E6%8D%A2%E4%B8%BA%E5%8F%B3%E5%80%BC/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="crossoverpptx">
@@ -315,9 +318,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/11/27/C-11%EF%BC%9Alambda%E5%8C%BF%E5%90%8D%E5%87%BD%E6%95%B0/" itemprop="url">C++11：lambda匿名函数</a></h1>
+          <h1 class="post-title" itemprop="name headline">C++11：move函数将左值强制转换为右值</h1>
         
 
         <div class="post-meta">
@@ -329,8 +330,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-11-27T22:55:41+08:00">
-                2022-11-27
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2023-01-04T08:54:35+08:00">
+                2023-01-04
               </time>
             
 
@@ -345,8 +346,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2022-11-28T16:02:25+08:00">
-                2022-11-28
+              <time title="更新于" itemprop="dateModified" datetime="2023-01-04T09:27:50+08:00">
+                2023-01-04
               </time>
             
           </span>
@@ -383,197 +384,13 @@
           
 
           
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  2k
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  8
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>lambda 源自希腊字母表中第 11 位的 λ，在计算机科学领域，它则被用来表示一种匿名函数。所谓匿名函数，简单地理解就是没有名称的函数，又常被称为 lambda 函数或者 lambda 表达式。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2022/11/27/C-11%EF%BC%9Alambda%E5%8C%BF%E5%90%8D%E5%87%BD%E6%95%B0/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/10/12/%E5%9B%BE%E5%83%8F%E6%BB%A4%E6%B3%A2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="crossoverpptx">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/me.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="crossoverpptx's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/10/12/%E5%9B%BE%E5%83%8F%E6%BB%A4%E6%B3%A2/" itemprop="url">图像滤波</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-10-12T17:04:16+08:00">
-                2022-10-12
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2022-10-12T17:15:52+08:00">
-                2022-10-12
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/" itemprop="url" rel="index">
-                    <span itemprop="name">计算机视觉</span>
-                  </a>
-                </span>
-
-                
-                
-              
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i> 浏览
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
             </span>
           
 
           
-            
-          
-
-          
-          
-
-          
-
-          
             <div class="post-wordcount">
               
                 
@@ -584,389 +401,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1.9k
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  7
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="1-图像滤波"><a href="#1-图像滤波" class="headerlink" title="1. 图像滤波"></a>1. 图像滤波</h1><p>图像滤波，即在尽量保留图像细节特征的条件下对目标图像的噪声进行抑制，是图像预处理中不可缺少的操作，其处理效果的好坏将直接影响到后续图像处理和分析的有效性和可靠性。</p>
-<p>图像滤波按图像域可分为两种类型：</p>
-<p>邻域滤波(Spatial Domain Filter)，其本质是数字窗口上的数学运算。一般用于图像平滑、图像锐化、特征提取(如纹理测量、边缘检测)等，邻域滤波使用邻域算子——利用给定像素周围像素值以决定此像素最终输出的一种算子。邻域滤波方式又分为线性滤波和非线性滤波，其中线性滤波包括均值滤波、方框滤波和高斯滤波等，非线性滤波包括中值滤波和双边滤波等。</p>
-<p>频域滤波(Frequency Domain Filter)，其本质是对像素频率的修改。一般用于降噪、重采样、图像压缩等。按图像频率滤除效果主要分为两种类型：低通滤波（滤除原图像的高频成分，即模糊图像边缘与细节）和高通滤波（滤除原图像的低频成分，即图像锐化）。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2022/10/12/%E5%9B%BE%E5%83%8F%E6%BB%A4%E6%B3%A2/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/10/11/%E5%9B%BE%E5%83%8F%E4%BA%8C%E5%80%BC%E5%8C%96/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="crossoverpptx">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/me.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="crossoverpptx's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/10/11/%E5%9B%BE%E5%83%8F%E4%BA%8C%E5%80%BC%E5%8C%96/" itemprop="url">图像二值化</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-10-11T18:26:05+08:00">
-                2022-10-11
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2022-10-11T19:50:42+08:00">
-                2022-10-11
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/" itemprop="url" rel="index">
-                    <span itemprop="name">计算机视觉</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  1.9k
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  8
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="1-图像二值化"><a href="#1-图像二值化" class="headerlink" title="1. 图像二值化"></a>1. 图像二值化</h1><p>图像二值化就是将图像上的像素点的灰度值设置为0或255，也就是将整个图像呈现出明显的黑白效果的过程。图像的二值化使图像中数据量大为减少，从而能凸显出目标的轮廓。</p>
-<p>要得到二值化图像，首先要把图像灰度化，然后将256个亮度等级的灰度图像通过适当的阈值选取而获得仍然可以反映图像整体和局部特征的二值化图像。所有灰度大于或等于阈值的像素被判定为属于特定物体，其灰度值为255，否则这些像素点被排除在物体区域以外，灰度值为0，表示背景或者例外的物体区域。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2022/10/11/%E5%9B%BE%E5%83%8F%E4%BA%8C%E5%80%BC%E5%8C%96/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/10/10/%E5%9B%BE%E5%83%8F%E7%81%B0%E5%BA%A6%E5%8C%96%E5%A4%84%E7%90%86/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="crossoverpptx">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/me.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="crossoverpptx's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/10/10/%E5%9B%BE%E5%83%8F%E7%81%B0%E5%BA%A6%E5%8C%96%E5%A4%84%E7%90%86/" itemprop="url">图像灰度化处理</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-10-10T20:29:56+08:00">
-                2022-10-10
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2022-10-11T19:50:30+08:00">
-                2022-10-11
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/" itemprop="url" rel="index">
-                    <span itemprop="name">计算机视觉</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  987
+                  1k
                 </span>
               
 
@@ -1003,17 +438,32 @@
       
 
       
-        
-          <h1 id="1-图像灰度化"><a href="#1-图像灰度化" class="headerlink" title="1. 图像灰度化"></a>1. 图像灰度化</h1><p>在RGB模型中，如果R=G=B时，则彩色表示一种灰度颜色，其中R=G=B的值叫灰度值，因此，灰度图像每个像素只需一个字节存放灰度值（又称强度值、亮度值），灰度范围为0-255，当灰度为255的时候，表示最亮（纯白）；当灰度为0的时候，表示最暗（纯黑）。</p>
-<p>灰度化的好处是：相较于彩色图像灰度图像占内存更小，运行速度更快；灰度图像后可以在视觉上增加对比，突出目标区域。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2022/10/10/%E5%9B%BE%E5%83%8F%E7%81%B0%E5%BA%A6%E5%8C%96%E5%A4%84%E7%90%86/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
+        <p>通过学习《<a href="https://crossoverpptx.github.io/2023/01/03/C-11%EF%BC%9A%E7%A7%BB%E5%8A%A8%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0/" target="_blank" rel="noopener">C++11移动构造函数</a>》我们知道，C++11 标准中借助右值引用可以为指定类添加移动构造函数，这样当使用该类的右值对象（可以理解为临时对象）初始化同类对象时，编译器会优先选择移动构造函数。</p>
+<p>需要注意，移动构造函数的调用时机是：用同类的右值对象初始化新对象。那么，用当前类的左值对象（有名称，能获取其存储地址的实例对象）初始化同类对象时，是否就无法调用移动构造函数了呢？当然不是，C++11 标准中已经给出了解决方案，即调用 move() 函数。</p>
+<p><strong>move 本意为 “移动”，但该函数并不能移动任何数据，它的功能很简单，就是将某个左值强制转化为右值。</strong>基于 move() 函数特殊的功能，其常用于实现移动语义。</p>
+<a id="more"></a>
+<p>move() 函数的用法也很简单，其语法格式如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">move</span>( arg )</span><br></pre></td></tr></table></figure>
+<p>其中，arg 表示指定的左值对象。该函数会返回 arg 对象的右值形式。</p>
+<p>下面用一些代码演示了move() 函数的使用方法。</p>
+<p>（1）move() 函数的基础应用：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">movedemo</span>&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    movedemo():num(<span class="keyword">new</span> <span class="keyword">int</span>(<span class="number">0</span>))&#123;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="string">"construct!"</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//拷贝构造函数</span></span><br><span class="line">    movedemo(<span class="keyword">const</span> movedemo &amp;d):num(<span class="keyword">new</span> <span class="keyword">int</span>(*d.num))&#123;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="string">"copy construct!"</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//移动构造函数</span></span><br><span class="line">    movedemo(movedemo &amp;&amp;d):num(d.num)&#123;</span><br><span class="line">        d.num = <span class="literal">NULL</span>;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="string">"move construct!"</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">public</span>:     <span class="comment">//这里应该是 private，使用 public 是为了更方便说明问题</span></span><br><span class="line">    <span class="keyword">int</span> *num;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    movedemo demo;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"demo2:\n"</span>;</span><br><span class="line">    movedemo demo2 = demo;</span><br><span class="line">    <span class="comment">//cout &lt;&lt; *demo2.num &lt;&lt; endl;   //可以执行</span></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"demo3:\n"</span>;</span><br><span class="line">    movedemo demo3 = <span class="built_in">std</span>::<span class="built_in">move</span>(demo);</span><br><span class="line">    <span class="comment">//此时 demo.num = NULL，因此下面代码会报运行时错误</span></span><br><span class="line">    <span class="comment">//cout &lt;&lt; *demo.num &lt;&lt; endl;</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>程序执行结果为：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">construct!</span><br><span class="line">demo2:</span><br><span class="line">copy construct!</span><br><span class="line">demo3:</span><br><span class="line"><span class="built_in">move</span> construct!</span><br></pre></td></tr></table></figure>
+<p>通过观察程序的输出结果，以及对比 demo2 和 demo3 初始化操作不难得知，demo 对象作为左值，直接用于初始化 demo2 对象，其底层调用的是拷贝构造函数；而通过调用 move() 函数可以得到 demo 对象的右值形式，用其初始化 demo3 对象，编译器会优先调用移动构造函数。</p>
+<blockquote>
+<p>注意：调用拷贝构造函数，并不影响 demo 对象，但如果调用移动构造函数，由于函数内部会重置 demo.num 指针的指向为 NULL，所以程序中第 30 行代码会导致程序运行时发生错误。</p>
+</blockquote>
+<p>（2）灵活使用 move() 函数：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">first</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    first() :num(<span class="keyword">new</span> <span class="keyword">int</span>(<span class="number">0</span>)) &#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"construct!"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//移动构造函数</span></span><br><span class="line">    first(first &amp;&amp;d) :num(d.num) &#123;</span><br><span class="line">        d.num = <span class="literal">NULL</span>;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"first move construct!"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">public</span>:    <span class="comment">//这里应该是 private，使用 public 是为了更方便说明问题</span></span><br><span class="line">    <span class="keyword">int</span> *num;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">second</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    second() :fir() &#123;&#125;</span><br><span class="line">    <span class="comment">//用 first 类的移动构造函数初始化 fir</span></span><br><span class="line">    second(second &amp;&amp; sec) :fir(<span class="built_in">move</span>(sec.fir)) &#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"second move construct"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">public</span>:    <span class="comment">//这里也应该是 private，使用 public 是为了更方便说明问题</span></span><br><span class="line">    first fir;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    second oth;</span><br><span class="line">    second oth2 = <span class="built_in">move</span>(oth);</span><br><span class="line">    <span class="comment">//cout &lt;&lt; *oth.fir.num &lt;&lt; endl;   //程序报运行时错误</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>程序执行结果为：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">construct!</span><br><span class="line">first <span class="built_in">move</span> construct!</span><br><span class="line">second <span class="built_in">move</span> construct</span><br></pre></td></tr></table></figure>
+<p>程序中分别构建了 first 和 second 这 2 个类，其中 second 类中包含一个 first 类对象。仔细观察可以发现，程序中使用了两次 move() 函数：</p>
+<ul>
+<li>程序第 31 行：由于 oth 为左值，如果想调用移动构造函数为 oth2 初始化，需先利用 move() 函数生成一个 oth 的右值版本；</li>
+<li>程序第 22 行：oth 对象内部还包含一个 first 类对象，对于 oth.fir 来说，其也是一个左值，所以在初始化 oth.fir 时，还需要再调用一次 move() 函数。</li>
+</ul>
+
       
     </div>
     
@@ -1028,202 +478,38 @@
 
     <footer class="post-footer">
       
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/09/29/%E5%88%9D%E8%A7%81%E4%B8%B9%E4%B8%9C/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="crossoverpptx">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/me.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="crossoverpptx's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/09/29/%E5%88%9D%E8%A7%81%E4%B8%B9%E4%B8%9C/" itemprop="url">初见辽东</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-09-29T20:15:22+08:00">
-                2022-09-29
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2022-09-29T20:57:04+08:00">
-                2022-09-29
-              </time>
-            
-          </span>
-
+        <div class="post-tags">
           
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E9%9A%8F%E7%AC%94/" itemprop="url" rel="index">
-                    <span itemprop="name">随笔</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
+            <a href="/tags/C-C/" rel="tag"># C/C++</a>
           
-
+            <a href="/tags/C-11/" rel="tag"># C++11</a>
           
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  458
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  1
-                </span>
-              
-            </div>
-          
-
-          
-
         </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>时隔整整9个月，再一次来到学校，不过和上次不同的是，学校不在沈阳，而在丹东。作为学校和丹东首批的联合培养学生，刚被录取时得知这个消息我是有点担心的，感觉就像是“被抛弃了”。不过，后来我慢慢发现，这未尝不是一次不一样的人生旅程，毕竟到哪都是学习。</p>
-<p>于是，我怀着一丝憧憬，当然还有半分担忧（科研？论文？），踏上了开往丹东的动车。一个半小时的动车很快，中间我还小睡了一会。刚出站就看到了学校的迎新队伍，于是作为一个“新生”，混在了开往学校的大巴里。一切都很顺利，被志愿者领着来到宿舍，环境比想象的好得多，另一个室友还没来，现在是一个人独占两人寝。</p>
-<p>时间很快，转眼已是研二，一年半的联培时间相信也很快，我必须抓紧起来，学习，科研，还有生活。人们总是在熟悉了某个环境后就安于现状，或者说“被迫”安于现状。所以，我们必须时常审视自身，把眼光放长远，这样才不会落入时间的陷阱。</p>
-<p>人生就是一场奇遇，我永远也不曾想过会来到这样的边境城市，一个距离我的家乡几千公里的地方。可是这样的事情偏偏发生了，这就是命运吧！在这里，我还会遇到各种各样的人，发生各种各样的事，也许两三年后离开东北，我再也不会踏足这片土地，但我一定会记得我曾经在这里生活过，记得初见这里时的画面。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
       
 
       
       
-        <div class="post-eof"></div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2023/01/03/C-11%EF%BC%9A%E7%A7%BB%E5%8A%A8%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0/" rel="next" title="C++11：移动构造函数">
+                <i class="fa fa-chevron-left"></i> C++11：移动构造函数
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
       
     </footer>
   </div>
@@ -1233,14 +519,11 @@
   </article>
 
 
-    
-  </section>
 
-  
-  <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/3/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><a class="extend next" rel="next" href="/page/5/">&gt;</a>
-  </nav>
-
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -1248,6 +531,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -1518,6 +805,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
