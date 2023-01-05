@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Docker," />
+  <meta name="keywords" content="C/C++," />
 
 
 
@@ -83,16 +83,16 @@
 
 
 
-<meta name="description" content="Docker简介 Docker 是一个开源的应用容器引擎，让开发者可以打包他们的应用以及依赖包到一个可移植的容器中，然后发布到任何流行的Linux机器或Windows 机器上，也可以实现虚拟化，容器是完全使用沙箱机制，相互之间不会有任何接口。 一个完整的Docker由四个部分组成：Docker Client（客户端）、Docker Daemon（守护进程）、Docker Image（镜像）和Doc">
+<meta name="description" content="1. 什么是浅拷贝和深拷贝对于基本类型的数据以及简单的对象，它们之间的拷贝非常简单，就是按位复制内存。例如： 1234567891011121314151617class Base&amp;#123;public:    Base(): m_a(0), m_b(0)&amp;#123; &amp;#125;    Base(int a, int b): m_a(a), m_b(b)&amp;#123; &amp;#125;private">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Centos7.x系统中Docker安装及简单使用">
-<meta property="og:url" content="http://yoursite.com/2020/12/30/Centos7-x%E7%B3%BB%E7%BB%9F%E4%B8%ADDocker%E5%AE%89%E8%A3%85%E5%8F%8A%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/index.html">
+<meta property="og:title" content="C++：深拷贝和浅拷贝">
+<meta property="og:url" content="http://yoursite.com/2023/01/05/C-%EF%BC%9A%E6%B7%B1%E6%8B%B7%E8%B4%9D%E5%92%8C%E6%B5%85%E6%8B%B7%E8%B4%9D/index.html">
 <meta property="og:site_name" content="crossoverpptx&#39;s Blog">
-<meta property="og:description" content="Docker简介 Docker 是一个开源的应用容器引擎，让开发者可以打包他们的应用以及依赖包到一个可移植的容器中，然后发布到任何流行的Linux机器或Windows 机器上，也可以实现虚拟化，容器是完全使用沙箱机制，相互之间不会有任何接口。 一个完整的Docker由四个部分组成：Docker Client（客户端）、Docker Daemon（守护进程）、Docker Image（镜像）和Doc">
-<meta property="article:published_time" content="2020-12-30T02:33:44.000Z">
-<meta property="article:modified_time" content="2022-04-08T01:37:38.902Z">
+<meta property="og:description" content="1. 什么是浅拷贝和深拷贝对于基本类型的数据以及简单的对象，它们之间的拷贝非常简单，就是按位复制内存。例如： 1234567891011121314151617class Base&amp;#123;public:    Base(): m_a(0), m_b(0)&amp;#123; &amp;#125;    Base(int a, int b): m_a(a), m_b(b)&amp;#123; &amp;#125;private">
+<meta property="article:published_time" content="2023-01-05T01:14:15.000Z">
+<meta property="article:modified_time" content="2023-01-05T01:39:17.113Z">
 <meta property="article:author" content="crossoverpptx">
-<meta property="article:tag" content="Docker">
+<meta property="article:tag" content="C&#x2F;C++">
 <meta name="twitter:card" content="summary">
 
 
@@ -123,13 +123,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2020/12/30/Centos7-x系统中Docker安装及简单使用/"/>
+  <link rel="canonical" href="http://yoursite.com/2023/01/05/C-：深拷贝和浅拷贝/"/>
 
 
 
 
 
-  <title>Centos7.x系统中Docker安装及简单使用 | crossoverpptx's Blog</title>
+  <title>C++：深拷贝和浅拷贝 | crossoverpptx's Blog</title>
   
 
 
@@ -300,7 +300,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/12/30/Centos7-x%E7%B3%BB%E7%BB%9F%E4%B8%ADDocker%E5%AE%89%E8%A3%85%E5%8F%8A%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2023/01/05/C-%EF%BC%9A%E6%B7%B1%E6%8B%B7%E8%B4%9D%E5%92%8C%E6%B5%85%E6%8B%B7%E8%B4%9D/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="crossoverpptx">
@@ -317,7 +317,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Centos7.x系统中Docker安装及简单使用</h1>
+          <h1 class="post-title" itemprop="name headline">C++：深拷贝和浅拷贝</h1>
         
 
         <div class="post-meta">
@@ -329,8 +329,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-12-30T10:33:44+08:00">
-                2020-12-30
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2023-01-05T09:14:15+08:00">
+                2023-01-05
               </time>
             
 
@@ -345,8 +345,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2022-04-08T09:37:38+08:00">
-                2022-04-08
+              <time title="更新于" itemprop="dateModified" datetime="2023-01-05T09:39:17+08:00">
+                2023-01-05
               </time>
             
           </span>
@@ -364,8 +364,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%AE%B9%E5%99%A8/" itemprop="url" rel="index">
-                    <span itemprop="name">容器</span>
+                  <a href="/categories/C-C/" itemprop="url" rel="index">
+                    <span itemprop="name">C/C++</span>
                   </a>
                 </span>
 
@@ -400,7 +400,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  720
+                  1.6k
                 </span>
               
 
@@ -416,7 +416,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  3
+                  6
                 </span>
               
             </div>
@@ -437,43 +437,27 @@
       
 
       
-        <h2 id="Docker简介"><a href="#Docker简介" class="headerlink" title="Docker简介"></a>Docker简介</h2><ul>
-<li>Docker 是一个开源的应用容器引擎，让开发者可以打包他们的应用以及依赖包到一个可移植的容器中，然后发布到任何流行的Linux机器或Windows 机器上，也可以实现虚拟化，容器是完全使用沙箱机制，相互之间不会有任何接口。</li>
-<li>一个完整的Docker由四个部分组成：Docker Client（客户端）、Docker Daemon（守护进程）、Docker Image（镜像）和Docker Container（容器）。</li>
-<li>Docker 使用客户端-服务器 (C/S) 架构模式，使用远程API来管理和创建Docker容器。Docker 容器通过 Docker 镜像来创建。容器与镜像的关系类似于面向对象编程中的对象与类。</li>
-</ul>
-<a id="more"></a>
-<hr>
-<h2 id="环境要求"><a href="#环境要求" class="headerlink" title="环境要求"></a>环境要求</h2><pre><code>1、只能是64位的系统;
-2、要求centos7以上系统的内核版本不低于3.10。
-</code></pre><hr>
-<h2 id="安装步骤"><a href="#安装步骤" class="headerlink" title="安装步骤"></a>安装步骤</h2><p>1、移除旧版本的docker</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum remove docker docker-client docker-client-latest docker-common docker-latest docker-latest-logrotate docker-logrotate docker-selinux docker-engine-selinux docker-engine</span><br></pre></td></tr></table></figure>
-<p>2、安装依赖包</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y yum-utils device-mapper-persistent-data lvm2</span><br></pre></td></tr></table></figure>
-<p>3、添加yum软件源<br>非官方源(比如阿里云)</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo</span><br></pre></td></tr></table></figure>
-<p>官方源</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum-config-manager  --add-repo https://download.docker.com/linux/centos/docker-ce.repo</span><br></pre></td></tr></table></figure>
-<p>4、更新yum软件源缓存</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum makecache fast</span><br></pre></td></tr></table></figure>
-<p>5、安装docker</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum  -y install  docker-ce</span><br></pre></td></tr></table></figure>
-<p>安装时，如果报错出现rpm包无法找到，先手动通过wget下载该rpm包，然后重新执行安装命令即可。 </p>
-<hr>
-<h2 id="Docker镜像和容器的简单使用命令"><a href="#Docker镜像和容器的简单使用命令" class="headerlink" title="Docker镜像和容器的简单使用命令"></a>Docker镜像和容器的简单使用命令</h2><p>1、查看docker版本： docker  version<br>2、查询镜像： docker  search  imageName[镜像名称：如  centos]<br>3、获取镜像：docker  pull  imageName[镜像名称：如  centos]<br>4、列出镜像:  docker  image  ls<br>5、查询镜像体积：docker system df<br>6、删除镜像:docker  image rm  imagesID<br>7、启动容器： docker  run —name <em>*</em>  -p  port:port  -d  [镜像名] 或者 docker start [containerID/containerName]<br>8、退出容器：exit/docker  stop containerID<br>9、进入容器：docker  attach  containerID 或者 docker   exec  -it   containerID<br>10、删除容器：<br>1）删除处于终止状态的：docker  container  rm  [ID]<br>2）删除处于运行状态的：docker  container  rm  -f  [ID]<br>3）删除所有处于终止状态的：docker container prune </p>
-<hr>
-<h2 id="Docker安装Tomcat实例"><a href="#Docker安装Tomcat实例" class="headerlink" title="Docker安装Tomcat实例"></a>Docker安装Tomcat实例</h2><p>1、获取tomcat镜像: </p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker  pull  tomcat</span><br></pre></td></tr></table></figure>
-<p>2、新建并运行tomcat容器:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker run  --name  tomcat  -p <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">8080</span>:<span class="number">8080</span>    -d  tomcat</span><br><span class="line">docker run  --name  tomcat  -p <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">8080</span>:<span class="number">8080</span>    -d  tomcat --restart=always</span><br></pre></td></tr></table></figure>
-<pre><code>--name：容器名 
--p：后面接IP地址(可以不设)：接宿主机端口：容器端口  
--d：后台运行
-</code></pre><p>3、进入容器：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker   <span class="keyword">exec</span>/attach  -it  tomcat  bash</span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">exec</span>进入容器后使用exit命令退出容器，只会退出容器，让容器在后台继续运行</span><br><span class="line">attach进入容器后使用exit命令退出容器，会直接关闭容器</span><br><span class="line">-it：交互模式进入容器</span><br></pre></td></tr></table></figure>
-<p>4、退出tomcat容器：exit<br>5、停止tomcat容器：docker   stop   tomcat<br>6、启动tomcat容器：docker   start   tomcat<br>7、删除tomcat容器：docker   container    rm  -f  tomcat</p>
+        <h2 id="1-什么是浅拷贝和深拷贝"><a href="#1-什么是浅拷贝和深拷贝" class="headerlink" title="1. 什么是浅拷贝和深拷贝"></a>1. 什么是浅拷贝和深拷贝</h2><p>对于基本类型的数据以及简单的对象，它们之间的拷贝非常简单，就是按位复制内存。例如：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Base</span>&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    Base(): m_a(<span class="number">0</span>), m_b(<span class="number">0</span>)&#123; &#125;</span><br><span class="line">    Base(<span class="keyword">int</span> a, <span class="keyword">int</span> b): m_a(a), m_b(b)&#123; &#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">int</span> m_a;</span><br><span class="line">    <span class="keyword">int</span> m_b;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a = <span class="number">10</span>;</span><br><span class="line">    <span class="keyword">int</span> b = a;  <span class="comment">//拷贝</span></span><br><span class="line">    <span class="function">Base <span class="title">obj1</span><span class="params">(<span class="number">10</span>, <span class="number">20</span>)</span></span>;</span><br><span class="line">    Base obj2 = obj1;  <span class="comment">//拷贝</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>b 和 obj2 都是以拷贝的方式初始化的，具体来说，就是将 a 和 obj1 所在内存中的数据按照二进制位（Bit）复制到 b 和 obj2 所在的内存，这种默认的拷贝行为就是<strong>浅拷贝</strong>，这和调用 memcpy() 函数的效果非常类似。<a id="more"></a></p>
+<p>对于简单的类，默认的拷贝构造函数一般就够用了，我们也没有必要再显式地定义一个功能类似的拷贝构造函数。但是当类持有其它资源时，例如动态分配的内存、指向其他数据的指针等，默认的拷贝构造函数就不能拷贝这些资源了，我们必须显式地定义拷贝构造函数，以完整地拷贝对象的所有数据。</p>
+<p>下面通过一个具体的例子来说明显式定义拷贝构造函数的必要性。我们知道，有些较老的编译器不支持变长数组，例如 VC6.0、VS2010 等，这有时候会给编程带来不便，下面我们通过自定义的 Array 类来实现变长数组：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//变长数组类</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Array</span>&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    Array(<span class="keyword">int</span> len);</span><br><span class="line">    Array(<span class="keyword">const</span> Array &amp;arr);  <span class="comment">//拷贝构造函数</span></span><br><span class="line">    ~Array();</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">int</span> <span class="keyword">operator</span>[](<span class="keyword">int</span> i) <span class="keyword">const</span> &#123; <span class="keyword">return</span> m_p[i]; &#125;  <span class="comment">//获取元素（读取）</span></span><br><span class="line">    <span class="keyword">int</span> &amp;<span class="keyword">operator</span>[](<span class="keyword">int</span> i)&#123; <span class="keyword">return</span> m_p[i]; &#125;  <span class="comment">//获取元素（写入）</span></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">length</span><span class="params">()</span> <span class="keyword">const</span> </span>&#123; <span class="keyword">return</span> m_len; &#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">int</span> m_len;</span><br><span class="line">    <span class="keyword">int</span> *m_p;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">Array::Array(<span class="keyword">int</span> len): m_len(len)&#123;</span><br><span class="line">    m_p = (<span class="keyword">int</span>*)<span class="built_in">calloc</span>( len, <span class="keyword">sizeof</span>(<span class="keyword">int</span>) );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Array::Array(<span class="keyword">const</span> Array &amp;arr)&#123;  <span class="comment">//拷贝构造函数</span></span><br><span class="line">    <span class="keyword">this</span>-&gt;m_len = arr.m_len;</span><br><span class="line">    <span class="keyword">this</span>-&gt;m_p = (<span class="keyword">int</span>*)<span class="built_in">calloc</span>( <span class="keyword">this</span>-&gt;m_len, <span class="keyword">sizeof</span>(<span class="keyword">int</span>) );</span><br><span class="line">    <span class="built_in">memcpy</span>( <span class="keyword">this</span>-&gt;m_p, arr.m_p, m_len * <span class="keyword">sizeof</span>(<span class="keyword">int</span>) );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Array::~Array()&#123; <span class="built_in">free</span>(m_p); &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//打印数组元素</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">printArray</span><span class="params">(<span class="keyword">const</span> Array &amp;arr)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> len = arr.length();</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;len; i++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(i == len<span class="number">-1</span>)&#123;</span><br><span class="line">            <span class="built_in">cout</span>&lt;&lt;arr[i]&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="built_in">cout</span>&lt;&lt;arr[i]&lt;&lt;<span class="string">", "</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="function">Array <span class="title">arr1</span><span class="params">(<span class="number">10</span>)</span></span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;<span class="number">10</span>; i++)&#123;</span><br><span class="line">        arr1[i] = i;</span><br><span class="line">    &#125;</span><br><span class="line">   </span><br><span class="line">    Array arr2 = arr1;</span><br><span class="line">    arr2[<span class="number">5</span>] = <span class="number">100</span>;</span><br><span class="line">    arr2[<span class="number">3</span>] = <span class="number">29</span>;</span><br><span class="line">   </span><br><span class="line">    printArray(arr1);</span><br><span class="line">    printArray(arr2);</span><br><span class="line">   </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行结果：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span></span><br><span class="line"><span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">29</span>, <span class="number">4</span>, <span class="number">100</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span></span><br></pre></td></tr></table></figure>
+<p>上面的代码中，我们显式地定义了拷贝构造函数，它除了会将原有对象的所有成员变量拷贝给新对象，还会为新对象再分配一块内存，并将原有对象所持有的内存也拷贝过来。这样做的结果是，原有对象和新对象所持有的动态内存是相互独立的，更改一个对象的数据不会影响另外一个对象，本例中我们更改了 arr2 的数据，就没有影响 arr1。</p>
+<p><strong>这种将对象所持有的其它资源一并拷贝的行为叫做深拷贝，我们必须显式地定义拷贝构造函数才能达到深拷贝的目的。</strong></p>
+<p>深拷贝的例子比比皆是，除了上面的变长数组类，动态数组类也需要深拷贝；此外，标准模板库STL中的 string、vector、stack、set、map 等也都必须使用深拷贝。</p>
+<p>如果希望亲眼目睹不使用深拷贝的后果，可以将上例中的拷贝构造函数删除，那么运行结果将变为：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">29</span>, <span class="number">4</span>, <span class="number">100</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span></span><br><span class="line"><span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">29</span>, <span class="number">4</span>, <span class="number">100</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span></span><br></pre></td></tr></table></figure>
+<p>可以发现，更改 arr2 的数据也影响到了 arr1。这是因为，在创建 arr2 对象时，默认拷贝构造函数将 arr1.m_p 直接赋值给了 arr2.m_p，导致 arr2.m_p 和 arr1.m_p 指向了同一块内存，所以会相互影响。</p>
+<p>另外需要注意的是，printArray() 函数的形参为引用类型，这样做能够避免在传参时调用拷贝构造函数；又因为 printArray() 函数不会修改任何数组元素，所以我们添加了 const 限制，以使得语义更加明确。</p>
+<h2 id="2-到底是浅拷贝还是深拷贝"><a href="#2-到底是浅拷贝还是深拷贝" class="headerlink" title="2. 到底是浅拷贝还是深拷贝"></a>2. 到底是浅拷贝还是深拷贝</h2><p>如果一个类拥有指针类型的成员变量，那么绝大部分情况下就需要深拷贝，因为只有这样，才能将指针指向的内容再复制出一份来，让原有对象和新生对象相互独立，彼此之间不受影响。如果类的成员变量没有指针，一般浅拷贝足以。</p>
+<p>另外一种需要深拷贝的情况就是在创建对象时进行一些预处理工作，比如统计创建过的对象的数目、记录对象创建的时间等，比如下面的例子：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;ctime&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;windows.h&gt;  //在Linux和Mac下要换成 unistd.h 头文件</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Base</span>&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    Base(<span class="keyword">int</span> a = <span class="number">0</span>, <span class="keyword">int</span> b = <span class="number">0</span>);</span><br><span class="line">    Base(<span class="keyword">const</span> Base &amp;obj);  <span class="comment">//拷贝构造函数</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">getCount</span><span class="params">()</span> <span class="keyword">const</span> </span>&#123; <span class="keyword">return</span> m_count; &#125;</span><br><span class="line">    <span class="function"><span class="keyword">time_t</span> <span class="title">getTime</span><span class="params">()</span> <span class="keyword">const</span> </span>&#123; <span class="keyword">return</span> m_time; &#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">int</span> m_a;</span><br><span class="line">    <span class="keyword">int</span> m_b;</span><br><span class="line">    <span class="keyword">time_t</span> m_time;  <span class="comment">//对象创建时间</span></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">int</span> m_count;  <span class="comment">//创建过的对象的数目</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> Base::m_count = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">Base::Base(<span class="keyword">int</span> a, <span class="keyword">int</span> b): m_a(a), m_b(b)&#123;</span><br><span class="line">    m_count++;</span><br><span class="line">    m_time = time((<span class="keyword">time_t</span>*)<span class="literal">NULL</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Base::Base(<span class="keyword">const</span> Base &amp;obj)&#123;  <span class="comment">//拷贝构造函数</span></span><br><span class="line">    <span class="keyword">this</span>-&gt;m_a = obj.m_a;</span><br><span class="line">    <span class="keyword">this</span>-&gt;m_b = obj.m_b;</span><br><span class="line">    <span class="keyword">this</span>-&gt;m_count++;</span><br><span class="line">    <span class="keyword">this</span>-&gt;m_time = time((<span class="keyword">time_t</span>*)<span class="literal">NULL</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="function">Base <span class="title">obj1</span><span class="params">(<span class="number">10</span>, <span class="number">20</span>)</span></span>;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;<span class="string">"obj1: count = "</span>&lt;&lt;obj1.getCount()&lt;&lt;<span class="string">", time = "</span>&lt;&lt;obj1.getTime()&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">   </span><br><span class="line">    Sleep(<span class="number">3000</span>);  <span class="comment">//在Linux和Mac下要写作 sleep(3);</span></span><br><span class="line">   </span><br><span class="line">    Base obj2 = obj1;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;<span class="string">"obj2: count = "</span>&lt;&lt;obj2.getCount()&lt;&lt;<span class="string">", time = "</span>&lt;&lt;obj2.getTime()&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行结果：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">obj1: count = <span class="number">1</span>, time = <span class="number">1488344372</span></span><br><span class="line">obj2: count = <span class="number">2</span>, time = <span class="number">1488344375</span></span><br></pre></td></tr></table></figure>
+<p>运行程序，先输出第一行结果，等待 3 秒后再输出第二行结果。Base 类中的 m_time 和 m_count 分别记录了对象的创建时间和创建数目，它们在不同的对象中有不同的值，所以需要在初始化对象的时候提前处理一下，这样浅拷贝就不能胜任了，就必须使用深拷贝了。</p>
 
       
     </div>
@@ -491,7 +475,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Docker/" rel="tag"># Docker</a>
+            <a href="/tags/C-C/" rel="tag"># C/C++</a>
           
         </div>
       
@@ -504,8 +488,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/12/29/%E4%BF%A1%E4%BB%B0/" rel="next" title="信仰">
-                <i class="fa fa-chevron-left"></i> 信仰
+              <a href="/2023/01/04/C-11%EF%BC%9Amove%E5%87%BD%E6%95%B0%E5%B0%86%E5%B7%A6%E5%80%BC%E5%BC%BA%E5%88%B6%E8%BD%AC%E6%8D%A2%E4%B8%BA%E5%8F%B3%E5%80%BC/" rel="next" title="C++11：move函数将左值强制转换为右值">
+                <i class="fa fa-chevron-left"></i> C++11：move函数将左值强制转换为右值
               </a>
             
           </div>
@@ -513,10 +497,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2020/12/31/ESXi%E4%B8%8A%E4%BF%AE%E6%94%B9%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%A3%81%E7%9B%98%E6%89%87%E5%8C%BA%E5%A4%A7%E5%B0%8F%E4%B8%BA32%E7%9A%84%E7%AE%80%E6%98%93%E6%96%B9%E6%B3%95/" rel="prev" title="ESXi上修改虚拟机磁盘扇区大小为32的简易方法">
-                ESXi上修改虚拟机磁盘扇区大小为32的简易方法 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -673,7 +653,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Docker简介"><span class="nav-number">1.</span> <span class="nav-text">Docker简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#环境要求"><span class="nav-number">2.</span> <span class="nav-text">环境要求</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装步骤"><span class="nav-number">3.</span> <span class="nav-text">安装步骤</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Docker镜像和容器的简单使用命令"><span class="nav-number">4.</span> <span class="nav-text">Docker镜像和容器的简单使用命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Docker安装Tomcat实例"><span class="nav-number">5.</span> <span class="nav-text">Docker安装Tomcat实例</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-什么是浅拷贝和深拷贝"><span class="nav-number">1.</span> <span class="nav-text">1. 什么是浅拷贝和深拷贝</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-到底是浅拷贝还是深拷贝"><span class="nav-number">2.</span> <span class="nav-text">2. 到底是浅拷贝还是深拷贝</span></a></li></ol></div>
             
 
           </div>
