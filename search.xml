@@ -6207,4 +6207,42 @@ Gray(i,j)=0.299*R(i,j)+0.578*G(i,j)+0.114*B(i,j)</script><h1 id="3-图像灰度�
         <tag>图像处理</tag>
       </tags>
   </entry>
+  <entry>
+    <title>直方图均衡化</title>
+    <url>/2023/01/08/%E7%9B%B4%E6%96%B9%E5%9B%BE%E5%9D%87%E8%A1%A1%E5%8C%96/</url>
+    <content><![CDATA[<h2 id="1-图像直方图"><a href="#1-图像直方图" class="headerlink" title="1. 图像直方图"></a>1. 图像直方图</h2><p>图像直方图，是指对整个图像在灰度范围内的像素值(0-255)统计出现频率次数，据此生成的直方图，称为图像直方图或直方图。直方图反映了图像灰度的分布情况，是图像的统计学特征。也可以说，直方图是图像中像素强度分布的图形表达方式，它统计了每一个强度值所具有的像素个数。</p>
+<h2 id="2-直方图均衡化"><a href="#2-直方图均衡化" class="headerlink" title="2. 直方图均衡化"></a>2. 直方图均衡化</h2><p>直方图均衡化是以累计分布函数为核心，将原始图像灰度直方图从比较集中的某个灰度区间，非线性地映射为在全部灰度范围内的较均匀分布，从而增强对比度。</p>
+<a id="more"></a>
+<p>直方图均衡化的数学原理如下：<br>首先作原始图像灰度的概率直方图, 然后设输入像素灰度值为r<sub>k</sub>，累计分布函数为</p>
+<p><img src="/2023/01/08/%E7%9B%B4%E6%96%B9%E5%9B%BE%E5%9D%87%E8%A1%A1%E5%8C%96/2-1.png" alt></p>
+<p>其中n<sub>i</sub>为图像中灰度值为r<sub>i</sub>的像素频数，n为图像像素总数。设输出像素灰度值为s<sub>k</sub>，像素范围为s<sub>min</sub>-s<sub>max</sub>。期望输出灰度直方图是均匀分布，即</p>
+<p> <img src="/2023/01/08/%E7%9B%B4%E6%96%B9%E5%9B%BE%E5%9D%87%E8%A1%A1%E5%8C%96/2-2.png" alt></p>
+<p>令C(s<sub>k</sub>)=C(r<sub>k</sub>)，即得</p>
+<p> <img src="/2023/01/08/%E7%9B%B4%E6%96%B9%E5%9B%BE%E5%9D%87%E8%A1%A1%E5%8C%96/2-3.png" alt></p>
+<p>所以最终直方图均衡化的点算子为</p>
+<p> <img src="/2023/01/08/%E7%9B%B4%E6%96%B9%E5%9B%BE%E5%9D%87%E8%A1%A1%E5%8C%96/2-4.png" alt></p>
+<h2 id="3-直方图均衡化的Python实现"><a href="#3-直方图均衡化的Python实现" class="headerlink" title="3. 直方图均衡化的Python实现"></a>3. 直方图均衡化的Python实现</h2><p>根据直方图均衡化的数学原理，用Python实现代码如下：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2 <span class="keyword">as</span> cv</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 计算累计分布函数</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">C</span><span class="params">(rk)</span>:</span></span><br><span class="line">    <span class="comment"># 读取图片灰度直方图</span></span><br><span class="line">    <span class="comment"># bins为直方图直方柱的取值向量，hist为bins各取值区间上的频数取值</span></span><br><span class="line">    hist, bins = np.histogram(rk, <span class="number">256</span>, [<span class="number">0</span>, <span class="number">256</span>])</span><br><span class="line">    <span class="comment"># 计算累计分布函数</span></span><br><span class="line">    <span class="keyword">return</span> hist.cumsum()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 计算灰度均衡化映射</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">T</span><span class="params">(rk)</span>:</span></span><br><span class="line">    cdf = C(rk)</span><br><span class="line">    <span class="comment"># 均衡化</span></span><br><span class="line">    cdf = (cdf - cdf.min()) * (<span class="number">255</span> - <span class="number">0</span>) / (cdf.max() - cdf.min()) + <span class="number">0</span></span><br><span class="line">    <span class="comment">#cdf = 255.0 * cdf / cdf[-1]</span></span><br><span class="line">    <span class="keyword">return</span> cdf.astype(<span class="string">'uint8'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 读取图片</span></span><br><span class="line">img = cv.imread(<span class="string">'lenna.jpg'</span>, <span class="number">0</span>)</span><br><span class="line"><span class="comment"># 将二维数字图像矩阵转变为一维向量</span></span><br><span class="line">rk = img.flatten()</span><br><span class="line"><span class="comment"># 原始图像灰度直方图</span></span><br><span class="line">plt.hist(rk, <span class="number">256</span>, [<span class="number">0</span>, <span class="number">255</span>], color = <span class="string">'r'</span>)</span><br><span class="line"><span class="comment"># 直方图均衡化</span></span><br><span class="line">imgDst = T(rk)[img]     </span><br><span class="line">plt.hist(imgDst.flatten(), <span class="number">256</span>, [<span class="number">0</span>, <span class="number">255</span>], color = <span class="string">'b'</span>)</span><br><span class="line">plt.legend([<span class="string">'Before Equalization'</span>,<span class="string">'Equalization'</span>]) </span><br><span class="line">plt.show()</span><br><span class="line"><span class="comment"># 展示前后对比图像</span></span><br><span class="line">plt.subplot(<span class="number">121</span>), plt.imshow(img, cmap=<span class="string">'gray'</span>), plt.title(<span class="string">'Original Gray'</span>)</span><br><span class="line">plt.subplot(<span class="number">122</span>), plt.imshow(imgDst, cmap=<span class="string">'gray'</span>), plt.title(<span class="string">'Histogram Equalization'</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<p>均衡前后图像灰度直方图如下所示：</p>
+<p> <img src="/2023/01/08/%E7%9B%B4%E6%96%B9%E5%9B%BE%E5%9D%87%E8%A1%A1%E5%8C%96/3-1.png" alt></p>
+<p>直方图均衡化前后的图像对比如下所示：</p>
+<p><img src="/2023/01/08/%E7%9B%B4%E6%96%B9%E5%9B%BE%E5%9D%87%E8%A1%A1%E5%8C%96/3-2.png" alt></p>
+<h2 id="4-opencv-python中直方图均衡化的应用"><a href="#4-opencv-python中直方图均衡化的应用" class="headerlink" title="4. opencv-python中直方图均衡化的应用"></a>4. opencv-python中直方图均衡化的应用</h2><p>opencv-python中使用cv.equalizeHist函数即可实现直方图均衡化，其函数原型如下：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">dst=cv.equalizeHist(src[, dst])</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>注意：输入需是灰度图像。</p>
+</blockquote>
+<p>测试代码如下：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">img = cv.imread(<span class="string">'lenna.jpg'</span>, <span class="number">0</span>)</span><br><span class="line">dst = cv.equalizeHist(img)</span><br><span class="line">plt.subplot(<span class="number">121</span>), plt.imshow(img, cmap=<span class="string">'gray'</span>), plt.title(<span class="string">'Original Gray'</span>), plt.axis(<span class="string">'off'</span>)</span><br><span class="line">plt.subplot(<span class="number">122</span>), plt.imshow(dst, cmap=<span class="string">'gray'</span>), plt.title(<span class="string">'Histogram Equalization'</span>), plt.axis(<span class="string">'off'</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<p>效果如下：</p>
+<p> <img src="/2023/01/08/%E7%9B%B4%E6%96%B9%E5%9B%BE%E5%9D%87%E8%A1%A1%E5%8C%96/4.png" alt></p>
+]]></content>
+      <categories>
+        <category>计算机视觉</category>
+      </categories>
+      <tags>
+        <tag>计算机视觉</tag>
+        <tag>图像处理</tag>
+      </tags>
+  </entry>
 </search>
