@@ -99,7 +99,7 @@
 <meta property="og:image" content="http://yoursite.com/2023/01/06/%E5%9B%BE%E5%83%8F%E8%BE%B9%E7%BC%98%E6%A3%80%E6%B5%8B/2.2.1-1.png">
 <meta property="og:image" content="http://yoursite.com/2023/01/06/%E5%9B%BE%E5%83%8F%E8%BE%B9%E7%BC%98%E6%A3%80%E6%B5%8B/2.2.2-1.png">
 <meta property="article:published_time" content="2023-01-06T01:02:17.000Z">
-<meta property="article:modified_time" content="2023-01-06T01:49:06.972Z">
+<meta property="article:modified_time" content="2023-02-22T14:10:57.427Z">
 <meta property="article:author" content="crossoverpptx">
 <meta property="article:tag" content="计算机视觉">
 <meta property="article:tag" content="图像处理">
@@ -356,8 +356,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2023-01-06T09:49:06+08:00">
-                2023-01-06
+              <time title="更新于" itemprop="dateModified" datetime="2023-02-22T22:10:57+08:00">
+                2023-02-22
               </time>
             
           </span>
@@ -450,7 +450,7 @@
       
         <h2 id="1-什么是边缘检测"><a href="#1-什么是边缘检测" class="headerlink" title="1. 什么是边缘检测"></a>1. 什么是边缘检测</h2><p>边缘检测是图像处理与计算机视觉中的重要技术之一。其目的是检测识别出图像中亮度变化剧烈的像素点构成的集合。图像边缘的正确检测对于分析图像中的内容、实现图像中物体的分割、定位等具有重要的作用。边缘检测大大减少了源图像的数据量，剔除了与目标不相干的信息，保留了图像重要的结构属性。</p>
 <p>图像的边缘指的是图像中像素灰度值突然发生变化的区域，如果将图像的每一行像素和每一列像素都描述成一个关于灰度值的函数，那么图像的边缘对应在灰度值函数中是函数值突然变大的区域。函数值的变化趋势可以用函数的导数描述。当函数值突然变大时，导数也必然会变大，而函数值变化较为平缓区域，导数值也比较小，因此可以通过寻找导数值较大的区域去寻找函数中突然变化的区域，进而确定图像中的边缘位置。<a id="more"></a></p>
-<h2 id="2-边缘检测的常用方法及Python应用"><a href="#2-边缘检测的常用方法及Python应用" class="headerlink" title="2 边缘检测的常用方法及Python应用"></a>2 边缘检测的常用方法及Python应用</h2><p>边缘检测的方法大致可分为两类：基于搜索和基于零交叉。</p>
+<h2 id="2-边缘检测的常用方法及Python应用"><a href="#2-边缘检测的常用方法及Python应用" class="headerlink" title="2. 边缘检测的常用方法及Python应用"></a>2. 边缘检测的常用方法及Python应用</h2><p>边缘检测的方法大致可分为两类：基于搜索和基于零交叉。</p>
 <p>基于搜索的边缘检测方法：首先计算边缘强度，通常用一阶导数表示，例如梯度模，然后，计算估计边缘的局部方向，通常采用梯度的方向，并利用此方向找到局部梯度模的最大值。</p>
 <p>基于零交叉的边缘检测方法：找到由图像得到的二阶导数的零交叉点来定位边缘，通常用拉普拉斯算子或非线性微分方程的零交叉点。</p>
 <p>滤波作为边缘检测的预处理通常是必要的，通常采用高斯滤波。</p>
@@ -704,7 +704,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-什么是边缘检测"><span class="nav-number">1.</span> <span class="nav-text">1. 什么是边缘检测</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-边缘检测的常用方法及Python应用"><span class="nav-number">2.</span> <span class="nav-text">2 边缘检测的常用方法及Python应用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-一阶微分算子"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 一阶微分算子</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-1-Roberts算子"><span class="nav-number">2.1.1.</span> <span class="nav-text">2.1.1 Roberts算子</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-2-Prewitt算子"><span class="nav-number">2.1.2.</span> <span class="nav-text">2.1.2 Prewitt算子</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-3-Sobel算子"><span class="nav-number">2.1.3.</span> <span class="nav-text">2.1.3 Sobel算子</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-二阶微分算子"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 二阶微分算子</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-1-Laplacian算子"><span class="nav-number">2.2.1.</span> <span class="nav-text">2.2.1 Laplacian算子</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-2-Canny算子"><span class="nav-number">2.2.2.</span> <span class="nav-text">2.2.2 Canny算子</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-什么是边缘检测"><span class="nav-number">1.</span> <span class="nav-text">1. 什么是边缘检测</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-边缘检测的常用方法及Python应用"><span class="nav-number">2.</span> <span class="nav-text">2. 边缘检测的常用方法及Python应用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-一阶微分算子"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 一阶微分算子</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-1-Roberts算子"><span class="nav-number">2.1.1.</span> <span class="nav-text">2.1.1 Roberts算子</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-2-Prewitt算子"><span class="nav-number">2.1.2.</span> <span class="nav-text">2.1.2 Prewitt算子</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-3-Sobel算子"><span class="nav-number">2.1.3.</span> <span class="nav-text">2.1.3 Sobel算子</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-二阶微分算子"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 二阶微分算子</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-1-Laplacian算子"><span class="nav-number">2.2.1.</span> <span class="nav-text">2.2.1 Laplacian算子</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-2-Canny算子"><span class="nav-number">2.2.2.</span> <span class="nav-text">2.2.2 Canny算子</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
@@ -738,7 +738,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">137.3k</span>
+    <span title="Site words total count">138.1k</span>
   
 </div>
 
