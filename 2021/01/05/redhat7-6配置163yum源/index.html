@@ -649,17 +649,17 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#yum源简介"><span class="nav-number">1.</span> <span class="nav-text">yum源简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#确认版本"><span class="nav-number">2.</span> <span class="nav-text">确认版本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">3.</span> <span class="nav-text">1
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#yum源简介"><span class="nav-text">yum源简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#确认版本"><span class="nav-text">确认版本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-text">1
 2
 [root@promote ~]# cat &#x2F;etc&#x2F;redhat-release
 Red Hat Enterprise Linux Server release 7.6 (Maipo)
-</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#卸载本地yum"><span class="nav-number">4.</span> <span class="nav-text">卸载本地yum</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#-1"><span class="nav-number">5.</span> <span class="nav-text">1
+</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#卸载本地yum"><span class="nav-text">卸载本地yum</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#-1"><span class="nav-text">1
 2
 3
 rpm -qa|grep yum　　#查看本地yum
 rpm -qa|grep yum|xargs rpm -e --nodeps　　#卸载本地yum，不检查依赖性，卸载yum程序
 rpm -qa|grep yum    #再次查看是否正确卸载
-</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#下载yum相关程序"><span class="nav-number">6.</span> <span class="nav-text">下载yum相关程序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#-2"><span class="nav-number">7.</span> <span class="nav-text">1
+</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#下载yum相关程序"><span class="nav-text">下载yum相关程序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#-2"><span class="nav-text">1
 2
 3
 4
@@ -671,17 +671,17 @@ wget http:&#x2F;&#x2F;mirrors.163.com&#x2F;centos&#x2F;7&#x2F;os&#x2F;x86_64&#x2
 wget http:&#x2F;&#x2F;mirrors.163.com&#x2F;centos&#x2F;7&#x2F;os&#x2F;x86_64&#x2F;Packages&#x2F;yum-metadata-parser-1.1.4-10.el7.x86_64.rpm
 wget http:&#x2F;&#x2F;mirrors.163.com&#x2F;centos&#x2F;7&#x2F;os&#x2F;x86_64&#x2F;Packages&#x2F;yum-plugin-fastestmirror-1.1.31-54.el7_8.noarch.rpm
 wget http:&#x2F;&#x2F;mirrors.163.com&#x2F;centos&#x2F;7&#x2F;os&#x2F;x86_64&#x2F;Packages&#x2F;yum-utils-1.1.31-54.el7_8.noarch.rpm
-</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装yum程序"><span class="nav-number">8.</span> <span class="nav-text">安装yum程序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改repo文件"><span class="nav-number">9.</span> <span class="nav-text">修改repo文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#-3"><span class="nav-number">10.</span> <span class="nav-text">1
+</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装yum程序"><span class="nav-text">安装yum程序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改repo文件"><span class="nav-text">修改repo文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#-3"><span class="nav-text">1
 2
 vi CentOS7-Base-163.repo
 :%s&#x2F;$releasever&#x2F;7&#x2F;ge
-</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#清除并更新yum缓存"><span class="nav-number">11.</span> <span class="nav-text">清除并更新yum缓存</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#-4"><span class="nav-number">12.</span> <span class="nav-text">1
+</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#清除并更新yum缓存"><span class="nav-text">清除并更新yum缓存</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#-4"><span class="nav-text">1
 2
 3
 yum clean all&amp;yum makecache
 yum update
 yum repolist #验证结果
-</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#备注"><span class="nav-number">13.</span> <span class="nav-text">备注</span></a></li></ol></div>
+</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#备注"><span class="nav-text">备注</span></a></li></ol></div>
             
 
           </div>
