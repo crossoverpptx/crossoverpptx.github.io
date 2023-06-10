@@ -83,14 +83,14 @@
 
 
 
-<meta name="description" content="无序关联容器概述继 map、multimap、set、multiset 关联容器之后，本节介绍一类“特殊”的关联容器，它们常被称为“无序容器”、“哈希容器”或者“无序关联容器”。">
+<meta name="description" content="1. 无序关联容器1.1 概述继 map、multimap、set、multiset 关联容器之后，本节介绍一类“特殊”的关联容器，它们常被称为“无序容器”、“哈希容器”或者“无序关联容器”。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="C++STL：无序关联容器">
 <meta property="og:url" content="http://yoursite.com/2022/05/09/C-STL%EF%BC%9A%E6%97%A0%E5%BA%8F%E5%85%B3%E8%81%94%E5%AE%B9%E5%99%A8/index.html">
 <meta property="og:site_name" content="crossoverpptx&#39;s Blog">
-<meta property="og:description" content="无序关联容器概述继 map、multimap、set、multiset 关联容器之后，本节介绍一类“特殊”的关联容器，它们常被称为“无序容器”、“哈希容器”或者“无序关联容器”。">
+<meta property="og:description" content="1. 无序关联容器1.1 概述继 map、multimap、set、multiset 关联容器之后，本节介绍一类“特殊”的关联容器，它们常被称为“无序容器”、“哈希容器”或者“无序关联容器”。">
 <meta property="article:published_time" content="2022-05-09T09:46:20.000Z">
-<meta property="article:modified_time" content="2022-05-21T10:58:28.000Z">
+<meta property="article:modified_time" content="2023-06-10T08:42:26.373Z">
 <meta property="article:author" content="crossoverpptx">
 <meta property="article:tag" content="C&#x2F;C++">
 <meta property="article:tag" content="STL">
@@ -346,8 +346,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2022-05-21T18:58:28+08:00">
-                2022-05-21
+              <time title="更新于" itemprop="dateModified" datetime="2023-06-10T16:42:26+08:00">
+                2023-06-10
               </time>
             
           </span>
@@ -401,7 +401,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  16.6k
+                  16.7k
                 </span>
               
 
@@ -438,7 +438,7 @@
       
 
       
-        <h2 id="无序关联容器"><a href="#无序关联容器" class="headerlink" title="无序关联容器"></a>无序关联容器</h2><h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>继 map、multimap、set、multiset 关联容器之后，本节介绍一类“特殊”的关联容器，它们常被称为“无序容器”、“哈希容器”或者“无序关联容器”。<a id="more"></a></p>
+        <h2 id="1-无序关联容器"><a href="#1-无序关联容器" class="headerlink" title="1. 无序关联容器"></a>1. 无序关联容器</h2><h3 id="1-1-概述"><a href="#1-1-概述" class="headerlink" title="1.1 概述"></a>1.1 概述</h3><p>继 map、multimap、set、multiset 关联容器之后，本节介绍一类“特殊”的关联容器，它们常被称为“无序容器”、“哈希容器”或者“无序关联容器”。<a id="more"></a></p>
 <blockquote>
 <p>注意，无序容器是 C++ 11 标准才正式引入到 STL 标准库中的，这意味着如果要使用该类容器，则必须选择支持 C++ 11 标准的编译器。</p>
 </blockquote>
@@ -455,7 +455,7 @@
 <li>无序容器内部存储的键值对是无序的，各键值对的存储位置取决于该键值对中的键，</li>
 <li>和关联容器相比，无序容器擅长通过指定键查找对应的值（平均时间复杂度为 O(1)）；但对于使用迭代器遍历容器中存储的元素，无序容器的执行效率则不如关联容器。</li>
 </ol>
-<h3 id="无序容器种类"><a href="#无序容器种类" class="headerlink" title="无序容器种类"></a>无序容器种类</h3><p>和关联容器一样，无序容器只是一类容器的统称，其包含有 4 个具体容器，分别为 unordered_map、unordered_multimap、unordered_set 以及 unordered_multiset。</p>
+<h3 id="1-2-无序容器种类"><a href="#1-2-无序容器种类" class="headerlink" title="1.2 无序容器种类"></a>1.2 无序容器种类</h3><p>和关联容器一样，无序容器只是一类容器的统称，其包含有 4 个具体容器，分别为 unordered_map、unordered_multimap、unordered_set 以及 unordered_multiset。</p>
 <p>下表对这 4 种无序容器的功能做了详细的介绍：</p>
 <div class="table-container">
 <table>
@@ -494,7 +494,7 @@
 <p>程序执行结果为：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">str = http://c.biancheng.net/c/</span><br><span class="line">C语言教程 http://c.biancheng.net/c/</span><br><span class="line">Python教程 http://c.biancheng.net/python/</span><br><span class="line">Java教程 http://c.biancheng.net/java/</span><br></pre></td></tr></table></figure>
 <hr>
-<h2 id="unordered-map"><a href="#unordered-map" class="headerlink" title="unordered_map"></a>unordered_map</h2><h4 id="概述-1"><a href="#概述-1" class="headerlink" title="概述"></a>概述</h4><p>unordered_map 容器，直译过来就是”无序 map 容器”的意思。所谓“无序”，指的是 unordered_map 容器不会像 map 容器那样对存储的数据进行排序。换句话说，unordered_map 容器和 map 容器仅有一点不同，即 map 容器中存储的数据是有序的，而 unordered_map 容器中是无序的。</p>
+<h2 id="2-unordered-map"><a href="#2-unordered-map" class="headerlink" title="2. unordered_map"></a>2. unordered_map</h2><h4 id="2-1-概述"><a href="#2-1-概述" class="headerlink" title="2.1 概述"></a>2.1 概述</h4><p>unordered_map 容器，直译过来就是”无序 map 容器”的意思。所谓“无序”，指的是 unordered_map 容器不会像 map 容器那样对存储的数据进行排序。换句话说，unordered_map 容器和 map 容器仅有一点不同，即 map 容器中存储的数据是有序的，而 unordered_map 容器中是无序的。</p>
 <blockquote>
 <p>可以将 unordered_map 容器等价为无序的 map 容器。</p>
 </blockquote>
@@ -534,7 +534,7 @@
 <blockquote>
 <p>总的来说，当无序容器中存储键值对的键为自定义类型时，默认的哈希函数 hash 以及比较函数 equal_to 将不再适用，只能自己设计适用该类型的哈希函数和比较函数，并显式传递给 Hash 参数和 Pred 参数。</p>
 </blockquote>
-<h4 id="成员方法"><a href="#成员方法" class="headerlink" title="成员方法"></a>成员方法</h4><p>unordered_map 既可以看做是关联容器，更属于自成一脉的无序容器。因此在该容器模板类中，既包含一些在学习关联容器时常见的成员方法，还有一些属于无序容器特有的成员方法。下表列出了 unordered_map 类模板提供的所有常用的成员方法以及各自的功能：</p>
+<h4 id="2-2-成员方法"><a href="#2-2-成员方法" class="headerlink" title="2.2 成员方法"></a>2.2 成员方法</h4><p>unordered_map 既可以看做是关联容器，更属于自成一脉的无序容器。因此在该容器模板类中，既包含一些在学习关联容器时常见的成员方法，还有一些属于无序容器特有的成员方法。下表列出了 unordered_map 类模板提供的所有常用的成员方法以及各自的功能：</p>
 <div class="table-container">
 <table>
 <thead>
@@ -658,7 +658,7 @@
 <blockquote>
 <p>注意，对于实现互换 2 个相同类型 unordered_map 容器的键值对，除了可以调用该容器模板类中提供的 swap() 成员方法外，STL 标准库还提供了同名的 swap() 非成员函数。</p>
 </blockquote>
-<h4 id="创建C-unordered-map容器的方法"><a href="#创建C-unordered-map容器的方法" class="headerlink" title="创建C++ unordered_map容器的方法"></a>创建C++ unordered_map容器的方法</h4><p>常见的创建 unordered_map 容器的方法有以下几种。</p>
+<h4 id="2-3-创建C-unordered-map容器的方法"><a href="#2-3-创建C-unordered-map容器的方法" class="headerlink" title="2.3 创建C++ unordered_map容器的方法"></a>2.3 创建C++ unordered_map容器的方法</h4><p>常见的创建 unordered_map 容器的方法有以下几种。</p>
 <p>1) 通过调用 unordered_map 模板类的默认构造函数，可以创建空的 unordered_map 容器。比如：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">std</span>::<span class="built_in">unordered_map</span>&lt;<span class="built_in">std</span>::<span class="built_in">string</span>, <span class="built_in">std</span>::<span class="built_in">string</span>&gt; umap;</span><br></pre></td></tr></table></figure>
 <p>由此，就创建好了一个可存储 <string,string> 类型键值对的 unordered_map 容器。</string,string></p>
@@ -677,7 +677,7 @@
 <p>4) 当然，如果不想全部拷贝，可以使用 unordered_map 类模板提供的迭代器，在现有 unordered_map 容器中选择部分区域内的键值对，为新建 unordered_map 容器初始化。例如：</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 传入 2 个迭代器</span></span><br><span class="line">std::unordered_map&lt;std::string, std::string&gt; umap2(++umap.begin(),umap.end());</span><br></pre></td></tr></table></figure>
 <p>通过此方式创建的 umap2 容器，其内部就包含 umap 容器中除第 1 个键值对外的所有其它键值对。</p>
-<h4 id="迭代器"><a href="#迭代器" class="headerlink" title="迭代器"></a>迭代器</h4><p>C++ STL 标准库中，unordered_map 容器迭代器的类型为前向迭代器（又称正向迭代器）。这意味着，假设 p 是一个前向迭代器，则其只能进行 <code>*p、p++、++p</code> 操作，且 2 个前向迭代器之间只能用 <code>==</code> 和 <code>!=</code> 运算符做比较。</p>
+<h4 id="2-4-迭代器"><a href="#2-4-迭代器" class="headerlink" title="2.4 迭代器"></a>2.4 迭代器</h4><p>C++ STL 标准库中，unordered_map 容器迭代器的类型为前向迭代器（又称正向迭代器）。这意味着，假设 p 是一个前向迭代器，则其只能进行 <code>*p、p++、++p</code> 操作，且 2 个前向迭代器之间只能用 <code>==</code> 和 <code>!=</code> 运算符做比较。</p>
 <p>在 unordered_map 容器模板中，提供了下表所示的成员方法，可用来获取指向指定位置的前向迭代器。</p>
 <div class="table-container">
 <table>
@@ -734,7 +734,7 @@
 <blockquote>
 <p>经测试，用于遍历整个容器的 begin()/end() 和 cbegin()/cend() 迭代器对，重哈希只会影响遍历容器内键值对的顺序，整个遍历的操作仍然可以顺利完成。</p>
 </blockquote>
-<h4 id="C-STL-unordered-map获取元素的几种方法"><a href="#C-STL-unordered-map获取元素的几种方法" class="headerlink" title="C++ STL unordered_map获取元素的几种方法"></a>C++ STL unordered_map获取元素的几种方法</h4><p>为了方便用户快速地从该类型容器提取出目标元素（也就是某个键值对的值），unordered_map 容器类模板中提供了以下几种方法。</p>
+<h4 id="2-5-C-STL-unordered-map获取元素的几种方法"><a href="#2-5-C-STL-unordered-map获取元素的几种方法" class="headerlink" title="2.5 C++ STL unordered_map获取元素的几种方法"></a>2.5 C++ STL unordered_map获取元素的几种方法</h4><p>为了方便用户快速地从该类型容器提取出目标元素（也就是某个键值对的值），unordered_map 容器类模板中提供了以下几种方法。</p>
 <p>1) unordered_map 容器类模板中，实现了对 [ ] 运算符的重载，使得我们可以像“利用下标访问普通数组中元素”那样，通过目标键值对的键获取到该键对应的值。</p>
 <p>举个例子：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unordered_map&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 创建 umap 容器</span></span><br><span class="line">    <span class="built_in">unordered_map</span>&lt;<span class="built_in">string</span>, <span class="built_in">string</span>&gt; umap&#123;</span><br><span class="line">        &#123;<span class="string">"Python教程"</span>,<span class="string">"http://c.biancheng.net/python/"</span>&#125;,</span><br><span class="line">        &#123;<span class="string">"Java教程"</span>,<span class="string">"http://c.biancheng.net/java/"</span>&#125;,</span><br><span class="line">        &#123;<span class="string">"Linux教程"</span>,<span class="string">"http://c.biancheng.net/linux/"</span>&#125; &#125;;</span><br><span class="line">    <span class="comment">// 获取 "Java教程" 对应的值</span></span><br><span class="line">    <span class="built_in">string</span> str = umap[<span class="string">"Java教程"</span>];</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; str &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -773,7 +773,7 @@
 <blockquote>
 <p>以上 4 种方法中，前 2 种方法基本能满足多数场景的需要，建议初学者首选 at() 成员方法！</p>
 </blockquote>
-<h4 id="C-unordered-map-insert-方法"><a href="#C-unordered-map-insert-方法" class="headerlink" title="C++ unordered_map insert()方法"></a>C++ unordered_map insert()方法</h4><p>为了方便向已建 unordered_map 容器中添加新的键值对，该容器模板中提供了 insert() 方法，unordered_map 模板类中，提供了多种语法格式的 insert() 方法，根据功能的不同，可划分为以下几种用法。</p>
+<h4 id="2-6-C-unordered-map-insert-方法"><a href="#2-6-C-unordered-map-insert-方法" class="headerlink" title="2.6 C++ unordered_map insert()方法"></a>2.6 C++ unordered_map insert()方法</h4><p>为了方便向已建 unordered_map 容器中添加新的键值对，该容器模板中提供了 insert() 方法，unordered_map 模板类中，提供了多种语法格式的 insert() 方法，根据功能的不同，可划分为以下几种用法。</p>
 <p>1) insert() 方法可以将 pair 类型的键值对元素添加到 unordered_map 容器中，其语法格式有 2 种：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 以普通方式传递参数</span></span><br><span class="line">pair&lt;iterator,bool&gt; insert ( const value_type&amp; val );</span><br><span class="line"><span class="comment">// 以右值引用的方式传递参数</span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">P</span>&gt;</span></span><br><span class="line"><span class="class">  <span class="title">pair</span>&lt;iterator,bool&gt; <span class="title">insert</span> ( <span class="title">P</span>&amp;&amp; <span class="title">val</span> );</span></span><br></pre></td></tr></table></figure>
 <p>以上 2 种格式中，参数 val 表示要添加到容器中的目标键值对元素；该方法的返回值为 pair类型值，内部包含一个 iterator 迭代器和 bool 变量：</p>
@@ -814,8 +814,8 @@
 <p>程序输出结果为：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">STL教程 http://c.biancheng.net/stl/</span><br><span class="line">Python教程 http://c.biancheng.net/python/</span><br><span class="line">Java教程 http://c.biancheng.net/java/</span><br></pre></td></tr></table></figure>
 <p>总的来说，unordered_map 模板类提供的 insert() 方法有以上 4 种，我们可以根据实际场景的需要自行选择使用哪一种。</p>
-<h4 id="C-unordered-map-emplace-和emplace-hint-方法"><a href="#C-unordered-map-emplace-和emplace-hint-方法" class="headerlink" title="C++ unordered_map emplace()和emplace_hint()方法"></a>C++ unordered_map emplace()和emplace_hint()方法</h4><p>和前面学的 map、set 等容器一样，C++ 11 标准也为 unordered_map 容器新增了 emplace() 和 emplace_hint() 成员方法。我们知道，实现向已有 unordered_map 容器中添加新键值对，可以通过调用 insert() 方法，但其实还有更好的方法，即使用 emplace() 或者 emplace_hint() 方法，它们完成“向容器中添加新键值对”的效率，要比 insert() 方法高。</p>
-<h5 id="unordered-map-emplace-方法"><a href="#unordered-map-emplace-方法" class="headerlink" title="unordered_map emplace()方法"></a>unordered_map emplace()方法</h5><p>emplace() 方法的用法很简单，其语法格式如下：</p>
+<h4 id="2-7-C-unordered-map-emplace-和emplace-hint-方法"><a href="#2-7-C-unordered-map-emplace-和emplace-hint-方法" class="headerlink" title="2.7 C++ unordered_map emplace()和emplace_hint()方法"></a>2.7 C++ unordered_map emplace()和emplace_hint()方法</h4><p>和前面学的 map、set 等容器一样，C++ 11 标准也为 unordered_map 容器新增了 emplace() 和 emplace_hint() 成员方法。我们知道，实现向已有 unordered_map 容器中添加新键值对，可以通过调用 insert() 方法，但其实还有更好的方法，即使用 emplace() 或者 emplace_hint() 方法，它们完成“向容器中添加新键值对”的效率，要比 insert() 方法高。</p>
+<h5 id="2-7-1-unordered-map-emplace-方法"><a href="#2-7-1-unordered-map-emplace-方法" class="headerlink" title="2.7.1 unordered_map emplace()方法"></a>2.7.1 unordered_map emplace()方法</h5><p>emplace() 方法的用法很简单，其语法格式如下：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span>... <span class="title">Args</span>&gt;</span></span><br><span class="line"><span class="class">  <span class="title">pair</span>&lt;iterator, bool&gt; <span class="title">emplace</span> ( <span class="title">Args</span>&amp;&amp;... <span class="title">args</span> );</span></span><br></pre></td></tr></table></figure>
 <p>其中，参数 args 表示可直接向该方法传递创建新键值对所需要的 2 个元素的值，其中第一个元素将作为键值对的键，另一个作为键值对的值。也就是说，该方法无需我们手动创建键值对，其内部会自行完成此工作。</p>
 <p>另外需要注意的是，该方法的返回值为 pair 类型值，其包含一个迭代器和一个 bool 类型值：</p>
@@ -828,7 +828,7 @@
 <p>程序执行结果为：</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">bool =<span class="number">1</span></span><br><span class="line">iter -&gt;STL教程 http://c.biancheng.net/stl/</span><br></pre></td></tr></table></figure>
 <p>通过执行结果中 bool 变量的值为 1 可以得知，emplace() 方法成功将新键值对添加到了 umap 容器中。</p>
-<h5 id="unordered-map-emplace-hint-方法"><a href="#unordered-map-emplace-hint-方法" class="headerlink" title="unordered_map emplace_hint()方法"></a>unordered_map emplace_hint()方法</h5><p>emplace_hint() 方法的语法格式如下：</p>
+<h5 id="2-7-2-unordered-map-emplace-hint-方法"><a href="#2-7-2-unordered-map-emplace-hint-方法" class="headerlink" title="2.7.2 unordered_map emplace_hint()方法"></a>2.7.2 unordered_map emplace_hint()方法</h5><p>emplace_hint() 方法的语法格式如下：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span>... <span class="title">Args</span>&gt;</span></span><br><span class="line"><span class="class">  <span class="title">iterator</span> <span class="title">emplace_hint</span> ( <span class="title">const_iterator</span> <span class="title">position</span>, <span class="title">Args</span>&amp;&amp;... <span class="title">args</span> );</span></span><br></pre></td></tr></table></figure>
 <p>和 emplace() 方法相同，emplace_hint() 方法内部会自行构造新键值对，因此我们只需向其传递构建该键值对所需的 2 个元素（第一个作为键，另一个作为值）即可。不同之处在于：</p>
 <ul>
@@ -842,12 +842,12 @@
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unordered_map&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 创建 umap 容器</span></span><br><span class="line">    <span class="built_in">unordered_map</span>&lt;<span class="built_in">string</span>, <span class="built_in">string</span>&gt; umap;</span><br><span class="line">    <span class="comment">// 定义一个接受 emplace_hint() 方法的迭代器</span></span><br><span class="line">    <span class="built_in">unordered_map</span>&lt;<span class="built_in">string</span>,<span class="built_in">string</span>&gt;::iterator iter;</span><br><span class="line">    <span class="comment">// 调用 empalce_hint() 方法</span></span><br><span class="line">    iter = umap.emplace_hint(umap.<span class="built_in">begin</span>(),<span class="string">"STL教程"</span>, <span class="string">"http://c.biancheng.net/stl/"</span>);</span><br><span class="line">    <span class="comment">// 输出 emplace_hint() 返回迭代器 iter 指向的键值对的内容</span></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"iter -&gt;"</span> &lt;&lt; iter-&gt;first &lt;&lt; <span class="string">" "</span> &lt;&lt; iter-&gt;second &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>程序执行结果为：</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iter -&gt;STL教程 http://c.biancheng.net/stl/</span><br></pre></td></tr></table></figure>
-<h4 id="C-STL-unordered-map删除元素：erase-和clear"><a href="#C-STL-unordered-map删除元素：erase-和clear" class="headerlink" title="C++ STL unordered_map删除元素：erase()和clear()"></a>C++ STL unordered_map删除元素：erase()和clear()</h4><p>C++ STL 标准库为了方便用户可以随时删除 unordered_map 容器中存储的键值对，unordered_map 容器类模板中提供了以下 2 个成员方法：</p>
+<h4 id="2-8-C-STL-unordered-map删除元素：erase-和clear"><a href="#2-8-C-STL-unordered-map删除元素：erase-和clear" class="headerlink" title="2.8 C++ STL unordered_map删除元素：erase()和clear()"></a>2.8 C++ STL unordered_map删除元素：erase()和clear()</h4><p>C++ STL 标准库为了方便用户可以随时删除 unordered_map 容器中存储的键值对，unordered_map 容器类模板中提供了以下 2 个成员方法：</p>
 <ul>
 <li>erase()：删除 unordered_map 容器中指定的键值对；</li>
 <li>clear()：删除 unordered_map 容器中所有的键值对，即清空容器。</li>
 </ul>
-<h5 id="unordered-map-erase-方法"><a href="#unordered-map-erase-方法" class="headerlink" title="unordered_map erase()方法"></a>unordered_map erase()方法</h5><p>为了满足不同场景删除 unordered_map 容器中键值对的需要，此容器的类模板中提供了 3 种语法格式的 erase() 方法。</p>
+<h5 id="2-8-1-unordered-map-erase-方法"><a href="#2-8-1-unordered-map-erase-方法" class="headerlink" title="2.8.1 unordered_map erase()方法"></a>2.8.1 unordered_map erase()方法</h5><p>为了满足不同场景删除 unordered_map 容器中键值对的需要，此容器的类模板中提供了 3 种语法格式的 erase() 方法。</p>
 <p>1) erase() 方法可以接受一个正向迭代器，并删除该迭代器指向的键值对。该方法的语法格式如下：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">iterator <span class="title">erase</span> <span class="params">( const_iterator <span class="built_in">position</span> )</span></span>;</span><br></pre></td></tr></table></figure>
 <p>其中 position 为指向容器中某个键值对的迭代器，该方法会返回一个指向被删除键值对之后位置的迭代器。举个例子：</p>
@@ -870,7 +870,7 @@
 <p>其中 first 和 last 都是正向迭代器，[first, last) 范围内的所有键值对都会被 erase() 方法删除；同时，该方法会返回一个指向被删除的最后一个键值对之后一个位置的迭代器。举个例子：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unordered_map&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 创建 umap 容器</span></span><br><span class="line">    <span class="built_in">unordered_map</span>&lt;<span class="built_in">string</span>, <span class="built_in">string</span>&gt; umap&#123;</span><br><span class="line">        &#123;<span class="string">"STL教程"</span>, <span class="string">"http://c.biancheng.net/stl/"</span>&#125;,</span><br><span class="line">        &#123;<span class="string">"Python教程"</span>, <span class="string">"http://c.biancheng.net/python/"</span>&#125;,</span><br><span class="line">        &#123;<span class="string">"Java教程"</span>, <span class="string">"http://c.biancheng.net/java/"</span>&#125; &#125;;</span><br><span class="line">    <span class="comment">// first 指向第一个键值对</span></span><br><span class="line">    <span class="built_in">unordered_map</span>&lt;<span class="built_in">string</span>, <span class="built_in">string</span>&gt;::iterator first = umap.<span class="built_in">begin</span>();</span><br><span class="line">    <span class="comment">// last 指向最后一个键值对</span></span><br><span class="line">    <span class="built_in">unordered_map</span>&lt;<span class="built_in">string</span>, <span class="built_in">string</span>&gt;::iterator last = umap.<span class="built_in">end</span>();</span><br><span class="line">    <span class="comment">// 删除[fist,last)范围内的键值对</span></span><br><span class="line">    <span class="keyword">auto</span> ret = umap.erase(first, last);</span><br><span class="line">    <span class="comment">// 输出 umap 容器中存储的键值对</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span> iter = umap.<span class="built_in">begin</span>(); iter != umap.<span class="built_in">end</span>(); ++iter) &#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; iter-&gt;first &lt;&lt; <span class="string">" "</span> &lt;&lt; iter-&gt;second &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>执行程序会发现，没有输出任何数据，因为 erase() 方法删除了 umap 容器中 [begin(), end()) 范围内所有的元素。</p>
-<h5 id="unordered-map-clear-方法"><a href="#unordered-map-clear-方法" class="headerlink" title="unordered_map clear()方法"></a>unordered_map clear()方法</h5><p>在个别场景中，可能需要一次性删除 unordered_map 容器中存储的所有键值对，可以使用 clear() 方法，其语法格式如下：</p>
+<h5 id="2-8-2-unordered-map-clear-方法"><a href="#2-8-2-unordered-map-clear-方法" class="headerlink" title="2.8.2 unordered_map clear()方法"></a>2.8.2 unordered_map clear()方法</h5><p>在个别场景中，可能需要一次性删除 unordered_map 容器中存储的所有键值对，可以使用 clear() 方法，其语法格式如下：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">clear</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
 <p>举个例子：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unordered_map&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 创建 umap 容器</span></span><br><span class="line">    <span class="built_in">unordered_map</span>&lt;<span class="built_in">string</span>, <span class="built_in">string</span>&gt; umap&#123;</span><br><span class="line">        &#123;<span class="string">"STL教程"</span>, <span class="string">"http://c.biancheng.net/stl/"</span>&#125;,</span><br><span class="line">        &#123;<span class="string">"Python教程"</span>, <span class="string">"http://c.biancheng.net/python/"</span>&#125;,</span><br><span class="line">        &#123;<span class="string">"Java教程"</span>, <span class="string">"http://c.biancheng.net/java/"</span>&#125; &#125;;</span><br><span class="line">    <span class="comment">// 输出 umap 容器中存储的键值对</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span> iter = umap.<span class="built_in">begin</span>(); iter != umap.<span class="built_in">end</span>(); ++iter) &#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; iter-&gt;first &lt;&lt; <span class="string">" "</span> &lt;&lt; iter-&gt;second &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 删除容器内所有键值对</span></span><br><span class="line">    umap.<span class="built_in">clear</span>();</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"umap size = "</span> &lt;&lt; umap.<span class="built_in">size</span>() &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -881,7 +881,7 @@
 <p>注意，虽然使用 erase() 方法的第 3 种语法格式，可能实现删除 unordered_map 容器内所有的键值对，但更推荐使用 clear() 方法。</p>
 </blockquote>
 <hr>
-<h2 id="unordered-multimap"><a href="#unordered-multimap" class="headerlink" title="unordered_multimap"></a>unordered_multimap</h2><h3 id="概述-2"><a href="#概述-2" class="headerlink" title="概述"></a>概述</h3><p>C++ STL 标准库中，除了提供有 unordered_map 无序关联容器，还提供有和 unordered_map 容器非常相似的 unordered_multimap 无序关联容器。</p>
+<h2 id="3-unordered-multimap"><a href="#3-unordered-multimap" class="headerlink" title="3. unordered_multimap"></a>3. unordered_multimap</h2><h3 id="3-1-概述"><a href="#3-1-概述" class="headerlink" title="3.1 概述"></a>3.1 概述</h3><p>C++ STL 标准库中，除了提供有 unordered_map 无序关联容器，还提供有和 unordered_map 容器非常相似的 unordered_multimap 无序关联容器。</p>
 <p>和 unordered_map 容器一样，unordered_multimap 容器也以键值对的形式存储数据，且底层也采用哈希表结构存储各个键值对。两者唯一的不同之处在于，unordered_multimap 容器可以存储多个键相等的键值对，而 unordered_map 容器不行。</p>
 <blockquote>
 <p>无序容器中存储的各个键值对，都会哈希存到各个桶（本质为链表）中。而对于 unordered_multimap 容器来说，其存储的所有键值对中，键相等的键值对会被哈希到同一个桶中存储。</p>
@@ -919,7 +919,7 @@
 </table>
 </div>
 <p>注意，当 unordered_multimap 容器中存储键值对的键为自定义类型时，默认的哈希函数 hash\<key> 以及比较函数 equal_to\<key> 将不再适用，这种情况下，需要我们自定义适用的哈希函数和比较函数，并分别显式传递给 Hash 参数和 Pred 参数。</key></key></p>
-<h3 id="成员方法-1"><a href="#成员方法-1" class="headerlink" title="成员方法"></a>成员方法</h3><p>和 unordered_map 容器相比，unordered_multimap 容器的类模板中没有重载 [ ] 运算符，也没有提供 at() 成员方法，除此之外它们完全一致。</p>
+<h3 id="3-2-成员方法"><a href="#3-2-成员方法" class="headerlink" title="3.2 成员方法"></a>3.2 成员方法</h3><p>和 unordered_map 容器相比，unordered_multimap 容器的类模板中没有重载 [ ] 运算符，也没有提供 at() 成员方法，除此之外它们完全一致。</p>
 <blockquote>
 <p>没有提供 [ ] 运算符和 at() 成员方法，意味着 unordered_multimap 容器无法通过指定键获取该键对应的值，因为该容器允许存储多个键相等的键值对，每个指定的键可能对应多个不同的值。</p>
 </blockquote>
@@ -1039,7 +1039,7 @@
 <blockquote>
 <p>注意，对于实现互换 2 个相同类型 unordered_multimap 容器的键值对，除了可以调用该容器模板类中提供的 swap() 成员方法外，STL 标准库还提供了同名的 swap() 非成员函数。</p>
 </blockquote>
-<h3 id="创建C-unordered-multimap容器"><a href="#创建C-unordered-multimap容器" class="headerlink" title="创建C++ unordered_multimap容器"></a>创建C++ unordered_multimap容器</h3><p>常见的创建 unordered_map 容器的方法有以下几种。</p>
+<h3 id="3-3-创建C-unordered-multimap容器"><a href="#3-3-创建C-unordered-multimap容器" class="headerlink" title="3.3 创建C++ unordered_multimap容器"></a>3.3 创建C++ unordered_multimap容器</h3><p>常见的创建 unordered_map 容器的方法有以下几种。</p>
 <p>1) 利用 unordered_multimap 容器类模板中的默认构造函数，可以创建空的 unordered_multimap 容器。比如：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">std</span>::<span class="built_in">unordered_multimap</span>&lt;<span class="built_in">std</span>::<span class="built_in">string</span>, <span class="built_in">std</span>::<span class="built_in">string</span>&gt; myummap;</span><br></pre></td></tr></table></figure>
 <p>由此，就创建好了一个可存储 <string, string> 类型键值对的 unordered_multimap 容器，只不过当前容器是空的，即没有存储任何键值对。</string,></p>
@@ -1057,7 +1057,7 @@
 <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 传入 2 个迭代器</span></span><br><span class="line">std::unordered_multimap&lt;std::string, std::string&gt; myummap2(++myummap.begin(), myummap.end());</span><br></pre></td></tr></table></figure>
 <p>通过此方式创建的 myummap2 容器，其内部就包含 myummap 容器中除第 1 个键值对外的所有其它键值对。</p>
 <hr>
-<h2 id="unordered-set"><a href="#unordered-set" class="headerlink" title="unordered_set"></a>unordered_set</h2><h3 id="概述-3"><a href="#概述-3" class="headerlink" title="概述"></a>概述</h3><p>unordered_set 容器，可直译为“无序 set 容器”，即 unordered_set 容器和 set 容器很像，唯一的区别就在于 set 容器会自行对存储的数据进行排序，而 unordered_set 容器不会。</p>
+<h2 id="4-unordered-set"><a href="#4-unordered-set" class="headerlink" title="4. unordered_set"></a>4. unordered_set</h2><h3 id="4-1-概述"><a href="#4-1-概述" class="headerlink" title="4.1 概述"></a>4.1 概述</h3><p>unordered_set 容器，可直译为“无序 set 容器”，即 unordered_set 容器和 set 容器很像，唯一的区别就在于 set 容器会自行对存储的数据进行排序，而 unordered_set 容器不会。</p>
 <p>总的来说，unordered_set 容器具有以下几个特性：</p>
 <ol>
 <li>不再以键值对的形式存储数据，而是直接存储数据的值；</li>
@@ -1102,7 +1102,7 @@
 <blockquote>
 <p>注意，如果 unordered_set 容器中存储的元素为自定义的数据类型，则默认的哈希函数 hash\<key> 以及比较函数 equal_to\<key> 将不再适用，只能自己设计适用该类型的哈希函数和比较函数，并显式传递给 Hash 参数和 Pred 参数。</key></key></p>
 </blockquote>
-<h3 id="成员方法-2"><a href="#成员方法-2" class="headerlink" title="成员方法"></a>成员方法</h3><div class="table-container">
+<h3 id="4-2-成员方法"><a href="#4-2-成员方法" class="headerlink" title="4.2 成员方法"></a>4.2 成员方法</h3><div class="table-container">
 <table>
 <thead>
 <tr>
@@ -1216,7 +1216,7 @@
 </div>
 <p>注意，此容器模板类中没有重载 [ ] 运算符，也没有提供 at() 成员方法。不仅如此，由于 unordered_set 容器内部存储的元素值不能被修改，因此无论使用那个迭代器方法获得的迭代器，都不能用于修改容器中元素的值。</p>
 <p>另外，对于实现互换 2 个相同类型 unordered_set 容器的所有元素，除了调用上表中的 swap() 成员方法外，还可以使用 STL 标准库提供的 swap() 非成员函数，它们具有相同的名称，用法也相同（都只需要传入 2 个参数即可），仅是调用方式上有差别。</p>
-<h3 id="创建C-unordered-set容器"><a href="#创建C-unordered-set容器" class="headerlink" title="创建C++ unordered_set容器"></a>创建C++ unordered_set容器</h3><p>前面介绍了如何创建 unordered_map 和 unordered_multimap 容器，值得一提的是，创建它们的所有方式完全适用于 unordereded_set 容器。</p>
+<h3 id="4-3-创建C-unordered-set容器"><a href="#4-3-创建C-unordered-set容器" class="headerlink" title="4.3 创建C++ unordered_set容器"></a>4.3 创建C++ unordered_set容器</h3><p>前面介绍了如何创建 unordered_map 和 unordered_multimap 容器，值得一提的是，创建它们的所有方式完全适用于 unordereded_set 容器。</p>
 <p>1) 通过调用 unordered_set 模板类的默认构造函数，可以创建空的 unordered_set 容器。比如：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">std</span>::<span class="built_in">unordered_set</span>&lt;<span class="built_in">std</span>::<span class="built_in">string</span>&gt; uset;</span><br></pre></td></tr></table></figure>
 <p>由此，就创建好了一个可存储 string 类型值的 unordered_set 容器，该容器底层采用默认的哈希函数 hash\<Key> 和比较函数 equal_to\<Key>。</Key></Key></p>
@@ -1236,7 +1236,7 @@
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 传入 2 个迭代器</span></span><br><span class="line"><span class="function"><span class="built_in">std</span>::<span class="built_in">unordered_set</span>&lt;<span class="built_in">std</span>::<span class="built_in">string</span>&gt; <span class="title">uset2</span><span class="params">(++uset.<span class="built_in">begin</span>(),uset.<span class="built_in">end</span>())</span></span>;</span><br></pre></td></tr></table></figure>
 <p>通过此方式创建的 uset2 容器，其内部就包含 uset 容器中除第 1 个元素外的所有其它元素。</p>
 <hr>
-<h2 id="unordered-multiset"><a href="#unordered-multiset" class="headerlink" title="unordered_multiset"></a>unordered_multiset</h2><h3 id="概述-4"><a href="#概述-4" class="headerlink" title="概述"></a>概述</h3><p>前面章节介绍了 unordered_set 容器的特定和用法，在此基础上，本节再介绍一个类似的 C++ STL 无序容器，即 unordered_multiset 容器。</p>
+<h2 id="5-unordered-multiset"><a href="#5-unordered-multiset" class="headerlink" title="5. unordered_multiset"></a>5. unordered_multiset</h2><h3 id="5-1-概述"><a href="#5-1-概述" class="headerlink" title="5.1 概述"></a>5.1 概述</h3><p>前面章节介绍了 unordered_set 容器的特定和用法，在此基础上，本节再介绍一个类似的 C++ STL 无序容器，即 unordered_multiset 容器。</p>
 <p>所谓“类似”，指的是 unordered_multiset 容器大部分的特性都和 unordered_set 容器相同，包括：</p>
 <ol>
 <li>unordered_multiset 不以键值对的形式存储数据，而是直接存储数据的值；</li>
@@ -1282,7 +1282,7 @@
 <blockquote>
 <p>总之，如果 unordered_multiset 容器中存储的元素为自定义的数据类型，则默认的哈希函数 hash\<key> 以及比较函数 equal_to\<key> 将不再适用，只能自己设计适用该类型的哈希函数和比较函数，并显式传递给 Hash 参数和 Pred 参数。</key></key></p>
 </blockquote>
-<h3 id="成员函数"><a href="#成员函数" class="headerlink" title="成员函数"></a>成员函数</h3><p>unordered_multiset 模板类中提供的成员方法，无论是种类还是数量，都和 unordered_set 类模板一样，如下表所示：</p>
+<h3 id="5-2-成员函数"><a href="#5-2-成员函数" class="headerlink" title="5.2 成员函数"></a>5.2 成员函数</h3><p>unordered_multiset 模板类中提供的成员方法，无论是种类还是数量，都和 unordered_set 类模板一样，如下表所示：</p>
 <div class="table-container">
 <table>
 <thead>
@@ -1397,7 +1397,7 @@
 </div>
 <p>注意，和 unordered_set 容器一样，unordered_multiset 模板类也没有重载 [ ] 运算符，没有提供 at() 成员方法。不仅如此，无论是由哪个成员方法返回的迭代器，都不能用于修改容器中元素的值。</p>
 <p>另外，对于互换 2 个相同类型 unordered_multiset 容器存储的所有元素，除了调用上表中的 swap() 成员方法外，STL 标准库也提供了 swap() 非成员函数。</p>
-<h3 id="创建C-unordered-multiset容器"><a href="#创建C-unordered-multiset容器" class="headerlink" title="创建C++ unordered_multiset容器"></a>创建C++ unordered_multiset容器</h3><p>考虑到不同场景的需要，unordered_multiset 容器模板类共提供了以下 4 种创建 unordered_multiset 容器的方式。</p>
+<h3 id="5-3-创建C-unordered-multiset容器"><a href="#5-3-创建C-unordered-multiset容器" class="headerlink" title="5.3 创建C++ unordered_multiset容器"></a>5.3 创建C++ unordered_multiset容器</h3><p>考虑到不同场景的需要，unordered_multiset 容器模板类共提供了以下 4 种创建 unordered_multiset 容器的方式。</p>
 <p>1) 调用 unordered_multiset 模板类的默认构造函数，可以创建空的 unordered_multiset 容器。比如：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">std</span>::<span class="built_in">unordered_multiset</span>&lt;<span class="built_in">std</span>::<span class="built_in">string</span>&gt; umset;</span><br></pre></td></tr></table></figure>
 <p>由此，就创建好了一个可存储 string 类型值的 unordered_multiset 容器，该容器底层采用默认的哈希函数 hash\<Key> 和比较函数 equal_to\<Key>。</Key></Key></p>
@@ -1617,7 +1617,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#无序关联容器"><span class="nav-text">无序关联容器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#概述"><span class="nav-text">概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#无序容器种类"><span class="nav-text">无序容器种类</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#unordered-map"><span class="nav-text">unordered_map</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#概述-1"><span class="nav-text">概述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#成员方法"><span class="nav-text">成员方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#创建C-unordered-map容器的方法"><span class="nav-text">创建C++ unordered_map容器的方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#迭代器"><span class="nav-text">迭代器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#C-STL-unordered-map获取元素的几种方法"><span class="nav-text">C++ STL unordered_map获取元素的几种方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#C-unordered-map-insert-方法"><span class="nav-text">C++ unordered_map insert()方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#C-unordered-map-emplace-和emplace-hint-方法"><span class="nav-text">C++ unordered_map emplace()和emplace_hint()方法</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#unordered-map-emplace-方法"><span class="nav-text">unordered_map emplace()方法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#unordered-map-emplace-hint-方法"><span class="nav-text">unordered_map emplace_hint()方法</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#C-STL-unordered-map删除元素：erase-和clear"><span class="nav-text">C++ STL unordered_map删除元素：erase()和clear()</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#unordered-map-erase-方法"><span class="nav-text">unordered_map erase()方法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#unordered-map-clear-方法"><span class="nav-text">unordered_map clear()方法</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#unordered-multimap"><span class="nav-text">unordered_multimap</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#概述-2"><span class="nav-text">概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#成员方法-1"><span class="nav-text">成员方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建C-unordered-multimap容器"><span class="nav-text">创建C++ unordered_multimap容器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#unordered-set"><span class="nav-text">unordered_set</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#概述-3"><span class="nav-text">概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#成员方法-2"><span class="nav-text">成员方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建C-unordered-set容器"><span class="nav-text">创建C++ unordered_set容器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#unordered-multiset"><span class="nav-text">unordered_multiset</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#概述-4"><span class="nav-text">概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#成员函数"><span class="nav-text">成员函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建C-unordered-multiset容器"><span class="nav-text">创建C++ unordered_multiset容器</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-无序关联容器"><span class="nav-text">1. 无序关联容器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-概述"><span class="nav-text">1.1 概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-无序容器种类"><span class="nav-text">1.2 无序容器种类</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-unordered-map"><span class="nav-text">2. unordered_map</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-概述"><span class="nav-text">2.1 概述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-成员方法"><span class="nav-text">2.2 成员方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-创建C-unordered-map容器的方法"><span class="nav-text">2.3 创建C++ unordered_map容器的方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-4-迭代器"><span class="nav-text">2.4 迭代器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-5-C-STL-unordered-map获取元素的几种方法"><span class="nav-text">2.5 C++ STL unordered_map获取元素的几种方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-6-C-unordered-map-insert-方法"><span class="nav-text">2.6 C++ unordered_map insert()方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-7-C-unordered-map-emplace-和emplace-hint-方法"><span class="nav-text">2.7 C++ unordered_map emplace()和emplace_hint()方法</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#2-7-1-unordered-map-emplace-方法"><span class="nav-text">2.7.1 unordered_map emplace()方法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-7-2-unordered-map-emplace-hint-方法"><span class="nav-text">2.7.2 unordered_map emplace_hint()方法</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-8-C-STL-unordered-map删除元素：erase-和clear"><span class="nav-text">2.8 C++ STL unordered_map删除元素：erase()和clear()</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#2-8-1-unordered-map-erase-方法"><span class="nav-text">2.8.1 unordered_map erase()方法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-8-2-unordered-map-clear-方法"><span class="nav-text">2.8.2 unordered_map clear()方法</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-unordered-multimap"><span class="nav-text">3. unordered_multimap</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-概述"><span class="nav-text">3.1 概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-成员方法"><span class="nav-text">3.2 成员方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-创建C-unordered-multimap容器"><span class="nav-text">3.3 创建C++ unordered_multimap容器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-unordered-set"><span class="nav-text">4. unordered_set</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-概述"><span class="nav-text">4.1 概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-成员方法"><span class="nav-text">4.2 成员方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-创建C-unordered-set容器"><span class="nav-text">4.3 创建C++ unordered_set容器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-unordered-multiset"><span class="nav-text">5. unordered_multiset</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-概述"><span class="nav-text">5.1 概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-2-成员函数"><span class="nav-text">5.2 成员函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-3-创建C-unordered-multiset容器"><span class="nav-text">5.3 创建C++ unordered_multiset容器</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -1651,7 +1651,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">143.8k</span>
+    <span title="Site words total count">144.1k</span>
   
 </div>
 

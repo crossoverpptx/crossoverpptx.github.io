@@ -98,7 +98,7 @@
 <meta property="og:image" content="http://yoursite.com/2022/08/16/%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2/%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A207.jpg">
 <meta property="og:image" content="http://yoursite.com/2022/08/16/%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2/%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A208.jpg">
 <meta property="article:published_time" content="2022-08-16T06:29:31.000Z">
-<meta property="article:modified_time" content="2022-08-16T08:52:54.000Z">
+<meta property="article:modified_time" content="2023-06-10T08:35:04.173Z">
 <meta property="article:author" content="crossoverpptx">
 <meta property="article:tag" content="计算机视觉">
 <meta name="twitter:card" content="summary">
@@ -354,8 +354,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2022-08-16T16:52:54+08:00">
-                2022-08-16
+              <time title="更新于" itemprop="dateModified" datetime="2023-06-10T16:35:04+08:00">
+                2023-06-10
               </time>
             
           </span>
@@ -490,6 +490,7 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 读取图像</span></span><br><span class="line">img = cv2.imread(<span class="string">'lenna.jpg'</span>, <span class="number">0</span>)</span><br><span class="line"> </span><br><span class="line"><span class="comment"># 傅里叶变换</span></span><br><span class="line">dft = cv2.dft(np.float32(img), flags = cv2.DFT_COMPLEX_OUTPUT)</span><br><span class="line">dftshift = np.fft.fftshift(dft)</span><br><span class="line">res1= <span class="number">20</span>*np.log(cv2.magnitude(dftshift[:,:,<span class="number">0</span>], dftshift[:,:,<span class="number">1</span>]))</span><br><span class="line"> </span><br><span class="line"><span class="comment"># 傅里叶逆变换</span></span><br><span class="line">ishift = np.fft.ifftshift(dftshift)</span><br><span class="line">iimg = cv2.idft(ishift)</span><br><span class="line">res2 = cv2.magnitude(iimg[:,:,<span class="number">0</span>], iimg[:,:,<span class="number">1</span>])</span><br><span class="line"> </span><br><span class="line"><span class="comment"># 显示图像</span></span><br><span class="line">plt.subplot(<span class="number">131</span>), plt.imshow(img, <span class="string">'gray'</span>), plt.title(<span class="string">'Original Image'</span>)</span><br><span class="line">plt.axis(<span class="string">'off'</span>)</span><br><span class="line">plt.subplot(<span class="number">132</span>), plt.imshow(res1, <span class="string">'gray'</span>), plt.title(<span class="string">'Fourier Image'</span>)</span><br><span class="line">plt.axis(<span class="string">'off'</span>)</span><br><span class="line">plt.subplot(<span class="number">133</span>), plt.imshow(res2, <span class="string">'gray'</span>), plt.title(<span class="string">'Inverse Fourier Image'</span>)</span><br><span class="line">plt.axis(<span class="string">'off'</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
 <p>效果如下：</p>
 <p><img src="/2022/08/16/%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2/傅里叶变换08.jpg" alt></p>
+<h1 id="源码仓库地址"><a href="#源码仓库地址" class="headerlink" title="源码仓库地址"></a>源码仓库地址</h1><p>🌼 <a href="https://github.com/crossoverpptx/ImageProcessing" target="_blank" rel="noopener">图像处理、机器学习的常用算法汇总</a></p>
 
       
     </div>
@@ -689,7 +690,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#时域与频域"><span class="nav-text">时域与频域</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#傅里叶级数"><span class="nav-text">傅里叶级数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#傅里叶变换"><span class="nav-text">傅里叶变换</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#傅里叶变换分类"><span class="nav-text">傅里叶变换分类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一维傅里叶公式"><span class="nav-text">一维傅里叶公式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二维离散傅里叶变换"><span class="nav-text">二维离散傅里叶变换</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#OpenCV中傅里叶变换的应用"><span class="nav-text">OpenCV中傅里叶变换的应用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#傅里叶变换-1"><span class="nav-text">傅里叶变换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#傅里叶逆变换"><span class="nav-text">傅里叶逆变换</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#时域与频域"><span class="nav-text">时域与频域</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#傅里叶级数"><span class="nav-text">傅里叶级数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#傅里叶变换"><span class="nav-text">傅里叶变换</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#傅里叶变换分类"><span class="nav-text">傅里叶变换分类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一维傅里叶公式"><span class="nav-text">一维傅里叶公式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二维离散傅里叶变换"><span class="nav-text">二维离散傅里叶变换</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#OpenCV中傅里叶变换的应用"><span class="nav-text">OpenCV中傅里叶变换的应用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#傅里叶变换-1"><span class="nav-text">傅里叶变换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#傅里叶逆变换"><span class="nav-text">傅里叶逆变换</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#源码仓库地址"><span class="nav-text">源码仓库地址</span></a></li></ol></div>
             
 
           </div>
@@ -723,7 +724,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">143.8k</span>
+    <span title="Site words total count">144.1k</span>
   
 </div>
 

@@ -83,14 +83,14 @@
 
 
 
-<meta name="description" content="概述deque 是 double-ended queue 的缩写，又称双端队列容器。">
+<meta name="description" content="1. 概述deque 是 double-ended queue 的缩写，又称双端队列容器。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="C++STL：顺序容器之deque">
 <meta property="og:url" content="http://yoursite.com/2022/04/29/C-STL%EF%BC%9A%E9%A1%BA%E5%BA%8F%E5%AE%B9%E5%99%A8%E4%B9%8Bdeque/index.html">
 <meta property="og:site_name" content="crossoverpptx&#39;s Blog">
-<meta property="og:description" content="概述deque 是 double-ended queue 的缩写，又称双端队列容器。">
+<meta property="og:description" content="1. 概述deque 是 double-ended queue 的缩写，又称双端队列容器。">
 <meta property="article:published_time" content="2022-04-29T01:16:35.000Z">
-<meta property="article:modified_time" content="2022-05-19T10:25:36.000Z">
+<meta property="article:modified_time" content="2023-06-10T08:45:30.777Z">
 <meta property="article:author" content="crossoverpptx">
 <meta property="article:tag" content="C&#x2F;C++">
 <meta property="article:tag" content="STL">
@@ -346,8 +346,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2022-05-19T18:25:36+08:00">
-                2022-05-19
+              <time title="更新于" itemprop="dateModified" datetime="2023-06-10T16:45:30+08:00">
+                2023-06-10
               </time>
             
           </span>
@@ -438,7 +438,7 @@
       
 
       
-        <h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>deque 是 double-ended queue 的缩写，又称双端队列容器。<a id="more"></a>deque 容器和 vecotr 容器有很多相似之处，比如：</p>
+        <h3 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h3><p>deque 是 double-ended queue 的缩写，又称双端队列容器。<a id="more"></a>deque 容器和 vecotr 容器有很多相似之处，比如：</p>
 <ul>
 <li>deque 容器也擅长在序列尾部添加或删除元素（时间复杂度为O(1)），而不擅长在序列中间添加或删除元素。</li>
 <li>deque 容器也可以根据需要修改自身的容量和大小。</li>
@@ -449,7 +449,7 @@
 </blockquote>
 <p>deque 容器以模板类 deque\<T>（T 为存储元素的类型）的形式在 \<deque> 头文件中，并位于 std 命名空间中。因此，在使用该容器之前，代码中需要包含下面两行代码：</deque></T></p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;deque&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br></pre></td></tr></table></figure>
-<h3 id="成员函数"><a href="#成员函数" class="headerlink" title="成员函数"></a>成员函数</h3><p>基于 deque 双端队列的特点，该容器包含一些 array、vector 容器都没有的成员函数，如下表所示：</p>
+<h3 id="2-成员函数"><a href="#2-成员函数" class="headerlink" title="2. 成员函数"></a>2. 成员函数</h3><p>基于 deque 双端队列的特点，该容器包含一些 array、vector 容器都没有的成员函数，如下表所示：</p>
 <div class="table-container">
 <table>
 <thead>
@@ -579,7 +579,7 @@
 </blockquote>
 <p>和 array、vector 相同，C++ 11 标准库新增的 begin() 和 end() 这 2 个全局函数也适用于 deque 容器。这 2 个函数的操作对象既可以是容器，也可以是普通数组。当操作对象是容器时，它和容器包含的 begin() 和 end() 成员函数的功能完全相同；如果操作对象是普通数组，则 begin() 函数返回的是指向数组第一个元素的指针，同样 end() 返回指向数组中最后一个元素之后一个位置的指针（注意不是最后一个元素）。</p>
 <p>deque 容器还有一个<code>std::swap(x , y)</code> 非成员函数（其中 x 和 y 是存储相同类型元素的 deque 容器），它和 swap() 成员函数的功能完全相同，仅使用语法上有差异。</p>
-<h3 id="创建deque容器的几种方式"><a href="#创建deque容器的几种方式" class="headerlink" title="创建deque容器的几种方式"></a>创建deque容器的几种方式</h3><p>创建 deque 容器，根据不同的实际场景，可选择使用如下几种方式。</p>
+<h3 id="3-创建deque容器的几种方式"><a href="#3-创建deque容器的几种方式" class="headerlink" title="3. 创建deque容器的几种方式"></a>3. 创建deque容器的几种方式</h3><p>创建 deque 容器，根据不同的实际场景，可选择使用如下几种方式。</p>
 <p>1) 创建一个没有任何元素的空 deque 容器：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">std</span>::<span class="built_in">deque</span>&lt;<span class="keyword">int</span>&gt; d;</span><br></pre></td></tr></table></figure>
 <p>和空 array 容器不同，空的 deque 容器在创建之后可以做添加或删除元素的操作，因此这种简单创建 deque 容器的方式比较常见。</p>
@@ -594,7 +594,7 @@
 <p>注意，采用此方式，必须保证新旧容器存储的元素类型一致。</p>
 <p>5) 通过拷贝其他类型容器中指定区域内的元素（也可以是普通数组），也可以创建一个新容器，例如：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 拷贝普通数组，创建 deque 容器</span></span><br><span class="line"><span class="keyword">int</span> a[] = &#123; <span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span> &#125;;</span><br><span class="line"><span class="function"><span class="built_in">std</span>::<span class="built_in">deque</span>&lt;<span class="keyword">int</span>&gt; <span class="title">d</span><span class="params">(a, a + <span class="number">5</span>)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 适用于所有类型的容器</span></span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">array</span>&lt;<span class="keyword">int</span>, 5&gt; arr&#123; <span class="number">11</span>,<span class="number">12</span>,<span class="number">13</span>,<span class="number">14</span>,<span class="number">15</span> &#125;;</span><br><span class="line"><span class="function"><span class="built_in">std</span>::<span class="built_in">deque</span>&lt;<span class="keyword">int</span>&gt; <span class="title">d</span><span class="params">(arr.<span class="built_in">begin</span>() + <span class="number">2</span>, arr.<span class="built_in">end</span>())</span></span>; <span class="comment">// 拷贝 arr 容器中的&#123;13,14,15&#125;</span></span><br></pre></td></tr></table></figure>
-<h3 id="迭代器"><a href="#迭代器" class="headerlink" title="迭代器"></a>迭代器</h3><p>deque 容器迭代器的类型为随机访问迭代器，deque 模板类提供了下表所示这些成员函数，通过调用这些函数，可以获得表示不同含义的随机访问迭代器。</p>
+<h3 id="4-迭代器"><a href="#4-迭代器" class="headerlink" title="4. 迭代器"></a>4. 迭代器</h3><p>deque 容器迭代器的类型为随机访问迭代器，deque 模板类提供了下表所示这些成员函数，通过调用这些函数，可以获得表示不同含义的随机访问迭代器。</p>
 <div class="table-container">
 <table>
 <thead>
@@ -680,7 +680,7 @@
 <blockquote>
 <p>在对容器做添加元素的操作之后，如果仍需要使用之前以创建好的迭代器，为了保险起见，一定要重新生成。</p>
 </blockquote>
-<h3 id="访问元素"><a href="#访问元素" class="headerlink" title="访问元素"></a>访问元素</h3><p>1) 和 array、vector 容器一样，可以采用普通数组访问存储元素的方式，访问 deque 容器中的元素，比如：</p>
+<h3 id="5-访问元素"><a href="#5-访问元素" class="headerlink" title="5. 访问元素"></a>5. 访问元素</h3><p>1) 和 array、vector 容器一样，可以采用普通数组访问存储元素的方式，访问 deque 容器中的元素，比如：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;deque&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">deque</span>&lt;<span class="keyword">int</span>&gt; d&#123; <span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span> &#125;;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; d[<span class="number">1</span>] &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="comment">// 修改指定下标位置处的元素</span></span><br><span class="line">    d[<span class="number">1</span>] = <span class="number">5</span>;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; d[<span class="number">1</span>] &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>运行结果为：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">2</span></span><br><span class="line"><span class="number">5</span></span><br></pre></td></tr></table></figure>
@@ -703,7 +703,7 @@
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;deque&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">deque</span>&lt;<span class="keyword">int</span>&gt; d&#123; <span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span> &#125;;</span><br><span class="line">    <span class="comment">// 从元素 2 开始遍历</span></span><br><span class="line">    <span class="keyword">auto</span> first = d.<span class="built_in">begin</span>() + <span class="number">1</span>;</span><br><span class="line">    <span class="comment">// 遍历至 5 结束（不包括 5）</span></span><br><span class="line">    <span class="keyword">auto</span> <span class="built_in">end</span> = d.<span class="built_in">end</span>() - <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span> (first &lt; <span class="built_in">end</span>) &#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; *first &lt;&lt; <span class="string">" "</span>;</span><br><span class="line">        ++first;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>运行结果为：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">2</span> <span class="number">3</span> <span class="number">4</span></span><br></pre></td></tr></table></figure>
-<h3 id="添加和删除元素"><a href="#添加和删除元素" class="headerlink" title="添加和删除元素"></a>添加和删除元素</h3><p>deque 容器中，无论是添加元素还是删除元素，都只能借助 deque 模板类提供的成员函数。下表中罗列的是所有和添加或删除容器内元素相关的 deque 模板类中的成员函数。</p>
+<h3 id="6-添加和删除元素"><a href="#6-添加和删除元素" class="headerlink" title="6. 添加和删除元素"></a>6. 添加和删除元素</h3><p>deque 容器中，无论是添加元素还是删除元素，都只能借助 deque 模板类提供的成员函数。下表中罗列的是所有和添加或删除容器内元素相关的 deque 模板类中的成员函数。</p>
 <div class="table-container">
 <table>
 <thead>
@@ -1002,7 +1002,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#概述"><span class="nav-text">概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#成员函数"><span class="nav-text">成员函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建deque容器的几种方式"><span class="nav-text">创建deque容器的几种方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#迭代器"><span class="nav-text">迭代器</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#deque容器迭代器的基本用法"><span class="nav-text">deque容器迭代器的基本用法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#deque容器迭代器的使用注意事项"><span class="nav-text">deque容器迭代器的使用注意事项</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#访问元素"><span class="nav-text">访问元素</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#添加和删除元素"><span class="nav-text">添加和删除元素</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#insert"><span class="nav-text">insert</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#emplace系列函数的优势"><span class="nav-text">emplace系列函数的优势</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-概述"><span class="nav-text">1. 概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-成员函数"><span class="nav-text">2. 成员函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-创建deque容器的几种方式"><span class="nav-text">3. 创建deque容器的几种方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-迭代器"><span class="nav-text">4. 迭代器</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#deque容器迭代器的基本用法"><span class="nav-text">deque容器迭代器的基本用法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#deque容器迭代器的使用注意事项"><span class="nav-text">deque容器迭代器的使用注意事项</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-访问元素"><span class="nav-text">5. 访问元素</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-添加和删除元素"><span class="nav-text">6. 添加和删除元素</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#insert"><span class="nav-text">insert</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#emplace系列函数的优势"><span class="nav-text">emplace系列函数的优势</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -1036,7 +1036,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">143.8k</span>
+    <span title="Site words total count">144.1k</span>
   
 </div>
 
