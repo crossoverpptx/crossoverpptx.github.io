@@ -92,7 +92,7 @@
 <meta property="og:image" content="http://yoursite.com/2023/06/12/LBP%E7%89%B9%E5%BE%81%E6%8F%90%E5%8F%96/3.png">
 <meta property="og:image" content="http://yoursite.com/2023/06/12/LBP%E7%89%B9%E5%BE%81%E6%8F%90%E5%8F%96/4.png">
 <meta property="article:published_time" content="2023-06-12T00:49:17.000Z">
-<meta property="article:modified_time" content="2023-06-12T01:00:36.131Z">
+<meta property="article:modified_time" content="2023-06-12T01:06:40.068Z">
 <meta property="article:author" content="crossoverpptx">
 <meta property="article:tag" content="机器学习">
 <meta property="article:tag" content="特征提取">
@@ -349,7 +349,7 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2023-06-12T09:00:36+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2023-06-12T09:06:40+08:00">
                 2023-06-12
               </time>
             
@@ -448,14 +448,25 @@
 <h2 id="1-4-Uniform-Pattern-LBP"><a href="#1-4-Uniform-Pattern-LBP" class="headerlink" title="1.4 Uniform Pattern LBP"></a>1.4 Uniform Pattern LBP</h2><p>为了解决二进制模式过多的问题，提高统计性，Ojala提出了采用一种“等价模式”(Uniform Pattern)来对LBP算子的模式种类进行降维。Ojala等认为，在实际图像中，绝大多数LBP模式最多只包含两次从1到0或从0到1的跳变。因此，Ojala将“等价模式”定义为：当某个LBP所对应的循环二进制数从0到1或从1到0最多有两次跳变时，该LBP所对应的二进制就称为一个等价模式类。如00000000(0次跳变)，00000111(只含一次从0到1的跳变)，10001111(先由1跳到0，再由0跳到1，共两次跳变)都是等价模式类。除等价模式类以外的模式都归为另一类，称为混合模式类，例如10010111(共四次跳变)。通过这样的改进，二进制模式的种类大大减少，而不会丢失任何信息。模式数量由原来的2P种减少为P(P-1)+2种，其中P表示邻域集内的采样点数。对于3*3邻域内8个采样点来说，二进制模式由原始的256种减少为58种，即：它把值分为59类，58个uniform pattern为一类，其它的所有值为第59类。这样直方图从原来的256维变成59维。这使得特征向量的维数更少，并且可以减少高频噪声带来的影响。具体实现如下：</p>
 <p>采样点数目为8个，即LBP特征值有28种，共256个值，正好对应灰度图像的0-255，因此原始的LBP特征图像是一幅正常的灰度图像，而等价模式LBP特征，根据0-1跳变次数，将这256个LBP特征值分为了59类，从跳变次数上划分：跳变0次—2个，跳变1次—0个，跳变2次—56个，跳变3次—0个，跳变4次—140个，跳变5次—0个，跳变6次—56个，跳变7次—0个，跳变8次—2个。共9种跳变情况，将这256个值进行分配，跳变小于2次的为等价模式类，共58个，他们对应的值按照从小到大分别编码为1-58，即它们在LBP特征图像中的灰度值为1-58，而除了等价模式类之外的混合模式类被编码为0，即它们在LBP特征中的灰度值为0，因此等价模式LBP特征图像整体偏暗。</p>
 <h2 id="1-5-MB-LBP"><a href="#1-5-MB-LBP" class="headerlink" title="1.5 MB-LBP"></a>1.5 MB-LBP</h2><p>MB-LBP的原理：将图像分成一个个小块（Block），每个小块再分为一个个的小区域（类似于HOG中的cell），小区域内的灰度平均值作为当前小区域的灰度值，与周围小区域灰度进行比较形成LBP特征，生成的特征称为MB-LBP，Block大小为3<em>3，则小区域的大小为1，就是原始的LBP特征，Block大小为9</em>9，小区域的大小为3*3。接下来对得到LBP特征进行均值模式编码，通过对得到的特征图求直方图，得到了LBP特征值0-255之间(0-255即直方图中的bin)的特征数量，通过对bin中的数值进行排序，通过权衡，将排序在前63位的特征值看作是等价模式类，其他的为混合模式类，总共64类，作者在论文中称之为SEMB-LBP(Statistically Effective MB-LBP)。类似于等价模式LBP，等价模式的LBP的等价模式类为58种，混合模式类1种，共59种。二者除了等价模式类的数量不同之外，主要区别在于：对等价模式类的定义不同，等价模式LBP是根据0-1的跳变次数定义的，而SEMB-LBP是通过对直方图排序得到的。</p>
-<h1 id="2-对于边缘点的处理"><a href="#2-对于边缘点的处理" class="headerlink" title="2. 对于边缘点的处理"></a>2. 对于边缘点的处理</h1><p>对于图像边缘的点，由于通常不能用上述方法来处理成LBP特征点，一般来说有以下几种处理方法：</p>
-<p>（1）将边缘的提取不到周围特征的点不进行LBP处理，结果LBP特征图片的像素点会比之前少。</p>
-<p>（2）将边缘不存在的邻域点值设置为0。</p>
-<p>（3）将边缘的提取不到周围特征的点用原像素点的值取代。</p>
+<h1 id="2-对于边缘点的处理"><a href="#2-对于边缘点的处理" class="headerlink" title="2. 对于边缘点的处理"></a>2. 对于边缘点的处理</h1><p>对于图像边缘的点，由于通常不能用上述方法来处理成LBP特征点，一般来说有以下几种处理方法：<br>（1）将边缘的提取不到周围特征的点不进行LBP处理，结果LBP特征图片的像素点会比之前少。<br>（2）将边缘不存在的邻域点值设置为0。<br>（3）将边缘的提取不到周围特征的点用原像素点的值取代。</p>
 <h1 id="3-LBP的Python应用"><a href="#3-LBP的Python应用" class="headerlink" title="3. LBP的Python应用"></a>3. LBP的Python应用</h1><p>Python skimage库中使用local_binary_pattern函数实现LBP提取特征，其函数原型如下：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">local_binary_pattern(image, P, R, method=<span class="string">'default'</span>)</span><br></pre></td></tr></table></figure>
 <blockquote>
-<p>参数说明：<br>image：（N，M）阵列Graylevel图像。<br>P：int圆对称邻居设置点的数量（角度空间的量化）。<br>R：float圆的半径（操作员的空间分辨率）。<br>method：{‘default’，‘ror’，‘uniform’，‘var’}确定模式的方法。<br>    ‘default’：原始的局部二值模式，它是灰度但不是旋转不变的。<br>    ‘ror’：扩展灰度和旋转不变的默认实现。<br>    ‘uniform’：改进的旋转不变性和均匀的模式以及角度空间的更精细的量化，灰度和旋转不变。<br>    ‘nri_uniform’：非旋转不变的均匀图案变体，它只是灰度不变的R199。<br>    ‘VAR’：局部对比度的旋转不变方差度量，图像纹理是旋转但不是灰度不变的。</p>
+<p>参数说明：</p>
+<ul>
+<li>image：（N，M）阵列Graylevel图像。</li>
+<li>P：int圆对称邻居设置点的数量（角度空间的量化）。</li>
+<li>R：float圆的半径（操作员的空间分辨率）。</li>
+<li><p>method：{‘default’，‘ror’，‘uniform’，‘var’}确定模式的方法。</p>
+<ul>
+<li>‘default’：原始的局部二值模式，它是灰度但不是旋转不变的。</li>
+<li>‘ror’：扩展灰度和旋转不变的默认实现。</li>
+<li>‘uniform’：改进的旋转不变性和均匀的模式以及角度空间的更精细的量化，灰度和旋转不变。</li>
+<li>‘nri_uniform’：非旋转不变的均匀图案变体，它只是灰度不变的R199。</li>
+<li>‘VAR’：局部对比度的旋转不变方差度量，图像纹理是旋转但不是灰度不变的。</li>
+</ul>
+</li>
+</ul>
 </blockquote>
 <p>测试代码如下：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding:utf-8 -*-</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> skimage.feature <span class="keyword">import</span> local_binary_pattern</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"></span><br><span class="line"><span class="comment"># settings for LBP</span></span><br><span class="line">radius = <span class="number">1</span>  <span class="comment"># LBP算法中范围半径的取值</span></span><br><span class="line">n_points = <span class="number">8</span> * radius   <span class="comment"># 领域像素点数</span></span><br><span class="line"></span><br><span class="line">image = cv2.imread(<span class="string">'lenna.jpg'</span>)  <span class="comment"># 读取图像</span></span><br><span class="line">image1 = cv2.cvtColor(image, cv2.COLOR_BGR2RGB) <span class="comment"># 按照RGB顺序展示原图</span></span><br><span class="line">image2 = cv2.cvtColor(image1, cv2.COLOR_BGR2GRAY)   <span class="comment"># 灰度转换</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># LBP处理</span></span><br><span class="line">lbp = local_binary_pattern(image2, n_points, radius)</span><br><span class="line"></span><br><span class="line">plt.subplot(<span class="number">131</span>), plt.imshow(image1), plt.title(<span class="string">'Original Image'</span>), plt.axis(<span class="string">'off'</span>)</span><br><span class="line">plt.subplot(<span class="number">132</span>), plt.imshow(image2, <span class="string">'gray'</span>), plt.title(<span class="string">'Gray Image'</span>), plt.axis(<span class="string">'off'</span>)</span><br><span class="line">plt.subplot(<span class="number">133</span>), plt.imshow(lbp, <span class="string">'gray'</span>), plt.title(<span class="string">'LBP Image'</span>), plt.axis(<span class="string">'off'</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
