@@ -92,7 +92,7 @@
 <meta property="og:image" content="http://yoursite.com/2023/06/12/LBP%E7%89%B9%E5%BE%81%E6%8F%90%E5%8F%96/3.png">
 <meta property="og:image" content="http://yoursite.com/2023/06/12/LBP%E7%89%B9%E5%BE%81%E6%8F%90%E5%8F%96/4.png">
 <meta property="article:published_time" content="2023-06-12T00:49:17.000Z">
-<meta property="article:modified_time" content="2023-06-12T01:41:16.947Z">
+<meta property="article:modified_time" content="2023-06-12T01:47:54.339Z">
 <meta property="article:author" content="crossoverpptx">
 <meta property="article:tag" content="机器学习">
 <meta property="article:tag" content="特征提取">
@@ -349,7 +349,7 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2023-06-12T09:41:16+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2023-06-12T09:47:54+08:00">
                 2023-06-12
               </time>
             
@@ -452,7 +452,7 @@
 <h1 id="3-LBP的Python应用"><a href="#3-LBP的Python应用" class="headerlink" title="3. LBP的Python应用"></a>3. LBP的Python应用</h1><p>Python skimage库中使用local_binary_pattern函数实现LBP提取特征，其函数原型如下：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">local_binary_pattern(image, P, R, method=<span class="string">'default'</span>)</span><br></pre></td></tr></table></figure>
 <blockquote>
-<p>参数说明：<br>image：（N，M）阵列Graylevel图像。<br>P：int圆对称邻居设置点的数量（角度空间的量化）。<br>R：float圆的半径（操作员的空间分辨率）。<br>method：{‘default’，‘ror’，‘uniform’，‘var’}确定模式的方法，如下所示：<br>            ‘default’：原始的局部二值模式，它是灰度但不是旋转不变的。<br>            ‘ror’：扩展灰度和旋转不变的默认实现。<br>            ‘uniform’：改进的旋转不变性和均匀的模式以及角度空间的更精细的量化，灰度和旋转不变。<br>            ‘nri_uniform’：非旋转不变的均匀图案变体，它只是灰度不变的R199。<br>            ‘VAR’：局部对比度的旋转不变方差度量，图像纹理是旋转但不是灰度不变的。</p>
+<p>参数说明：<br>image：（N，M）阵列Graylevel图像。<br>P：int圆对称邻居设置点的数量（角度空间的量化）。<br>R：float圆的半径（操作员的空间分辨率）。<br>method：{‘default’，‘ror’，‘uniform’，‘var’}确定模式的方法，如下所示：<br>        ‘default’：原始的局部二值模式，它是灰度但不是旋转不变的。<br>        ‘ror’：扩展灰度和旋转不变的默认实现。<br>        ‘uniform’：改进的旋转不变性和均匀的模式以及角度空间的更精细的量化，灰度和旋转不变。<br>        ‘nri_uniform’：非旋转不变的均匀图案变体，它只是灰度不变的R199。<br>        ‘VAR’：局部对比度的旋转不变方差度量，图像纹理是旋转但不是灰度不变的。</p>
 </blockquote>
 <p>测试代码如下：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding:utf-8 -*-</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> skimage.feature <span class="keyword">import</span> local_binary_pattern</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"></span><br><span class="line"><span class="comment"># settings for LBP</span></span><br><span class="line">radius = <span class="number">1</span>  <span class="comment"># LBP算法中范围半径的取值</span></span><br><span class="line">n_points = <span class="number">8</span> * radius   <span class="comment"># 领域像素点数</span></span><br><span class="line"></span><br><span class="line">image = cv2.imread(<span class="string">'lenna.jpg'</span>)  <span class="comment"># 读取图像</span></span><br><span class="line">image1 = cv2.cvtColor(image, cv2.COLOR_BGR2RGB) <span class="comment"># 按照RGB顺序展示原图</span></span><br><span class="line">image2 = cv2.cvtColor(image1, cv2.COLOR_BGR2GRAY)   <span class="comment"># 灰度转换</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># LBP处理</span></span><br><span class="line">lbp = local_binary_pattern(image2, n_points, radius)</span><br><span class="line"></span><br><span class="line">plt.subplot(<span class="number">131</span>), plt.imshow(image1), plt.title(<span class="string">'Original Image'</span>), plt.axis(<span class="string">'off'</span>)</span><br><span class="line">plt.subplot(<span class="number">132</span>), plt.imshow(image2, <span class="string">'gray'</span>), plt.title(<span class="string">'Gray Image'</span>), plt.axis(<span class="string">'off'</span>)</span><br><span class="line">plt.subplot(<span class="number">133</span>), plt.imshow(lbp, <span class="string">'gray'</span>), plt.title(<span class="string">'LBP Image'</span>), plt.axis(<span class="string">'off'</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
