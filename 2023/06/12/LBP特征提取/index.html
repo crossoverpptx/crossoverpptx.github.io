@@ -1,0 +1,1252 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="机器学习,特征提取," />
+
+
+
+
+  
+
+
+  <link rel="alternate" href="/atom.xml" title="crossoverpptx's Blog" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="LBP指局部二值模式，英文全称：Local Binary Pattern，是一种用来描述图像局部特征的算子，LBP特征具有灰度不变性和旋转不变性等显著优点。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LBP特征提取">
+<meta property="og:url" content="http://yoursite.com/2023/06/12/LBP%E7%89%B9%E5%BE%81%E6%8F%90%E5%8F%96/index.html">
+<meta property="og:site_name" content="crossoverpptx&#39;s Blog">
+<meta property="og:description" content="LBP指局部二值模式，英文全称：Local Binary Pattern，是一种用来描述图像局部特征的算子，LBP特征具有灰度不变性和旋转不变性等显著优点。">
+<meta property="og:image" content="http://yoursite.com/2023/06/12/LBP%E7%89%B9%E5%BE%81%E6%8F%90%E5%8F%96/3.png">
+<meta property="og:image" content="http://yoursite.com/2023/06/12/LBP%E7%89%B9%E5%BE%81%E6%8F%90%E5%8F%96/4.png">
+<meta property="article:published_time" content="2023-06-12T00:49:17.000Z">
+<meta property="article:modified_time" content="2023-06-12T01:00:36.131Z">
+<meta property="article:author" content="crossoverpptx">
+<meta property="article:tag" content="机器学习">
+<meta property="article:tag" content="特征提取">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/2023/06/12/LBP%E7%89%B9%E5%BE%81%E6%8F%90%E5%8F%96/3.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2023/06/12/LBP特征提取/"/>
+
+
+
+
+
+  <title>LBP特征提取 | crossoverpptx's Blog</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">crossoverpptx's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">极度的痛苦才是精神的最大解放者。唯有此种痛苦，才迫使我们大彻如悟。</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2023/06/12/LBP%E7%89%B9%E5%BE%81%E6%8F%90%E5%8F%96/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="crossoverpptx">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/me.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="crossoverpptx's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">LBP特征提取</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2023-06-12T08:49:17+08:00">
+                2023-06-12
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2023-06-12T09:00:36+08:00">
+                2023-06-12
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index">
+                    <span itemprop="name">机器学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i> 浏览
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2.6k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  9
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>LBP指局部二值模式，英文全称：Local Binary Pattern，是一种用来描述图像局部特征的算子，LBP特征具有灰度不变性和旋转不变性等显著优点。<a id="more"></a></p>
+<h1 id="1-LBP原理及其扩展"><a href="#1-LBP原理及其扩展" class="headerlink" title="1 LBP原理及其扩展"></a>1 LBP原理及其扩展</h1><h2 id="1-1-原始LBP"><a href="#1-1-原始LBP" class="headerlink" title="1.1 原始LBP"></a>1.1 原始LBP</h2><p>原始的LBP算子定义在像素3<em>3的邻域内，以邻域中心像素为阈值，相邻的8个像素的灰度值与邻域中心的像素值进行比较，若周围像素大于中心像素值，则该像素点的位置被标记为1，否则为0。这样，3</em>3邻域内的8个点经过比较可产生8位二进制数，将这8位二进制数依次排列形成一个二进制数字，这个二进制数字就是中心像素的LBP值，因此LBP值有256种。中心像素的LBP值反映了该像素周围区域的纹理信息。需要注意的是，计算LBP特征的图像必须是灰度图，如果是彩色图，需要先转换成灰度图。 </p>
+<h2 id="1-2-圆形LBP"><a href="#1-2-圆形LBP" class="headerlink" title="1.2 圆形LBP"></a>1.2 圆形LBP</h2><p>由于原始LBP特征使用的是固定邻域内的灰度值，因此当图像的尺度发生变化时，LBP特征的编码将会发生错误，LBP特征将不能正确的反映像素点周围的纹理信息，因此研究人员对其进行了改进。基本的LBP算子的最大缺陷在于它只覆盖了一个固定半径范围内的小区域，这显然不能满足不同尺寸和频率纹理的需要。为了适应不同尺度的纹理特征，并达到灰度和旋转不变性的要求，Ojala等对LBP算子进行了改进，将3*3邻域扩展到任意邻域，并用圆形邻域代替了正方形邻域，改进后的LBP算子允许在半径为R的圆形邻域内有任意多个像素点。从而得到了诸如半径为R的圆形区域内含有P个采样点的LBP算子，这种LBP特征叫做Extended LBP，也叫Circular LBP。</p>
+<h2 id="1-3-旋转不变LBP"><a href="#1-3-旋转不变LBP" class="headerlink" title="1.3 旋转不变LBP"></a>1.3 旋转不变LBP</h2><p>上面的LBP特征具有灰度不变性，但还不具备旋转不变性，因此研究人员又在上面的基础上进行了扩展，提出了具有旋转不变性的LBP特征。首先不断的旋转圆形邻域内的LBP特征，根据选择得到一系列的LBP特征值，从这些LBP特征值选择LBP特征值最小的作为中心像素点的LBP特征。</p>
+<h2 id="1-4-Uniform-Pattern-LBP"><a href="#1-4-Uniform-Pattern-LBP" class="headerlink" title="1.4 Uniform Pattern LBP"></a>1.4 Uniform Pattern LBP</h2><p>为了解决二进制模式过多的问题，提高统计性，Ojala提出了采用一种“等价模式”(Uniform Pattern)来对LBP算子的模式种类进行降维。Ojala等认为，在实际图像中，绝大多数LBP模式最多只包含两次从1到0或从0到1的跳变。因此，Ojala将“等价模式”定义为：当某个LBP所对应的循环二进制数从0到1或从1到0最多有两次跳变时，该LBP所对应的二进制就称为一个等价模式类。如00000000(0次跳变)，00000111(只含一次从0到1的跳变)，10001111(先由1跳到0，再由0跳到1，共两次跳变)都是等价模式类。除等价模式类以外的模式都归为另一类，称为混合模式类，例如10010111(共四次跳变)。通过这样的改进，二进制模式的种类大大减少，而不会丢失任何信息。模式数量由原来的2P种减少为P(P-1)+2种，其中P表示邻域集内的采样点数。对于3*3邻域内8个采样点来说，二进制模式由原始的256种减少为58种，即：它把值分为59类，58个uniform pattern为一类，其它的所有值为第59类。这样直方图从原来的256维变成59维。这使得特征向量的维数更少，并且可以减少高频噪声带来的影响。具体实现如下：</p>
+<p>采样点数目为8个，即LBP特征值有28种，共256个值，正好对应灰度图像的0-255，因此原始的LBP特征图像是一幅正常的灰度图像，而等价模式LBP特征，根据0-1跳变次数，将这256个LBP特征值分为了59类，从跳变次数上划分：跳变0次—2个，跳变1次—0个，跳变2次—56个，跳变3次—0个，跳变4次—140个，跳变5次—0个，跳变6次—56个，跳变7次—0个，跳变8次—2个。共9种跳变情况，将这256个值进行分配，跳变小于2次的为等价模式类，共58个，他们对应的值按照从小到大分别编码为1-58，即它们在LBP特征图像中的灰度值为1-58，而除了等价模式类之外的混合模式类被编码为0，即它们在LBP特征中的灰度值为0，因此等价模式LBP特征图像整体偏暗。</p>
+<h2 id="1-5-MB-LBP"><a href="#1-5-MB-LBP" class="headerlink" title="1.5 MB-LBP"></a>1.5 MB-LBP</h2><p>MB-LBP的原理：将图像分成一个个小块（Block），每个小块再分为一个个的小区域（类似于HOG中的cell），小区域内的灰度平均值作为当前小区域的灰度值，与周围小区域灰度进行比较形成LBP特征，生成的特征称为MB-LBP，Block大小为3<em>3，则小区域的大小为1，就是原始的LBP特征，Block大小为9</em>9，小区域的大小为3*3。接下来对得到LBP特征进行均值模式编码，通过对得到的特征图求直方图，得到了LBP特征值0-255之间(0-255即直方图中的bin)的特征数量，通过对bin中的数值进行排序，通过权衡，将排序在前63位的特征值看作是等价模式类，其他的为混合模式类，总共64类，作者在论文中称之为SEMB-LBP(Statistically Effective MB-LBP)。类似于等价模式LBP，等价模式的LBP的等价模式类为58种，混合模式类1种，共59种。二者除了等价模式类的数量不同之外，主要区别在于：对等价模式类的定义不同，等价模式LBP是根据0-1的跳变次数定义的，而SEMB-LBP是通过对直方图排序得到的。</p>
+<h1 id="2-对于边缘点的处理"><a href="#2-对于边缘点的处理" class="headerlink" title="2. 对于边缘点的处理"></a>2. 对于边缘点的处理</h1><p>对于图像边缘的点，由于通常不能用上述方法来处理成LBP特征点，一般来说有以下几种处理方法：</p>
+<p>（1）将边缘的提取不到周围特征的点不进行LBP处理，结果LBP特征图片的像素点会比之前少。</p>
+<p>（2）将边缘不存在的邻域点值设置为0。</p>
+<p>（3）将边缘的提取不到周围特征的点用原像素点的值取代。</p>
+<h1 id="3-LBP的Python应用"><a href="#3-LBP的Python应用" class="headerlink" title="3. LBP的Python应用"></a>3. LBP的Python应用</h1><p>Python skimage库中使用local_binary_pattern函数实现LBP提取特征，其函数原型如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">local_binary_pattern(image, P, R, method=<span class="string">'default'</span>)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>参数说明：<br>image：（N，M）阵列Graylevel图像。<br>P：int圆对称邻居设置点的数量（角度空间的量化）。<br>R：float圆的半径（操作员的空间分辨率）。<br>method：{‘default’，‘ror’，‘uniform’，‘var’}确定模式的方法。<br>    ‘default’：原始的局部二值模式，它是灰度但不是旋转不变的。<br>    ‘ror’：扩展灰度和旋转不变的默认实现。<br>    ‘uniform’：改进的旋转不变性和均匀的模式以及角度空间的更精细的量化，灰度和旋转不变。<br>    ‘nri_uniform’：非旋转不变的均匀图案变体，它只是灰度不变的R199。<br>    ‘VAR’：局部对比度的旋转不变方差度量，图像纹理是旋转但不是灰度不变的。</p>
+</blockquote>
+<p>测试代码如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding:utf-8 -*-</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> skimage.feature <span class="keyword">import</span> local_binary_pattern</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"></span><br><span class="line"><span class="comment"># settings for LBP</span></span><br><span class="line">radius = <span class="number">1</span>  <span class="comment"># LBP算法中范围半径的取值</span></span><br><span class="line">n_points = <span class="number">8</span> * radius   <span class="comment"># 领域像素点数</span></span><br><span class="line"></span><br><span class="line">image = cv2.imread(<span class="string">'lenna.jpg'</span>)  <span class="comment"># 读取图像</span></span><br><span class="line">image1 = cv2.cvtColor(image, cv2.COLOR_BGR2RGB) <span class="comment"># 按照RGB顺序展示原图</span></span><br><span class="line">image2 = cv2.cvtColor(image1, cv2.COLOR_BGR2GRAY)   <span class="comment"># 灰度转换</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># LBP处理</span></span><br><span class="line">lbp = local_binary_pattern(image2, n_points, radius)</span><br><span class="line"></span><br><span class="line">plt.subplot(<span class="number">131</span>), plt.imshow(image1), plt.title(<span class="string">'Original Image'</span>), plt.axis(<span class="string">'off'</span>)</span><br><span class="line">plt.subplot(<span class="number">132</span>), plt.imshow(image2, <span class="string">'gray'</span>), plt.title(<span class="string">'Gray Image'</span>), plt.axis(<span class="string">'off'</span>)</span><br><span class="line">plt.subplot(<span class="number">133</span>), plt.imshow(lbp, <span class="string">'gray'</span>), plt.title(<span class="string">'LBP Image'</span>), plt.axis(<span class="string">'off'</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<p>效果如下：</p>
+<p><img src="/2023/06/12/LBP%E7%89%B9%E5%BE%81%E6%8F%90%E5%8F%96/3.png" alt="img"> </p>
+<h1 id="4-LBPH算法及其应用"><a href="#4-LBPH算法及其应用" class="headerlink" title="4. LBPH算法及其应用"></a>4. LBPH算法及其应用</h1><h2 id="4-1-LBPH算法原理"><a href="#4-1-LBPH算法原理" class="headerlink" title="4.1 LBPH算法原理"></a>4.1 LBPH算法原理</h2><p>LBPH(Local Binary Patterns Histograms)局部二进制编码直方图，是一种人脸识别算法，用于识别人脸，它以其性能以及如何能够从正面和侧面识别人脸而闻名。建立在LBPH基础之上的人脸识别法基本思想如下：首先以每个像素为中心，判断与周围像素灰度值大小关系，对其进行二进制编码，从而获得整幅图像的LBP编码图像；再将LBP图像分为个区域，获取每个区域的LBP编码直方图，继而得到整幅图像的LBP编码直方图，通过比较不同人脸图像LBP编码直方图达到人脸识别的目的,其优点是不会受到光照、缩放、旋转和平移的影响。</p>
+<p>一幅图像具体的计算LBPH的过程如下：</p>
+<p>a.    计算图像的LBP特征图像；</p>
+<p>b.    将LBP特征图像进行分块，Opencv中默认将LBP特征图像分成8行8列64块区域；</p>
+<p>c.    计算每块区域特征图像的直方图cell_LBPH，将直方图进行归一化；</p>
+<p>d.    将上面计算的每块区域特征图像的直方图按分块的空间顺序依次排列成一行，形成LBP特征向量；</p>
+<p>e.    用机器学习的方法对LBP特征向量进行训练，用来检测和识别目标。</p>
+<h2 id="4-2-LBPH识别应用"><a href="#4-2-LBPH识别应用" class="headerlink" title="4.2 LBPH识别应用"></a>4.2 LBPH识别应用</h2><p>如下是LBPH人脸识别的部分测试代码：</p>
+<p><img src="/2023/06/12/LBP%E7%89%B9%E5%BE%81%E6%8F%90%E5%8F%96/4.png" alt="img"> </p>
+<p>根据上述代码，基于LBPH的人脸识别基本步骤可以概括如下：</p>
+<p>a. 创建空列表分别存储用于训练的人脸和人脸标签；</p>
+<p>b. 遍历训练集，将训练人脸及便签存进空列表；</p>
+<p>c. 通过OpenCV的LBPH识别函数对训练集中的人脸和人脸标签生成识别器；</p>
+<p>d. 读取测试图像，通过识别器进行预测识别该人脸属于哪一类。</p>
+<h1 id="5-源码仓库地址"><a href="#5-源码仓库地址" class="headerlink" title="5. 源码仓库地址"></a>5. 源码仓库地址</h1><p>🌼 <a href="https://github.com/crossoverpptx/ImageProcessing" target="_blank" rel="noopener">图像处理、机器学习的常用算法汇总</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag"># 机器学习</a>
+          
+            <a href="/tags/%E7%89%B9%E5%BE%81%E6%8F%90%E5%8F%96/" rel="tag"># 特征提取</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2023/06/11/%E9%9C%8D%E5%A4%AB%E5%8F%98%E6%8D%A2/" rel="next" title="霍夫变换">
+                <i class="fa fa-chevron-left"></i> 霍夫变换
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/me.png"
+                alt="crossoverpptx" />
+            
+              <p class="site-author-name" itemprop="name">crossoverpptx</p>
+              <p class="site-description motion-element" itemprop="description">极度的痛苦才是精神的最大解放者。唯有此种痛苦，才迫使我们大彻如悟。</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+                <a href="/archives">
+                  <span class="site-state-item-count">81</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/index.html">
+                  <span class="site-state-item-count">28</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/crossoverpptx" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:2269041628@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-LBP原理及其扩展"><span class="nav-text">1 LBP原理及其扩展</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-原始LBP"><span class="nav-text">1.1 原始LBP</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-圆形LBP"><span class="nav-text">1.2 圆形LBP</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-旋转不变LBP"><span class="nav-text">1.3 旋转不变LBP</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-4-Uniform-Pattern-LBP"><span class="nav-text">1.4 Uniform Pattern LBP</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-5-MB-LBP"><span class="nav-text">1.5 MB-LBP</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-对于边缘点的处理"><span class="nav-text">2. 对于边缘点的处理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-LBP的Python应用"><span class="nav-text">3. LBP的Python应用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-LBPH算法及其应用"><span class="nav-text">4. LBPH算法及其应用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-1-LBPH算法原理"><span class="nav-text">4.1 LBPH算法原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-2-LBPH识别应用"><span class="nav-text">4.2 LBPH识别应用</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-源码仓库地址"><span class="nav-text">5. 源码仓库地址</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">crossoverpptx</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">148.7k</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i> 访问人数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i> 访问总量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>
