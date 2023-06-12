@@ -6632,21 +6632,7 @@ Gray(i,j)=0.299*R(i,j)+0.578*G(i,j)+0.114*B(i,j)</script><h1 id="3-图像灰度�
 <h1 id="3-LBP的Python应用"><a href="#3-LBP的Python应用" class="headerlink" title="3. LBP的Python应用"></a>3. LBP的Python应用</h1><p>Python skimage库中使用local_binary_pattern函数实现LBP提取特征，其函数原型如下：</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">local_binary_pattern(image, P, R, method=<span class="string">'default'</span>)</span><br></pre></td></tr></table></figure>
 <blockquote>
-<p>参数说明：</p>
-<ul>
-<li>image：（N，M）阵列Graylevel图像。</li>
-<li>P：int圆对称邻居设置点的数量（角度空间的量化）。</li>
-<li>R：float圆的半径（操作员的空间分辨率）。</li>
-<li><p>method：{‘default’，‘ror’，‘uniform’，‘var’}确定模式的方法。</p>
-<ul>
-<li>‘default’：原始的局部二值模式，它是灰度但不是旋转不变的。</li>
-<li>‘ror’：扩展灰度和旋转不变的默认实现。</li>
-<li>‘uniform’：改进的旋转不变性和均匀的模式以及角度空间的更精细的量化，灰度和旋转不变。</li>
-<li>‘nri_uniform’：非旋转不变的均匀图案变体，它只是灰度不变的R199。</li>
-<li>‘VAR’：局部对比度的旋转不变方差度量，图像纹理是旋转但不是灰度不变的。</li>
-</ul>
-</li>
-</ul>
+<p>参数说明：<br>image：（N，M）阵列Graylevel图像。<br>P：int圆对称邻居设置点的数量（角度空间的量化）。<br>R：float圆的半径（操作员的空间分辨率）。<br>method：{‘default’，‘ror’，‘uniform’，‘var’}确定模式的方法，如下所示：<br>        ‘default’：原始的局部二值模式，它是灰度但不是旋转不变的。<br>        ‘ror’：扩展灰度和旋转不变的默认实现。<br>        ‘uniform’：改进的旋转不变性和均匀的模式以及角度空间的更精细的量化，灰度和旋转不变。<br>        ‘nri_uniform’：非旋转不变的均匀图案变体，它只是灰度不变的R199。<br>        ‘VAR’：局部对比度的旋转不变方差度量，图像纹理是旋转但不是灰度不变的。</p>
 </blockquote>
 <p>测试代码如下：</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># -*- coding:utf-8 -*-</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> skimage.feature <span class="keyword">import</span> local_binary_pattern</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"></span><br><span class="line"><span class="comment"># settings for LBP</span></span><br><span class="line">radius = <span class="number">1</span>  <span class="comment"># LBP算法中范围半径的取值</span></span><br><span class="line">n_points = <span class="number">8</span> * radius   <span class="comment"># 领域像素点数</span></span><br><span class="line"></span><br><span class="line">image = cv2.imread(<span class="string">'lenna.jpg'</span>)  <span class="comment"># 读取图像</span></span><br><span class="line">image1 = cv2.cvtColor(image, cv2.COLOR_BGR2RGB) <span class="comment"># 按照RGB顺序展示原图</span></span><br><span class="line">image2 = cv2.cvtColor(image1, cv2.COLOR_BGR2GRAY)   <span class="comment"># 灰度转换</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># LBP处理</span></span><br><span class="line">lbp = local_binary_pattern(image2, n_points, radius)</span><br><span class="line"></span><br><span class="line">plt.subplot(<span class="number">131</span>), plt.imshow(image1), plt.title(<span class="string">'Original Image'</span>), plt.axis(<span class="string">'off'</span>)</span><br><span class="line">plt.subplot(<span class="number">132</span>), plt.imshow(image2, <span class="string">'gray'</span>), plt.title(<span class="string">'Gray Image'</span>), plt.axis(<span class="string">'off'</span>)</span><br><span class="line">plt.subplot(<span class="number">133</span>), plt.imshow(lbp, <span class="string">'gray'</span>), plt.title(<span class="string">'LBP Image'</span>), plt.axis(<span class="string">'off'</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
