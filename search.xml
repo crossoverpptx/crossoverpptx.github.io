@@ -6817,7 +6817,7 @@ m(x,y)=\sqrt{[L(x+1,y)-L(x-1,y)]^2+[L(x,y+1)-L(x,y-1)]^2}</script><script type="
 <p><img src="/2023/06/13/SIFT%E7%AE%97%E6%B3%95/7.png" alt="img"> </p>
 <h1 id="4-SIFT算法进行图像分类的思路"><a href="#4-SIFT算法进行图像分类的思路" class="headerlink" title="4. SIFT算法进行图像分类的思路"></a>4. SIFT算法进行图像分类的思路</h1><p>通过比较待识别图片与训练图集中的每一张图片的sift描述子的个数，找出匹配度最高的那张图片所在的类别，则该类别就被判定为待识别图片的类别。</p>
 <p>如以下代码所示，有40类图片，每类图片5张：首先计算待识别图片的des描述子，然后依次比较每一类中每一张图片与该描述子的匹配数之和（平均匹配数），则匹配数之和（平均匹配数）最大的一类判定为与待识别图片为同一类。</p>
-<p><img src="file:///C:\Users\fwp\AppData\Local\Temp\ksohtml784\wps19.jpg" alt="img"> </p>
+<p><img src="/2023/06/13/SIFT%E7%AE%97%E6%B3%95/8.png" alt="img"> </p>
 <h1 id="5-源码仓库地址"><a href="#5-源码仓库地址" class="headerlink" title="5. 源码仓库地址"></a>5. 源码仓库地址</h1><p>🌼 <a href="https://github.com/crossoverpptx/ImageProcessing-and-MachineLearning" target="_blank" rel="noopener">图像处理、机器学习的常用算法汇总</a></p>
 ]]></content>
       <categories>
