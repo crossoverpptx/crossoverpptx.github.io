@@ -6833,4 +6833,59 @@ s.t. PP^T = I</script><p>利用拉格朗日函数可以得到：J(P)=tr(PCP<sup>
         <tag>机器学习</tag>
       </tags>
   </entry>
+  <entry>
+    <title>距离和相似性度量</title>
+    <url>/2023/06/15/%E8%B7%9D%E7%A6%BB%E5%92%8C%E7%9B%B8%E4%BC%BC%E6%80%A7%E5%BA%A6%E9%87%8F/</url>
+    <content><![CDATA[<p>在机器学习中，经常需要比较个体间差异的大小，进而评价个体的相似性和类别。最常见的是数据分析中的相关分析，数据挖掘中的分类和聚类算法，如K最近邻（KNN）和K均值（K-Means）等。其中，衡量个体间差异的方法，主要分为距离度量和相似性度量。</p>
+<p>为了方便下面的解释和举例，先设定我们要比较X个体和Y个体间的差异，它们都包含了N个维的特征，即X=（x1, x2, x3, … xn），Y=（y1, y2, y3, … yn）。</p>
+<a id="more"></a>
+<h1 id="1-距离度量"><a href="#1-距离度量" class="headerlink" title="1. 距离度量"></a>1. 距离度量</h1><p>距离度量（Distance）用于衡量个体在空间上存在的距离，距离越远说明个体间的差异越大。对于任意一个定义在两个矢量x和y上的函数d(x,y)，只要满足如下4个性质就可以称作“距离度量”。<br>（1）非负性：d(x,y)≥0<br>（2）对称性：d(x,y)=d(y,x)<br>（3）自反性：d(x,y)=0，当且仅当x=y<br>（4）三角不等式：d(x,y)≤d(x,z)+d(y,z)</p>
+<h2 id="1-1-欧几里得距离-Euclidean-Distance"><a href="#1-1-欧几里得距离-Euclidean-Distance" class="headerlink" title="1.1 欧几里得距离(Euclidean Distance)"></a>1.1 欧几里得距离(Euclidean Distance)</h2><p>欧氏距离是最常见的距离度量，衡量的是多维空间中各个点之间的绝对距离。公式如下：</p>
+<p><img src="/2023/06/15/%E8%B7%9D%E7%A6%BB%E5%92%8C%E7%9B%B8%E4%BC%BC%E6%80%A7%E5%BA%A6%E9%87%8F/1.png" alt="img"> </p>
+<p>因为计算是基于各维度特征的绝对数值，所以欧氏度量需要保证各维度指标在相同的刻度级别，比如对身高（cm）和体重（kg）两个单位不同的指标使用欧式距离可能使结果失效。</p>
+<h2 id="1-2-明可夫斯基距离-Minkowski-Distance"><a href="#1-2-明可夫斯基距离-Minkowski-Distance" class="headerlink" title="1.2 明可夫斯基距离(Minkowski Distance)"></a>1.2 明可夫斯基距离(Minkowski Distance)</h2><p>明氏距离是欧氏距离的推广，是对多个距离度量公式的概括性的表述。公式如下：</p>
+<p><img src="/2023/06/15/%E8%B7%9D%E7%A6%BB%E5%92%8C%E7%9B%B8%E4%BC%BC%E6%80%A7%E5%BA%A6%E9%87%8F/2.png" alt="img"> </p>
+<p>这里的p值是一个变量，当p=2时就得到了上节的欧氏距离。</p>
+<h2 id="1-3-曼哈顿距离-Manhattan-Distance"><a href="#1-3-曼哈顿距离-Manhattan-Distance" class="headerlink" title="1.3 曼哈顿距离(Manhattan Distance)"></a>1.3 曼哈顿距离(Manhattan Distance)</h2><p>曼哈顿距离来源于城市区块距离，是将多个维度上的距离进行求和后的结果，即当上节的明氏距离中p=1时得到的距离度量公式，如下所示：</p>
+<p><img src="/2023/06/15/%E8%B7%9D%E7%A6%BB%E5%92%8C%E7%9B%B8%E4%BC%BC%E6%80%A7%E5%BA%A6%E9%87%8F/3.png" alt="img"> </p>
+<h2 id="1-4-切比雪夫距离-Chebyshev-Distance"><a href="#1-4-切比雪夫距离-Chebyshev-Distance" class="headerlink" title="1.4 切比雪夫距离(Chebyshev Distance)"></a>1.4 切比雪夫距离(Chebyshev Distance)</h2><p>切比雪夫距离起源于国际象棋中国王的走法，我们知道国际象棋国王每次只能往周围的8格中走一步，那么如果要从棋盘中A格(x1, y1)走到B格(x2, y2)最少需要走几步？扩展到多维空间，其实切比雪夫距离就是当p趋向于无穷大时的明氏距离：</p>
+<p><img src="/2023/06/15/%E8%B7%9D%E7%A6%BB%E5%92%8C%E7%9B%B8%E4%BC%BC%E6%80%A7%E5%BA%A6%E9%87%8F/4.png" alt="img"> </p>
+<blockquote>
+<p> P.S. 其实上面的曼哈顿距离、欧氏距离和切比雪夫距离都是明可夫斯基距离在特殊条件下的应用。</p>
+</blockquote>
+<h2 id="1-5-马哈拉诺比斯距离-Mahalanobis-Distance"><a href="#1-5-马哈拉诺比斯距离-Mahalanobis-Distance" class="headerlink" title="1.5 马哈拉诺比斯距离(Mahalanobis Distance)"></a>1.5 马哈拉诺比斯距离(Mahalanobis Distance)</h2><p>既然欧几里得距离无法忽略指标度量的差异，所以在使用欧氏距离之前需要对底层指标进行数据的标准化，而基于各指标维度进行标准化后再使用欧氏距离就衍生出来另外一个距离度量——马哈拉诺比斯距离（Mahalanobis Distance），简称马氏距离。</p>
+<h1 id="2-相似性度量"><a href="#2-相似性度量" class="headerlink" title="2. 相似性度量"></a>2. 相似性度量</h1><p>相似性度量（Similarity），即计算个体间的相似程度，与距离度量相反，相似性度量的值越小，说明个体间相似度越小，差异越大。</p>
+<h2 id="2-1-向量空间余弦相似度-Cosine-Similarity"><a href="#2-1-向量空间余弦相似度-Cosine-Similarity" class="headerlink" title="2.1 向量空间余弦相似度(Cosine Similarity)"></a>2.1 向量空间余弦相似度(Cosine Similarity)</h2><p>余弦相似度用向量空间中两个向量夹角的余弦值作为衡量两个个体间差异的大小。相比距离度量，余弦相似度更加注重两个向量在方向上的差异，而非距离或长度上。公式如下：<img src="/2023/06/15/%E8%B7%9D%E7%A6%BB%E5%92%8C%E7%9B%B8%E4%BC%BC%E6%80%A7%E5%BA%A6%E9%87%8F/6.png" alt="6"></p>
+<p><img src="/2023/06/15/%E8%B7%9D%E7%A6%BB%E5%92%8C%E7%9B%B8%E4%BC%BC%E6%80%A7%E5%BA%A6%E9%87%8F/5.png" alt="img"> </p>
+<h2 id="2-2-皮尔森相关系数-Pearson-Correlation-Coefficient"><a href="#2-2-皮尔森相关系数-Pearson-Correlation-Coefficient" class="headerlink" title="2.2 皮尔森相关系数(Pearson Correlation Coefficient)"></a>2.2 皮尔森相关系数(Pearson Correlation Coefficient)</h2><p>即相关分析中的相关系数r，分别对X和Y基于自身总体标准化后计算空间向量的余弦夹角。公式如下：</p>
+<p><img src="/2023/06/15/%E8%B7%9D%E7%A6%BB%E5%92%8C%E7%9B%B8%E4%BC%BC%E6%80%A7%E5%BA%A6%E9%87%8F/6.png" alt="img"> </p>
+<h2 id="2-3-Jaccard相似系数-Jaccard-Coefficient"><a href="#2-3-Jaccard相似系数-Jaccard-Coefficient" class="headerlink" title="2.3 Jaccard相似系数(Jaccard Coefficient)"></a>2.3 Jaccard相似系数(Jaccard Coefficient)</h2><p>Jaccard系数主要用于计算符号度量或布尔值度量的个体间的相似度，因为个体的特征属性都是由符号度量或者布尔值标识，因此无法衡量差异具体值的大小，只能获得“是否相同”这个结果，所以Jaccard系数只关心个体间共同具有的特征是否一致这个问题。如果比较X与Y的Jaccard相似系数，只比较xn和yn中相同的个数，公式如下：</p>
+<p><img src="/2023/06/15/%E8%B7%9D%E7%A6%BB%E5%92%8C%E7%9B%B8%E4%BC%BC%E6%80%A7%E5%BA%A6%E9%87%8F/7.png" alt="img"> </p>
+<h2 id="2-4-调整余弦相似度-Adjusted-Cosine-Similarity"><a href="#2-4-调整余弦相似度-Adjusted-Cosine-Similarity" class="headerlink" title="2.4 调整余弦相似度(Adjusted Cosine Similarity)"></a>2.4 调整余弦相似度(Adjusted Cosine Similarity)</h2><p>虽然余弦相似度对个体间存在的偏见可以进行一定的修正，但是因为只能分辨个体在维之间的差异，没法衡量每个维数值的差异，会导致这样一个情况：比如用户对内容评分，5分制，X和Y两个用户对两个内容的评分分别为(1,2)和(4,5)，使用余弦相似度得出的结果是0.98，两者极为相似，但从评分上看X似乎不喜欢这2个内容，而Y比较喜欢，余弦相似度对数值的不敏感导致了结果的误差，需要修正这种不合理性，就出现了调整余弦相似度，即所有维度上的数值都减去一个均值，比如X和Y的评分均值都是3，那么调整后为(-2,-1)和(1,2)，再用余弦相似度计算，得到-0.8，相似度为负值并且差异不小，但显然更加符合现实。</p>
+<h1 id="3-欧氏距离与余弦相似度的比较"><a href="#3-欧氏距离与余弦相似度的比较" class="headerlink" title="3. 欧氏距离与余弦相似度的比较"></a>3. 欧氏距离与余弦相似度的比较</h1><p>欧氏距离是最常见的距离度量，而余弦相似度则是最常见的相似度度量，很多的距离度量和相似度度量都是基于这两者的变形和衍生，所以下面重点比较下两者在衡量个体差异时实现方式和应用环境上的区别。</p>
+<p>借助三维坐标系来看下欧氏距离和余弦相似度的区别：</p>
+<p><img src="/2023/06/15/%E8%B7%9D%E7%A6%BB%E5%92%8C%E7%9B%B8%E4%BC%BC%E6%80%A7%E5%BA%A6%E9%87%8F/8.png" alt="img"> </p>
+<p>从图上可以看出距离度量衡量的是空间各点间的绝对距离，跟各个点所在的位置坐标（即个体特征维度的数值）直接相关；而余弦相似度衡量的是空间向量的夹角，更加的是体现在方向上的差异，而不是位置。如果保持A点的位置不变，B点朝原方向远离坐标轴原点，那么这个时候余弦相似度cosθ是保持不变的，因为夹角不变，而A、B两点的距离显然在发生改变，这就是欧氏距离和余弦相似度的不同之处。</p>
+<p> 根据欧氏距离和余弦相似度各自的计算方式和衡量特征，分别适用于不同的数据分析模型：</p>
+<ul>
+<li><p>欧氏距离能够体现个体数值特征的绝对差异，所以更多的用于需要从维度的数值大小中体现差异的分析，如使用用户行为指标分析用户价值的相似度或差异；</p>
+</li>
+<li><p>余弦相似度更多的是从方向上区分差异，而对绝对的数值不敏感，更多的用于使用用户对内容评分来区分用户兴趣的相似度和差异，同时修正了用户间可能存在的度量标准不统一的问题（因为余弦相似度对绝对数值不敏感）。</p>
+</li>
+</ul>
+<h1 id="4-Python计算欧氏距离与余弦相似度"><a href="#4-Python计算欧氏距离与余弦相似度" class="headerlink" title="4. Python计算欧氏距离与余弦相似度"></a>4. Python计算欧氏距离与余弦相似度</h1><h2 id="4-1-Python计算欧氏距离"><a href="#4-1-Python计算欧氏距离" class="headerlink" title="4.1 Python计算欧氏距离"></a>4.1 Python计算欧氏距离</h2><p>以下代码提供了3种计算欧氏距离的方法：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">x=np.random.random(<span class="number">10</span>)</span><br><span class="line">y=np.random.random(<span class="number">10</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 方法一：根据公式求解</span></span><br><span class="line">d1=np.sqrt(np.sum(np.square(x-y)))</span><br><span class="line"> </span><br><span class="line"><span class="comment"># 方法二：根据scipy库求解</span></span><br><span class="line"><span class="keyword">from</span> scipy.spatial.distance <span class="keyword">import</span> pdist</span><br><span class="line">X=np.vstack([x,y])  <span class="comment"># 将x，y两个一维数组合并成一个2D数组：[[x1,x2,x3...],[y1,y2,y3...]]</span></span><br><span class="line">d2=pdist(X) <span class="comment"># d2=np.sqrt(（x1-y1)+(x2-y2)+....)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 方法三：使用numpy.linalg.norm(x, y)可以计算向量 x 和向量 y 的欧氏距离</span></span><br><span class="line">d3=np.linalg.norm(x-y)</span><br><span class="line"></span><br><span class="line">print(d1, d2, d3)</span><br></pre></td></tr></table></figure>
+<p> 以上3种方法得到的结果一致。</p>
+<h2 id="4-2-Python计算余弦相似度"><a href="#4-2-Python计算余弦相似度" class="headerlink" title="4.2 Python计算余弦相似度"></a>4.2 Python计算余弦相似度</h2><p>以下代码提供了3种计算余弦相似度的方法：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">x=np.random.random(<span class="number">10</span>)</span><br><span class="line">y=np.random.random(<span class="number">10</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 方法一：scipy中的scipy.spatial.distance.cosine函数可计算余弦距离。</span></span><br><span class="line"><span class="comment"># 因此，我们可以用1减去余弦距离得到余弦相似度。</span></span><br><span class="line"><span class="keyword">from</span> scipy <span class="keyword">import</span> spatial</span><br><span class="line">res1 = <span class="number">1</span> - spatial.distance.cosine(x, y)</span><br><span class="line">print(res1)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 方法二：numpy中的numpy.dot函数可以两个向量的点积，numpy.linalg.norm函数可以计算向量的欧氏距离。</span></span><br><span class="line"><span class="comment"># 因此，可以通过公式和这两个函数计算向量的余弦相似度。</span></span><br><span class="line"><span class="keyword">from</span> numpy <span class="keyword">import</span> dot</span><br><span class="line"><span class="keyword">from</span> numpy.linalg <span class="keyword">import</span> norm</span><br><span class="line">res2 = dot(x, y) / (norm(x) * norm(y))</span><br><span class="line">print(res2)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 方法三：sklearn中的sklearn.metrics.pairwise.cosine_similarity函数可直接计算出两个向量的余弦相似度。</span></span><br><span class="line"><span class="keyword">from</span> sklearn.metrics.pairwise <span class="keyword">import</span> cosine_similarity</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">res3 = cosine_similarity(x.reshape(<span class="number">1</span>, <span class="number">-1</span>), y.reshape(<span class="number">1</span>, <span class="number">-1</span>)) <span class="comment"># reshape(1, -1)将矩阵转化成1行</span></span><br><span class="line">print(res3)</span><br></pre></td></tr></table></figure>
+<p>以上3种方法得到的结果一致。</p>
+<h1 id="5-源码仓库地址"><a href="#5-源码仓库地址" class="headerlink" title="5. 源码仓库地址"></a>5. 源码仓库地址</h1><p>🌼 <a href="https://github.com/crossoverpptx/ImageProcessing-and-MachineLearning" target="_blank" rel="noopener">图像处理、机器学习的常用算法汇总</a></p>
+]]></content>
+      <categories>
+        <category>机器学习</category>
+      </categories>
+      <tags>
+        <tag>机器学习</tag>
+      </tags>
+  </entry>
 </search>
