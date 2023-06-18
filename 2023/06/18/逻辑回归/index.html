@@ -1,0 +1,1291 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="机器学习," />
+
+
+
+
+  
+
+
+  <link rel="alternate" href="/atom.xml" title="crossoverpptx's Blog" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="1. 逻辑回归简介逻辑回归（Logistic Regression）虽然被称为回归，但其实际上是分类模型，并常用于二分类。逻辑回归与线性回归本质上是类似的，相较线性回归只是多了一个Logistic函数（或称为Sigmoid函数）。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="逻辑回归">
+<meta property="og:url" content="http://yoursite.com/2023/06/18/%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92/index.html">
+<meta property="og:site_name" content="crossoverpptx&#39;s Blog">
+<meta property="og:description" content="1. 逻辑回归简介逻辑回归（Logistic Regression）虽然被称为回归，但其实际上是分类模型，并常用于二分类。逻辑回归与线性回归本质上是类似的，相较线性回归只是多了一个Logistic函数（或称为Sigmoid函数）。">
+<meta property="og:image" content="http://yoursite.com/2023/06/18/%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92/1.png">
+<meta property="og:image" content="http://yoursite.com/2023/06/18/%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92/2.png">
+<meta property="og:image" content="http://yoursite.com/2023/06/18/%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92/3.png">
+<meta property="og:image" content="http://yoursite.com/2023/06/18/%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92/4.png">
+<meta property="og:image" content="http://yoursite.com/2023/06/18/%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92/5.png">
+<meta property="og:image" content="file:///C:/Users/fwp/AppData/Local/Temp/ksohtml15868/wps6.jpg">
+<meta property="og:image" content="http://yoursite.com/2023/06/18/%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92/6.png">
+<meta property="og:image" content="http://yoursite.com/2023/06/18/%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92/7.png">
+<meta property="og:image" content="http://yoursite.com/2023/06/18/%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92/8.png">
+<meta property="og:image" content="http://yoursite.com/2023/06/18/%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92/9.png">
+<meta property="og:image" content="http://yoursite.com/2023/06/18/%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92/10.png">
+<meta property="og:image" content="http://yoursite.com/2023/06/18/%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92/11.png">
+<meta property="og:image" content="http://yoursite.com/2023/06/18/%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92/12.png">
+<meta property="og:image" content="http://yoursite.com/2023/06/18/%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92/13.png">
+<meta property="og:image" content="http://yoursite.com/2023/06/18/%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92/14.png">
+<meta property="og:image" content="file:///C:/Users/fwp/AppData/Local/Temp/ksohtml15868/wps16.jpg">
+<meta property="article:published_time" content="2023-06-18T02:37:42.000Z">
+<meta property="article:modified_time" content="2023-06-18T02:49:17.394Z">
+<meta property="article:author" content="crossoverpptx">
+<meta property="article:tag" content="机器学习">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/2023/06/18/%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92/1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2023/06/18/逻辑回归/"/>
+
+
+
+
+
+  <title>逻辑回归 | crossoverpptx's Blog</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">crossoverpptx's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">极度的痛苦才是精神的最大解放者。唯有此种痛苦，才迫使我们大彻如悟。</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2023/06/18/%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="crossoverpptx">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/me.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="crossoverpptx's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">逻辑回归</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2023-06-18T10:37:42+08:00">
+                2023-06-18
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2023-06-18T10:49:17+08:00">
+                2023-06-18
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index">
+                    <span itemprop="name">机器学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i> 浏览
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2.5k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  10
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="1-逻辑回归简介"><a href="#1-逻辑回归简介" class="headerlink" title="1. 逻辑回归简介"></a>1. 逻辑回归简介</h1><p>逻辑回归（Logistic Regression）虽然被称为回归，但其实际上是分类模型，并常用于二分类。逻辑回归与线性回归本质上是类似的，相较线性回归只是多了一个Logistic函数（或称为Sigmoid函数）。<a id="more"></a></p>
+<h2 id="1-1-分类和回归"><a href="#1-1-分类和回归" class="headerlink" title="1.1 分类和回归"></a>1.1 分类和回归</h2><p>分类和回归是机器学习可以解决的两大主要问题，从预测值的类型上看，连续变量预测的定量输出称为回归；离散变量预测的定性输出称为分类。例如：预测明天多少度，是一个回归任务；预测明天阴还是晴，就是一个分类任务。</p>
+<h2 id="1-2-逻辑回归"><a href="#1-2-逻辑回归" class="headerlink" title="1.2 逻辑回归"></a>1.2 逻辑回归</h2><p>Logistic Regression原理与Linear Regression回归类似，其主要流程如下：<br>（1）构建预测函数。一般来说在构建之前，需要根据数据来确定函数模型，是线性还是非线性。<br>（2）构建Cost函数(损失函数)。该函数表示预测的输出（h）与训练数据类别（y）之间的偏差，可以是二者之间的差（h-y）或者是其他的形式。综合考虑所有训练数据的“损失”，将Cost求和或者求平均，记为J(θ)函数，表示所有训练数据预测值与实际类别的偏差。<br>（3）采用梯度下降算法，minJ(θ)。在数据量很大时，梯度下降算法执行起来会较慢。因此出现了随机梯度下降等算法进行优化。</p>
+<h1 id="2-逻辑回归原理"><a href="#2-逻辑回归原理" class="headerlink" title="2. 逻辑回归原理"></a>2. 逻辑回归原理</h1><h2 id="2-1-构造预测函数"><a href="#2-1-构造预测函数" class="headerlink" title="2.1 构造预测函数"></a>2.1 构造预测函数</h2><p>在线性回归中模型中预测函数为：</p>
+<p><img src="/2023/06/18/%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92/1.png" alt="img"> </p>
+<p>逻辑回归作为分类问题，结果h = {1 or 0}即可。若逻辑回归采用线性回归预测函数则会产生远大于1或远小于0得值，不便于预测。因此线性回归预测函数需要做一定改进。设想如果有一个函数h(x)能够把预测结果值压缩到0-1这个区间，那么我们就可以设定一个阈值s，若h(x) &gt;= s,则认定为预测结果为1，否之为0。</p>
+<p>实际中也存在这样的函数：Logistic函数（或称为Sigmoid函数），函数表达式为：</p>
+<p><img src="/2023/06/18/%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92/2.png" alt="img"> </p>
+<p>其图像如下图所示：</p>
+<p><img src="/2023/06/18/%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92/3.png" alt="img"> </p>
+<p>对于线性边界的情况，边界形式如下：</p>
+<p><img src="/2023/06/18/%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92/4.png" alt="img"> </p>
+<p>构造预测函数为：</p>
+<p><img src="/2023/06/18/%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92/5.png" alt="img"> </p>
+<p>函数<img src="file:///C:\Users\fwp\AppData\Local\Temp\ksohtml15868\wps6.jpg" alt="img">的值有特殊的含义，它表示结果取1的概率，因此对于输入x分类结果为类别1和类别0的概率分别为：</p>
+<p><img src="/2023/06/18/%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92/6.png" alt="img">    公式（1）</p>
+<h2 id="2-2-构造损失函数-J"><a href="#2-2-构造损失函数-J" class="headerlink" title="2.2 构造损失函数 J"></a>2.2 构造损失函数 J</h2><p>Cost函数和J函数如下，它们是基于最大似然估计推导得到的：</p>
+<p><img src="/2023/06/18/%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92/7.png" alt="img"> </p>
+<p><img src="/2023/06/18/%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92/8.png" alt="img"> </p>
+<p>下面详细说明推导的过程：</p>
+<p>2.1节公式(1) 综合起来可以写成：</p>
+<p><img src="/2023/06/18/%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92/9.png" alt="img"> </p>
+<p>取似然函数为：</p>
+<p><img src="/2023/06/18/%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92/10.png" alt="img"> </p>
+<p>对数似然函数为：</p>
+<p><img src="/2023/06/18/%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92/11.png" alt="img"> </p>
+<p>最大似然估计就是求使l(θ)取最大值时的θ，其实这里可以使用梯度上升法求解，求得的θ就是要求的最佳参数。但是，在Andrew Ng的课程中将取为下式，即：</p>
+<p><img src="/2023/06/18/%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92/12.png" alt="img"> </p>
+<h2 id="2-3-梯度下降法求J-θ-的最小值"><a href="#2-3-梯度下降法求J-θ-的最小值" class="headerlink" title="2.3 梯度下降法求J(θ)的最小值"></a>2.3 梯度下降法求J(θ)的最小值</h2><p>θ更新过程如下：</p>
+<p><img src="/2023/06/18/%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92/13.png" alt="img"> </p>
+<p>经化简后θ的最终更新过程可以写成：</p>
+<p><img src="/2023/06/18/%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92/14.png" alt="img"> </p>
+<p>另外，可以通过向量化，即使用矩阵计算来代替for循环，以简化计算过程，提高效率；可以通过正则化解决过拟合问题（过拟合即过分拟合了训练数据，使得模型的复杂度提高，泛化能力较差（对未知数据的预测能力））。</p>
+<h1 id="3-逻辑回归特点"><a href="#3-逻辑回归特点" class="headerlink" title="3. 逻辑回归特点"></a>3. 逻辑回归特点</h1><p><strong><em>优点：</em></strong><br>（1）简单实现，模型的可解释性很好。<br>（2）训练速度快。计算的量只和特征的数目有关，不需要缩放输入特征等等。<br>（3）资源占用小。因为只需要存储各个维度的特征值。</p>
+<p><strong><em>缺点：</em></strong><br>（1）准确率不是很高，就是因为模型（非常类似线性模型），很难拟合数据的真实分布，容易导致过拟合。<br>（2）难处理数据不平衡的问题。<br>（3）逻辑回归本身无法解决非线性问题，因为它的决策边界是线性的。<br>（4）高度依赖正确的数据表示。</p>
+<h1 id="4-逻辑回归的应用场景"><a href="#4-逻辑回归的应用场景" class="headerlink" title="4. 逻辑回归的应用场景"></a>4. 逻辑回归的应用场景</h1><p>当Y变量只有两个值时，当面临分类问题时，可以考虑使用逻辑回归。</p>
+<p>逻辑回归也用于多分类别分类。有很多种多分类算法，如随机森林分类器或者朴素贝叶斯分类器等等。逻辑回归也可以用于多分类任务。可以通过一些技巧，分两种策略：</p>
+<p>一对多策略：基本思想是将第i种类型的所有样本作为正例，将剩下的所有样本作为负例。进行训练得出一个分类器。这样，我们就得到N个分类器。预测的时候，将样本给N个分类器，获得N个结果，选择其中概率值最大的那个作为结果。</p>
+<p>一对一策略：这种策略，假设有N个类别，不同的类别之间，训练一个分类器，训练得到的结果有<img src="file:///C:\Users\fwp\AppData\Local\Temp\ksohtml15868\wps16.jpg" alt="img">种不同的分类器。预测的时候，将样本给所有的分类器，会有N(N-1)个结果，最终结果通过“投票”产生。</p>
+<h1 id="5-逻辑回归的Python应用"><a href="#5-逻辑回归的Python应用" class="headerlink" title="5. 逻辑回归的Python应用"></a>5. 逻辑回归的Python应用</h1><h2 id="5-1-自定义函数实现逻辑回归"><a href="#5-1-自定义函数实现逻辑回归" class="headerlink" title="5.1 自定义函数实现逻辑回归"></a>5.1 自定义函数实现逻辑回归</h2><p>可以自定义sigmod函数、损失函数、梯度下降等实现逻辑回归，如下代码所示：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"><span class="comment"># sigmod函数，即得分函数,计算数据的概率是0还是1；得到y大于等于0.5是1，y小于等于0.5为0。</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">sigmod</span><span class="params">(x)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span> / (<span class="number">1</span> + np.exp(-x))</span><br><span class="line"> </span><br><span class="line"><span class="comment"># 损失函数</span></span><br><span class="line"><span class="comment"># hx是概率估计值，是sigmod(x)得来的值，y是样本真值</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">cost</span><span class="params">(hx, y)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> -y * np.log(hx) - (<span class="number">1</span> - y) * np.log(<span class="number">1</span> - hx)</span><br><span class="line"> </span><br><span class="line"><span class="comment"># 梯度下降</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">gradient</span><span class="params">(current_para, x, y, learning_rate)</span>:</span></span><br><span class="line">    m = len(y)</span><br><span class="line">    matrix_gradient = np.zeros(len(x[<span class="number">0</span>]))</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(m):</span><br><span class="line">        current_x = x[i]</span><br><span class="line">        current_y = y[i]</span><br><span class="line">        current_x = np.asarray(current_x)</span><br><span class="line">        matrix_gradient += (sigmod(np.dot(current_para, current_x)) - current_y) * current_x</span><br><span class="line">    new_para = current_para - learning_rate * matrix_gradient</span><br><span class="line">    <span class="keyword">return</span> new_para</span><br><span class="line"> </span><br><span class="line"><span class="comment"># 误差计算</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">error</span><span class="params">(para, x, y)</span>:</span></span><br><span class="line">    total = len(y)</span><br><span class="line">    error_num = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(total):</span><br><span class="line">        current_x = x[i]</span><br><span class="line">        current_y = y[i]</span><br><span class="line">        hx = sigmod(np.dot(para, current_x))  <span class="comment"># LR算法</span></span><br><span class="line">        <span class="keyword">if</span> cost(hx, current_y) &gt; <span class="number">0.5</span>:  <span class="comment"># 进一步计算损失</span></span><br><span class="line">            error_num += <span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> error_num / total</span><br><span class="line"> </span><br><span class="line"><span class="comment"># 训练</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">train</span><span class="params">(initial_para, x, y, learning_rate, num_iter)</span>:</span></span><br><span class="line">    dataMat = np.asarray(x)</span><br><span class="line">    labelMat = np.asarray(y)</span><br><span class="line">    para = initial_para</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(num_iter + <span class="number">1</span>):</span><br><span class="line">        para = gradient(para, dataMat, labelMat, learning_rate)  <span class="comment"># 梯度下降法</span></span><br><span class="line">        <span class="keyword">if</span> i % <span class="number">100</span> == <span class="number">0</span>:</span><br><span class="line">            err = error(para, dataMat, labelMat)</span><br><span class="line">            print(<span class="string">"iter:"</span> + str(i) + <span class="string">" ; error:"</span> + str(err))</span><br><span class="line">    <span class="keyword">return</span> para</span><br><span class="line"> </span><br><span class="line"><span class="comment"># 数据集加载</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">load_dataset</span><span class="params">()</span>:</span></span><br><span class="line">    dataMat = []</span><br><span class="line">    labelMat = []</span><br><span class="line">    <span class="keyword">with</span> open(<span class="string">"logistic_regression_binary.csv"</span>, <span class="string">"r+"</span>) <span class="keyword">as</span> file_object:</span><br><span class="line">        lines = file_object.readlines()</span><br><span class="line">        <span class="keyword">for</span> line <span class="keyword">in</span> lines:</span><br><span class="line">            line_array = line.strip().split()</span><br><span class="line">            dataMat.append([<span class="number">1.0</span>, float(line_array[<span class="number">0</span>]), float(line_array[<span class="number">1</span>])])  <span class="comment"># 数据</span></span><br><span class="line">            labelMat.append(int(line_array[<span class="number">2</span>]))  <span class="comment"># 标签</span></span><br><span class="line">    <span class="keyword">return</span> dataMat, labelMat</span><br><span class="line"> </span><br><span class="line"><span class="comment"># 绘制图形</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">plotBestFit</span><span class="params">(wei, data, label)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> type(wei).__name__ == <span class="string">'ndarray'</span>:</span><br><span class="line">        weights = wei</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        weights = wei.getA()</span><br><span class="line">    fig = plt.figure(<span class="number">0</span>)</span><br><span class="line">    ax = fig.add_subplot(<span class="number">111</span>)</span><br><span class="line">    xxx = np.arange(<span class="number">-3</span>, <span class="number">3</span>, <span class="number">0.1</span>)</span><br><span class="line">    yyy = - weights[<span class="number">0</span>] / weights[<span class="number">2</span>] - weights[<span class="number">1</span>] / weights[<span class="number">2</span>] * xxx</span><br><span class="line">    ax.plot(xxx, yyy)</span><br><span class="line">    cord1 = []</span><br><span class="line">    cord0 = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(len(label)):</span><br><span class="line">        <span class="keyword">if</span> label[i] == <span class="number">1</span>:</span><br><span class="line">            cord1.append(data[i][<span class="number">1</span>:<span class="number">3</span>])</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            cord0.append(data[i][<span class="number">1</span>:<span class="number">3</span>])</span><br><span class="line">    cord1 = np.array(cord1)</span><br><span class="line">    cord0 = np.array(cord0)</span><br><span class="line">    ax.scatter(cord1[:, <span class="number">0</span>], cord1[:, <span class="number">1</span>], c=<span class="string">'g'</span>)</span><br><span class="line">    ax.scatter(cord0[:, <span class="number">0</span>], cord0[:, <span class="number">1</span>], c=<span class="string">'r'</span>)</span><br><span class="line">    plt.show()</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">logistic_regression</span><span class="params">()</span>:</span></span><br><span class="line">    x, y = load_dataset()</span><br><span class="line">    n = len(x[<span class="number">0</span>])</span><br><span class="line">    initial_para = np.ones(n)</span><br><span class="line">    learning_rate = <span class="number">0.001</span></span><br><span class="line">    num_iter = <span class="number">1000</span></span><br><span class="line">    print(<span class="string">"初始参数："</span>, initial_para)</span><br><span class="line">    para = train(initial_para, x, y, learning_rate, num_iter)</span><br><span class="line">    print(<span class="string">"训练所得参数："</span>, para)</span><br><span class="line">    plotBestFit(para, x, y)</span><br><span class="line"> </span><br><span class="line">    </span><br><span class="line"><span class="keyword">if</span> __name__==<span class="string">"__main__"</span>:</span><br><span class="line">    logistic_regression()</span><br></pre></td></tr></table></figure>
+<h2 id="5-2-sklearn库LogisticRegression函数的应用"><a href="#5-2-sklearn库LogisticRegression函数的应用" class="headerlink" title="5.2 sklearn库LogisticRegression函数的应用"></a>5.2 sklearn库LogisticRegression函数的应用</h2><p>另外，可以通过sklearn库的逻辑回归函数来训练模型并预测，其函数原型如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">LogisticRegression(C=<span class="number">1.0</span>,class_weight=<span class="literal">None</span>,dual=<span class="literal">False</span>,fit_intercept=<span class="literal">True</span>,intercept_scaling=<span class="number">1</span>,max_iter=<span class="number">100</span>,multi_class=<span class="string">'ovr'</span>,n_jobs=<span class="number">1</span>,penalty=<span class="string">'l2'</span>,random_state=<span class="literal">None</span>,solver=<span class="string">'liblinear'</span>,tol=<span class="number">0.0001</span>,verbose=<span class="number">0</span>,warm_start=<span class="literal">False</span>)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>参数说明:</p>
+<p>C：正则化系数λ的倒数，默认为1.0。</p>
+<p>class_weight：用于标示分类模型中各种类型的权重，不考虑权重，即为None。</p>
+<p>dual：对偶或原始方法，bool类型，默认为False。</p>
+<p>fit_intercept：是否存在截距或偏差，bool类型，默认为True。</p>
+<p>intercept_scaling：仅在正则化项为”liblinear”，且fit_intercept设置为True时有用，float类型，默认为1。</p>
+<p>max_iter：算法收敛最大迭代次数，int类型，默认为10，仅在正则化优化算法为newton-cg, sag和lbfgs才有用。</p>
+<p>multi_class：分类方式选择参数，str类型，可选参数为ovr和multinomial，默认为ovr。</p>
+<p>n_jobs：并行数，int类型，默认为1。</p>
+<p>penalty：用于指定惩罚项中使用的规范，str类型，可选参数为l1和l2，默认为l2。</p>
+<p>random_state：随机数种子，int类型，可选参数，默认为无。</p>
+<p>solver：优化算法选择参数，决定了我们对逻辑回归损失函数的优化方法。有五个可选参数，即newtoncg,lbfgs,liblinear,sag,saga。对于小型数据集来说，‘liblinear’是一个不错的选择，而‘sag’和‘saga’对于大型数据集则更快。</p>
+<p>tol：停止求解的标准，float类型，默认为1e-4。</p>
+<p>verbose：日志冗长度，int类型，默认为0。</p>
+<p>warm_start：热启动参数，bool类型，默认为False。</p>
+</blockquote>
+<p>下面以通过泰坦尼克号数据集预测乘客生还情况为例，说明上述函数的使用：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split</span><br><span class="line"><span class="comment"># 建立模型用的训练数据集和验证数据集</span></span><br><span class="line">train_X, test_X, train_y, test_y = train_test_split(source_X , source_y, train_size=<span class="number">.8</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 导入算法</span></span><br><span class="line"><span class="keyword">from</span> sklearn.linear_model <span class="keyword">import</span> LogisticRegression</span><br><span class="line"><span class="comment"># 创建模型：逻辑回归（logisic regression）</span></span><br><span class="line">model = LogisticRegression()</span><br><span class="line"><span class="comment"># 训练模型</span></span><br><span class="line">model.fit( train_X , train_y )</span><br><span class="line">LogisticRegression(C=<span class="number">1.0</span>, class_weight=<span class="literal">None</span>, dual=<span class="literal">False</span>, fit_intercept=<span class="literal">True</span>,</span><br><span class="line">          intercept_scaling=<span class="number">1</span>, max_iter=<span class="number">100</span>, multi_class=<span class="string">'ovr'</span>, n_jobs=<span class="number">1</span>,</span><br><span class="line">          penalty=<span class="string">'l2'</span>, random_state=<span class="literal">None</span>, solver=<span class="string">'liblinear'</span>, tol=<span class="number">0.0001</span>,</span><br><span class="line">          verbose=<span class="number">0</span>, warm_start=<span class="literal">False</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 评估模型</span></span><br><span class="line"><span class="comment"># 分类问题，score得到的是模型的正确率</span></span><br><span class="line">model.score(test_X , test_y )</span><br><span class="line"><span class="comment"># k折交叉验证</span></span><br><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> model_selection</span><br><span class="line"><span class="comment"># 将训练集分成5份，4份用来训练模型，1份用来预测，这样就可以用不同的训练集在一个模型中训练</span></span><br><span class="line">print(model_selection.cross_val_score(model, source_X, source_y, cv=<span class="number">5</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 结果预测</span></span><br><span class="line">pred_Y = model.predict(pred_X)</span><br><span class="line"><span class="comment"># 生成的预测值是浮点数（0.0,1,0）,所以要对数据类型进行转换</span></span><br><span class="line">pred_Y=pred_Y.astype(int)</span><br><span class="line"><span class="comment"># 乘客id</span></span><br><span class="line">passenger_id = full.loc[sourceRow:,<span class="string">'PassengerId'</span>]</span><br><span class="line"><span class="comment"># 数据框：乘客id，预测生存情况的值</span></span><br><span class="line">predDf = pd.DataFrame(</span><br><span class="line">    &#123; <span class="string">'PassengerId'</span>: passenger_id ,</span><br><span class="line">     <span class="string">'Survived'</span>: pred_Y &#125; )</span><br><span class="line">predDf.shape</span><br><span class="line">print(predDf.head())</span><br><span class="line"><span class="comment"># 保存结果</span></span><br><span class="line">predDf.to_csv(<span class="string">'titanic_pred.csv'</span>, index = <span class="literal">False</span> )</span><br></pre></td></tr></table></figure>
+<h1 id="6-源码仓库地址"><a href="#6-源码仓库地址" class="headerlink" title="6. 源码仓库地址"></a>6. 源码仓库地址</h1><p>🌼 <a href="https://github.com/crossoverpptx/ImageProcessing-and-MachineLearning" target="_blank" rel="noopener">图像处理、机器学习的常用算法汇总</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag"># 机器学习</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2023/06/17/K-means%E7%AE%97%E6%B3%95/" rel="next" title="K-means算法">
+                <i class="fa fa-chevron-left"></i> K-means算法
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/me.png"
+                alt="crossoverpptx" />
+            
+              <p class="site-author-name" itemprop="name">crossoverpptx</p>
+              <p class="site-description motion-element" itemprop="description">极度的痛苦才是精神的最大解放者。唯有此种痛苦，才迫使我们大彻如悟。</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+                <a href="/archives">
+                  <span class="site-state-item-count">87</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/index.html">
+                  <span class="site-state-item-count">28</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/crossoverpptx" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:2269041628@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-逻辑回归简介"><span class="nav-text">1. 逻辑回归简介</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-分类和回归"><span class="nav-text">1.1 分类和回归</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-逻辑回归"><span class="nav-text">1.2 逻辑回归</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-逻辑回归原理"><span class="nav-text">2. 逻辑回归原理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-构造预测函数"><span class="nav-text">2.1 构造预测函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-构造损失函数-J"><span class="nav-text">2.2 构造损失函数 J</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-梯度下降法求J-θ-的最小值"><span class="nav-text">2.3 梯度下降法求J(θ)的最小值</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-逻辑回归特点"><span class="nav-text">3. 逻辑回归特点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-逻辑回归的应用场景"><span class="nav-text">4. 逻辑回归的应用场景</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-逻辑回归的Python应用"><span class="nav-text">5. 逻辑回归的Python应用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#5-1-自定义函数实现逻辑回归"><span class="nav-text">5.1 自定义函数实现逻辑回归</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-2-sklearn库LogisticRegression函数的应用"><span class="nav-text">5.2 sklearn库LogisticRegression函数的应用</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-源码仓库地址"><span class="nav-text">6. 源码仓库地址</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">crossoverpptx</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">167.7k</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i> 访问人数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i> 访问总量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>
