@@ -7094,4 +7094,50 @@ C_N^2</script><p>种不同的分类器。预测的时候，将样本给所有的
         <tag>机器学习</tag>
       </tags>
   </entry>
+  <entry>
+    <title>朴素贝叶斯算法</title>
+    <url>/2023/06/19/%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF%E7%AE%97%E6%B3%95/</url>
+    <content><![CDATA[<h1 id="1-贝叶斯定理"><a href="#1-贝叶斯定理" class="headerlink" title="1. 贝叶斯定理"></a>1. 贝叶斯定理</h1><p>先验概率：即基于统计的概率，是基于以往历史经验和分析得到的结果，不需要依赖当前发生的条件。</p>
+<p>后验概率：则是从条件概率而来，由因推果，是基于当下发生了事件之后计算的概率，依赖于当前发生的条件。<a id="more"></a></p>
+<p>条件概率：记事件A发生的概率为P(A)，事件B发生的概率为P(B)，则在B事件发生的前提下，A事件发生的概率即为条件概率，记为P(A|B)。<!-- more --></p>
+<p><img src="/2023/06/19/%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF%E7%AE%97%E6%B3%95/1.png" alt="img"> </p>
+<p>贝叶斯公式：贝叶斯公式便是基于条件概率，通过P(B|A)来求P(A|B)，如下：</p>
+<p><img src="/2023/06/19/%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF%E7%AE%97%E6%B3%95/2.png" alt="img"> </p>
+<p>将A看成“规律”，B看成“现象”，那么贝叶斯公式可以看成：</p>
+<p><img src="/2023/06/19/%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF%E7%AE%97%E6%B3%95/3.png" alt="img"> </p>
+<p>全概率公式：表示若事件A1,A2,…,An构成一个完备事件组且都有正概率，则对任意一个事件B都有公式成立：</p>
+<p><img src="/2023/06/19/%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF%E7%AE%97%E6%B3%95/4.png" alt="img"> </p>
+<p>将全概率公式带入贝叶斯公式中，得到：</p>
+<p><img src="/2023/06/19/%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF%E7%AE%97%E6%B3%95/5.png" alt="img"> </p>
+<h1 id="2-朴素贝叶斯"><a href="#2-朴素贝叶斯" class="headerlink" title="2. 朴素贝叶斯"></a>2. 朴素贝叶斯</h1><h2 id="2-1-朴素贝叶斯原理"><a href="#2-1-朴素贝叶斯原理" class="headerlink" title="2.1 朴素贝叶斯原理"></a>2.1 朴素贝叶斯原理</h2><p>特征条件假设：假设每个特征之间没有联系，给定训练数据集，其中每个样本x都包括n维特征，即x = (x<sub>1</sub>,x<sub>2</sub>,…,x<sub>n</sub>)，类标记集合含有k种类别，即y = (y<sub>1</sub>,y<sub>2</sub>,…,y<sub>k</sub>)。</p>
+<p>对于给定的新样本x，判断其属于哪个标记的类别，根据贝叶斯定理，可以得到x属于y<sub>k</sub>类别的概率P(y<sub>k</sub>|x)：</p>
+<p><img src="/2023/06/19/%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF%E7%AE%97%E6%B3%95/6.png" alt="img"> </p>
+<p>最大的类别记为预测类别，即：<img src="/2023/06/19/%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF%E7%AE%97%E6%B3%95/7.png" alt="img"></p>
+<p>朴素贝叶斯算法对条件概率分布作出了独立性的假设，通俗地讲就是说假设各个维度的特征x<sub>1</sub>,x<sub>2</sub>,…,x<sub>n</sub>互相独立，在这个假设的前提上，条件概率可以转化为：</p>
+<p><img src="/2023/06/19/%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF%E7%AE%97%E6%B3%95/8.png" alt="img"> </p>
+<p>代入上面贝叶斯公式中，得到：</p>
+<p><img src="/2023/06/19/%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF%E7%AE%97%E6%B3%95/9.png" alt="img"> </p>
+<p>于是，朴素贝叶斯分类器可表示为：</p>
+<p><img src="/2023/06/19/%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF%E7%AE%97%E6%B3%95/10.png" alt="img"> </p>
+<p>因为对所有的y<sub>k</sub>，上式中的分母的值都是一样的，所以可以忽略分母部分，朴素贝叶斯分类器最终表示为：</p>
+<p><img src="/2023/06/19/%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF%E7%AE%97%E6%B3%95/11.png" alt="img"> </p>
+<h2 id="2-2-朴素贝叶斯适用范围"><a href="#2-2-朴素贝叶斯适用范围" class="headerlink" title="2.2 朴素贝叶斯适用范围"></a>2.2 朴素贝叶斯适用范围</h2><p>朴素贝叶斯只适用于特征之间是条件独立的情况下，否则分类效果不好，这里的朴素指的就是条件独立。</p>
+<p>朴素贝叶斯主要被广泛地使用在文档分类中。</p>
+<h2 id="2-3-朴素贝叶斯常用模型"><a href="#2-3-朴素贝叶斯常用模型" class="headerlink" title="2.3 朴素贝叶斯常用模型"></a>2.3 朴素贝叶斯常用模型</h2><p>朴素贝叶斯常用的模型如下：<br>（1）高斯模型：处理特征是连续型变量的情况。<br>（2）多项式模型：最常见，要求特征是离散数据。<br>（3）伯努利模型：要求特征是离散的，且为布尔类型，即true和false，或者1和0。</p>
+<h1 id="3-朴素贝叶斯算法的特点"><a href="#3-朴素贝叶斯算法的特点" class="headerlink" title="3. 朴素贝叶斯算法的特点"></a>3. 朴素贝叶斯算法的特点</h1><p><strong><em>优点：</em></strong><br>1、朴素贝叶斯模型有稳定的分类效率。<br>2、对小规模的数据表现很好，能处理多分类任务，适合增量式训练，尤其是数据量超出内存时，可以一批批的去增量训练。<br>3、对缺失数据不太敏感，算法也比较简单，常用于文本分类。</p>
+<p><strong><em>缺点：</em></strong><br>1、需要知道先验概率，且先验概率很多时候取决于假设，假设的模型可以有很多种，因此在某些时候会由于假设的先验模型的原因导致预测效果不佳。<br>2、对输入数据的表达形式很敏感（离散、连续，值极大极小之类的）。</p>
+<h1 id="4-朴素贝叶斯的Python应用"><a href="#4-朴素贝叶斯的Python应用" class="headerlink" title="4. 朴素贝叶斯的Python应用"></a>4. 朴素贝叶斯的Python应用</h1><p>在sklearn库中提供了GaussianNB、MultinomialNB和BernoulliNB 3种朴素贝叶斯模型，下面以GaussianNB为例。</p>
+<p>测试代码如下：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 导入包</span></span><br><span class="line"><span class="keyword">from</span> sklearn.naive_bayes <span class="keyword">import</span> GaussianNB  <span class="comment"># 高斯分布，假定特征服从正态分布的</span></span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split <span class="comment"># 数据集划分</span></span><br><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> accuracy_score</span><br><span class="line"></span><br><span class="line"><span class="comment"># 导入数据集</span></span><br><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> datasets</span><br><span class="line">iris = datasets.load_iris()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 拆分数据集,random_state:随机数种子</span></span><br><span class="line">train_x,test_x,train_y,test_y = train_test_split(iris.data,iris.target,random_state=<span class="number">12</span>) </span><br><span class="line"></span><br><span class="line"><span class="comment"># 建模</span></span><br><span class="line">gnb_clf = GaussianNB()</span><br><span class="line">gnb_clf.fit(train_x,train_y)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 对测试集进行预测</span></span><br><span class="line"><span class="comment"># predict()：直接给出预测的类别</span></span><br><span class="line"><span class="comment"># predict_proba()：输出的是每个样本属于某种类别的概率</span></span><br><span class="line">predict_class = gnb_clf.predict(test_x)</span><br><span class="line"><span class="comment"># predict_class_proba = gnb_clf.predict_proba(test_x)</span></span><br><span class="line">print(<span class="string">"测试集准确率为："</span>,accuracy_score(test_y,predict_class))</span><br></pre></td></tr></table></figure>
+<p> 输出结果如下：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">测试集准确率为： <span class="number">0.9736842105263158</span>。</span><br></pre></td></tr></table></figure>
+<h1 id="5-源码仓库地址"><a href="#5-源码仓库地址" class="headerlink" title="5. 源码仓库地址"></a>5. 源码仓库地址</h1><p>🌼 <a href="https://github.com/crossoverpptx/ImageProcessing-and-MachineLearning" target="_blank" rel="noopener">图像处理、机器学习的常用算法汇总</a></p>
+]]></content>
+      <categories>
+        <category>机器学习</category>
+      </categories>
+      <tags>
+        <tag>机器学习</tag>
+      </tags>
+  </entry>
 </search>
