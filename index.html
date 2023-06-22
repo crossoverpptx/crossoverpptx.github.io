@@ -345,7 +345,7 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2023-06-22T10:45:00+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2023-06-22T10:49:43+08:00">
                 2023-06-22
               </time>
             
@@ -434,15 +434,6 @@
       
         
           <h1 id="1-随机森林原理"><a href="#1-随机森林原理" class="headerlink" title="1. 随机森林原理"></a>1. 随机森林原理</h1><h2 id="1-1-集成学习"><a href="#1-1-集成学习" class="headerlink" title="1.1 集成学习"></a>1.1 集成学习</h2><p>集成学习通过训练学习出多个估计器，当需要预测时通过结合器将多个估计器的结果整合起来当作最后的结果输出。</p>
-<p>下图展示了集成学习的基本流程：</p>
-<p><img src="/2023/06/22/%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97/1.png" alt="img"> </p>
-<p>  集成学习分两种：<br>（1）Bagging装袋：又称自主聚集(bootstrap aggregating)，是一种根据均匀概率分布从数据集中重复抽样（有放回）的技术。每个新数据集和原始数据集大小相等。代表算法：随机森林。<br>（2）Boosting提升：是一个迭代的过程，用来自适应地改变训练样本的分布，使得弱学习器聚焦到那些很难分类的样本上。它的做法是给每一个训练样本赋予一个权重，在每一轮训练结束时自动地调整权重。代表算法：Adaboost、GBDT、XGBoost。</p>
-<p>集成学习的优势是提升了单个估计器的通用性与鲁棒性，比单个估计器拥有更好的预测性能。集成学习的另一个特点是能方便的进行并行化操作。</p>
-<h2 id="1-2-Bagging算法"><a href="#1-2-Bagging算法" class="headerlink" title="1.2 Bagging算法"></a>1.2 Bagging算法</h2><p>Bagging 算法是一种集成学习算法，其全称为自助聚集算法（Bootstrap aggregating），顾名思义算法由 Bootstrap 与 Aggregating 两部分组成。</p>
-<p>下图展示了Bagging算法使用自助取样（Bootstrapping）生成多个子数据的示例：</p>
-<p><img src="/2023/06/22/%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97/2.png" alt="img"> </p>
-<p>算法的具体步骤为：假设有一个大小为 N 的训练数据集，每次从该数据集中有放回的取选出大小为 M 的子数据集，一共选 K 次，根据这 K 个子数据集，训练学习出 K 个模型。当要预测的时候，使用这 K 个模型进行预测，再通过取平均值或者多数分类的方式，得到最后的预测结果。</p>
-<h2 id="1-3-随机森林算法"><a href="#1-3-随机森林算法" class="headerlink" title="1.3 随机森林算法"></a>1.3 随机森林算法</h2><p>将多个决策树结合在一起，每次数据集是随机有放回的选出，同时随机选出部分特征作为输入，所以该算法被称为随机森林算法。可以看到随机森林算法是以决策树为估计器的Bagging算法。</p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2023/06/22/%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97/#more" rel="contents">
