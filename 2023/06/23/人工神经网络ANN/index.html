@@ -1,0 +1,1266 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="机器学习," />
+
+
+
+
+  
+
+
+  <link rel="alternate" href="/atom.xml" title="crossoverpptx's Blog" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="1. 人工神经网络简介1.1 生物神经网络人工神经网络的灵感来自其生物学对应物。生物神经网络使大脑能够以复杂的方式处理大量信息。大脑的生物神经网络由大约1000亿个神经元组成，这是大脑的基本处理单元。神经元通过彼此之间巨大的连接（称为突触）来执行其功能。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="人工神经网络ANN">
+<meta property="og:url" content="http://yoursite.com/2023/06/23/%E4%BA%BA%E5%B7%A5%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9CANN/index.html">
+<meta property="og:site_name" content="crossoverpptx&#39;s Blog">
+<meta property="og:description" content="1. 人工神经网络简介1.1 生物神经网络人工神经网络的灵感来自其生物学对应物。生物神经网络使大脑能够以复杂的方式处理大量信息。大脑的生物神经网络由大约1000亿个神经元组成，这是大脑的基本处理单元。神经元通过彼此之间巨大的连接（称为突触）来执行其功能。">
+<meta property="og:image" content="http://yoursite.com/2023/06/23/%E4%BA%BA%E5%B7%A5%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9CANN/1.png">
+<meta property="og:image" content="http://yoursite.com/2023/06/23/%E4%BA%BA%E5%B7%A5%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9CANN/2.png">
+<meta property="article:published_time" content="2023-06-23T01:23:25.000Z">
+<meta property="article:modified_time" content="2023-06-23T01:32:59.831Z">
+<meta property="article:author" content="crossoverpptx">
+<meta property="article:tag" content="机器学习">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/2023/06/23/%E4%BA%BA%E5%B7%A5%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9CANN/1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2023/06/23/人工神经网络ANN/"/>
+
+
+
+
+
+  <title>人工神经网络ANN | crossoverpptx's Blog</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">crossoverpptx's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">极度的痛苦才是精神的最大解放者。唯有此种痛苦，才迫使我们大彻如悟。</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2023/06/23/%E4%BA%BA%E5%B7%A5%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9CANN/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="crossoverpptx">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/me.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="crossoverpptx's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">人工神经网络ANN</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2023-06-23T09:23:25+08:00">
+                2023-06-23
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2023-06-23T09:32:59+08:00">
+                2023-06-23
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index">
+                    <span itemprop="name">机器学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i> 浏览
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  3k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  10
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="1-人工神经网络简介"><a href="#1-人工神经网络简介" class="headerlink" title="1. 人工神经网络简介"></a>1. 人工神经网络简介</h1><h2 id="1-1-生物神经网络"><a href="#1-1-生物神经网络" class="headerlink" title="1.1 生物神经网络"></a>1.1 生物神经网络</h2><p>人工神经网络的灵感来自其生物学对应物。生物神经网络使大脑能够以复杂的方式处理大量信息。大脑的生物神经网络由大约1000亿个神经元组成，这是大脑的基本处理单元。神经元通过彼此之间巨大的连接（称为突触）来执行其功能。<a id="more"></a></p>
+<p>人体神经元模型如下图所示：</p>
+<p><img src="/2023/06/23/%E4%BA%BA%E5%B7%A5%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9CANN/1.png" alt="img"> </p>
+<ul>
+<li>接收区（receptive zone）：树突接收到输入信息。</li>
+<li>触发区（trigger zone）：位于轴突和细胞体交接的地方，决定是否产生神经冲动。</li>
+<li>传导区（conducting zone）：由轴突进行神经冲动的传递。</li>
+<li>输出区（output zone）：神经冲动的目的就是要让神经末梢，突触的神经递质或电力释出，才能影响下一个接受的细胞（神经元、肌肉细胞或是腺体细胞），此称为突触传递。</li>
+</ul>
+<h2 id="1-2-人工神经网络"><a href="#1-2-人工神经网络" class="headerlink" title="1.2 人工神经网络"></a>1.2 人工神经网络</h2><p>人工神经网络定义为：人工神经网络是一种由具有自适应性的简单单元构成的广泛并行互联的网络，它的组织结构能够模拟生物神经系统对真实世界所做出的交互反应。</p>
+<p>人工神经网络的结构如下图所示：</p>
+<p><img src="/2023/06/23/%E4%BA%BA%E5%B7%A5%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9CANN/2.png" alt="img"> </p>
+<ul>
+<li>输入层：输入层接收特征向量 x 。</li>
+<li>输出层：输出层产出最终的预测 h 。</li>
+<li>隐含层：隐含层介于输入层与输出层之间，之所以称之为隐含层，是因为当中产生的值并不像输入层使用的样本矩阵 X 或者输出层用到的标签矩阵 y 那样直接可见。</li>
+</ul>
+<p>人工神经网络由一个输入层和一个输出层组成，其中输入层从外部源（数据文件，图像，硬件传感器等）接收数据，一个或多个隐藏层处理数据，输出层提供一个或多个数据点基于网络的功能。根据不同的问题，可以加入多个隐藏层，由图中这种全连接改为部 分连接，甚至是环形连接等。</p>
+<h1 id="2-人工神经网络原理"><a href="#2-人工神经网络原理" class="headerlink" title="2. 人工神经网络原理"></a>2. 人工神经网络原理</h1><p>人工神经网络的强大之处在于，它拥有很强的学习能力。在得到一个训练集之后，它能通过学习提取所观察事物的各个部分的特征，将特征之间用不同网络节点连接，通过训练连接的网络权重，改变每一个连接的强度，直到顶层的输出得到正确的答案。</p>
+<p>神经网络算法大致过程如下：<br>第一步，我们要预先设定一种网络结构和激活函数，这一步其实很困难，因为网络结构可以无限拓展，要知道什么样的结构才符合我们的问题需要做大量的试验。<br>第二步，初始化模型中的权重。模型中的每一个连接都会有一个权重，在初始化的时候可以都随机给予一个值。<br>第三步，就是根据输入数据和权重来预测结果。由于最开始的参数都是随机设置的，所以获得的结果肯定与真实的结果差距比较大，所以在这里要计算一个误差，误差反映了预测结果和真实结果的差距有多大。<br>最后一步，模型要调节权重。这里我们可以参与的就是需要设置一个“学习率”，这个学习率是针对误差的，每次获得误差后，连接上的权重都会按照误差的这个比率来进行调整，从而期望在下次计算时获得一个较小的误差。经过若干次循环这个过程，我们可以选择达到一个比较低的损失值的时候停止并输出模型，也可以选择一个确定的循环轮次来结束。</p>
+<h2 id="2-1-ANN的基本构造"><a href="#2-1-ANN的基本构造" class="headerlink" title="2.1 ANN的基本构造"></a>2.1 ANN的基本构造</h2><p>人工神经网络是许多神经元经联接而成的网络结构。因此，ANN的构造有两层含义：1. 神经元的结构；2. 网络互联结构(拓扑结构)。</p>
+<h3 id="2-1-1-神经元的结构模型"><a href="#2-1-1-神经元的结构模型" class="headerlink" title="2.1.1 神经元的结构模型"></a>2.1.1 神经元的结构模型</h3><p>根据前面对生物神经元的分析，应具有以下特点：<br>（a） 神经元是一个多输入、单输出的元件。<br>（b） 神经元是一个具有非线性输入/输出特性的元件。表现在只有当来自各神经突触的活动电位达到一定强度后，该神经才能被激活，释放出神经传递化学物质，发出本身的活动电位脉冲。<br>（c） 神经元的连接具有可塑性，表现在其活动电位脉冲的传递强度依靠神经传递化学物质的释放量及突触间隙的变化量，可以进行调节。<br>（d） 神经元的输出响应，是各个输入的综合结果。</p>
+<h3 id="2-1-2-网络拓扑结构"><a href="#2-1-2-网络拓扑结构" class="headerlink" title="2.1.2 网络拓扑结构"></a>2.1.2 网络拓扑结构</h3><p>网络拓扑结构即神经元的联接形式，从大的方面来看，ANN网络拓扑结构可分为层次结构、模块结构和层次模块结构等几种。<br>1.层次结构：神经元的联接按层次排列。<br>2.模块结构：主要特点是将整个网络按功能划分为不同的模块，每个模块内部的神经元紧密互联，并完成各自特定的功能，模块之间再互联以完成整体功能。<br>3.层次模块结构：将模块结构和层次结构结合起来，使之更接近人脑神经系统的结构，这也是目前为人们广泛注意的一种新型网络互联模式。</p>
+<p>根据网络中神经元的层数不同，可将神经网络分为单层网络和多层网络；</p>
+<p>根据同层网络神经元之间有无相互联接以及后层神经元与前层神经元有无反馈作用的不同，可将神经网络分为以下多种。<br>（a）前向网络: 网络中的神经元分层排列，每个神经元只与前一层神经元相连，层间神经元无连接。最上一层为输出层，最下一层为输入层，中间层称为隐层。<br>（b）从输出到输入有反馈的前向网络: 从输出到输入有反馈环节的前向网络。<br>（c）层内互连前向网络: 通过层内神经元的相互连接，可以实现同一层神经元间的相互制约，从而可以将层内神经元分为几组，让每组作为一个整体来动作。<br>（d）互连网络:分为局部互连和全互连两种。全互连网络中每个神经元的输出都与其他神经元相连；而局部互连网络中，有些神经元间没有连接关系。</p>
+<h2 id="2-2-学习规则"><a href="#2-2-学习规则" class="headerlink" title="2.2 学习规则"></a>2.2 学习规则</h2><p>神经网络要能工作必须首先进行学习，学习规则多种多样，一般可以归结为以下两类：<br>（1）有指导学习：不但需要学习用的输入事例（训练样本，通常为一矢量），同时还要求与之对应的表示所需期望输出的目标矢量。进行学习时，首先计算一个输入矢量的网络输出，然后同相应的目标输出比较，比较结果的误差用来按规定的算法改变加权。<br>（2）无指导学习：不要求有目标矢量，网络通过自身的“经历”来学会某种功能，在学习时，关键不在于网络实际输出是否与外部的期望输出相一致，而在于调整权重以反映学习样本的分布，因此整个训练过程实质是抽取训练样本集的统计特性。特别适用于对未知事物的研究。</p>
+<p>工程实践中，有指导学习和无指导学习并不是相互冲突的，目前已经出现了一些融合有指导学习和无指导学习的训练算法。如在应用有指导学习训练一个网络后，再利用一些后期的无指导学习来使得网络自适应于环境的变化。</p>
+<h2 id="2-3-学习算法"><a href="#2-3-学习算法" class="headerlink" title="2.3 学习算法"></a>2.3 学习算法</h2><p>学习算法是人工神经网络研究的主要内容和中心环节，许多性能各异的神经网络的差异也主要体现在学习算法的不同上，同时，对于神经网络学习算法也是至今人们研究得最多的一个方面。</p>
+<p>截止目前，人们已先后提出了误差反向传播算法(BP算法)、Hopfield算法、自适应共振理论算法(ART算法)、自组织特征映射算法(Kohonen算法)等。</p>
+<p>误差反向传播算法简称BP算法，它是Werbos等人提出的一个有监督训练的多层神经网络算法。在网络学习阶段，其每一个训练范例在网络中经过两个方向的传递计算。一遍向前传播计算，从输入层开始传递至各层，经过处理后产生一个输出，由此可得到一个该实际输出与其理想输出之差的误差矢量；此后，再进行反向传播计算，即从输出层开始至输入层结束，根据误差矢量并以一定的速度对各权值依次进行修正。</p>
+<p>BP算法有很强的数学基础，扩展了神经网络的应用范围，已有许多成功的应用实例，对神经网络研究的再次兴起起过很大作用。</p>
+<h1 id="3-人工神经网络特点"><a href="#3-人工神经网络特点" class="headerlink" title="3. 人工神经网络特点"></a>3. 人工神经网络特点</h1><p><strong><em>优点：</em></strong><br>（1）具有自学习功能 。<br>（2）具有联想存储功能。<br>（3）具有高速寻找优化解的能力。</p>
+<p><strong><em>缺点：</em></strong><br>（1）神经网络需要大量数据，非常消耗资源，开销也非常大的，而且训练时间长，还需要耗费很大的人力物力。<br>（2）神经网络在概括方面很不好。<br>（3）神经网络是不透明的。</p>
+<h1 id="4-人工神经网络的Python应用"><a href="#4-人工神经网络的Python应用" class="headerlink" title="4. 人工神经网络的Python应用"></a>4. 人工神经网络的Python应用</h1><p>在 Scikit 中神经网络被称为多层感知器（Multi-layer Perceptron），它可以用于分类或回归的非线性函数。用于分类的模块是 MLPClassifier，而用于回归的模块则是 MLPRegressor。</p>
+<p>MLPClassifier 主要用来做分类，下面用 MLPClassifier 在鸢尾花数据上做测试。其函数原型如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">clf = MLPClassifier(solver=’sgd’,activation=’relu’,alpha=<span class="number">1e-4</span>,hidden_layer_sizes=(<span class="number">50</span>,<span class="number">50</span>),random_state=<span class="number">1</span>,max_iter=<span class="number">10</span>,verbose=<span class="number">10</span>,learning_rate_init=<span class="number">.1</span>)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>参数说明：</p>
+<p>hidden_layer_sizes：例如hidden_layer_sizes=(50, 50)，表示有两层隐藏层，第一层隐藏层有50个神经元，第二层也有50个神经元。</p>
+<p>Activation：{‘identity’, ‘logistic’, ‘tanh’, ‘relu’}，默认‘relu’。</p>
+<p>solver： {‘lbfgs’, ‘sgd’, ‘adam’}, 默认adam，用来优化权重。</p>
+<p>alpha：float,可选的，默认0.0001，正则化项参数。</p>
+<p>learning_rate：学习率,用于权重更新,只有当solver为’sgd’时使用，{‘constant’，’invscaling’, ‘adaptive’}，默认constant。</p>
+<p>random_state：int 或RandomState，可选，默认None，随机数生成器的状态或种子。</p>
+<p>max_iter：int，可选，默认200，最大迭代次数。</p>
+<p>verbose：bool, 可选，默认False，是否将过程打印到stdout。</p>
+</blockquote>
+<p>测试代码如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.neural_network <span class="keyword">import</span> MLPClassifier</span><br><span class="line"><span class="keyword">from</span> sklearn.datasets <span class="keyword">import</span> load_iris</span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split</span><br><span class="line"></span><br><span class="line">iris = load_iris()  <span class="comment"># 导入数据集</span></span><br><span class="line">X = iris[<span class="string">'data'</span>]  <span class="comment"># 获取自变量数据</span></span><br><span class="line">y = iris[<span class="string">'target'</span>]  <span class="comment"># 获取因变量数据</span></span><br><span class="line">X_train, X_test, y_train, y_test = \</span><br><span class="line">    train_test_split(X, y, test_size=<span class="number">0.2</span>)  <span class="comment"># 分割训练集和测试集</span></span><br><span class="line">clf = MLPClassifier(solver=<span class="string">'adam'</span>, alpha=<span class="number">1e-5</span>, \</span><br><span class="line">                    hidden_layer_sizes=(<span class="number">3</span>,<span class="number">3</span>), random_state=<span class="number">1</span>,max_iter=<span class="number">100000</span>,) <span class="comment"># 创建神经网络分类器对象</span></span><br><span class="line">clf.fit(X, y) <span class="comment"># 训练模型</span></span><br><span class="line">clf.score(X_test,y_test) <span class="comment"># 模型评分</span></span><br></pre></td></tr></table></figure>
+<p>结果如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">score= <span class="number">0.9666666666666667</span></span><br></pre></td></tr></table></figure>
+<h1 id="5-源码仓库地址"><a href="#5-源码仓库地址" class="headerlink" title="5. 源码仓库地址"></a>5. 源码仓库地址</h1><p>🌼 <a href="https://github.com/crossoverpptx/ImageProcessing-and-MachineLearning" target="_blank" rel="noopener">图像处理、机器学习的常用算法汇总</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag"># 机器学习</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2023/06/22/%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97/" rel="next" title="随机森林">
+                <i class="fa fa-chevron-left"></i> 随机森林
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/me.png"
+                alt="crossoverpptx" />
+            
+              <p class="site-author-name" itemprop="name">crossoverpptx</p>
+              <p class="site-description motion-element" itemprop="description">极度的痛苦才是精神的最大解放者。唯有此种痛苦，才迫使我们大彻如悟。</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+                <a href="/archives">
+                  <span class="site-state-item-count">92</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/index.html">
+                  <span class="site-state-item-count">28</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/crossoverpptx" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:2269041628@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-人工神经网络简介"><span class="nav-text">1. 人工神经网络简介</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-生物神经网络"><span class="nav-text">1.1 生物神经网络</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-人工神经网络"><span class="nav-text">1.2 人工神经网络</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-人工神经网络原理"><span class="nav-text">2. 人工神经网络原理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-ANN的基本构造"><span class="nav-text">2.1 ANN的基本构造</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-1-神经元的结构模型"><span class="nav-text">2.1.1 神经元的结构模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-2-网络拓扑结构"><span class="nav-text">2.1.2 网络拓扑结构</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-学习规则"><span class="nav-text">2.2 学习规则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-学习算法"><span class="nav-text">2.3 学习算法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-人工神经网络特点"><span class="nav-text">3. 人工神经网络特点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-人工神经网络的Python应用"><span class="nav-text">4. 人工神经网络的Python应用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-源码仓库地址"><span class="nav-text">5. 源码仓库地址</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">crossoverpptx</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">179.7k</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i> 访问人数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i> 访问总量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>
