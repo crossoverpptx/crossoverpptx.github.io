@@ -7446,4 +7446,105 @@ C_N^2</script><p>种不同的分类器。预测的时候，将样本给所有的
         <tag>机器学习</tag>
       </tags>
   </entry>
+  <entry>
+    <title>卷积神经网络CNN</title>
+    <url>/2023/06/24/%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9CCNN/</url>
+    <content><![CDATA[<h1 id="1-卷积神经网络简介"><a href="#1-卷积神经网络简介" class="headerlink" title="1. 卷积神经网络简介"></a>1. 卷积神经网络简介</h1><p>卷积神经网络(convolutional neural network, CNN)，是一类包含卷积计算且具有深度结构的前馈神经网络。卷积神经网络是受生物学上感受野（Receptive Field）的机制而提出的。卷积神经网络专门用来处理具有类似网格结构的数据的神经网络。例如，时间序列数据（可以认为是在时间轴上有规律地采样形成的一维网格）和图像数据（可以看作是二维的像素网格）。<a id="more"></a></p>
+<h1 id="2-卷积神经网络原理"><a href="#2-卷积神经网络原理" class="headerlink" title="2. 卷积神经网络原理"></a>2. 卷积神经网络原理</h1><p>典型的CNN由卷积层、池化层、全连接层3个部分构成：</p>
+<ul>
+<li>卷积层：负责提取图像中的局部特征；</li>
+<li>池化层：大幅降低参数量级（降维）；</li>
+<li>全连接层：类似传统神经网络的部分，用来输出想要的结果。</li>
+</ul>
+<h2 id="2-1-卷积层（convolutional-layer）"><a href="#2-1-卷积层（convolutional-layer）" class="headerlink" title="2.1 卷积层（convolutional layer）"></a>2.1 卷积层（convolutional layer）</h2><p>卷积可以理解为使用一个过滤器（卷积核）来过滤图像的各个小区域，从而得到这些小区域的特征值。</p>
+<p>在具体应用中，往往有多个卷积核，可以认为「每个卷积核代表了一种图像模式」，如果某个图像块与此卷积核卷积出的值大，则认为此图像块十分接近于此卷积核。如果我们设计了 6 个卷积核，可以理解：我们认为这个图像上有 6 种底层纹理模式，也就是我们用 6 种基础模式就能描绘出一副图像。</p>
+<p>卷积层通过卷积核的过滤提取出图片中局部的特征，与人类视觉的特征提取类似。</p>
+<h2 id="2-2-池化层（pooling-layer）"><a href="#2-2-池化层（pooling-layer）" class="headerlink" title="2.2 池化层（pooling layer）"></a>2.2 池化层（pooling layer）</h2><p>池化层简单说就是下采样，他可以大大降低数据的维度。需要池化层的原因：即使做完了卷积，图像仍然很大（因为卷积核通常比较小），所以为了降低数据维度，就进行下采样。池化层函数实际上是一个统计函数，例如最大池化、平均池化、累加池化等。</p>
+<p>那么池化层函数会不会对图像数据产生副作用呢？答案是：一般不会。</p>
+<p>关于池化层，有一个局部线性变换的不变性（invariant）理论：如果输入数据的局部进行了线性变换操作（如平移或旋转等），那么经过池化操作后，输出的结果并不会发生变化。局部平移“不变性”特别有用，尤其是我们关心某个特征是否出现，而不关心它出现的位置时（例如，在模式识别场景中，当我们检测人脸时，我们只关心图像中是否具备人脸的特征，而并不关心人脸是在图像的左上角和右下角）。</p>
+<p>为什么池化层可以降低过拟合的概率呢？因为池化函数使得模型更关注偏全局的特征（而非局部），所以可以尽量避免让模型专注于图像的一些特化细节（例如让模型更关注一张人脸，而不是他眼睛的大小）。</p>
+<p>总结：池化层相比卷积层可以更有效的降低数据维度，这么做不但可以大大减少运算量，还可以有效的避免过拟合。</p>
+<h2 id="2-3-全连接层（fully-connected-layer）"><a href="#2-3-全连接层（fully-connected-layer）" class="headerlink" title="2.3 全连接层（fully-connected layer）"></a>2.3 全连接层（fully-connected layer）</h2><p>经过卷积层和池化层处理过的数据输入到全连接层，得到最终想要的结果。经过卷积层和池化层降维过的数据，全连接层才能”跑得动”，不然数据量太大，计算成本高，效率低下。“全连接”意味着，前层网络中的所有神经元都与下一层的所有神经元连接。</p>
+<p>全连接层设计目的在于：它将前面各个层学习到的“分布式特征表示”映射到“样本标记空间”，然后利用损失函数来调控学习过程，最后给出对象的分类预测。</p>
+<p>虽然池化层看似是整个网络结构中最不起眼的一步，但是由于其对所有的参数进行“连接”，其会造成大量的冗余参数，不良的设计会导致在全连接层极易出现「过拟合」的现象，对此，可以使用 Dropout 方法来缓解；同时其极高的参数量会导致性能的降低，对此，颜水成博士团队曾发表论文 Network in Network（NIN），提出使用全局均值池化策略（Global Average Pooling，GAP）取代全连接层。</p>
+<h1 id="3-卷积神经网络特点"><a href="#3-卷积神经网络特点" class="headerlink" title="3. 卷积神经网络特点"></a>3. 卷积神经网络特点</h1><p><strong><em>优点</em></strong><br>（1）共享卷积核，对高维数据处理无压力<br>（2）无需手动选取特征，训练好权重，即得特征分类效果好</p>
+<p><strong><em>缺点</em></strong><br>（1）需要调参，需要大样本量，训练最好要GPU<br>（2）物理含义不明确（也就说，我们并不知道没个卷积层到底提取到的是什么特征，而且神经网络本身就是一种难以解释的“黑箱模型”）</p>
+<h1 id="4-卷积神经网络的常见网络结构及框架"><a href="#4-卷积神经网络的常见网络结构及框架" class="headerlink" title="4. 卷积神经网络的常见网络结构及框架"></a>4. 卷积神经网络的常见网络结构及框架</h1><h2 id="4-1-网络结构"><a href="#4-1-网络结构" class="headerlink" title="4.1 网络结构"></a>4.1 网络结构</h2><ul>
+<li>LeNet，这是最早用于数字识别的CNN。</li>
+<li>AlexNet，2012 ILSVRC比赛远超第2名的CNN，比LeNet更深，用多层小卷积层叠加替换单大卷积层。</li>
+<li>ZF Net，2013 ILSVRC比赛冠军。</li>
+<li>GoogLeNet，2014 ILSVRC比赛冠军。</li>
+<li>VGGNet，2014 ILSVRC比赛中的模型，图像识别略差于GoogLeNet，但是在很多图像转化学习问题(比如object detection)上效果奇好。</li>
+</ul>
+<h2 id="4-2-框架"><a href="#4-2-框架" class="headerlink" title="4.2 框架"></a>4.2 框架</h2><p>（1）Caffe</p>
+<ul>
+<li><p>源于Berkeley的主流CV工具包，支持C++,python,matlab</p>
+</li>
+<li><p>Model Zoo中有大量预训练好的模型供使用</p>
+</li>
+</ul>
+<p>（2）PyTorch</p>
+<ul>
+<li><p>Facebook用的卷积神经网络工具包</p>
+</li>
+<li><p>通过时域卷积的本地接口，使用非常直观</p>
+</li>
+<li><p>定义新网络层简单</p>
+</li>
+</ul>
+<p>（3）TensorFlow</p>
+<ul>
+<li><p>Google的深度学习框架</p>
+</li>
+<li><p>TensorBoard可视化很方便</p>
+</li>
+<li><p>数据和模型并行化好，速度快</p>
+</li>
+</ul>
+<h1 id="5-卷积神经网络的Python应用"><a href="#5-卷积神经网络的Python应用" class="headerlink" title="5. 卷积神经网络的Python应用"></a>5. 卷积神经网络的Python应用</h1><p>下面以TensorFlow框架为例，说明Python中CNN的应用。TensorFlow中CNN的相关函数有卷积函数和池化函数。</p>
+<h2 id="5-1-卷积函数"><a href="#5-1-卷积函数" class="headerlink" title="5.1 卷积函数"></a>5.1 卷积函数</h2><p>卷积函数定义在tensorflow/python/ops下的nn_impl.py和nn_ops.py文件中。</p>
+<p>它包括了很多类型的卷积函数：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">tf.nn.conv2d(input, filter, strides, padding, use_cudnn_on_gpu=<span class="literal">None</span>, name=<span class="literal">None</span>)</span><br><span class="line">tf.nn.depthwise_conv2d(input, filter, strides, padding, name=<span class="literal">None</span>)</span><br><span class="line">tf.nn.separable_conv2d(input, depthwise_filter, pointwise_filter, strides, padding, name=<span class="literal">None</span>)</span><br><span class="line">……</span><br></pre></td></tr></table></figure>
+<p>在这里，我们只对平时用的比较多的二维卷积进行介绍。其他函数的使用方法跟二维卷积是一样的。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">tf.nn.conv2d(input, filter, strides, padding, use_cudnn_on_gpu=<span class="literal">None</span>, name=<span class="literal">None</span>)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><em>参数说明：</em></p>
+<p>input：需要做卷积的输入数据。注意：这是一个4维的张量（[batch, in_height, in_width, in_channels]）。对于图像数据来说，batch是这一批样本的个数，in_height和in_width是图像的尺寸，in_channels是图像的通道数，而且要求图像的类型为float32或float64。因此，我们在对图像进行处理的时候，首先要把图像转换成这种特定的类型。</p>
+<p>filter：卷积核。这也是一个4维的张量（[filter_height, filter_width, in_channels, out_channels]）。filter_height,和filter_width是图像的尺寸，in_channels,是输入的通道数，out_channels是输出的通道数。</p>
+<p>strides：图像每一维的步长。是一个一维向量，长度为4。</p>
+<p>padding：定义元素边框与元素内容之间的空间。这里只能选择”SAME”或”VALID”，这个值决定了不同的卷积方式。当它为”SAME”时，表示边缘填充，适用于全尺寸操作；当它为”VALID”时，表示边缘不填充。</p>
+<p>use_cudnn_on_gpu：bool类型，是否使用cudnn加速。</p>
+<p>name：该操作的名称。</p>
+<p>返回值：返回一个张量（tensor），即特征图（feature map）。</p>
+</blockquote>
+<p>测试代码如下：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#卷积函数</span></span><br><span class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="comment"># tf.nn.conv2d(input, filter, strides, padding, use_cudnn_on_gpu=None, name=None)</span></span><br><span class="line">input_data = tf.Variable(np.random.rand(<span class="number">10</span>, <span class="number">9</span>, <span class="number">9</span>, <span class="number">4</span>), dtype=np.float32)</span><br><span class="line">filter_data =  tf.Variable(np.random.rand(<span class="number">3</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">2</span>), dtype=np.float32)</span><br><span class="line"><span class="comment"># y = tf.nn.conv2d(input_data, filter_data, strides=[1,1,1,1], padding = 'SAME')</span></span><br><span class="line">y = tf.nn.conv2d(input_data, filter_data, strides=[<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>], padding = <span class="string">'VALID'</span>)</span><br><span class="line"></span><br><span class="line">print(input_data)</span><br><span class="line">print(y)</span><br></pre></td></tr></table></figure>
+<h2 id="5-2-池化函数"><a href="#5-2-池化函数" class="headerlink" title="5.2 池化函数"></a>5.2 池化函数</h2><p>池化函数定义在tensorflow/python/ops下的nn.py和gen_nn_ops.py文件中。</p>
+<p>我们用的比较多的是下面这两个池化函数：</p>
+<ul>
+<li><p>最大池化：tf.nn.max_pool(value, ksize, strides, padding, name=None)</p>
+</li>
+<li><p>平均池化：tf.nn.avg_pool(value, ksize, strides, padding, name=None)</p>
+</li>
+</ul>
+<p>这里所需要指定的输入参数，跟我们之前介绍的二维卷积函数是一样的：</p>
+<blockquote>
+<p>value：需要池化的输入。一般池化层接在卷积层后面，所以输入通常是conv2d所输出的feature map，依然是4维的张量（[batch, height, width, channels]）。</p>
+<p>ksize：池化窗口的大小。由于一般不在batch和channel上做池化，所以ksize一般是[1,height, width,1]。</p>
+<p>strides：图像每一维的步长。是一个一维向量，长度为4。</p>
+<p>padding：和卷积函数中padding含义一样。</p>
+<p>name：该操作的名称。</p>
+<p>返回值：返回一个张量（tensor）。</p>
+</blockquote>
+<p>测试代码如下：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#池化函数</span></span><br><span class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">input_data = tf.Variable(np.random.rand(<span class="number">10</span>, <span class="number">6</span>, <span class="number">6</span>, <span class="number">4</span>), dtype=np.float32)</span><br><span class="line">filter_data =  tf.Variable(np.random.rand(<span class="number">2</span>, <span class="number">2</span>, <span class="number">4</span>, <span class="number">2</span>), dtype=np.float32)</span><br><span class="line">y = tf.nn.conv2d(input_data, filter_data, strides=[<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>], padding = <span class="string">'SAME'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 最大池化</span></span><br><span class="line"><span class="comment"># tf.nn.max_pool(value, ksize, strides, padding, name=None) </span></span><br><span class="line">output = tf.nn.max_pool(value=y,ksize=[<span class="number">1</span>,<span class="number">2</span>,<span class="number">2</span>,<span class="number">1</span>],strides=[<span class="number">1</span>,<span class="number">2</span>,<span class="number">2</span>,<span class="number">1</span>], padding=<span class="string">'SAME'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 平均池化</span></span><br><span class="line"><span class="comment"># tf.nn.avg_pool(value, ksize, strides, padding, name=None)</span></span><br><span class="line"><span class="comment"># output = tf.nn.avg_pool(value=y,ksize=[1,2,2,1],strides=[1,2,2,1], padding='SAME')</span></span><br><span class="line"></span><br><span class="line">print(<span class="string">'conv:'</span>,y)</span><br><span class="line">print(<span class="string">'pool_padding_valid:'</span>,output)</span><br></pre></td></tr></table></figure>
+<h1 id="6-源码仓库地址"><a href="#6-源码仓库地址" class="headerlink" title="6. 源码仓库地址"></a>6. 源码仓库地址</h1><p>🌼 <a href="https://github.com/crossoverpptx/ImageProcessing-and-MachineLearning" target="_blank" rel="noopener">图像处理、机器学习的常用算法汇总</a></p>
+]]></content>
+      <categories>
+        <category>机器学习</category>
+      </categories>
+      <tags>
+        <tag>机器学习</tag>
+      </tags>
+  </entry>
 </search>
