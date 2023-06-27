@@ -1,0 +1,1346 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="算法设计与分析," />
+
+
+
+
+  
+
+
+  <link rel="alternate" href="/atom.xml" title="crossoverpptx's Blog" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="1. 回溯法简介回溯法，又叫试探法，是一种寻找最优解的暴力搜寻法。由于暴力，回溯法的时间复杂度较高，因此在比较一些数字较大的问题，比如最短路径问题等时，运行时间一般比较长。在回溯法中，DFS（深度优先搜索）是一种很重要的工具。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="算法设计与分析之回溯法">
+<meta property="og:url" content="http://yoursite.com/2023/06/27/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90%E4%B9%8B%E5%9B%9E%E6%BA%AF%E6%B3%95/index.html">
+<meta property="og:site_name" content="crossoverpptx&#39;s Blog">
+<meta property="og:description" content="1. 回溯法简介回溯法，又叫试探法，是一种寻找最优解的暴力搜寻法。由于暴力，回溯法的时间复杂度较高，因此在比较一些数字较大的问题，比如最短路径问题等时，运行时间一般比较长。在回溯法中，DFS（深度优先搜索）是一种很重要的工具。">
+<meta property="og:image" content="http://yoursite.com/2023/06/27/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90%E4%B9%8B%E5%9B%9E%E6%BA%AF%E6%B3%95/1.jpg">
+<meta property="og:image" content="http://yoursite.com/2023/06/27/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90%E4%B9%8B%E5%9B%9E%E6%BA%AF%E6%B3%95/2.jpg">
+<meta property="article:published_time" content="2023-06-27T05:30:48.000Z">
+<meta property="article:modified_time" content="2023-06-27T08:03:40.636Z">
+<meta property="article:author" content="crossoverpptx">
+<meta property="article:tag" content="算法设计与分析">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/2023/06/27/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90%E4%B9%8B%E5%9B%9E%E6%BA%AF%E6%B3%95/1.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2023/06/27/算法设计与分析之回溯法/"/>
+
+
+
+
+
+  <title>算法设计与分析之回溯法 | crossoverpptx's Blog</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">crossoverpptx's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">极度的痛苦才是精神的最大解放者。唯有此种痛苦，才迫使我们大彻如悟。</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2023/06/27/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90%E4%B9%8B%E5%9B%9E%E6%BA%AF%E6%B3%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="crossoverpptx">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/me.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="crossoverpptx's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">算法设计与分析之回溯法</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2023-06-27T13:30:48+08:00">
+                2023-06-27
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2023-06-27T16:03:40+08:00">
+                2023-06-27
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/" itemprop="url" rel="index">
+                    <span itemprop="name">算法设计与分析</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i> 浏览
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  4.7k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  19
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="1-回溯法简介"><a href="#1-回溯法简介" class="headerlink" title="1. 回溯法简介"></a>1. 回溯法简介</h1><p>回溯法，又叫试探法，是一种寻找<strong>最优解</strong>的<strong>暴力搜寻法。</strong>由于暴力，回溯法的<strong>时间复杂度较高</strong>，因此在比较一些数字较大的问题，比如<strong>最短路径问题</strong>等时，运行时间一般比较长。在回溯法中，<strong>DFS（深度优先搜索）</strong>是一种很重要的工具。<a id="more"></a></p>
+<h2 id="1-1-DFS的基本思想"><a href="#1-1-DFS的基本思想" class="headerlink" title="1.1 DFS的基本思想"></a>1.1 DFS的基本思想</h2><p>（1）某一种可能情况向前探索，并生成一个子节点；</p>
+<p>（2）过程中，一旦发现原来的选择不符合要求，就<strong>回溯</strong>至父亲结点，然后重新选择另一方向，再次生成子结点，继续向前探索；</p>
+<p>（3）如此反复进行，直至求得最优解。</p>
+<h2 id="1-2-回溯法的基本思想"><a href="#1-2-回溯法的基本思想" class="headerlink" title="1.2 回溯法的基本思想"></a>1.2 回溯法的基本思想</h2><p>（1）针对具体问题，定义问题的<strong>解空间</strong>；</p>
+<p>（2）确定易于搜索的解空间结构（数据结构的选择）；</p>
+<p>（3）一般以<strong>DFS</strong>的方式搜索解空间；</p>
+<p>（4）在搜索过程中，可以使用<strong>剪枝函数</strong>等来优化算法。（剪枝函数：用<strong>约束函数</strong>和<strong>限界函数</strong>剪去得不到最优解的<strong>子树</strong>，统称为剪枝函数。）</p>
+<blockquote>
+<p>解空间：顾名思义，就是一个问题的所有解的集合。（但这离我们要求的<strong>最优解</strong>还差很远。）</p>
+<p>约束条件：有效解的要求，即题目的要求。</p>
+<p>约束函数：减去不满足约束条件的子树的函数。</p>
+<p>限界函数：去掉得不到最优解的结点的函数。</p>
+<p>扩展结点：当前正在产生子结点的结点称为扩展结点。</p>
+</blockquote>
+<p>回溯法处理的解空间类型主要分为以下两种：</p>
+<ul>
+<li><p><strong>子集树：</strong>当所给问题是从集合中找出满足某种性质的<strong>子集</strong>时，相应的解空间树称为子集树。</p>
+</li>
+<li><p><strong>排列树：</strong>当所给问题事从集合中确定满足某种性质的<strong>排列</strong>时，相应的解空间树称为排列树。</p>
+</li>
+</ul>
+<h2 id="1-3-回溯法和DFS的区别"><a href="#1-3-回溯法和DFS的区别" class="headerlink" title="1.3 回溯法和DFS的区别"></a>1.3 回溯法和DFS的区别</h2><p>DFS是一种遍历搜索图、树等数据结构的一种算法，更像一种工具；</p>
+<p>而回溯法则是为了解决问题不断地生成又放弃一些解决方案（解空间在搜索问题的过程中动态产生是回溯法的一个重要特点），直至找到最优解或搜索完毕为止的一种方法，更像一种指导思想，在解空间中利用DFS进行全面的搜索。</p>
+<h2 id="1-4-剪枝"><a href="#1-4-剪枝" class="headerlink" title="1.4 剪枝"></a>1.4 剪枝</h2><p><strong>剪枝</strong>就是在搜索过程中利用<strong>过滤条件</strong>来剪去完全不用考虑（已经判断这条路走下去得不到最优解）的搜索路径，从而<strong>避免了一些不必要的搜索</strong>，优化算法求解速度，当然还必须得保证结果的正确性。</p>
+<p>应用到回溯算法中，我们可以提前<strong>判断当前路径是否能产生结果集</strong>，如果否，就可以提前回溯。而这也叫做<strong>可行性剪枝</strong>。</p>
+<p>另外还有一种叫做<strong>最优性剪枝</strong>，每次记录当前得到的最优值，如果当前结点已经无法产生<strong>比当前最优解更优的解</strong>时，可以提前回溯。</p>
+<p>然而，剪枝的过滤条件不好找，想通过剪枝优化来提高算法高效性，既要保证结果正确性，还要保证剪枝的准确性。</p>
+<h1 id="2-01背包问题：子集树"><a href="#2-01背包问题：子集树" class="headerlink" title="2. 01背包问题：子集树"></a>2. 01背包问题：子集树</h1><h2 id="2-1-问题介绍"><a href="#2-1-问题介绍" class="headerlink" title="2.1 问题介绍"></a>2.1 问题介绍</h2><p>01背包问题就是由子集树解决的一个经典问题。问题如下：</p>
+<p>小明打算去拜访同学，他打算带一背包的巧克力作为礼物。他希望装进的巧克力总价值最高（这样可能比较好吃）。然而小明体力有限，巧克力包不能太重，只能有8kg。可供选择的巧克力如下：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>序号</th>
+<th>品牌</th>
+<th>重量/kg</th>
+<th>价值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>费列罗</td>
+<td>4</td>
+<td>45</td>
+</tr>
+<tr>
+<td>2</td>
+<td>好时之点</td>
+<td>5</td>
+<td>57</td>
+</tr>
+<tr>
+<td>3</td>
+<td>德芙</td>
+<td>2</td>
+<td>22</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Cudie（西班牙）</td>
+<td>1</td>
+<td>11</td>
+</tr>
+<tr>
+<td>5</td>
+<td>自制</td>
+<td>6</td>
+<td>67</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="2-2-解决思路"><a href="#2-2-解决思路" class="headerlink" title="2.2 解决思路"></a>2.2 解决思路</h2><p><img src="/2023/06/27/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90%E4%B9%8B%E5%9B%9E%E6%BA%AF%E6%B3%95/1.jpg" alt="Image"></p>
+<p>因为我们考虑的是找子集，所以每个物品只有选与不选两种状态，因此解空间是一个二叉树。在这个树中，每一层的边表示对一个物品的选择与否。如上图所示，选择第一层点0与左边点1间的边，表示选择1号物品，也就是选择左子树走下去；如果不选择1号物品入包，则进入右子树，选择右边点1。那么，一共有n件物品，就有n层的边，n+1层点。最后一层的每一个叶结点分别表示一种选择法，一共有2<sup>n</sup>个叶结点，即解空间中共有2<sup>n</sup>种解，我们要在这些叶结点中选择最佳结点。</p>
+<p>我们先给出利用回溯法搜索子树集的伪代码框架：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">void search(层数)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">if</span>(搜索到最底层)</span><br><span class="line">		打印出结果解;</span><br><span class="line">	<span class="keyword">else</span> </span><br><span class="line">		<span class="keyword">for</span>(遍历当前层解)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span>(合适解)</span><br><span class="line">				继续搜索;</span><br><span class="line">			撤消当前状态的影响; //回溯</span><br><span class="line">		&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>回溯法讲究“暴力”。从暴力的角度思考，想把所有的尽量装满背包的搭配都找出来，需要标记每一种装法（每一个解）最大value，从而找到最优解。我们从第一种巧克力开始装，然后找下一个，判断能否装入，再递归，到达边界，比较，记录较优解，回溯，继续往下找……循环。从子集树的角度将，我们优先选择走左子树，也就是入包；当走到叶结点或不符合约束的重量条件时，回溯到父结点，进入右结点，最后遍历全树。</p>
+<blockquote>
+<p>判断能否装入后可以用一个book数组来标记是否选择入包。</p>
+</blockquote>
+<h2 id="2-3-算法实现"><a href="#2-3-算法实现" class="headerlink" title="2.3 算法实现"></a>2.3 算法实现</h2><p>由以上思路写出01背包问题的算法如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//01背包问题-回溯法-子集树 </span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n, bag_v, bag_w;</span><br><span class="line"><span class="keyword">int</span> bag[<span class="number">100</span>], x[<span class="number">100</span>], w[<span class="number">100</span>], val[<span class="number">100</span>];</span><br><span class="line"></span><br><span class="line"><span class="comment">//search递归函数，当前节点背包的价值为cur_v（current value），重量为cur_w（current weight）</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">search</span><span class="params">(<span class="keyword">int</span> cur, <span class="keyword">int</span> cur_v, <span class="keyword">int</span> cur_w)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(cur &gt; n) <span class="comment">//判断子集树的边界   </span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(cur_v &gt; bag_v) <span class="comment">//子集树对应的背包价值 是否超过了 最大价值</span></span><br><span class="line">        &#123;</span><br><span class="line">            bag_v = cur_v; <span class="comment">//得到最大价值</span></span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)      </span><br><span class="line">                bag[i] = x[i]; <span class="comment">//x表示当前子集树各物品是否被选中，将选中的物品存入bag中 </span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> </span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt;= <span class="number">1</span>; j++) <span class="comment">//遍历当前解层：j 代表是否选择该物品</span></span><br><span class="line">        &#123;</span><br><span class="line">            x[cur] = j;      </span><br><span class="line">            <span class="keyword">if</span>(cur_w + x[cur]*w[cur] &lt;= bag_w) <span class="comment">//满足重量约束,继续向前寻找配对 </span></span><br><span class="line">            &#123;</span><br><span class="line">                cur_w += w[cur]*x[cur];</span><br><span class="line">                cur_v += val[cur]*x[cur];</span><br><span class="line">                search(cur + <span class="number">1</span>, cur_v, cur_w); <span class="comment">//递归，下一层物品 </span></span><br><span class="line">                <span class="comment">//清除痕迹，回溯上一层 </span></span><br><span class="line">                cur_w -= w[cur]*x[cur];   </span><br><span class="line">                cur_v -= val[cur]*x[cur];</span><br><span class="line">                x[cur] = <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i;</span><br><span class="line">    bag_v = <span class="number">0</span>; <span class="comment">//初始化背包最大价值</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">//输入数据 </span></span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"请输入背包最大容量:"</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cin</span> &gt;&gt; bag_w;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"请输入物品个数:"</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cin</span> &gt;&gt; n;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"请依次输入物品的重量:"</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">for</span>(i = <span class="number">1</span>; i &lt;= n; i++) </span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">cin</span> &gt;&gt; w[i];</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"请依次输入物品的价值:"</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">for</span>(i = <span class="number">1</span>; i &lt;= n; i++) </span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">cin</span> &gt;&gt; val[i]; </span><br><span class="line">    search(<span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"最大价值为:"</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; bag_v &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"物品的编号依次为:"</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">        <span class="keyword">if</span>(bag[i] == <span class="number">1</span>) </span><br><span class="line">            <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; i &lt;&lt; <span class="string">" "</span>;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>输出如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">PS E:\Code\VSCode\Learning\build&gt; .\main.exe</span><br><span class="line">请输入背包最大容量:</span><br><span class="line"><span class="number">8</span></span><br><span class="line">请输入物品个数:</span><br><span class="line"><span class="number">5</span></span><br><span class="line">请依次输入物品的重量:</span><br><span class="line"><span class="number">4</span> <span class="number">5</span> <span class="number">2</span> <span class="number">1</span> <span class="number">6</span></span><br><span class="line">请依次输入物品的价值:</span><br><span class="line"><span class="number">45</span> <span class="number">57</span> <span class="number">22</span> <span class="number">11</span> <span class="number">67</span></span><br><span class="line">最大价值为:</span><br><span class="line"><span class="number">90</span></span><br><span class="line">物品的编号依次为:</span><br><span class="line"><span class="number">2</span> <span class="number">3</span> <span class="number">4</span></span><br></pre></td></tr></table></figure>
+<h2 id="2-4-如何优化"><a href="#2-4-如何优化" class="headerlink" title="2.4 如何优化"></a>2.4 如何优化</h2><p>我们可以用一个上界函数bound()：当前价值+剩余容量可容纳的最大价值，去和目前的背包最大价值（也就是最优解）比较，如果bound()更小，那就没有继续搜索的意义了，剪去左子树，即不选择当前物品，进入右子树。</p>
+<p>因为物品只有选与不选2个决策，而总共有n个物品，所以时间复杂度为O(2<sup>n</sup>)。因为递归栈最多达到n层，而且存储所有物品的信息也只需要常数个一维数组，所以最终的空间复杂度为O(n)。</p>
+<p>那么，我们如何计算这个“剩余容量可容纳的最大价值”呢？首先，我们先将物品按照其单位重量价值从大到小排序，此后就按照顺序考虑各个物品。代码如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(cur_w+w[cur]&lt;=bag_w) <span class="comment">//将物品cur放入背包,搜索左子树,即选择当前物品 </span></span><br><span class="line">&#123;</span><br><span class="line">	cur_w+=w[cur]; <span class="comment">//同步更新当前背包的重量</span></span><br><span class="line">	cur_v+=val[cur]; <span class="comment">//同步更新当前背包的总价值</span></span><br><span class="line">	put[cur]=<span class="number">1</span>;</span><br><span class="line">	search(cur+<span class="number">1</span>,cur_v,cur_w); <span class="comment">//深度搜索进入下一层</span></span><br><span class="line">	cur_w-=w[cur]; <span class="comment">//回溯复原</span></span><br><span class="line">	cur_v-=val[cur]; <span class="comment">//回溯复原</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span>(bound(cur+<span class="number">1</span>,cur_v,cur_w)&gt;bag_v) <span class="comment">//如若符合条件则搜索右子树,即不选择当前物品 </span></span><br><span class="line">&#123;</span><br><span class="line">	put[cur]=<span class="number">0</span>;</span><br><span class="line">	search(cur+<span class="number">1</span>,cur_v,cur_w);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>当i&lt;=n，重量超过限制时，<strong>leftw为负</strong>，我们得到的是一个<strong>达不到的理想最大价值</strong>，因为此时最后放入的物品单位价值较高，但无法完全塞进书包，我们就去掉多余的部分，只取一部分该物体入包。当然，这是做不到的。因此计算出的值是一个达不到的理想值。</p>
+</li>
+<li><p>当i&gt;n，重量未超过限制时，则是可达到的最大价值。</p>
+</li>
+</ul>
+<p>这样就解释了这个上界函数的优化。可以看出，这是一个最优性剪枝优化，判断当前结点是否有机会产生更优解。</p>
+<p><strong>优化后的算法如下：</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n, bag_v, bag_w;</span><br><span class="line"><span class="keyword">int</span> bag[<span class="number">100</span>], put[<span class="number">100</span>], w[<span class="number">100</span>], val[<span class="number">100</span>], order[<span class="number">100</span>];</span><br><span class="line"><span class="keyword">double</span> perp[<span class="number">100</span>]; </span><br><span class="line"></span><br><span class="line"><span class="comment">//按照单位重量价值排序，这里用冒泡 </span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">bubblesort</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i,j;</span><br><span class="line">    <span class="keyword">int</span> temporder = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">double</span> temp = <span class="number">0.0</span>;</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">for</span>(i = <span class="number">1</span>;i &lt;= n; i++)</span><br><span class="line">        perp[i] = val[i] / w[i]; <span class="comment">//计算单位价值（单位重量的物品价值）</span></span><br><span class="line">    <span class="keyword">for</span>(i = <span class="number">1</span>; i &lt;= n - <span class="number">1</span>; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span>(j = i + <span class="number">1</span>; j &lt;= n; j++)</span><br><span class="line">            <span class="keyword">if</span>(perp[i] &lt; perp[j]) <span class="comment">//冒泡排序perp[], order[], sortv[], sortw[]</span></span><br><span class="line">        &#123;</span><br><span class="line">            temp = perp[i];  <span class="comment">//冒泡对perp[]排序交换 </span></span><br><span class="line">            perp[i] = perp[i];</span><br><span class="line">            perp[j] = temp;</span><br><span class="line"> </span><br><span class="line">            temporder = order[i]; <span class="comment">//冒泡对order[]交换 </span></span><br><span class="line">            order[i] = order[j];</span><br><span class="line">            order[j] = temporder;</span><br><span class="line"> </span><br><span class="line">            temp = val[i]; <span class="comment">//冒泡对val[]交换 </span></span><br><span class="line">            val[i] = val[j];</span><br><span class="line">            val[j] = temp;</span><br><span class="line"> </span><br><span class="line">            temp = w[i]; <span class="comment">//冒泡对w[]交换 </span></span><br><span class="line">            w[i] = w[j];</span><br><span class="line">            w[j] = temp;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//计算上界函数，功能为剪枝</span></span><br><span class="line"><span class="function"><span class="keyword">double</span> <span class="title">bound</span><span class="params">(<span class="keyword">int</span> i, <span class="keyword">int</span> cur_v, <span class="keyword">int</span> cur_w)</span></span></span><br><span class="line"><span class="function"></span>&#123;   <span class="comment">//判断当前背包的总价值cur_v ＋ 剩余容量可容纳的最大价值 &lt;= 当前最优价值</span></span><br><span class="line">    <span class="keyword">double</span> leftw = bag_w - cur_w; <span class="comment">//剩余背包容量</span></span><br><span class="line">    <span class="keyword">double</span> b = cur_v; <span class="comment">//记录当前背包的总价值cur_v，最后求上界</span></span><br><span class="line">    <span class="comment">//以物品单位重量价值递减次序装入物品</span></span><br><span class="line">    <span class="keyword">while</span>(i &lt;= n &amp;&amp; w[i] &lt;= leftw)</span><br><span class="line">    &#123;</span><br><span class="line">        leftw -= w[i];</span><br><span class="line">        b += val[i];</span><br><span class="line">        i++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//装满背包</span></span><br><span class="line">    <span class="keyword">if</span>(i &lt;= n)</span><br><span class="line">        b += val[i] / w[i] * leftw;</span><br><span class="line">    <span class="keyword">return</span> b; <span class="comment">//返回计算出的上界</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">search</span><span class="params">(<span class="keyword">int</span> cur, <span class="keyword">int</span> cur_v, <span class="keyword">int</span> cur_w)</span></span></span><br><span class="line"><span class="function"></span>&#123;   <span class="comment">//search递归函数，当前current节点的价值为current value，重量为current weight </span></span><br><span class="line">    <span class="keyword">if</span>(cur &gt; n) <span class="comment">//判断边界   </span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(cur_v &gt; bag_v) <span class="comment">//是否超过了最大价值</span></span><br><span class="line">        &#123;</span><br><span class="line">            bag_v = cur_v; <span class="comment">//得到最大价值</span></span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)      </span><br><span class="line">                bag[order[i]] = put[i]; <span class="comment">//put表示当前是否被选中，将选中的物品存入bag中 </span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//如若左子节点可行，则直接搜索左子树</span></span><br><span class="line">    <span class="comment">//对于右子树，先计算上界函数，以判断是否将其减去</span></span><br><span class="line">    <span class="keyword">if</span>(cur_w + w[cur] &lt;= bag_w) <span class="comment">//将物品cur放入背包,搜索左子树,即选择当前物品 </span></span><br><span class="line">    &#123;</span><br><span class="line">        cur_w += w[cur]; <span class="comment">//同步更新当前背包的重量</span></span><br><span class="line">        cur_v += val[cur]; <span class="comment">//同步更新当前背包的总价值</span></span><br><span class="line">        put[cur] = <span class="number">1</span>;</span><br><span class="line">        search(cur + <span class="number">1</span>, cur_v, cur_w); <span class="comment">//深度搜索进入下一层</span></span><br><span class="line">        cur_w -= w[cur]; <span class="comment">//回溯复原</span></span><br><span class="line">        cur_v -= val[cur]; <span class="comment">//回溯复原</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(bound(cur + <span class="number">1</span>, cur_v, cur_w) &gt; bag_v) <span class="comment">//如若符合条件则搜索右子树，即不选择当前物品 </span></span><br><span class="line">    &#123;</span><br><span class="line">        put[cur] = <span class="number">0</span>;</span><br><span class="line">        search(cur + <span class="number">1</span>, cur_v, cur_w);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i;</span><br><span class="line">    bag_v = <span class="number">0</span>; <span class="comment">//初始化背包最大价值</span></span><br><span class="line">    <span class="comment">//输入数据 </span></span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"请输入背包最大容量:"</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cin</span> &gt;&gt; bag_w;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"请输入物品个数:"</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cin</span> &gt;&gt; n;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"请依次输入物品的重量:"</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">for</span>(i = <span class="number">1</span>; i &lt;= n; i++) </span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">cin</span> &gt;&gt; w[i];</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"请依次输入物品的价值:"</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">for</span>(i = <span class="number">1</span>; i &lt;= n; i++) </span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">cin</span> &gt;&gt; val[i];</span><br><span class="line">    <span class="keyword">for</span>(i = <span class="number">1</span>; i &lt;= n; i++) <span class="comment">//新增的order数组，存储初始编号 </span></span><br><span class="line">        order[i] = i;</span><br><span class="line">    search(<span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"最大价值为:"</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; bag_v &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"物品的编号依次为:"</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">        <span class="keyword">if</span>(bag[i] == <span class="number">1</span>) </span><br><span class="line">            <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; i &lt;&lt; <span class="string">" "</span>;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="3-旅行商问题TSP：排序树"><a href="#3-旅行商问题TSP：排序树" class="headerlink" title="3. 旅行商问题TSP：排序树"></a>3. 旅行商问题TSP：排序树</h1><h2 id="3-1-问题介绍"><a href="#3-1-问题介绍" class="headerlink" title="3.1 问题介绍"></a>3.1 问题介绍</h2><p>小明在去同学那前想了一想，准备顺便拜访各高校的高中同学。他打算从本校出发，途径高中同学所在的一些高校，最终回到自己学校。小舟很懒，希望只走最短的路，同时不想在一个学校玩第二次，因为他们不是主要目标。如何制定一个旅行方案？</p>
+<p>乍一看这个题目是不是和最短路径问题很像？但很可惜的是，最短路径不要求通过每一个点，还是有所不同。</p>
+<h2 id="3-2-解决思路"><a href="#3-2-解决思路" class="headerlink" title="3.2 解决思路"></a>3.2 解决思路</h2><p>排列树与子集树最大的区别在于，<strong>子集树</strong>的解是<strong>无序</strong>的子集，而<strong>排列树</strong>的解则包含整个集合的所有元素，我们从暴力的原则出发，将元素进行<strong>全排列</strong>。</p>
+<p>​                                       <img src="/2023/06/27/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90%E4%B9%8B%E5%9B%9E%E6%BA%AF%E6%B3%95/2.jpg" alt="Image"></p>
+<blockquote>
+<p>{｝外的数表示已经排好序，｛｝内的数表示尚未排序。</p>
+</blockquote>
+<p>在排序树中，<strong>每一层选择一个数字排到队尾</strong>，因此对一个n元素的集合，树的第一层将有n个子结点，表示可选n个数放在队伍的第一个位置，一次分叉比前一次减少一个（因为已经确定了一个位置的元素）；树共有<strong>n+1层</strong>（图中省略了最后一层），表示选择<strong>n次</strong>；叶结点共有<strong>n!</strong>个，表示组合数A，全排列共有n!种情形（因此时间复杂度也是n!）。</p>
+<p>在这个问题中，我们的解空间就是所有城市的全排列，即走过每一个城市的顺序，因此可以用排序树来考虑这个问题。</p>
+<h2 id="3-3-算法框架"><a href="#3-3-算法框架" class="headerlink" title="3.3 算法框架"></a>3.3 算法框架</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">backtrack</span><span class="params">(<span class="keyword">int</span> t)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(t &gt; n)</span><br><span class="line">        output(x);</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = t; i &lt;= n; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            swap(x[t], x[i]);</span><br><span class="line">            <span class="keyword">if</span>(constraint(t) &amp;&amp; bound(t))</span><br><span class="line">                backtrack(t+<span class="number">1</span>);</span><br><span class="line">            swap(x[i],x[t]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里的swap是一个<strong>交换函数</strong>，对于一个排列，只要交换任意两数后就是一个新排列。constraint()和bound())分别是<strong>约束条件</strong>和<strong>限定函数</strong>（用于剪枝优化）。</p>
+<p><strong>为什么要用swap来交换，而不是把数据放入新数组啦等等什么别的操作呢？</strong>这是因为，当我们在原先存储数据的数组x内进行交换时，我们<strong>把排好序的元素放到了数组的前面，留下的数据则是未排序的</strong>。这样在我们进行for循环的时候就能从t开始，同时避免了重复遇到排过序的数，也不需要book记录等多余的代码。</p>
+<h2 id="3-4-算法实现"><a href="#3-4-算法实现" class="headerlink" title="3.4 算法实现"></a>3.4 算法实现</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//旅行商问题-回溯法-排序树 </span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">int</span> n, t;</span><br><span class="line"><span class="keyword">int</span> dis[<span class="number">100</span>][<span class="number">100</span>], x[<span class="number">100</span>], bestroad[<span class="number">100</span>]; </span><br><span class="line"><span class="keyword">int</span> cur_dis, bestdis;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> INF=<span class="number">99999</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">swap</span><span class="params">(<span class="keyword">int</span>&amp; a, <span class="keyword">int</span>&amp; b)</span>  <span class="comment">//swap函数，交换 </span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> temp;</span><br><span class="line">	temp = a;</span><br><span class="line">	a = b;</span><br><span class="line">	b = temp;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">backtrack</span><span class="params">(<span class="keyword">int</span> t)</span>   </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (t == n)</span><br><span class="line">	&#123; 	<span class="comment">//判断边界。很长的判断，不能到自己或到不了，要比当前最优解短 </span></span><br><span class="line">		<span class="keyword">if</span> (dis[x[n - <span class="number">1</span>]][x[n]] != <span class="number">0</span> &amp;&amp; dis[x[n]][<span class="number">1</span>] != <span class="number">0</span> &amp;&amp;(cur_dis + dis[x[n - <span class="number">1</span>]][x[n]] + dis[x[n]][<span class="number">1</span>] &lt; bestdis || bestdis == <span class="number">0</span>)) </span><br><span class="line">		&#123;  	<span class="comment">//记录最优路径，最优距离 </span></span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= n; j++)</span><br><span class="line">				bestroad[j] = x[j];</span><br><span class="line">			bestdis = cur_dis + dis[x[n<span class="number">-1</span>]][x[n]] + dis[x[n]][<span class="number">1</span>];</span><br><span class="line">			<span class="keyword">return</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j=t;j&lt;= n; j++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span>(dis[x[t]][x[j]]!=<span class="number">0</span>&amp;&amp; (cur_dis + dis[x[t - <span class="number">1</span>]][x[t]] + dis[x[t]][<span class="number">1</span>] &lt; bestdis || bestdis == <span class="number">0</span>))</span><br><span class="line">			&#123;</span><br><span class="line">				swap(x[t], x[j]);</span><br><span class="line">				cur_dis += dis[x[t]][x[t<span class="number">-1</span>]];</span><br><span class="line">				backtrack(t+<span class="number">1</span>);</span><br><span class="line">				<span class="comment">//回溯 </span></span><br><span class="line">				cur_dis -= dis[x[t]][x[t<span class="number">-1</span>]];</span><br><span class="line">				swap(x[t], x[j]);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"> &#125;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i, j, m, a, b, c;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"输入城市数:"</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">cin</span> &gt;&gt; n; </span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"输入路径数:"</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>; </span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">cin</span> &gt;&gt; m;</span><br><span class="line">	<span class="comment">//初始化邻接矩阵</span></span><br><span class="line">	<span class="keyword">for</span>(i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">		<span class="keyword">for</span>(j = <span class="number">1</span>; j &lt;= n; j++)</span><br><span class="line">			dis[i][j] = <span class="number">0</span>;  </span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"输入路径与距离:"</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//读入城市之间的距离</span></span><br><span class="line">	<span class="keyword">for</span>(i = <span class="number">1</span>; i &lt;= m; i++)</span><br><span class="line">	&#123; </span><br><span class="line">		<span class="built_in">std</span>::<span class="built_in">cin</span> &gt;&gt; a &gt;&gt; b &gt;&gt; c;</span><br><span class="line">		dis[a][b] = dis[b][a] = c; <span class="comment">//无向图，两边都记录 </span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">		x[i] = i;</span><br><span class="line">		</span><br><span class="line">	backtrack(<span class="number">2</span>);      </span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"最佳路径为:"</span>;</span><br><span class="line">	<span class="keyword">for</span> (i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">			<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; bestroad[i] &lt;&lt; <span class="string">" --&gt; "</span>;</span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"1"</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"最短距离为:"</span> &lt;&lt; bestdis;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<p>输出如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">PS E:\Code\VSCode\Learning\build&gt; .<span class="string">"E:/Code/VSCode/Learning/build/main.exe"</span></span><br><span class="line">输入城市数:</span><br><span class="line"><span class="number">4</span></span><br><span class="line">输入路径数:</span><br><span class="line"><span class="number">6</span></span><br><span class="line">输入路径与距离:</span><br><span class="line"><span class="number">1</span> <span class="number">2</span> <span class="number">30</span></span><br><span class="line"><span class="number">1</span> <span class="number">3</span> <span class="number">6</span></span><br><span class="line"><span class="number">1</span> <span class="number">4</span> <span class="number">4</span></span><br><span class="line"><span class="number">2</span> <span class="number">3</span> <span class="number">5</span></span><br><span class="line"><span class="number">2</span> <span class="number">4</span> <span class="number">10</span></span><br><span class="line"><span class="number">3</span> <span class="number">4</span> <span class="number">20</span></span><br><span class="line">最佳路径为:<span class="number">1</span> --&gt; <span class="number">4</span> --&gt; <span class="number">2</span> --&gt; <span class="number">3</span> --&gt; <span class="number">1</span></span><br><span class="line">最短距离为:<span class="number">25</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>注意：</p>
+<ul>
+<li><p>不同于最短路径，这里我们把<strong>INF（即无路径连通）与0（即自身）</strong>放在一起处理，因为他们都不需要swap。</p>
+</li>
+<li><p>我们用t==n，而不是t&gt;=n，是为了<strong>防止数组下表越界</strong>。</p>
+</li>
+</ul>
+</blockquote>
+<h1 id="4-总结"><a href="#4-总结" class="headerlink" title="4. 总结"></a>4. 总结</h1><ul>
+<li><p>回溯法作为一种极暴力的搜索法，其时间复杂度是极高的，子集树大概是2<sup>n</sup>，排序树大概是n！，所以处理大的问题不太给力。但作为回报，它能给出真正的最优解。</p>
+</li>
+<li><p>回溯法的子集树和排序树，可以处理两类问题，求子集最优和排序最优。</p>
+</li>
+<li><p>想要利用剪枝函数优化是非常困难的。</p>
+</li>
+</ul>
+<p>参考文献：<a href="https://mp.weixin.qq.com/s?__biz=MzI3NTkyODIzNg==&amp;mid=2247484972&amp;idx=1&amp;sn=3549d22ce88e7a8326e8670a06e10ff6&amp;chksm=eb7c03efdc0b8af9d5558a07d7b509b56438f45ba22487f80d4aa4aa7ca7595152c29b196d2e&amp;scene=21#wechat_redirect" target="_blank" rel="noopener">程序猿声：【算法学习】再谈回溯法</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/" rel="tag"># 算法设计与分析</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2023/06/26/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E7%AE%97%E6%B3%95/" rel="next" title="动态规划算法">
+                <i class="fa fa-chevron-left"></i> 动态规划算法
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/me.png"
+                alt="crossoverpptx" />
+            
+              <p class="site-author-name" itemprop="name">crossoverpptx</p>
+              <p class="site-description motion-element" itemprop="description">极度的痛苦才是精神的最大解放者。唯有此种痛苦，才迫使我们大彻如悟。</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+                <a href="/archives">
+                  <span class="site-state-item-count">95</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/index.html">
+                  <span class="site-state-item-count">29</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/crossoverpptx" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:2269041628@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-回溯法简介"><span class="nav-text">1. 回溯法简介</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-DFS的基本思想"><span class="nav-text">1.1 DFS的基本思想</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-回溯法的基本思想"><span class="nav-text">1.2 回溯法的基本思想</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-回溯法和DFS的区别"><span class="nav-text">1.3 回溯法和DFS的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-4-剪枝"><span class="nav-text">1.4 剪枝</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-01背包问题：子集树"><span class="nav-text">2. 01背包问题：子集树</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-问题介绍"><span class="nav-text">2.1 问题介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-解决思路"><span class="nav-text">2.2 解决思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-算法实现"><span class="nav-text">2.3 算法实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-4-如何优化"><span class="nav-text">2.4 如何优化</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-旅行商问题TSP：排序树"><span class="nav-text">3. 旅行商问题TSP：排序树</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-问题介绍"><span class="nav-text">3.1 问题介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-解决思路"><span class="nav-text">3.2 解决思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-3-算法框架"><span class="nav-text">3.3 算法框架</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-4-算法实现"><span class="nav-text">3.4 算法实现</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-总结"><span class="nav-text">4. 总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">crossoverpptx</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">189.6k</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i> 访问人数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i> 访问总量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>
