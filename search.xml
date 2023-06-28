@@ -7791,4 +7791,82 @@ j>=w(i) & V(i,j)=max｛V(i-1,j)，V(i-1,j-w(i))+v(i)｝
         <tag>算法设计与分析</tag>
       </tags>
   </entry>
+  <entry>
+    <title>算法设计与分析之贪心算法</title>
+    <url>/2023/06/28/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90%E4%B9%8B%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/</url>
+    <content><![CDATA[<h1 id="1-贪心算法简介"><a href="#1-贪心算法简介" class="headerlink" title="1. 贪心算法简介"></a>1. 贪心算法简介</h1><p>贪心算法（Greedy Algorithm）是一种基于贪心思想的算法策略。它通过每一步选择当前状态下最优的解决方案，从而逐步得到全局最优解。贪心算法通常在问题具有<strong>贪心选择性质</strong>和<strong>最优子结构性质</strong>时被应用。<a id="more"></a></p>
+<p>贪心算法的基本思想是，每一步选择当前情况下看起来最好的解决方案，而不考虑之后可能发生的情况。它<strong>不进行回溯，也不考虑全局最优解</strong>，而是<strong>根据局部最优选择</strong>来构建解决方案。</p>
+<p><strong>适合贪心算法具有的特征：</strong></p>
+<p>1、优化问题。</p>
+<p>2、问题的求解可以划分为若干阶段。</p>
+<p>3、能够制定出最优量度标准。</p>
+<p>4、问题具有最优子结构性质。</p>
+<p><strong>贪心算法的步骤通常如下：</strong></p>
+<p>1、确定问题的最优子结构：问题的最优解可以通过子问题的最优解来构建。</p>
+<p>2、定义贪心选择策略：确定每一步的最优选择。</p>
+<p>3、构建解决方案：根据贪心选择策略，逐步构建问题的解决方案。</p>
+<p>4、验证解决方案：检查贪心算法得到的解决方案是否满足问题的要求。</p>
+<h1 id="2-找零钱问题"><a href="#2-找零钱问题" class="headerlink" title="2. 找零钱问题"></a>2. 找零钱问题</h1><p>关于贪心算法的一个经典例子是找零钱问题（Coin Change Problem）。问题描述如下：给定一些不同面额的硬币和一个需要找零的金额，找出最少的硬币数量来凑出该金额。利用贪心算法解决该问题的思路如下：</p>
+<p>（1）输入A和每种货币的数目；</p>
+<p>（2）从币值从高到低进行贪心策略；</p>
+<p>（3）选择所要表示的币值；</p>
+<p>（4）记录所选择的币值所要的数目，现金值实时更改；</p>
+<p>（5）输出结果。</p>
+<p><strong>算法实现</strong></p>
+<pre><code>#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;algorithm&gt;
+
+std::vector&lt;int&gt; greedyCoinChange(std::vector&lt;int&gt;&amp; coins, int amount) {
+    std::vector&lt;int&gt; result;
+
+    // 按面额从大到小排序硬币
+    std::sort(coins.rbegin(), coins.rend());
+
+    for (auto coin : coins) {
+        while (amount &gt;= coin) {
+            result.push_back(coin);
+            amount -= coin;
+        }
+    }
+
+    if (amount != 0) {
+        // 找不到合适的硬币组合
+        result.clear();
+    }
+
+    return result;
+}
+
+int main() {
+    std::vector&lt;int&gt; coins{1, 5, 10, 25};
+    int amount = 47;
+
+    std::vector&lt;int&gt; result = greedyCoinChange(coins, amount);
+
+    if (!result.empty()) {
+        std::cout &lt;&lt; &quot;找零的硬币数量：&quot; &lt;&lt; result.size() &lt;&lt; std::endl;
+        std::cout &lt;&lt; &quot;找零的硬币面额：&quot;;
+        for (auto coin : result) {
+            std::cout &lt;&lt; coin &lt;&lt; &quot; &quot;;
+        }
+        std::cout &lt;&lt; std::endl;
+    } else {
+        std::cout &lt;&lt; &quot;无法找零。&quot; &lt;&lt; std::endl;
+    }
+
+    return 0;
+}
+</code></pre><p>在上述示例中，我们定义了一个greedyCoinChange函数，它接收一个硬币面额的向量coins和需要找零的金额amount。首先，我们将硬币面额按从大到小排序，以便每次选择最大面额的硬币。然后，我们循环遍历每个硬币，直到无法再选择该硬币为止。最后，如果剩余的金额不为0，则表示无法找零，返回空的结果。在main函数中，我们定义了一组硬币面额和需要找零的金额，并调用greedyCoinChange函数来获取找零的结果。如果结果不为空，我们输出找零的硬币数量和面额；否则，输出无法找零的信息。</p>
+<p>例如，对于硬币面额为{1, 5, 10, 25}，需要找零47的情况下，输出将会是：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">找零的硬币数量：<span class="number">5</span></span><br><span class="line">找零的硬币面额：<span class="number">25</span> <span class="number">10</span> <span class="number">10</span> <span class="number">1</span> <span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>这表示我们可以用5个硬币凑出47的金额，其中包括1个25分硬币、2个10分硬币和2个1分硬币。</p>
+]]></content>
+      <categories>
+        <category>算法设计与分析</category>
+      </categories>
+      <tags>
+        <tag>算法设计与分析</tag>
+      </tags>
+  </entry>
 </search>

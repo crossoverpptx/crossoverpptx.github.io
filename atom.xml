@@ -6,7 +6,7 @@
   <link href="http://yoursite.com/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2023-06-27T08:03:40.636Z</updated>
+  <updated>2023-06-28T05:00:34.442Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>算法设计与分析之贪心算法</title>
+    <link href="http://yoursite.com/2023/06/28/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90%E4%B9%8B%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/"/>
+    <id>http://yoursite.com/2023/06/28/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90%E4%B9%8B%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/</id>
+    <published>2023-06-28T02:46:37.000Z</published>
+    <updated>2023-06-28T05:00:34.442Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="1-贪心算法简介"><a href="#1-贪心算法简介" class="headerlink" title="1. 贪心算法简介"></a>1. 贪心算法简介</h1><p>贪心算法（Greedy Algorithm）是一种基于贪心思想的算法策略。它通过每一步选择当前状态下最优的解决方案，从而逐步得到全局最优解。贪心算法通常在问题具有<strong>贪心选择性质</strong>和<strong>最优子结构性质</strong>时被应用。<a id="more"></a></p><p>贪心算法的基本思想是，每一步选择当前情况下看起来最好的解决方案，而不考虑之后可能发生的情况。它<strong>不进行回溯，也不考虑全局最优解</strong>，而是<strong>根据局部最优选择</strong>来构建解决方案。</p><p><strong>适合贪心算法具有的特征：</strong></p><p>1、优化问题。</p><p>2、问题的求解可以划分为若干阶段。</p><p>3、能够制定出最优量度标准。</p><p>4、问题具有最优子结构性质。</p><p><strong>贪心算法的步骤通常如下：</strong></p><p>1、确定问题的最优子结构：问题的最优解可以通过子问题的最优解来构建。</p><p>2、定义贪心选择策略：确定每一步的最优选择。</p><p>3、构建解决方案：根据贪心选择策略，逐步构建问题的解决方案。</p><p>4、验证解决方案：检查贪心算法得到的解决方案是否满足问题的要求。</p><h1 id="2-找零钱问题"><a href="#2-找零钱问题" class="headerlink" title="2. 找零钱问题"></a>2. 找零钱问题</h1><p>关于贪心算法的一个经典例子是找零钱问题（Coin Change Problem）。问题描述如下：给定一些不同面额的硬币和一个需要找零的金额，找出最少的硬币数量来凑出该金额。利用贪心算法解决该问题的思路如下：</p><p>（1）输入A和每种货币的数目；</p><p>（2）从币值从高到低进行贪心策略；</p><p>（3）选择所要表示的币值；</p><p>（4）记录所选择的币值所要的数目，现金值实时更改；</p><p>（5）输出结果。</p><p><strong>算法实现</strong></p><pre><code>#include &lt;iostream&gt;#include &lt;vector&gt;#include &lt;algorithm&gt;std::vector&lt;int&gt; greedyCoinChange(std::vector&lt;int&gt;&amp; coins, int amount) {    std::vector&lt;int&gt; result;    // 按面额从大到小排序硬币    std::sort(coins.rbegin(), coins.rend());    for (auto coin : coins) {        while (amount &gt;= coin) {            result.push_back(coin);            amount -= coin;        }    }    if (amount != 0) {        // 找不到合适的硬币组合        result.clear();    }    return result;}int main() {    std::vector&lt;int&gt; coins{1, 5, 10, 25};    int amount = 47;    std::vector&lt;int&gt; result = greedyCoinChange(coins, amount);    if (!result.empty()) {        std::cout &lt;&lt; &quot;找零的硬币数量：&quot; &lt;&lt; result.size() &lt;&lt; std::endl;        std::cout &lt;&lt; &quot;找零的硬币面额：&quot;;        for (auto coin : result) {            std::cout &lt;&lt; coin &lt;&lt; &quot; &quot;;        }        std::cout &lt;&lt; std::endl;    } else {        std::cout &lt;&lt; &quot;无法找零。&quot; &lt;&lt; std::endl;    }    return 0;}</code></pre><p>在上述示例中，我们定义了一个greedyCoinChange函数，它接收一个硬币面额的向量coins和需要找零的金额amount。首先，我们将硬币面额按从大到小排序，以便每次选择最大面额的硬币。然后，我们循环遍历每个硬币，直到无法再选择该硬币为止。最后，如果剩余的金额不为0，则表示无法找零，返回空的结果。在main函数中，我们定义了一组硬币面额和需要找零的金额，并调用greedyCoinChange函数来获取找零的结果。如果结果不为空，我们输出找零的硬币数量和面额；否则，输出无法找零的信息。</p><p>例如，对于硬币面额为{1, 5, 10, 25}，需要找零47的情况下，输出将会是：</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">找零的硬币数量：<span class="number">5</span></span><br><span class="line">找零的硬币面额：<span class="number">25</span> <span class="number">10</span> <span class="number">10</span> <span class="number">1</span> <span class="number">1</span></span><br></pre></td></tr></table></figure><p>这表示我们可以用5个硬币凑出47的金额，其中包括1个25分硬币、2个10分硬币和2个1分硬币。</p>]]></content>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;1-贪心算法简介&quot;&gt;&lt;a href=&quot;#1-贪心算法简介&quot; class=&quot;headerlink&quot; title=&quot;1. 贪心算法简介&quot;&gt;&lt;/a&gt;1. 贪心算法简介&lt;/h1&gt;&lt;p&gt;贪心算法（Greedy Algorithm）是一种基于贪心思想的算法策略。它通过每一步选择当前状态下最优的解决方案，从而逐步得到全局最优解。贪心算法通常在问题具有&lt;strong&gt;贪心选择性质&lt;/strong&gt;和&lt;strong&gt;最优子结构性质&lt;/strong&gt;时被应用。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="算法设计与分析" scheme="http://yoursite.com/categories/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/"/>
+    
+    
+    <category term="算法设计与分析" scheme="http://yoursite.com/tags/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/"/>
+    
+  </entry>
   
   <entry>
     <title>算法设计与分析之回溯法</title>
@@ -436,27 +457,6 @@
     
     
     <category term="C/C++" scheme="http://yoursite.com/tags/C-C/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>寻梦环游记</title>
-    <link href="http://yoursite.com/2023/03/06/%E5%AF%BB%E6%A2%A6%E7%8E%AF%E6%B8%B8%E8%AE%B0/"/>
-    <id>http://yoursite.com/2023/03/06/%E5%AF%BB%E6%A2%A6%E7%8E%AF%E6%B8%B8%E8%AE%B0/</id>
-    <published>2023-03-06T15:53:26.000Z</published>
-    <updated>2023-06-10T08:28:18.837Z</updated>
-    
-    <content type="html"><![CDATA[<p>看了这部早有耳闻的电影，原因可能是开学前给去世的爷爷上坟和最近身体不好的奶奶，但直到前两天我才知道这是部关于死亡的电影。故事可以说是多级反转，不过结局是美好的：一家人在一起，载歌载舞，无论他们是生是死。<a id="more"></a></p><p>不久前的寒假，我回到儿时的故乡。儿时热闹的村庄，早已没有了往日的喧嚣。那时，无论盛夏烈日炎炎，还是冬天白雪皑皑，总有我们一群嬉笑打闹的孩子，大人们忙碌谈笑，老人们家长里短。然而，在我长大的短短二十年间，老人们陆续离去，我们也离开家乡，或是上学或是工作或是在外地买房。这个村庄，只剩一群不愿离开，也离不开的中老年人守护。他们保留着传统的生活习惯，随着时光流逝，最后也会像这可能不知多久后消失的村庄，埋入祖辈的墓地里，隐入历史的尘烟中。</p><p>我生于旧世纪的尾巴，成长在由贫穷迈向小康的转折点，农村和城市的印记都刻在我的脑海里。虽然我现在在大城市学习生活，以后也大概率会在大城市工作生活。然而一直以来，我做梦的场景好像很多时候都是故乡的村庄和老房子，甚至都不是现在翻新的房子，虽然这房子也翻新得有十年了吧。这是什么原因？我一直苦苦思索而不得。可能儿时的我，儿时的村庄才是我潜意识中真正幸福的时光吧，在那个记忆里，我才真正放松和自由。有时我也想，等我老了也回来吧，那时的我也没有了欲望和抱负，坐在宁静的村庄晒着太阳，回忆往事，静静等待死亡，最后叶落归根。</p><p>奶奶身体不好，可能随时离我们而去，爸爸妈妈也步入中年。曾经我在想，他们一生的意义是什么呢？他们没有知识，不知道文化的魅力和宇宙的浩瀚；他们没去过大城市，没见过高楼大厦，去过风景名胜；他们没有以后……后来我想通了，他们的一生在他们眼中未必不是精彩的，他们从乱世中走来，度过苦难，却也见过现代社会的繁荣，我们不必为他们悲哀，因为一代人自有一代人的命运，我们最终也会如此。</p><p>时间缓缓流淌，死是我们的归宿，就像电影中的那样，谁也不能幸免，所以我们不必害怕，但我们现在得认真地活，认真地陪伴家人，认真学习工作，感受人生。这样，在我们离开这个世界时，才能更加坦然，让活着的人记住我们。到那时，在另一个世界的我们和这个世界的人们，虽然肉体无法接触，但灵魂一直相伴，直到最终和我们最亲近的人在另一个世界重逢。</p><p><img src="/2023/03/06/%E5%AF%BB%E6%A2%A6%E7%8E%AF%E6%B8%B8%E8%AE%B0/寻梦环游记.jpg" alt></p>]]></content>
-    
-    
-    <summary type="html">&lt;p&gt;看了这部早有耳闻的电影，原因可能是开学前给去世的爷爷上坟和最近身体不好的奶奶，但直到前两天我才知道这是部关于死亡的电影。故事可以说是多级反转，不过结局是美好的：一家人在一起，载歌载舞，无论他们是生是死。&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="电影" scheme="http://yoursite.com/categories/%E7%94%B5%E5%BD%B1/"/>
-    
-    
-    <category term="电影" scheme="http://yoursite.com/tags/%E7%94%B5%E5%BD%B1/"/>
     
   </entry>
   
