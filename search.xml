@@ -7869,4 +7869,52 @@ int main() {
         <tag>算法设计与分析</tag>
       </tags>
   </entry>
+  <entry>
+    <title>算法设计与分析之分治法</title>
+    <url>/2023/06/29/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90%E4%B9%8B%E5%88%86%E6%B2%BB%E6%B3%95/</url>
+    <content><![CDATA[<h1 id="1-分治法简介"><a href="#1-分治法简介" class="headerlink" title="1. 分治法简介"></a>1. 分治法简介</h1><p>分治法的就是将一个规模为N的问题分解为K个规模较小的子问题，这些子问题相互独立且与原问题性质相同。求出子问题的解，就可得到原问题的解。<a id="more"></a></p>
+<h2 id="1-1-基本思想"><a href="#1-1-基本思想" class="headerlink" title="1.1 基本思想"></a>1.1 基本思想</h2><p>当我们求解某些问题时，由于这些问题要处理的数据相当多，或求解过程相当复杂，使得直接求解法在时间上相当长，或者根本无法直接求出。对于这类问题，我们往往先把它分解成几个子问题，找到求出这几个子问题的解法后，再找到合适的方法，把它们组合成求整个问题的解法。如果这些子问题还较大，难以解决，可以再把它们分成几个更小的子问题，以此类推，直至可以直接求出解为止。这就是分治策略的基本思想。一般情况下，还会用到二分法。</p>
+<blockquote>
+<p>二分法：利用分治策略求解时，所需时间取决于分解后子问题的个数、子问题的规模大小等因素，而二分法，由于其划分的简单和均匀的特点，是经常采用的一种有效的方法，例如二分法检索。</p>
+</blockquote>
+<h2 id="1-2-解决步骤"><a href="#1-2-解决步骤" class="headerlink" title="1.2 解决步骤"></a>1.2 解决步骤</h2><p>分治法解题的一般步骤如下：</p>
+<p>（1）分解，将要解决的问题划分成若干规模较小的同类问题；</p>
+<p>（2）求解，当子问题划分得足够小时，用较简单的方法解决；</p>
+<p>（3）合并，按原问题的要求，将子问题的解逐层合并构成原问题的解。</p>
+<h2 id="1-3-具体算法"><a href="#1-3-具体算法" class="headerlink" title="1.3 具体算法"></a>1.3 具体算法</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">&#123;//开始</span><br><span class="line">	<span class="keyword">if</span>(1、问题不可分)</span><br><span class="line">		2、返回问题解；</span><br><span class="line">  	<span class="keyword">else</span></span><br><span class="line">  	&#123;</span><br><span class="line">   		3、从原问题中划分出含一半运算对象的子问题1；</span><br><span class="line"> 		4、递归调用分治法过程，求出解1；</span><br><span class="line"> 		5、从原问题中划出含另一半运算对象的子问题2；</span><br><span class="line"> 		6、递归调用分治法过程，求出解2；</span><br><span class="line">   		7、将解1、解2组合成整个问题的解； </span><br><span class="line">  	&#125; </span><br><span class="line">&#125;//结束</span><br></pre></td></tr></table></figure>
+<h2 id="1-4-应用场景"><a href="#1-4-应用场景" class="headerlink" title="1.4 应用场景"></a>1.4 应用场景</h2><p> 运用分治策略解决的问题一般来说具有以下特点：</p>
+<p>1、原问题可以分解为多个子问题。这些子问题与原问题相比，只是问题的规模有所降低，其结构和求解方法与原问题相同或相似。</p>
+<p>2、原问题在分解过程中，递归地求解子问题。由于递归都必须有一个终止条件，因此，当分解后的子问题规模足够小时，应能够直接求解。</p>
+<p>3、在求解并得到各个子问题的解后，应能够采用某种方式、方法合并或构造出原问题的解。</p>
+<blockquote>
+<p>不难发现，在分治策略中，由于子问题与原问题在结构和解法上的相似性，用分治方法解决的问题，大都采用了<strong>递归</strong>的形式。在各种排序方法中，如<strong>归并排序、快速排序、堆排序</strong>等，都存在有分治的思想。另外，下列问题也可用分治策略解决：</p>
+<p><strong>Merge Two Sorted Lists（合并两个有序链表）- LeetCode 21</strong><br><strong>Merge k Sorted Lists（合并 K 个升序链表）- LeetCode 23</strong><br><strong>Top K 问题：前 K 个高频元素 - LeetCode 347</strong></p>
+</blockquote>
+<h1 id="2-二分查找"><a href="#2-二分查找" class="headerlink" title="2. 二分查找"></a>2. 二分查找</h1><p><strong>问题描述：</strong>给定 n 个元素，这些元素是有序的（假定为升序），从中查找特定元素 x。</p>
+<p><strong>算法思想：</strong>将有序序列分成规模大致相等的两部分，然后取中间元素与特定查找元素 x 进行比较，如果 x 等于中间元素，则查找成功，算法终止；如果 x 小于中间元素，则在序列的前半部分继续查找，即在序列的前半部分重复分解和治理操作；否则，在序列的后半部分继续查找，即在序列的后半部分重复分解和治理操作。</p>
+<p><strong>算法设计：</strong></p>
+<p>（1）设置查找区间：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> left; <span class="comment">// C++自动初始化为0</span></span><br><span class="line"><span class="keyword">int</span> right = n;</span><br></pre></td></tr></table></figure>
+<p>（2）若查找区间 [left, right] 不存在，则查找失败，返回；否则执行（3）。</p>
+<p>（3）取中间位 mid = (left + right)/2，比较 x 与 a[mid]  ，有三种情况：</p>
+<ul>
+<li><p>若 x &lt; a[mid]，则right = mid - 1；查找在左半区间进行，转（2）；</p>
+</li>
+<li><p>若 x &gt; a[mid]，则left = mid + 1；查找在右半区间进行，转（2）；</p>
+</li>
+<li><p>若 x = a[mid]，则查找成功，返回mid的值。</p>
+</li>
+</ul>
+<p><strong>时间复杂度分析：</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">（1）顺序查找</span><br><span class="line">- 最好时间复杂度：O(1)</span><br><span class="line">- 最坏时间复杂度：O(n)</span><br><span class="line">（2）二分查找</span><br><span class="line">- 最好时间复杂度：O(1)</span><br><span class="line">- 最坏时间复杂度：O(logn)</span><br></pre></td></tr></table></figure>
+<p><strong>算法实现：</strong></p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">binarySearch</span><span class="params">(<span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; nums, <span class="keyword">int</span> l, <span class="keyword">int</span> r, <span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (l &lt;= r) &#123;</span><br><span class="line">        <span class="comment">// 计算 mid 时需要防止溢出，left+(right-left)/2和(left+right)/2的结果相同，但是有效防止了left和right太大直接相加导致溢出</span></span><br><span class="line">        <span class="keyword">int</span> mid = l + (r-l)/<span class="number">2</span>;</span><br><span class="line">        <span class="keyword">if</span> (nums[mid] == x) &#123;</span><br><span class="line">            <span class="keyword">return</span> mid;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (nums[mid] &gt; x) &#123;</span><br><span class="line">            <span class="keyword">return</span> binarySearch(nums, l, mid - <span class="number">1</span>, x);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;			 </span><br><span class="line">            <span class="keyword">return</span> binarySearch(nums, mid + <span class="number">1</span>, r, x);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;			</span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; nums&#123;<span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">10</span>, <span class="number">40</span>&#125;;</span><br><span class="line">    <span class="keyword">int</span> x = <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> ans = binarySearch(nums, <span class="number">0</span>, nums.size() - <span class="number">1</span>, x);</span><br><span class="line">    <span class="keyword">if</span> (ans == <span class="number">-1</span>) &#123;</span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"未找到该数！"</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">	    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"该数的索引为："</span> &lt;&lt; ans &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>算法设计与分析</category>
+      </categories>
+      <tags>
+        <tag>算法设计与分析</tag>
+      </tags>
+  </entry>
 </search>
