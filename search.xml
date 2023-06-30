@@ -4449,30 +4449,6 @@ bat脚本命令说明：<figure class="highlight python"><table><tr><td class="c
       </tags>
   </entry>
   <entry>
-    <title>redhat7.6配置163yum源</title>
-    <url>/2021/01/05/redhat7-6%E9%85%8D%E7%BD%AE163yum%E6%BA%90/</url>
-    <content><![CDATA[<p><strong>本文介绍redhat7.6服务器上配置163yum源的方法。</strong></p>
-<hr>
-<h2 id="yum源简介"><a href="#yum源简介" class="headerlink" title="yum源简介"></a>yum源简介</h2><ul>
-<li>yum需要一个yum库，也就是yum源。默认情况下，CentOS就有一个yum源，其配置文件在/etc/yum.repos.d/目录下。</li>
-<li>当使用yum下载安装rpm包时，首先要找一个yum库（源），然后确保本地有一个客户端（yum这个命令就是客户端），由yum程序去连接服务器。连接的方式是由配置文件决定的。通过编辑/etc/yum.repos.d/CentOS-Base.repo文件，可以修改设置。</li>
-</ul>
-<a id="more"></a>
-<hr>
-<h2 id="确认版本"><a href="#确认版本" class="headerlink" title="确认版本"></a>确认版本</h2><h2 id><a href="#" class="headerlink" title></a><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">[root@promote ~]<span class="comment"># cat /etc/redhat-release</span></span><br><span class="line">Red Hat Enterprise Linux Server release <span class="number">7.6</span> (Maipo)</span><br></pre></td></tr></table></figure></h2><h2 id="卸载本地yum"><a href="#卸载本地yum" class="headerlink" title="卸载本地yum"></a>卸载本地yum</h2><h2 id="-1"><a href="#-1" class="headerlink" title></a><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">rpm -qa|grep yum　　<span class="comment">#查看本地yum</span></span><br><span class="line">rpm -qa|grep yum|xargs rpm -e --nodeps　　<span class="comment">#卸载本地yum，不检查依赖性，卸载yum程序</span></span><br><span class="line">rpm -qa|grep yum    <span class="comment">#再次查看是否正确卸载</span></span><br></pre></td></tr></table></figure></h2><h2 id="下载yum相关程序"><a href="#下载yum相关程序" class="headerlink" title="下载yum相关程序"></a>下载yum相关程序</h2><h2 id="-2"><a href="#-2" class="headerlink" title></a><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">wget http://mirrors<span class="number">.163</span>.com/centos/<span class="number">7</span>/os/x86_64/Packages/python-urlgrabber<span class="number">-3.10</span><span class="number">-10.</span>el7.noarch.rpm</span><br><span class="line">wget http://mirrors<span class="number">.163</span>.com/centos/<span class="number">7</span>/os/x86_64/Packages/rpm<span class="number">-4.11</span><span class="number">.3</span><span class="number">-45.</span>el7.x86_64.rpm</span><br><span class="line">wget http://mirrors<span class="number">.163</span>.com/centos/<span class="number">7</span>/os/x86_64/Packages/yum<span class="number">-3.4</span><span class="number">.3</span><span class="number">-168.</span>el7.centos.noarch.rpm</span><br><span class="line">wget http://mirrors<span class="number">.163</span>.com/centos/<span class="number">7</span>/os/x86_64/Packages/yum-metadata-parser<span class="number">-1.1</span><span class="number">.4</span><span class="number">-10.</span>el7.x86_64.rpm</span><br><span class="line">wget http://mirrors<span class="number">.163</span>.com/centos/<span class="number">7</span>/os/x86_64/Packages/yum-plugin-fastestmirror<span class="number">-1.1</span><span class="number">.31</span><span class="number">-54.</span>el7_8.noarch.rpm</span><br><span class="line">wget http://mirrors<span class="number">.163</span>.com/centos/<span class="number">7</span>/os/x86_64/Packages/yum-utils<span class="number">-1.1</span><span class="number">.31</span><span class="number">-54.</span>el7_8.noarch.rpm</span><br></pre></td></tr></table></figure></h2><h2 id="安装yum程序"><a href="#安装yum程序" class="headerlink" title="安装yum程序"></a>安装yum程序</h2><p>若提示依赖检测失败，执行以下命令强制安装。<br><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">rpm -ivh * --force --nodeps <span class="comment">#--force 强制安装，--nodeps 不检查依赖</span></span><br></pre></td></tr></table></figure></p>
-<hr>
-<h2 id="修改repo文件"><a href="#修改repo文件" class="headerlink" title="修改repo文件"></a>修改repo文件</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">cd /etc/yum.repos.d/　　<span class="comment">#进入到yum配置文件目录</span></span><br><span class="line">mkdir repo_backup   <span class="comment">#创建yum备份目录</span></span><br><span class="line">mv *.repo repo_backup   <span class="comment">#备份</span></span><br><span class="line">wget http://mirrors<span class="number">.163</span>.com/.help/CentOS7-Base<span class="number">-163.</span>repo　　<span class="comment">#下载CentOS配置文件</span></span><br></pre></td></tr></table></figure>
-<p>修改CentOS7-Base-163.repo文件</p>
-<h2 id="-3"><a href="#-3" class="headerlink" title></a><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">vi CentOS7-Base<span class="number">-163.</span>repo</span><br><span class="line">:%s/$releasever/<span class="number">7</span>/ge</span><br></pre></td></tr></table></figure></h2><h2 id="清除并更新yum缓存"><a href="#清除并更新yum缓存" class="headerlink" title="清除并更新yum缓存"></a>清除并更新yum缓存</h2><h2 id="-4"><a href="#-4" class="headerlink" title></a><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">yum clean all&amp;yum makecache</span><br><span class="line">yum update</span><br><span class="line">yum repolist <span class="comment">#验证结果</span></span><br></pre></td></tr></table></figure></h2><h2 id="备注"><a href="#备注" class="headerlink" title="备注"></a>备注</h2><p>当发现仍无需要的软件时，CentOS还有一个源叫做EPEL(Extra Packages for Enterprise)，可尝试安装epel yum源<br><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">yum install -y epel-release</span><br></pre></td></tr></table></figure></p>
-]]></content>
-      <categories>
-        <category>redhat</category>
-      </categories>
-      <tags>
-        <tag>redhat</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>《信》-东野圭吾</title>
     <url>/2022/01/04/%E3%80%8A%E4%BF%A1%E3%80%8B-%E4%B8%9C%E9%87%8E%E5%9C%AD%E5%90%BE/</url>
     <content><![CDATA[<p>看完了东野圭吾的《信》，这不是一部推理题材的小说，只是讲述了一个关于人性的故事。故事围绕“犯罪者的家属该不该受到歧视”展开，主人公的哥哥犯下了盗窃杀人罪，留下他独自一人，没有钱上大学只能去打工，却在被老板知道自己的哥哥是罪犯后遭遇辞退，一次次想隐瞒却又终究暴露，连自己的女朋友也因此分手，好不容易结婚生了孩子，竟连孩子也要饱受歧视。于是，他的心理也在这一件件事中发生改变，甚至扭曲，终于无法忍受，写信告诉自己的哥哥要断绝关系，不再相见……<a id="more"></a></p>
@@ -7915,6 +7891,32 @@ int main() {
       </categories>
       <tags>
         <tag>算法设计与分析</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Redhat7.6配置163yum源</title>
+    <url>/2021/01/05/Redhat7-6%E9%85%8D%E7%BD%AE163yum%E6%BA%90/</url>
+    <content><![CDATA[<p><strong>本文介绍Redhat7.6服务器上配置163yum源的方法。</strong></p>
+<h1 id="1-yum源简介"><a href="#1-yum源简介" class="headerlink" title="1. yum源简介"></a>1. yum源简介</h1><ul>
+<li>yum需要一个yum库，也就是yum源。默认情况下，CentOS就有一个yum源，其配置文件在/etc/yum.repos.d/目录下。</li>
+<li>当使用yum下载安装rpm包时，首先要找一个yum库（源），然后确保本地有一个客户端（yum这个命令就是客户端），由yum程序去连接服务器。连接的方式是由配置文件决定的。通过编辑/etc/yum.repos.d/CentOS-Base.repo文件，可以修改设置。</li>
+</ul>
+<a id="more"></a>
+<h1 id="2-确认版本"><a href="#2-确认版本" class="headerlink" title="2. 确认版本"></a>2. 确认版本</h1><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">[root@promote ~]<span class="comment"># cat /etc/redhat-release</span></span><br><span class="line">Red Hat Enterprise Linux Server release <span class="number">7.6</span> (Maipo)</span><br></pre></td></tr></table></figure>
+<h1 id="3-卸载本地yum"><a href="#3-卸载本地yum" class="headerlink" title="3. 卸载本地yum"></a>3. 卸载本地yum</h1><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">rpm -qa|grep yum　　<span class="comment">#查看本地yum</span></span><br><span class="line">rpm -qa|grep yum|xargs rpm -e --nodeps　　<span class="comment">#卸载本地yum，不检查依赖性，卸载yum程序</span></span><br><span class="line">rpm -qa|grep yum    <span class="comment">#再次查看是否正确卸载</span></span><br></pre></td></tr></table></figure>
+<h1 id="4-下载yum相关程序"><a href="#4-下载yum相关程序" class="headerlink" title="4. 下载yum相关程序"></a>4. 下载yum相关程序</h1><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">wget http://mirrors<span class="number">.163</span>.com/centos/<span class="number">7</span>/os/x86_64/Packages/python-urlgrabber<span class="number">-3.10</span><span class="number">-10.</span>el7.noarch.rpm</span><br><span class="line">wget http://mirrors<span class="number">.163</span>.com/centos/<span class="number">7</span>/os/x86_64/Packages/rpm<span class="number">-4.11</span><span class="number">.3</span><span class="number">-45.</span>el7.x86_64.rpm</span><br><span class="line">wget http://mirrors<span class="number">.163</span>.com/centos/<span class="number">7</span>/os/x86_64/Packages/yum<span class="number">-3.4</span><span class="number">.3</span><span class="number">-168.</span>el7.centos.noarch.rpm</span><br><span class="line">wget http://mirrors<span class="number">.163</span>.com/centos/<span class="number">7</span>/os/x86_64/Packages/yum-metadata-parser<span class="number">-1.1</span><span class="number">.4</span><span class="number">-10.</span>el7.x86_64.rpm</span><br><span class="line">wget http://mirrors<span class="number">.163</span>.com/centos/<span class="number">7</span>/os/x86_64/Packages/yum-plugin-fastestmirror<span class="number">-1.1</span><span class="number">.31</span><span class="number">-54.</span>el7_8.noarch.rpm</span><br><span class="line">wget http://mirrors<span class="number">.163</span>.com/centos/<span class="number">7</span>/os/x86_64/Packages/yum-utils<span class="number">-1.1</span><span class="number">.31</span><span class="number">-54.</span>el7_8.noarch.rpm</span><br></pre></td></tr></table></figure>
+<h1 id="5-安装yum程序"><a href="#5-安装yum程序" class="headerlink" title="5. 安装yum程序"></a>5. 安装yum程序</h1><p>若提示依赖检测失败，执行以下命令强制安装。<br><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">rpm -ivh * --force --nodeps <span class="comment">#--force 强制安装，--nodeps 不检查依赖</span></span><br></pre></td></tr></table></figure></p>
+<h1 id="6-修改repo文件"><a href="#6-修改repo文件" class="headerlink" title="6. 修改repo文件"></a>6. 修改repo文件</h1><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">cd /etc/yum.repos.d/　　<span class="comment">#进入到yum配置文件目录</span></span><br><span class="line">mkdir repo_backup   <span class="comment">#创建yum备份目录</span></span><br><span class="line">mv *.repo repo_backup   <span class="comment">#备份</span></span><br><span class="line">wget http://mirrors<span class="number">.163</span>.com/.help/CentOS7-Base<span class="number">-163.</span>repo　　<span class="comment">#下载CentOS配置文件</span></span><br></pre></td></tr></table></figure>
+<p>修改CentOS7-Base-163.repo文件<br><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">vi CentOS7-Base<span class="number">-163.</span>repo</span><br><span class="line">:%s/$releasever/<span class="number">7</span>/ge</span><br></pre></td></tr></table></figure></p>
+<h1 id="7-清除并更新yum缓存"><a href="#7-清除并更新yum缓存" class="headerlink" title="7. 清除并更新yum缓存"></a>7. 清除并更新yum缓存</h1><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">yum clean all&amp;yum makecache</span><br><span class="line">yum update</span><br><span class="line">yum repolist <span class="comment">#验证结果</span></span><br></pre></td></tr></table></figure>
+<h1 id="备注"><a href="#备注" class="headerlink" title="备注"></a>备注</h1><p>当发现仍无需要的软件时，CentOS还有一个源叫做EPEL(Extra Packages for Enterprise)，可尝试安装epel yum源<br><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">yum install -y epel-release</span><br></pre></td></tr></table></figure></p>
+]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>Redhat</tag>
+        <tag>Linux</tag>
       </tags>
   </entry>
 </search>
