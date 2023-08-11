@@ -1,0 +1,1353 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="C/C++,网络通信,Socket编程," />
+
+
+
+
+  
+
+
+  <link rel="alternate" href="/atom.xml" title="crossoverpptx's Blog" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="1. 服务端创建流程 调用socket函数创建监听socket； 调用bind函数将socket绑定到某个IP和端口号组成的二元组上； 调用listen函数开启监听； 当有客户端连接请求时，调用accept函数接受连接，产生一个新的socket（与客户端通信的socket）； 基于新产生的socket调用send或recv函数开始与客户端进行数据交流； 通信结束后，调用close函数关闭socke">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Socket编程：基于TCP协议的客户端与服务端网络通信">
+<meta property="og:url" content="http://yoursite.com/2023/08/11/Socket%E7%BC%96%E7%A8%8B%EF%BC%9A%E5%9F%BA%E4%BA%8ETCP%E5%8D%8F%E8%AE%AE%E7%9A%84%E5%AE%A2%E6%88%B7%E7%AB%AF%E4%B8%8E%E6%9C%8D%E5%8A%A1%E7%AB%AF%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1/index.html">
+<meta property="og:site_name" content="crossoverpptx&#39;s Blog">
+<meta property="og:description" content="1. 服务端创建流程 调用socket函数创建监听socket； 调用bind函数将socket绑定到某个IP和端口号组成的二元组上； 调用listen函数开启监听； 当有客户端连接请求时，调用accept函数接受连接，产生一个新的socket（与客户端通信的socket）； 基于新产生的socket调用send或recv函数开始与客户端进行数据交流； 通信结束后，调用close函数关闭socke">
+<meta property="article:published_time" content="2023-08-11T09:54:50.000Z">
+<meta property="article:modified_time" content="2023-08-11T10:02:17.811Z">
+<meta property="article:author" content="crossoverpptx">
+<meta property="article:tag" content="C&#x2F;C++">
+<meta property="article:tag" content="网络通信">
+<meta property="article:tag" content="Socket编程">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2023/08/11/Socket编程：基于TCP协议的客户端与服务端网络通信/"/>
+
+
+
+
+
+  <title>Socket编程：基于TCP协议的客户端与服务端网络通信 | crossoverpptx's Blog</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">crossoverpptx's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">极度的痛苦才是精神的最后解放者。唯有此种痛苦，才迫使我们大彻如悟。</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2023/08/11/Socket%E7%BC%96%E7%A8%8B%EF%BC%9A%E5%9F%BA%E4%BA%8ETCP%E5%8D%8F%E8%AE%AE%E7%9A%84%E5%AE%A2%E6%88%B7%E7%AB%AF%E4%B8%8E%E6%9C%8D%E5%8A%A1%E7%AB%AF%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="crossoverpptx">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/me.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="crossoverpptx's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Socket编程：基于TCP协议的客户端与服务端网络通信</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2023-08-11T17:54:50+08:00">
+                2023-08-11
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2023-08-11T18:02:17+08:00">
+                2023-08-11
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C-C/" itemprop="url" rel="index">
+                    <span itemprop="name">C/C++</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i> 浏览
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  3.1k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  13
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="1-服务端创建流程"><a href="#1-服务端创建流程" class="headerlink" title="1. 服务端创建流程"></a>1. 服务端创建流程</h1><ol>
+<li>调用socket函数创建监听socket；</li>
+<li>调用bind函数将socket绑定到某个IP和端口号组成的二元组上；</li>
+<li>调用listen函数开启监听；</li>
+<li>当有客户端连接请求时，调用accept函数接受连接，产生一个新的socket（与客户端通信的socket）；</li>
+<li>基于新产生的socket调用send或recv函数开始与客户端进行数据交流；</li>
+<li>通信结束后，调用close函数关闭socket。<a id="more"></a></li>
+</ol>
+<h1 id="2-客户端创建流程"><a href="#2-客户端创建流程" class="headerlink" title="2. 客户端创建流程"></a>2. 客户端创建流程</h1><ol>
+<li>调用socket函数创建客户端socket；</li>
+<li>调用connect函数尝试连接服务器；</li>
+<li>连接成功后调用send或recv函数与服务器进行数据交流。</li>
+<li>通信结束后，调用close函数关闭socket。</li>
+</ol>
+<h1 id="3-常用API"><a href="#3-常用API" class="headerlink" title="3. 常用API"></a>3. 常用API</h1><h2 id="struct-sockaddr-和-struct-sockaddr-in"><a href="#struct-sockaddr-和-struct-sockaddr-in" class="headerlink" title="struct sockaddr 和 struct sockaddr_in"></a>struct sockaddr 和 struct sockaddr_in</h2><p> 这两个结构体都是用来处理<strong>网络通信的地址</strong>。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> *此数据结构用做bind、connect、recvfrom、sendto等函数的参数，指明地址信息</span></span><br><span class="line"><span class="comment"> *note:</span></span><br><span class="line"><span class="comment"> *  目标地址和端口信息在一起</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/socket.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">sockaddr</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="comment">// 地址家族，一般“AF_xxx”的形式，通常使用AF_INET</span></span><br><span class="line">    <span class="keyword">unsigned</span> short sa_family;</span><br><span class="line">    <span class="comment">// 14字节协议地址，目标地址和端口信息</span></span><br><span class="line">    <span class="keyword">char</span>           sa_data[<span class="number">14</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;netinet/in.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span>  <span class="title">sockaddr_in</span> </span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    short <span class="keyword">int</span>       sin_family;       <span class="comment">//协议族</span></span><br><span class="line">    <span class="keyword">unsigned</span> short  <span class="keyword">int</span>  sin_port;    <span class="comment">//端口号(使用网络字节顺序)</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">in_addr</span>  <span class="title">sin_addr</span>;</span>         <span class="comment">//IP地址        </span></span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">char</span>   sin_zero[<span class="number">8</span>];      <span class="comment">//sockaddr与sockaddr_in 保持大小相同而保留的空字节</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span>  <span class="title">in_addr</span> </span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">unsigned</span>  <span class="keyword">long</span>  s_addr;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">in_addr</span> </span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">union</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="class"><span class="keyword">struct</span></span></span><br><span class="line"><span class="class">        &#123;</span></span><br><span class="line">            <span class="keyword">unsigned</span> <span class="keyword">char</span> s_b1,</span><br><span class="line">                          s_b2,</span><br><span class="line">                          s_b3,</span><br><span class="line">                          s_b4;</span><br><span class="line">        &#125; S_un_b;</span><br><span class="line"></span><br><span class="line">        <span class="class"><span class="keyword">struct</span> </span></span><br><span class="line"><span class="class">        &#123;</span></span><br><span class="line">            <span class="keyword">unsigned</span> short s_w1,</span><br><span class="line">                           s_w2;</span><br><span class="line">        &#125; S_un_w;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">unsigned</span> <span class="keyword">long</span> S_addr;</span><br><span class="line">    &#125; S_un;</span><br><span class="line">&#125; IN_ADDR;</span><br></pre></td></tr></table></figure>
+<p><strong>sockaddr_in</strong>和<strong>sockaddr</strong>是<strong>并列</strong>的结构，指向<strong>sockaddr_in</strong>的结构体的指针，同样可以指向<strong>sockraddr</strong>的结构体，并代替它。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">sockaddr_in</span> <span class="title">mysock</span>;</span></span><br><span class="line"></span><br><span class="line">bind(sockfd, (struct sockaddr *)&amp;mysock, <span class="keyword">sizeof</span>(struct sockaddr); <span class="comment">/* bind的时候进行转化 */</span></span><br></pre></td></tr></table></figure>
+<h2 id="net-core-somaxconn"><a href="#net-core-somaxconn" class="headerlink" title="net.core.somaxconn"></a>net.core.somaxconn</h2><p>net.core.somaxconn是Linux中的一个kernel参数，表示socket监听（listen）的backlog上限。backlog是socket的监听队列，当一个请求（request）尚未被处理或建立时，他会进入backlog。而socket server可以一次性处理backlog中的所有请求，处理后的请求不再位于监听队列中。当server处理请求较慢，以至于监听队列被填满后，新来的请求会被拒绝。</p>
+<blockquote>
+<p>在Hadoop 1.0中，参数ipc.server.listen.queue.size控制了服务端socket的监听队列长度，即backlog长度，默认值是128。而Linux的参数net.core.somaxconn默认值同样为128。当服务端繁忙时，如NameNode或JobTracker，128是远远不够的。这样就需要增大backlog，例如我们的3000台集群就将ipc.server.listen.queue.size设成了32768，为了使得整个参数达到预期效果，同样需要将kernel参数net.core.somaxconn设成一个大于等于32768的值。</p>
+</blockquote>
+<p>Linux中可以工具syctl来动态调整所有的kernel参数。所谓动态调整就是kernel参数值修改后即时生效。但是这个生效仅限于os层面，对于Hadoop来说，必须重启应用才能生效。</p>
+<p>显示所有的kernel参数及值</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sysctl -a</span><br></pre></td></tr></table></figure>
+<p>修改参数值的语法</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sysctl -w net.core.somaxconn=32768</span><br></pre></td></tr></table></figure>
+<p>以上命令将kernel参数net.core.somaxconn的值改成了32768。这样的改动虽然可以立即生效，但是重启机器后会恢复默认值。为了永久保留改动，需要用vi在/etc/sysctl.conf中增加一行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">net.core.somaxconn=4000</span><br></pre></td></tr></table></figure>
+<p>然后执行命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sysctl -p</span><br></pre></td></tr></table></figure>
+<h2 id="int-socket-int-family-int-type-int-protocol"><a href="#int-socket-int-family-int-type-int-protocol" class="headerlink" title="int socket(int family, int type, int protocol);"></a>int socket(int family, int type, int protocol);</h2><ul>
+<li>作用：创建一个套接字描述符。在Linux系统中，一切皆文件。为了表示和区分已经打开的文件，Unix/Linux会给文件分配一个ID，这个ID是一个整数，被称为文件描述符。因此，网络连接也是一个文件，它也有文件描述符。通过socket()函数来创建一个网络连接或者说打开一个网络文件，socket()函数的返回值就是文件描述符，通过这个文件描述符我们就可以使用普通的文件操作来传输数据了。</li>
+<li>参数：</li>
+</ul>
+<p>​        family：指明了协议族/域，通常AF_INET、AF_INET6、AF_LOCAL等；<br>​        type：套接字类型，主要 SOCK_STREAM、SOCK_DGRAM、SOCK_RAW等；<br>​        protocol：一般取为0。</p>
+<ul>
+<li>返回值：ok(非负)，error(-1)。成功时，返回一个小的非负整数值，与文件描述符类似。</li>
+</ul>
+<h2 id="int-bind-int-sockfd-const-struct-sockaddr-addr-socklen-t-addrlen"><a href="#int-bind-int-sockfd-const-struct-sockaddr-addr-socklen-t-addrlen" class="headerlink" title="int bind(int sockfd, const struct sockaddr *addr, socklen_t addrlen);"></a>int bind(int sockfd, const struct sockaddr *addr, socklen_t addrlen);</h2><ul>
+<li><p>作用：服务端把用于通信的地址和端口绑定到socket上。</p>
+</li>
+<li><p>参数：</p>
+<p>sockfd：代表需要绑定的socket，即在创建socket套接字时返回的文件描述符；<br>addr：存放了服务端用于通信的地址和端口；<br>addrlen：代表addr结构体的大小。</p>
+</li>
+<li><p>返回值：当bind函数返回0时，为正确绑定；返回-1，则为绑定失败。</p>
+</li>
+</ul>
+<h2 id="int-listen-int-sockfd-int-backlog"><a href="#int-listen-int-sockfd-int-backlog" class="headerlink" title="int listen(int sockfd, int backlog);"></a>int listen(int sockfd, int backlog);</h2><ul>
+<li><p>作用：listen函数的功能并不是等待一个新的connect的到来，真正等待connect的是accept函数。listen的操作就是当有较多的client发起connect时，server端不能及时处理连接请求，这时就会将connect连接放在等待队列中缓存起来。这个等待队列的长度由listen中的backlog参数来设定。</p>
+</li>
+<li><p>参数：</p>
+<p>sockfd：前面socket创建的文件描述符;<br>backlog：指server端可以缓存连接的最大个数，也就是等待队列的长度。</p>
+</li>
+<li><p>返回值：当listen运行成功时，返回0；运行失败时，返回-1。</p>
+</li>
+</ul>
+<h2 id="int-accept-int-sockfd-struct-sockaddr-client-addr-socklen-t-addrlen"><a href="#int-accept-int-sockfd-struct-sockaddr-client-addr-socklen-t-addrlen" class="headerlink" title="int accept(int sockfd, struct sockaddr client_addr, socklen_t addrlen);"></a>int accept(int sockfd, struct sockaddr <em>client_addr, socklen_t </em>addrlen);</h2><ul>
+<li><p>作用：accept函数等待客户端的连接，如果没有客户端连上来，它就一直等待，这种方式称为阻塞。accept等待到客户端的连接后，创建一个新的socket，函数返回值就是这个新的socket，服务端用这个新的socket和客户端进行消息的收发。</p>
+</li>
+<li><p>参数：</p>
+<p>sockfd：已经被listen过的socket；<br>client_addr：用于存放客户端的地址信息，其中包含客户端的协议族，网络地址以及端口号。如果不需要客户端的地址，可以填0；<br>addrlen：用于存放参数二(client_addr)的长度。</p>
+</li>
+<li><p>返回值：ok(新的 fd )，error(-1)。</p>
+</li>
+</ul>
+<h2 id="int-connect-int-sock-fd-struct-sockaddr-serv-addr-int-addrlen"><a href="#int-connect-int-sock-fd-struct-sockaddr-serv-addr-int-addrlen" class="headerlink" title="int connect(int sock_fd, struct sockaddr *serv_addr, int addrlen);"></a>int connect(int sock_fd, struct sockaddr *serv_addr, int addrlen);</h2><ul>
+<li><p>作用：客户端向服务端发起连接请求。</p>
+</li>
+<li><p>参数：</p>
+<p>sock_fd：代表通过socket()函数返回的文件描述符；<br>serv_addr：代表目标服务器的协议族，网络地址以及端口号，是一个sockaddr 类型的指针；<br>addrlen：代表第二个参数内容的大小。</p>
+</li>
+<li><p>返回值：当返回值是0时，代表连接成功；返回值为-1时，代表连接失败。</p>
+</li>
+</ul>
+<h2 id="int-recv-int-sockfd-void-buf-int-len-int-flags"><a href="#int-recv-int-sockfd-void-buf-int-len-int-flags" class="headerlink" title="int recv(int sockfd, void *buf, int len, int flags);"></a>int recv(int sockfd, void *buf, int len, int flags);</h2><ul>
+<li><p>作用：recv函数用于接收对端socket发送过来的数据。不论是客户端还是服务端，应用程序都用recv函数接受来自TCP连接的另一端发送过来的数据。如果socket对端没有发送数据，recv函数就会等待，如果对端发送了数据，函数返回接收到的字符数。</p>
+</li>
+<li><p>参数：</p>
+<p>sockfd：代表接收端的套接字描述符，即通过socket()函数返回的文件描述符；<br>buf：用于接收数据的内存地址，可以是C语言基本数据类型变量的地址，也可以是数组、结构体、字符串；<br>len：指明需要接收数据的字节数。不能超过buf的大小，否则内存溢出；<br>flags：一般设置为0，其他数值意义不大。</p>
+</li>
+<li><p>返回值：失败时，返回值小于0；超时或对端主动关闭，返回值等于0；成功时，返回值是接收数据的长度。</p>
+</li>
+</ul>
+<h2 id="int-send-int-sockfd-const-void-buf-int-len-int-flags"><a href="#int-send-int-sockfd-const-void-buf-int-len-int-flags" class="headerlink" title="int send(int sockfd, const void *buf, int len, int flags);"></a>int send(int sockfd, const void *buf, int len, int flags);</h2><ul>
+<li><p>作用：send函数用于把数据通过socket发送给对端。不论是客户端还是服务端，应用程序都用send函数来向TCP连接的另一端发送数据。</p>
+</li>
+<li><p>参数：</p>
+<p>sockfd：代表发送端的套接字描述符，即通过socket()函数返回的文件描述符；<br>buf：指明需要发送数据的内存地址，可以是C语言基本数据类型变量的地址，也可以是数组、结构体、字符串；<br>len：指明实际发送数据的字节数；<br>flags：一般设置为0，其他数值意义不大。</p>
+</li>
+<li><p>返回值：失败时，返回值小于0；超时或对端主动关闭，返回值等于0；成功时，返回值是发送数据的长度。</p>
+</li>
+</ul>
+<h2 id="int-close-int-sockfd"><a href="#int-close-int-sockfd" class="headerlink" title="int close(int sockfd);"></a>int close(int sockfd);</h2><ul>
+<li><p>作用：关闭套接字，并终止TCP连接。</p>
+</li>
+<li><p>参数：</p>
+<p>sockfd：套接字描述符。</p>
+</li>
+<li><p>返回值：ok(0)，error(-1)。</p>
+</li>
+</ul>
+<h2 id="int-inet-pton-int-af-const-char-src-void-dst"><a href="#int-inet-pton-int-af-const-char-src-void-dst" class="headerlink" title="int inet_pton(int af, const char src, void dst);"></a>int inet_pton(int af, const char <em>src, void </em>dst);</h2><ul>
+<li><p>作用：将文本地址转化为二进制地址。</p>
+</li>
+<li><p>头文件：#include <arpa inet.h></arpa></p>
+</li>
+<li><p>参数：</p>
+<p>af：地址族。AF_INET：IPv4 地址；AF_INET6：IPv6 地址；<br>src：指向“点分式”IPv4 或 IPv6 地址的指针，例如“192.168.1.100”；<br>dst：类型为 struct in_addr <em>或者 struct in6_addr </em>的指针。</p>
+</li>
+<li><p>返回值：成功：1；失败：0 代表地址与地址族不匹配，-1 代表地址不合法。</p>
+</li>
+</ul>
+<h2 id="const-char-inet-ntop-int-af-const-void-src-char-dst-socklen-t-size"><a href="#const-char-inet-ntop-int-af-const-void-src-char-dst-socklen-t-size" class="headerlink" title="const char inet_ntop(int af, const void src, char *dst, socklen_t size);"></a>const char <em>inet_ntop(int af, const void </em>src, char *dst, socklen_t size);</h2><ul>
+<li><p>作用：将二进制地址转化为文本地址。</p>
+</li>
+<li><p>头文件：#include <arpa inet.h></arpa></p>
+</li>
+<li><p>参数：</p>
+<p>af：地址族。AF_INET：IPv4 地址；AF_INET6：IPv6 地址；<br>src：类型为 struct in_addr <em>或者 struct in6_addr </em>的指针；<br>dst：地址缓冲区指针；<br>size：地址缓冲区大小，至少要 INET_ADDRSTRLEN 或者 INET6_ADDRSTRLEN 个字节。</p>
+</li>
+<li><p>返回值：成功：dst； 失败：NULL。</p>
+</li>
+</ul>
+<h2 id="字节序的转换函数"><a href="#字节序的转换函数" class="headerlink" title="字节序的转换函数"></a>字节序的转换函数</h2><ul>
+<li><p>函数原型：</p>
+<p><strong>uint32_t htonl(uint32_t hostlong);</strong><br><strong>uint16_t htons(uint16_t hostshort);</strong><br><strong>uint32_t ntohl(uint32_t netlong);</strong><br><strong>uint16_t ntohs(uint16_t netshort);</strong></p>
+</li>
+<li><p>参数：<br>hostlong：主机字节序的长整型数据；<br>hostshort：主机字节序的短整型数据；<br>netlong： 网络字节序的长整型数据；<br>netshort：网络字节序的短整型数据。</p>
+</li>
+<li><p>返回值：对应的字节序数据。</p>
+</li>
+</ul>
+<h1 id="4-服务端代码"><a href="#4-服务端代码" class="headerlink" title="4. 服务端代码"></a>4. 服务端代码</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;		// POSIX系统API访问</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/types.h&gt;	// 基本系统数据类型</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;arpa/inet.h&gt;	// 网络信息转换</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> SERVER_PORT 9991</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 创建一个监听socket</span></span><br><span class="line">    <span class="keyword">int</span> listenfd = socket(AF_INET, SOCK_STREAM, <span class="number">0</span>);	</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (listenfd == <span class="number">-1</span>) &#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"create listen socket error!"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 初始化服务器地址</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">sockaddr_in</span> <span class="title">bindaddr</span>;</span></span><br><span class="line">    bindaddr.sin_family = AF_INET;</span><br><span class="line">    bindaddr.sin_addr.s_addr = htonl(INADDR_ANY);</span><br><span class="line">    bindaddr.sin_port = htons(SERVER_PORT);</span><br><span class="line">	<span class="comment">//如果只想在本机上进行访问，bind函数地址可以使用本地回环地址</span></span><br><span class="line">	<span class="comment">//如果只想被局域网的内部机器访问，那么bind函数地址可以使用局域网地址</span></span><br><span class="line">	<span class="comment">//如果希望被公网访问，那么bind函数地址可以使用INADDR_ANY or 0.0.0.0</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 绑定地址和端口</span></span><br><span class="line">    <span class="keyword">if</span> (bind(listenfd, (struct sockaddr *)&amp;bindaddr, <span class="keyword">sizeof</span>(bindaddr)) == <span class="number">-1</span>) &#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"bind listen socket error!"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 启动监听</span></span><br><span class="line">    <span class="keyword">if</span> (listen(listenfd, SOMAXCONN) == <span class="number">-1</span>) &#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"listen error!"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"start listening..."</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">        <span class="comment">// 创建一个临时的客户端socket</span></span><br><span class="line">        <span class="class"><span class="keyword">struct</span> <span class="title">sockaddr_in</span> <span class="title">clientaddr</span>;</span></span><br><span class="line">        <span class="keyword">socklen_t</span> clientaddrlen = <span class="keyword">sizeof</span>(clientaddr);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 接受客户端连接</span></span><br><span class="line">        <span class="keyword">int</span> clientfd = accept(listenfd, (struct sockaddr *)&amp;clientaddr, &amp;clientaddrlen);</span><br><span class="line">        <span class="keyword">if</span> (clientfd != <span class="number">-1</span>) &#123;</span><br><span class="line">            <span class="keyword">char</span> recvBuf[<span class="number">32</span>] = &#123;<span class="number">0</span>&#125;;</span><br><span class="line">            <span class="comment">// 从客户端接受数据</span></span><br><span class="line">            <span class="keyword">int</span> ret = recv(clientfd, recvBuf, <span class="keyword">sizeof</span>(recvBuf), <span class="number">0</span>);</span><br><span class="line">            <span class="keyword">if</span> (ret &gt; <span class="number">0</span>) &#123;</span><br><span class="line">                <span class="built_in">cout</span> &lt;&lt; <span class="string">"recv data from cilent successfully, data:"</span> &lt;&lt; recvBuf &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">                <span class="comment">// 将接收到的数据原封不动地发给客户端</span></span><br><span class="line">                ret = send(clientfd, recvBuf, <span class="built_in">strlen</span>(recvBuf), <span class="number">0</span>);</span><br><span class="line">                <span class="keyword">if</span> (ret != <span class="built_in">strlen</span>(recvBuf)) &#123;</span><br><span class="line">                    <span class="built_in">cout</span> &lt;&lt; <span class="string">"send data error!"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    <span class="built_in">cout</span> &lt;&lt; <span class="string">"send data to client successfully, data:"</span> &lt;&lt; recvBuf &lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="built_in">cout</span> &lt;&lt; <span class="string">"recv data error!"</span> &lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        close(clientfd);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 关闭监听socket</span></span><br><span class="line">    close(listenfd);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="5-客户端代码"><a href="#5-客户端代码" class="headerlink" title="5. 客户端代码"></a>5. 客户端代码</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;		// POSIX系统API访问</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/types.h&gt;	// 基本系统数据类型</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;arpa/inet.h&gt;	// 网络信息转换</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> SERVER_ADDRESS <span class="meta-string">"127.0.0.1"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> SERVER_PORT 9991</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>* argv[])</span> </span>&#123;</span><br><span class="line">    <span class="keyword">char</span>* message;</span><br><span class="line">    <span class="keyword">if</span>(argc != <span class="number">2</span>) &#123;</span><br><span class="line">        <span class="built_in">fputs</span>(<span class="string">"Usage: ./client message\n"</span>, <span class="built_in">stderr</span>); <span class="comment">// 向指定的文件写入一个字符串</span></span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    message = argv[<span class="number">1</span>];</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"send message: %s\n"</span>, message);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建一个socket</span></span><br><span class="line">    <span class="keyword">int</span> clientfd = socket(AF_INET, SOCK_STREAM, <span class="number">0</span>);</span><br><span class="line">    <span class="keyword">if</span> (clientfd == <span class="number">-1</span>) &#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"create client socket error!"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 连接服务器地址</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">sockaddr_in</span> <span class="title">serveraddr</span>;</span></span><br><span class="line">    serveraddr.sin_family = AF_INET;</span><br><span class="line">    serveraddr.sin_addr.s_addr = inet_addr(SERVER_ADDRESS);</span><br><span class="line">    serveraddr.sin_port = htons(SERVER_PORT);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (connect(clientfd, (struct sockaddr *)&amp;serveraddr, <span class="keyword">sizeof</span>(serveraddr)) == <span class="number">-1</span>) &#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"connect socket error!"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 向服务器发送数据</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">int</span> ret = send(clientfd, message, <span class="built_in">strlen</span>(message), <span class="number">0</span>);</span><br><span class="line">    <span class="keyword">if</span> (ret != <span class="built_in">strlen</span>(message)) &#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"send data error!"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"send data to server successfully, data:"</span> &lt;&lt; message &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 从服务器读取数据</span></span><br><span class="line">    <span class="keyword">char</span> recvBuf[<span class="number">32</span>] = &#123;<span class="number">0</span>&#125;;</span><br><span class="line">    ret = recv(clientfd, recvBuf, <span class="keyword">sizeof</span>(recvBuf), <span class="number">0</span>);</span><br><span class="line">    <span class="keyword">if</span> (ret &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"recv data from server successfully, data:"</span> &lt;&lt; recvBuf &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"recv data from server error!"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 关闭socket</span></span><br><span class="line">    close(clientfd);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/C-C/" rel="tag"># C/C++</a>
+          
+            <a href="/tags/%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1/" rel="tag"># 网络通信</a>
+          
+            <a href="/tags/Socket%E7%BC%96%E7%A8%8B/" rel="tag"># Socket编程</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2023/08/10/C-%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/" rel="next" title="C++单例模式">
+                <i class="fa fa-chevron-left"></i> C++单例模式
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/me.png"
+                alt="crossoverpptx" />
+            
+              <p class="site-author-name" itemprop="name">crossoverpptx</p>
+              <p class="site-description motion-element" itemprop="description">极度的痛苦才是精神的最后解放者。唯有此种痛苦，才迫使我们大彻如悟。</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+                <a href="/archives">
+                  <span class="site-state-item-count">99</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/index.html">
+                  <span class="site-state-item-count">33</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/crossoverpptx" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:2269041628@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-服务端创建流程"><span class="nav-text">1. 服务端创建流程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-客户端创建流程"><span class="nav-text">2. 客户端创建流程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-常用API"><span class="nav-text">3. 常用API</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#struct-sockaddr-和-struct-sockaddr-in"><span class="nav-text">struct sockaddr 和 struct sockaddr_in</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#net-core-somaxconn"><span class="nav-text">net.core.somaxconn</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#int-socket-int-family-int-type-int-protocol"><span class="nav-text">int socket(int family, int type, int protocol);</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#int-bind-int-sockfd-const-struct-sockaddr-addr-socklen-t-addrlen"><span class="nav-text">int bind(int sockfd, const struct sockaddr *addr, socklen_t addrlen);</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#int-listen-int-sockfd-int-backlog"><span class="nav-text">int listen(int sockfd, int backlog);</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#int-accept-int-sockfd-struct-sockaddr-client-addr-socklen-t-addrlen"><span class="nav-text">int accept(int sockfd, struct sockaddr client_addr, socklen_t addrlen);</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#int-connect-int-sock-fd-struct-sockaddr-serv-addr-int-addrlen"><span class="nav-text">int connect(int sock_fd, struct sockaddr *serv_addr, int addrlen);</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#int-recv-int-sockfd-void-buf-int-len-int-flags"><span class="nav-text">int recv(int sockfd, void *buf, int len, int flags);</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#int-send-int-sockfd-const-void-buf-int-len-int-flags"><span class="nav-text">int send(int sockfd, const void *buf, int len, int flags);</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#int-close-int-sockfd"><span class="nav-text">int close(int sockfd);</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#int-inet-pton-int-af-const-char-src-void-dst"><span class="nav-text">int inet_pton(int af, const char src, void dst);</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#const-char-inet-ntop-int-af-const-void-src-char-dst-socklen-t-size"><span class="nav-text">const char inet_ntop(int af, const void src, char *dst, socklen_t size);</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字节序的转换函数"><span class="nav-text">字节序的转换函数</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-服务端代码"><span class="nav-text">4. 服务端代码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-客户端代码"><span class="nav-text">5. 客户端代码</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">crossoverpptx</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">195.8k</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i> 访问人数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i> 访问总量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>
